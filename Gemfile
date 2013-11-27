@@ -50,3 +50,7 @@ gem 'cancan'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#Use bootsrap ssas
+gem 'bootstrap-sass-rails'
+
