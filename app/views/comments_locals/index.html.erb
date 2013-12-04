@@ -1,0 +1,33 @@
+<h1>Listing comments_locals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Evalutiondate</th>
+      <th>User mobile</th>
+      <th>Local</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments_locals.each do |comments_local| %>
+      <tr>
+        <td><%= comments_local.comment %></td>
+        <td><%= comments_local.evalutiondate %></td>
+        <td><%= comments_local.user_mobile_id %></td>
+        <td><%= comments_local.local_id %></td>
+        <td><%= link_to 'Show', comments_local %></td>
+        <td><%= link_to 'Edit', edit_comments_local_path(comments_local) %></td>
+        <td><%= link_to 'Destroy', comments_local, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comments local', new_comments_local_path %>

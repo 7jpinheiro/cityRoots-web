@@ -1,0 +1,33 @@
+<h1>Listing rating_locals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Evaluationdate</th>
+      <th>User mobile</th>
+      <th>Local</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rating_locals.each do |rating_local| %>
+      <tr>
+        <td><%= rating_local.rating %></td>
+        <td><%= rating_local.evaluationdate %></td>
+        <td><%= rating_local.user_mobile_id %></td>
+        <td><%= rating_local.local_id %></td>
+        <td><%= link_to 'Show', rating_local %></td>
+        <td><%= link_to 'Edit', edit_rating_local_path(rating_local) %></td>
+        <td><%= link_to 'Destroy', rating_local, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rating local', new_rating_local_path %>

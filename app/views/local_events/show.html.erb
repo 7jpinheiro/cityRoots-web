@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stardate:</strong>
+  <%= @local_event.stardate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @local_event.enddate %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @local_event.organization %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @local_event.price %>
+</p>
+
+<p>
+  <strong>Program:</strong>
+  <%= @local_event.program %>
+</p>
+
+<p>
+  <strong>Event type:</strong>
+  <%= @local_event.event_type_id %>
+</p>
+
+<%= link_to 'Edit', edit_local_event_path(@local_event) %> |
+<%= link_to 'Back', local_events_path %>

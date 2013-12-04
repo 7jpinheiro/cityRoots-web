@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @local.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @local.description %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @local.schedule %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @local.site %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @local.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @local.address %>
+</p>
+
+<p>
+  <strong>Coord:</strong>
+  <%= @local.coord %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @local.transport %>
+</p>
+
+<p>
+  <strong>Reference point:</strong>
+  <%= @local.reference_point %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @local.active %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @local.timestamp %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @local.city_id %>
+</p>
+
+<p>
+  <strong>User web:</strong>
+  <%= @local.user_web_id %>
+</p>
+
+<%= link_to 'Edit', edit_local_path(@local) %> |
+<%= link_to 'Back', locals_path %>

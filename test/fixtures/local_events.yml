@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stardate: 2013-12-04
+  enddate: 2013-12-04
+  organization: MyString
+  price: MyString
+  program: MyString
+  event_type_id: 1
+
+two:
+  stardate: 2013-12-04
+  enddate: 2013-12-04
+  organization: MyString
+  price: MyString
+  program: MyString
+  event_type_id: 1

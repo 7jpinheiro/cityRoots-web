@@ -1,0 +1,33 @@
+<h1>Listing rating_itineraries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Evaluationdate</th>
+      <th>User mobile</th>
+      <th>Itinerary</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rating_itineraries.each do |rating_itinerary| %>
+      <tr>
+        <td><%= rating_itinerary.rating %></td>
+        <td><%= rating_itinerary.evaluationdate %></td>
+        <td><%= rating_itinerary.user_mobile_id %></td>
+        <td><%= rating_itinerary.itinerary_id %></td>
+        <td><%= link_to 'Show', rating_itinerary %></td>
+        <td><%= link_to 'Edit', edit_rating_itinerary_path(rating_itinerary) %></td>
+        <td><%= link_to 'Destroy', rating_itinerary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rating itinerary', new_rating_itinerary_path %>

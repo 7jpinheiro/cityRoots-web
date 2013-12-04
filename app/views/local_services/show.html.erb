@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @local_service.capacity %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @local_service.details %>
+</p>
+
+<p>
+  <strong>Service type:</strong>
+  <%= @local_service.service_type_id %>
+</p>
+
+<%= link_to 'Edit', edit_local_service_path(@local_service) %> |
+<%= link_to 'Back', local_services_path %>

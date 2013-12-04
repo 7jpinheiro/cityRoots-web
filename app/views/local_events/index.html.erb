@@ -1,0 +1,37 @@
+<h1>Listing local_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stardate</th>
+      <th>Enddate</th>
+      <th>Organization</th>
+      <th>Price</th>
+      <th>Program</th>
+      <th>Event type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @local_events.each do |local_event| %>
+      <tr>
+        <td><%= local_event.stardate %></td>
+        <td><%= local_event.enddate %></td>
+        <td><%= local_event.organization %></td>
+        <td><%= local_event.price %></td>
+        <td><%= local_event.program %></td>
+        <td><%= local_event.event_type_id %></td>
+        <td><%= link_to 'Show', local_event %></td>
+        <td><%= link_to 'Edit', edit_local_event_path(local_event) %></td>
+        <td><%= link_to 'Destroy', local_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Local event', new_local_event_path %>

@@ -1,0 +1,51 @@
+<h1>Listing locals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Schedule</th>
+      <th>Site</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Coord</th>
+      <th>Transport</th>
+      <th>Reference point</th>
+      <th>Active</th>
+      <th>Timestamp</th>
+      <th>City</th>
+      <th>User web</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locals.each do |local| %>
+      <tr>
+        <td><%= local.name %></td>
+        <td><%= local.description %></td>
+        <td><%= local.schedule %></td>
+        <td><%= local.site %></td>
+        <td><%= local.email %></td>
+        <td><%= local.address %></td>
+        <td><%= local.coord %></td>
+        <td><%= local.transport %></td>
+        <td><%= local.reference_point %></td>
+        <td><%= local.active %></td>
+        <td><%= local.timestamp %></td>
+        <td><%= local.city_id %></td>
+        <td><%= local.user_web_id %></td>
+        <td><%= link_to 'Show', local %></td>
+        <td><%= link_to 'Edit', edit_local_path(local) %></td>
+        <td><%= link_to 'Destroy', local, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Local', new_local_path %>

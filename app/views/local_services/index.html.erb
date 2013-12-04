@@ -1,0 +1,31 @@
+<h1>Listing local_services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Capacity</th>
+      <th>Details</th>
+      <th>Service type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @local_services.each do |local_service| %>
+      <tr>
+        <td><%= local_service.capacity %></td>
+        <td><%= local_service.details %></td>
+        <td><%= local_service.service_type_id %></td>
+        <td><%= link_to 'Show', local_service %></td>
+        <td><%= link_to 'Edit', edit_local_service_path(local_service) %></td>
+        <td><%= link_to 'Destroy', local_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Local service', new_local_service_path %>

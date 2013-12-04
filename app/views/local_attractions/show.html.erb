@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @local_attraction.details %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @local_attraction.price %>
+</p>
+
+<p>
+  <strong>Attraction type:</strong>
+  <%= @local_attraction.attraction_type %>
+</p>
+
+<%= link_to 'Edit', edit_local_attraction_path(@local_attraction) %> |
+<%= link_to 'Back', local_attractions_path %>

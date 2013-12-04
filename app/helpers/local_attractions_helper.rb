@@ -1,0 +1,2 @@
+module LocalAttractionsHelper
+end

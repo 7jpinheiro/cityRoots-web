@@ -1,0 +1,33 @@
+<%= form_for(@comments_itinerary) do |f| %>
+  <% if @comments_itinerary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comments_itinerary.errors.count, "error") %> prohibited this comments_itinerary from being saved:</h2>
+
+      <ul>
+      <% @comments_itinerary.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :evalutiondate %><br>
+    <%= f.date_select :evalutiondate %>
+  </div>
+  <div class="field">
+    <%= f.label :user_mobile_id %><br>
+    <%= f.number_field :user_mobile_id %>
+  </div>
+  <div class="field">
+    <%= f.label :itinerary_id %><br>
+    <%= f.number_field :itinerary_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

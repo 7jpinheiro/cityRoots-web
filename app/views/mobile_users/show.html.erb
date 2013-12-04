@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @mobile_user.username %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @mobile_user.active %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @mobile_user.country_id %>
+</p>
+
+<%= link_to 'Edit', edit_mobile_user_path(@mobile_user) %> |
+<%= link_to 'Back', mobile_users_path %>

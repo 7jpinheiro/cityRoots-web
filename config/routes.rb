@@ -1,4 +1,44 @@
 CityRootsWeb::Application.routes.draw do
+  resources :comments_itineraries
+
+  resources :comments_locals
+
+  resources :rating_itineraries
+
+  resources :rating_locals
+
+  resources :mobile_users
+
+  resources :web_users_packs
+
+  resources :web_users
+
+  resources :cities
+
+  resources :pack_types
+
+  resources :locals
+
+  resources :local_attractions
+
+  resources :attraction_types
+
+  resources :local_services
+
+  resources :local_events
+
+  resources :event_types
+
+  resources :photos
+
+  resources :itineraries_types
+
+  resources :itineraries
+
+  resources :service_types
+
+  resources :attraction_big_types
+
   resources :countries
 
   # The priority is based upon order of creation: first created -> highest priority.

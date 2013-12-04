@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @comments_local.comment %>
+</p>
+
+<p>
+  <strong>Evalutiondate:</strong>
+  <%= @comments_local.evalutiondate %>
+</p>
+
+<p>
+  <strong>User mobile:</strong>
+  <%= @comments_local.user_mobile_id %>
+</p>
+
+<p>
+  <strong>Local:</strong>
+  <%= @comments_local.local_id %>
+</p>
+
+<%= link_to 'Edit', edit_comments_local_path(@comments_local) %> |
+<%= link_to 'Back', comments_locals_path %>

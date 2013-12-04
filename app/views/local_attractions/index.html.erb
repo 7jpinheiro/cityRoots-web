@@ -1,0 +1,31 @@
+<h1>Listing local_attractions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Details</th>
+      <th>Price</th>
+      <th>Attraction type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @local_attractions.each do |local_attraction| %>
+      <tr>
+        <td><%= local_attraction.details %></td>
+        <td><%= local_attraction.price %></td>
+        <td><%= local_attraction.attraction_type %></td>
+        <td><%= link_to 'Show', local_attraction %></td>
+        <td><%= link_to 'Edit', edit_local_attraction_path(local_attraction) %></td>
+        <td><%= link_to 'Destroy', local_attraction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Local attraction', new_local_attraction_path %>

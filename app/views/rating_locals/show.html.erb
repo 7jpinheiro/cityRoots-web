@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @rating_local.rating %>
+</p>
+
+<p>
+  <strong>Evaluationdate:</strong>
+  <%= @rating_local.evaluationdate %>
+</p>
+
+<p>
+  <strong>User mobile:</strong>
+  <%= @rating_local.user_mobile_id %>
+</p>
+
+<p>
+  <strong>Local:</strong>
+  <%= @rating_local.local_id %>
+</p>
+
+<%= link_to 'Edit', edit_rating_local_path(@rating_local) %> |
+<%= link_to 'Back', rating_locals_path %>
