@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserWebTest < ActiveSupport::TestCase
+class WebUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

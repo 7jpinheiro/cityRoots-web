@@ -1,18 +1,9 @@
-class DeviseCreateUserWebs < ActiveRecord::Migration
-    
+class DeviseCreateWebUsers < ActiveRecord::Migration
   def change
-    create_table(:user_web) do |t|
+    create_table(:web_users) do |t|
       ## Database authenticatable
-      t.string :email, :null => false, :default => ""
-      t.string :pass,  :null => false, :default => ""
-      t.string :name,  :null => false, :default => ""
-      t.string :pass,  :null => false, :default => ""
-      t.string :enterprisename, :null => true, :default => ""
-      t.string :niff, :null => true, :default => "", :unique => true
-      t.string :address, :null => true, :default => ""
-      t.bool   :active, :default => false
-
-
+      t.string :email,              :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => ""
 
       ## Recoverable
       t.string   :reset_password_token
@@ -43,9 +34,9 @@ class DeviseCreateUserWebs < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :user_web, :email,                :unique => true
-    add_index :user_web, :reset_password_token, :unique => true
-    # add_index :user_webs, :confirmation_token,   :unique => true
-    # add_index :user_webs, :unlock_token,         :unique => true
+    add_index :web_users, :email,                :unique => true
+    add_index :web_users, :reset_password_token, :unique => true
+    # add_index :web_users, :confirmation_token,   :unique => true
+    # add_index :web_users, :unlock_token,         :unique => true
   end
 end
