@@ -1,9 +1,18 @@
 class DeviseCreateUserWebs < ActiveRecord::Migration
+    
   def change
     create_table(:user_web) do |t|
       ## Database authenticatable
-      t.string :email,              :null => false, :default => ""
-      t.string :pass, :null => false, :default => ""
+      t.string :email, :null => false, :default => ""
+      t.string :pass,  :null => false, :default => ""
+      t.string :name,  :null => false, :default => ""
+      t.string :pass,  :null => false, :default => ""
+      t.string :enterprisename, :null => true, :default => ""
+      t.string :niff, :null => true, :default => "", :unique => true
+      t.string :address, :null => true, :default => ""
+      t.bool   :active, :default => false
+
+
 
       ## Recoverable
       t.string   :reset_password_token
