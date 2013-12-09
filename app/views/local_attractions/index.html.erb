@@ -1,8 +1,74 @@
-<h1>Listing local_attractions</h1>
+<ul id="breadcrumb">
+  <li><a href="#"><span class="glyphicon glyphicon-home"> </span> Home</a></li>
+  <li><a href="#"><span class="glyphicon glyphicon-camera"> </span> Pontos de Interesse</a></li>
+</ul>
 
+<h1>Pontos de Interesse</h1>
+
+ 
+ <% @local_attractions.each do |local_attraction| %>
+          <div class="col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-xs-3 col-md-3 text-center">   
+                        <img src="http://www.jeronimobraga.com.pt/upload/imgs/imgcont/Santuario%20do%20Bom%20Jesus%20do%20Monte%20(Braga).jpg" alt="bootsnipp" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-xs-9 col-md-9 section-box">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <h4><strong><%= link_to local_attraction.local.name, local_attraction %></strong></h4>
+                        </div>
+                        <div  class="col-md-3 text-right" style="min-height:30px">
+                          <%= link_to edit_local_attraction_path(local_attraction) do %>
+                            <span class="glyphicon glyphicon-edit"></span>
+                          <% end %> 
+                          <%= link_to local_attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                            <span class="glyphicon glyphicon-remove"></span>
+                          <% end %> 
+                        </div>
+                        
+                      </div>
+                      <div >
+                          <p>
+                          <b>Categoria: </b><%= local_attraction.attraction_type.name %>
+                          </p>
+                          <p>
+                            <b>Descrição: </b>
+                            <%= truncate local_attraction.local.description, length: 300 %>
+                            <%= link_to 'Ler mais', local_attraction %> 
+                          </p>
+                          <hr/>
+                          <div class="row rating-desc">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
+                                <span class="glyphicon glyphicon-comment"></span>(100 Comments)
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        <% end %>
+<!--
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Schedule</th>
+      <th>Site</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Coord</th>
+      <th>Transport</th>
+      <th>Reference point</th>
+      <th>Active</th>
+      <th>Timestamp</th>
+      <th>City</th>
+      <th>User web</th>
       <th>Details</th>
       <th>Price</th>
       <th>Attraction type</th>
@@ -15,9 +81,23 @@
   <tbody>
     <% @local_attractions.each do |local_attraction| %>
       <tr>
+        <td><%= local_attraction.local.name %></td>
+        <td><%= local_attraction.local.description %></td>
+        <td><%= local_attraction.local.schedule %></td>
+        <td><%= local_attraction.local.site %></td>
+        <td><%= local_attraction.local.email %></td>
+        <td><%= local_attraction.local.address %></td>
+        <td><%= local_attraction.local.coord %></td>
+        <td><%= local_attraction.local.transport %></td>
+        <td><%= local_attraction.local.reference_point %></td>
+        <td><%= local_attraction.local.active %></td>
+        <td><%= local_attraction.local.timestamp %></td>
+        <td><%= local_attraction.local.city_id %></td>
+        <td><%= local_attraction.local.web_user_id %></td>
         <td><%= local_attraction.details %></td>
         <td><%= local_attraction.price %></td>
         <td><%= local_attraction.attraction_type %></td>
+        <td><%= local_attraction.details %></td>
         <td><%= link_to 'Show', local_attraction %></td>
         <td><%= link_to 'Edit', edit_local_attraction_path(local_attraction) %></td>
         <td><%= link_to 'Destroy', local_attraction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,5 +107,5 @@
 </table>
 
 <br>
-
+-->
 <%= link_to 'New Local attraction', new_local_attraction_path %>

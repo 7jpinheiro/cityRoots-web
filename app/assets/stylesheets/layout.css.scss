@@ -1,7 +1,7 @@
 
 /************************ Colors ************************/
-$color1: #3498db;
-$color2: #2980b9
+$color1: #34495e;
+$color2: #4f6f8f;
 
 /*
  * Style tweaks
@@ -12,9 +12,17 @@ html {
 }
 body {
   padding-top: 70px;
+  font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 footer {
   padding: 30px 0;
+}
+a:hover, a:focus{
+  text-decoration: none;
+}
+h1{
+  font-size: 50px;
+  text-align: center;
 }
 
 /*
@@ -148,7 +156,7 @@ margin-bottom:5px;
  width:70px;
  height:60px;
  position:absolute;
- background:$color2 /*#16A085;*/
+ background:$color2; /*#16A085;*/
  color:#fff;
  z-index:2;
 }
@@ -176,7 +184,7 @@ transform:rotate(360deg);  */
 .var_nav:hover .link_bg
 {
 width:100%;
-background: $color2 /*#16A085;*/
+background: $color2; /*#16A085;*/
 -webkit-transition: all 0.3s ease-in-out;
 -moz-transition: all 0.3s ease-in-out;
 -o-transition: all 0.3s ease-in-out;
@@ -248,8 +256,8 @@ display:block;
   background: #a6a6a6;
   text-decoration: none;
   position: relative;
-  height: 40px;
-  line-height: 40px;
+  height: 30px;
+  line-height: 30px;
   padding: 0 10px 0 5px;
   text-align: center;
   margin-right: 23px;
@@ -281,7 +289,7 @@ display:block;
   position: absolute;
   top: 0;
   border: 0 solid #a6a6a6;
-  border-width: 20px 10px;
+  border-width: 15px 10px;
   width: 0;
   height: 0;
 }
@@ -320,3 +328,12 @@ display:block;
 #breadcrumb li a:active:after {
   border-left-color: #e6e6e6;
 }
+
+
+.glyphicon { margin-right:5px;}
+.section-box { margin-top:0px; text-align:justify;}
+.glyphicon-star { color:#ffbf00;}
+.glyphicon-star-empty {color:#ffbf00}
+.glyphicon-comment { color:#27ae60;}
+.separator { padding-right:5px;padding-left:5px; }
+.section-box hr {margin-top: 0;margin-bottom: 5px;border: 0;border-top: 1px solid rgb(199, 199, 199);}

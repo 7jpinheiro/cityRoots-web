@@ -19,7 +19,7 @@ CityRootsWeb::Application.routes.draw do
 
   resources :locals
 
-  resources :local_attractions
+  resources :local_attractions 
 
   resources :attraction_types
 
