@@ -5,13 +5,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>CityRoots</title>
-
     <!-- Bootstrap core CSS -->
     <%= stylesheet_link_tag "bootstrap.min", "layout" %>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <%= javascript_include_tag "html5shiv", "respond.min" %>
+
     <![endif]-->
   </head>
 
@@ -29,10 +29,10 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active first"><a href="#">Home</a></li>
-            <li><a href="#about">Pacotes</a></li>
+            <li class="active first"><%= link_to 'Home', :controller => "welcome", :action =>"index" %></li>
+            <li><%= link_to 'Pacotes', :controller => "pacotes", :action =>"index" %></li>
             <li><a href="#about">Parceiros</a></li>
-            <li><a href="#about">Galeria</a></li>
+            <li><%= link_to 'Galeria', :controller => "galeria", :action =>"index" %></li>
             <li><a href="#contact">Contactos</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">

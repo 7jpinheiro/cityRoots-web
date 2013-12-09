@@ -1,5 +1,7 @@
 CityRootsWeb::Application.routes.draw do
   
+  get "galeria/index"
+  get "pacotes/index"
   resources :countries
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,6 +12,7 @@ CityRootsWeb::Application.routes.draw do
 
   # Example of regular route:
   get 'welcome/:pacotes' => 'welcome#pacotes'
+  get 'welcome/:galeria' => 'welcome#galeria'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
