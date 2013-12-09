@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="http://blueimp.github.io/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.css">
+<!--<link rel="stylesheet" href="http://blueimp.github.io/Bootstrap-Image-Gallery/css/demo.css">-->
+
+<h2>Galeria</h2>
+
+<!-- http://www.ptweb.com/images/portugal-beach.jpg
+ The container for the list of example images -->
+<div id="links">
+	<a href="http://www.ptweb.com/images/portugal-beach.jpg" title="Praia Portuguesa" data-gallery="">
+		<img src="http://www.ptweb.com/images/portugal-beach.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://upload.wikimedia.org/wikipedia/commons/4/4d/Ribeira_do_porto.jpg" title="Ribeira" data-gallery="">
+		<img src="http://upload.wikimedia.org/wikipedia/commons/4/4d/Ribeira_do_porto.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://media-cdn.tripadvisor.com/media/photo-s/01/37/71/39/paradise-beach-carvoeiro.jpg" title="Praia Carvoeiro" data-gallery="">
+		<img src="http://media-cdn.tripadvisor.com/media/photo-s/01/37/71/39/paradise-beach-carvoeiro.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.golisbon.com/images/lisbon2.png" title="Lisboa" data-gallery="">
+		<img src="http://www.golisbon.com/images/lisbon2.png" style="height:75px;width:75px;">
+	</a>
+	<a href="http://european-union.ca/images/portugal.jpg" title="Portugal" data-gallery="">
+		<img src="http://european-union.ca/images/portugal.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.rightmove.co.uk/overseas-magazine/files/2011/11/iStock_000015519935XSmall.jpg" title="Paisagem Portuguesa" data-gallery="">
+		<img src="http://www.rightmove.co.uk/overseas-magazine/files/2011/11/iStock_000015519935XSmall.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.lacartes.com/images/business/37944/114937/l/278631.jpg" title="Paisagem Portuguesa" data-gallery="">
+		<img src="http://www.lacartes.com/images/business/37944/114937/l/278631.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.travelersjournal.co.uk/wp-content/uploads/2013/02/Algarve-Portugal.jpg" title="Portugal" data-gallery="">
+		<img src="http://www.travelersjournal.co.uk/wp-content/uploads/2013/02/Algarve-Portugal.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://vidadecamaleao.files.wordpress.com/2007/07/lisboa02.jpg" title="Paisagem Portuguesa" data-gallery="">
+		<img src="http://vidadecamaleao.files.wordpress.com/2007/07/lisboa02.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.sula-mac.com/pics/image/Nazare,%20Portugal%20from%20the%20cliff%20top.jpg" title="Paisagem Portuguesa" data-gallery="">
+		<img src="http://www.sula-mac.com/pics/image/Nazare,%20Portugal%20from%20the%20cliff%20top.jpg" style="height:75px;width:75px;">
+	</a>
+	<a href="http://www.blog.omnibees.com/wp-content/uploads/2011/10/praia-falesia.png" title="Paisagem Portuguesa" data-gallery="">
+		<img src="http://www.blog.omnibees.com/wp-content/uploads/2011/10/praia-falesia.png" style="height:75px;width:75px;">
+	</a>
+</div>
+<br>
+</div>
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation and button states -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="http://blueimp.github.io/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.js"></script>
+<!--<script src="http://blueimp.github.io/Bootstrap-Image-Gallery/js/demo.js"></script>-->
