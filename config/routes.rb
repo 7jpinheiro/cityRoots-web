@@ -9,8 +9,8 @@ CityRootsWeb::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root to:'welcome#index'
 
-    match 'contact' => 'contact#new', :as => 'contact', :via => :get
-    match 'contact' => 'contact#create', :as => 'contact', :via => :post
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact_create', :via => :post
   # Example of regular route:
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
