@@ -1,5 +1,6 @@
 CityRootsWeb::Application.routes.draw do
-  devise_for :web_users
+  devise_for :users
+  devise_for :installs
   resources :countries
 
   # The priority is based upon order of creation: first created -> highest priority.

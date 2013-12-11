@@ -1,6 +1,6 @@
-class DeviseCreateWebUsers < ActiveRecord::Migration
+class DeviseCreateInstalls < ActiveRecord::Migration
   def change
-    create_table(:web_users) do |t|
+    create_table(:installs) do |t|
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""
@@ -34,9 +34,9 @@ class DeviseCreateWebUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :web_users, :email,                :unique => true
-    add_index :web_users, :reset_password_token, :unique => true
-    # add_index :web_users, :confirmation_token,   :unique => true
-    # add_index :web_users, :unlock_token,         :unique => true
+    add_index :installs, :email,                :unique => true
+    add_index :installs, :reset_password_token, :unique => true
+    # add_index :installs, :confirmation_token,   :unique => true
+    # add_index :installs, :unlock_token,         :unique => true
   end
 end
