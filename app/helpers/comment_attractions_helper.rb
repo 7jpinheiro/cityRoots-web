@@ -1,0 +1,2 @@
+module CommentAttractionsHelper
+end

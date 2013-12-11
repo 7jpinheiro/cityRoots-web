@@ -1,0 +1,33 @@
+#!/bin/bash
+
+rails g scaffold event name:string description:text schedule:string site:string email:string address:string coord:string transport:string active:boolean timestamp:integer stardate:date enddate:date organization:string price:string program:string event_type_id:integer city_id:integer web_user_id:integer 
+rails g scaffold service name:string description:text schedule:string site:string email:string address:string coord:string transport:string reference_point:boolean active:boolean timestamp:integer capacity:integer details:text service_type_id:integer city_id:integer web_user_id:integer 
+rails g scaffold attraction name:string description:text schedule:string site:string email:string address:string coord:string transport:string reference_point:boolean active:boolean timestamp:integer details:text price:string attraction_type_id:integer city_id:integer web_user_id:integer 
+rails g scaffold itinerary name:string description:text itinerary_type_id:integer
+rails g scaffold itinerary_service itinerary_id:integer service_id:integer
+rails g scaffold itinerary_event itinerary_id:integer event_id:integer
+rails g scaffold itinerary_attraction itinerary_id:integer attraction_id:integer
+rails g scaffold itinerary_type name:string description:text
+rails g scaffold event_type name:string description:text
+rails g scaffold service_type name:string description:text
+rails g scaffold attraction_type name:string description:text attraction_big_types_id:integer
+rails g scaffold attraction_big_type name:string description:text
+rails g scaffold photo_service url:string name:string description:text extension:string
+rails g scaffold photo_event url:string name:string description:text extension:string
+rails g scaffold photo_attraction url:string name:string description:text extension:string
+rails g scaffold rating_service rating:integer evaluationdate:date mobile_user_id:integer service_id:integer
+rails g scaffold rating_event rating:integer evaluationdate:date mobile_user_id:integer event_id:integer
+rails g scaffold rating_attraction rating:integer evaluationdate:date mobile_user_id:integer attraction_id:integer
+rails g scaffold rating_itinerary rating:integer evaluationdate:date mobile_user_id:integer itinerary_id:integer
+rails g scaffold comment_service comment:text evalutiondate:date mobile_user_id:integer service_id:integer
+rails g scaffold comment_event comment:text evalutiondate:date mobile_user_id:integer event_id:integer
+rails g scaffold comment_attraction comment:text evalutiondate:date mobile_user_id:integer attraction_id:integer
+rails g scaffold comment_itinerary comment:text evalutiondate:date mobile_user_id:integer itinerary_id:integer
+rails g scaffold city name:string abv:string country_id:integer
+rails g scaffold country name:string abv:string
+rails g scaffold language name:string abv:text description:text
+rails g scaffold mobile_user username:string active:boolean country_id:integer email:string pass:string dateofbirth:date firstname:string surname:string gender:string  language_id:integer country_id:integer
+rails g scaffold mobile_user_city city_id:ineteger mobile_user_id:integer
+rails g scaffold web_user_pack subscriptiondate:date validity:date obs:string active:boolean pack_type_id:integer web_user_id:integer 
+rails g scaffold pack_type name:string description:text duration:integer price:float
+

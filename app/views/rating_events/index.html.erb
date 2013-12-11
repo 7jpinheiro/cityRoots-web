@@ -1,0 +1,33 @@
+<h1>Listing rating_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Evaluationdate</th>
+      <th>Mobile user</th>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rating_events.each do |rating_event| %>
+      <tr>
+        <td><%= rating_event.rating %></td>
+        <td><%= rating_event.evaluationdate %></td>
+        <td><%= rating_event.mobile_user_id %></td>
+        <td><%= rating_event.event_id %></td>
+        <td><%= link_to 'Show', rating_event %></td>
+        <td><%= link_to 'Edit', edit_rating_event_path(rating_event) %></td>
+        <td><%= link_to 'Destroy', rating_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rating event', new_rating_event_path %>

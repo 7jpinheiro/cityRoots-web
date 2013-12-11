@@ -1,5 +1,63 @@
 CityRootsWeb::Application.routes.draw do
   
+  resources :pack_types
+
+  resources :web_user_packs
+
+  resources :mobile_user_cities
+
+  resources :mobile_users
+
+  resources :languages
+
+  resources :cities
+
+  resources :comment_itineraries
+
+  resources :comment_attractions
+
+  resources :comment_events
+
+  resources :comment_services
+
+  resources :rating_itineraries
+
+  resources :rating_attractions
+
+  resources :rating_events
+
+  resources :rating_services
+
+  resources :photo_attractions
+
+  resources :photo_events
+
+  resources :photo_services
+
+  resources :attraction_big_types
+
+  resources :attraction_types
+
+  resources :service_types
+
+  resources :event_types
+
+  resources :itinerary_types
+
+  resources :itinerary_attractions
+
+  resources :itinerary_events
+
+  resources :itinerary_services
+
+  resources :itineraries
+
+  resources :attractions
+
+  resources :services
+
+  resources :events
+
   get "galeria/index"
   get "pacotes/index"
   resources :countries

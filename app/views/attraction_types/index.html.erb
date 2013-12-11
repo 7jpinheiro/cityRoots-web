@@ -1,0 +1,31 @@
+<h1>Listing attraction_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Attraction big types</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attraction_types.each do |attraction_type| %>
+      <tr>
+        <td><%= attraction_type.name %></td>
+        <td><%= attraction_type.description %></td>
+        <td><%= attraction_type.attraction_big_types_id %></td>
+        <td><%= link_to 'Show', attraction_type %></td>
+        <td><%= link_to 'Edit', edit_attraction_type_path(attraction_type) %></td>
+        <td><%= link_to 'Destroy', attraction_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attraction type', new_attraction_type_path %>

@@ -1,0 +1,33 @@
+<h1>Listing comment_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Evalutiondate</th>
+      <th>Mobile user</th>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment_events.each do |comment_event| %>
+      <tr>
+        <td><%= comment_event.comment %></td>
+        <td><%= comment_event.evalutiondate %></td>
+        <td><%= comment_event.mobile_user_id %></td>
+        <td><%= comment_event.event_id %></td>
+        <td><%= link_to 'Show', comment_event %></td>
+        <td><%= link_to 'Edit', edit_comment_event_path(comment_event) %></td>
+        <td><%= link_to 'Destroy', comment_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment event', new_comment_event_path %>

@@ -1,0 +1,29 @@
+<h1>Listing itinerary_services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Itinerary</th>
+      <th>Service</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @itinerary_services.each do |itinerary_service| %>
+      <tr>
+        <td><%= itinerary_service.itinerary_id %></td>
+        <td><%= itinerary_service.service_id %></td>
+        <td><%= link_to 'Show', itinerary_service %></td>
+        <td><%= link_to 'Edit', edit_itinerary_service_path(itinerary_service) %></td>
+        <td><%= link_to 'Destroy', itinerary_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Itinerary service', new_itinerary_service_path %>

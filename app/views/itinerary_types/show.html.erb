@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @itinerary_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @itinerary_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_itinerary_type_path(@itinerary_type) %> |
+<%= link_to 'Back', itinerary_types_path %>

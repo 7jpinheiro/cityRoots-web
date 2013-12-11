@@ -1,0 +1,61 @@
+<h1>Listing events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Schedule</th>
+      <th>Site</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Coord</th>
+      <th>Transport</th>
+      <th>Active</th>
+      <th>Timestamp</th>
+      <th>Stardate</th>
+      <th>Enddate</th>
+      <th>Organization</th>
+      <th>Price</th>
+      <th>Program</th>
+      <th>Event type</th>
+      <th>City</th>
+      <th>Web user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.description %></td>
+        <td><%= event.schedule %></td>
+        <td><%= event.site %></td>
+        <td><%= event.email %></td>
+        <td><%= event.address %></td>
+        <td><%= event.coord %></td>
+        <td><%= event.transport %></td>
+        <td><%= event.active %></td>
+        <td><%= event.timestamp %></td>
+        <td><%= event.stardate %></td>
+        <td><%= event.enddate %></td>
+        <td><%= event.organization %></td>
+        <td><%= event.price %></td>
+        <td><%= event.program %></td>
+        <td><%= event.event_type_id %></td>
+        <td><%= event.city_id %></td>
+        <td><%= event.web_user_id %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>

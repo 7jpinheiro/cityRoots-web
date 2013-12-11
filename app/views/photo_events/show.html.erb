@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @photo_event.url %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @photo_event.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @photo_event.description %>
+</p>
+
+<p>
+  <strong>Extension:</strong>
+  <%= @photo_event.extension %>
+</p>
+
+<%= link_to 'Edit', edit_photo_event_path(@photo_event) %> |
+<%= link_to 'Back', photo_events_path %>

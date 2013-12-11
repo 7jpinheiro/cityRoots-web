@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @rating_attraction.rating %>
+</p>
+
+<p>
+  <strong>Evaluationdate:</strong>
+  <%= @rating_attraction.evaluationdate %>
+</p>
+
+<p>
+  <strong>Mobile user:</strong>
+  <%= @rating_attraction.mobile_user_id %>
+</p>
+
+<p>
+  <strong>Attraction:</strong>
+  <%= @rating_attraction.attraction_id %>
+</p>
+
+<%= link_to 'Edit', edit_rating_attraction_path(@rating_attraction) %> |
+<%= link_to 'Back', rating_attractions_path %>
