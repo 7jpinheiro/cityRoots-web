@@ -107,26 +107,53 @@
     text-align: center;
 }	
 /*
-----> Paneil profissional
+----> Panel premium
 */
 .panel-profissional {
-  border-color: #0E5697;
+  border-color: #B68C34;
 }
 
 .panel-profissional > .panel-heading {
-  color: #439483;
-  background-color: #0E5697;
-  border-color: #0E5697;
+  color: #B68C34;
+  background-color: #B68C34;
+  border-color: #B68C34;
 }
 
 .panel-profissional > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #0E5697;
+  border-top-color: #B68C34;
 }
 
 .panel-profissional > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #0E5697;
+  border-bottom-color: #B68C34;
 }
 .panel-title-profissional{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+/*
+----> Panel free DB9370
+*/
+.panel-free {
+  border-color: #A20795;
+}
+
+.panel-free > .panel-heading {
+  color: #A20795;
+  background-color: #A20795;
+  border-color: #A20795;
+}
+
+.panel-free > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #A20795;
+}
+
+.panel-free > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #A20795;
+}
+.panel-title-free{
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
@@ -169,35 +196,35 @@
 	</div>
 </div>
 <hr/>
-<div class="row">
-	<h3>Prefeito para comerciantes</h3>
+<div class="container">
+	<h3>Perfeito para comerciantes</h3>
 	<br/>
-	<br/>
-    <div class="col-xs-12 col-md-3">
-        <div class="panel panel-primary">
+    <div class="col-xs-12 col-md-3" >
+        <div class="panel panel-free" style="height:337px;">
             <div class="panel-heading">
-                <h3 class="panel-title">
-                    Básico</h3>
+                <h3 class="panel-title-free"> 
+                    Free</h3>
             </div>
             <div class="panel-body">
-                <div class="the-price">
+                <div class="the-price" style="height:76px;">
                     <h1>
-                        €10<span class="subscript">/ano</span></h1>
+                    	€0<small>/ano</small>
+                    </h1>
                 </div>
                 <table class="table">
-                    <tr>
+                    <tr style="height:49px;">
                         <td>
-                            Personalização do perfil
+                            Criação do seu perfil 
                         </td>
                     </tr>
-                    <tr class="active">
+                    <tr class="active" style="height:49px;">
                         <td>
-                            Publicações de eventos
+                            Georeferênciação do establecimento
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height:49px;">
                         <td>
-                            Métricas sobre a utilização do serviço
+                            Foto da fachada do establecimento
                         </td>
                     </tr>
                 </table>
@@ -208,8 +235,8 @@
         </div>
     </div>
     <div class="col-xs-12 col-md-3">
-        <div class="panel panel-profissional">
-            <div class="cnrflash">
+        <div class="panel panel-primary" style="height:337px;">
+        	<div class="cnrflash">
                 <div class="cnrflash-inner">
                     <span class="cnrflash-label">Mais
                         <br>
@@ -217,28 +244,63 @@
                 </div>
             </div>
             <div class="panel-heading">
-                <h3 class="panel-title-profissional" >
-                    Profissional</h3>
+                <h3 class="panel-title">
+                    Freemium</h3>
             </div>
             <div class="panel-body">
-                <div class="the-price">
+                <div class="the-price" style="height:76px;">
                     <h1>
-                        €25<span class="subscript">/ano</span></h1>
+                    	€25<small>/ano</small>
+                    </h1>
                 </div>
                 <table class="table">
-                    <tr>
+                    <tr style="height:49px;">
                         <td>
-                            Personalização do perfil
+                            Publicação de mais conteudo multimedia
                         </td>
                     </tr>
-                    <tr class="active">
+                    <tr class="active" style="height:49px;">
                         <td>
-                            Publicações de eventos
+                            Publicação de produtos e serviços
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height:49px;">
                         <td>
-                            Métricas sobre a utilização do serviço
+                            Publicação de promoções e eventos
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+            	<a href="pacotes/index#basico" class="btn btn-primary" role="button">Ver mais</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+        <div class="panel panel-profissional" style="height:337px;">
+            <div class="panel-heading">
+                <h3 class="panel-title-profissional" >
+                    Premium</h3>
+            </div>
+            <div class="panel-body">
+                <div class="the-price" style="height:76px;">
+                    <h1>
+                        €50<small>/ano</small></h1>
+                </div>
+                <table class="table">
+                    <tr style="height:49px;">
+                        <td>
+                            Fazer publicidade
+                        </td>
+                    </tr>
+                    <tr class="active" style="height:49px;">
+                        <td>
+                            Dar destaque na aplicação Movel
+                        </td>
+                    </tr>
+                    <tr style="height:49px;">
+                        <td>
+                            Estatisticas
                         </td>
                     </tr>
                 </table>
@@ -247,41 +309,7 @@
                 <a href="pacotes/index#profissional" class="btn btn-primary" role="button">Ver mais</a>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-md-3">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Avançado</h3>
-            </div>
-            <div class="panel-body">
-                <div class="the-price">
-                    <h1>
-                        €50<span class="subscript">/ano</span></h1>
-                </div>
-                <table class="table">
-                    <tr>
-                        <td>
-                            Personalização do perfil
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td>
-                            Publicações de eventos
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Métricas sobre a utilização do serviço
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <a href="pacotes/index#avancado" class="btn btn-primary" role="button">Ver mais</a>
-            </div>
-        </div>
-    </div>
+    </div>	
 </div>
 <hr class="featurette-divider"/>
 <div class="featurette">
