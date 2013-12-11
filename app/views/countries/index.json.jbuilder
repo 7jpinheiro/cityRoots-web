@@ -1,4 +1,4 @@
 json.array!(@countries) do |country|
-  json.extract! country, :name, :abv
+  json.extract! country, :id, :name, :adv
   json.url country_url(country, format: :json)
 end
