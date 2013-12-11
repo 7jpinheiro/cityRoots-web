@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @attraction.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @attraction.description %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @attraction.schedule %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @attraction.site %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @attraction.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @attraction.address %>
+</p>
+
+<p>
+  <strong>Coord:</strong>
+  <%= @attraction.coord %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @attraction.transport %>
+</p>
+
+<p>
+  <strong>Reference point:</strong>
+  <%= @attraction.reference_point %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @attraction.active %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @attraction.timestamp %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @attraction.details %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @attraction.price %>
+</p>
+
+<p>
+  <strong>Attraction type:</strong>
+  <%= @attraction.attraction_type_id %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @attraction.city_id %>
+</p>
+
+<p>
+  <strong>Web user:</strong>
+  <%= @attraction.web_user_id %>
+</p>
+
+<%= link_to 'Edit', edit_attraction_path(@attraction) %> |
+<%= link_to 'Back', attractions_path %>

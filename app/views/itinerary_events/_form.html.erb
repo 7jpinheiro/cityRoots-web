@@ -1,0 +1,25 @@
+<%= form_for(@itinerary_event) do |f| %>
+  <% if @itinerary_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@itinerary_event.errors.count, "error") %> prohibited this itinerary_event from being saved:</h2>
+
+      <ul>
+      <% @itinerary_event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :itinerary_id %><br>
+    <%= f.number_field :itinerary_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_id %><br>
+    <%= f.number_field :event_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

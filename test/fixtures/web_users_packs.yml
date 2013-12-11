@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subscriptiondate: 2013-12-11
+  validity: 2013-12-11
+  obs: MyString
+  active: false
+  pack_type_id: 1
+  web_user_id: 1
+
+two:
+  subscriptiondate: 2013-12-11
+  validity: 2013-12-11
+  obs: MyString
+  active: false
+  pack_type_id: 1
+  web_user_id: 1

@@ -1,0 +1,2 @@
+module PhotoEventsHelper
+end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @comments_itinerary.comment %>
+</p>
+
+<p>
+  <strong>Evalutiondate:</strong>
+  <%= @comments_itinerary.evalutiondate %>
+</p>
+
+<p>
+  <strong>Mobile user:</strong>
+  <%= @comments_itinerary.mobile_user_id %>
+</p>
+
+<p>
+  <strong>Itinerary:</strong>
+  <%= @comments_itinerary.itinerary_id %>
+</p>
+
+<%= link_to 'Edit', edit_comments_itinerary_path(@comments_itinerary) %> |
+<%= link_to 'Back', comments_itineraries_path %>

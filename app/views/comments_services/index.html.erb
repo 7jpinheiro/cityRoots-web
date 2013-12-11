@@ -1,0 +1,33 @@
+<h1>Listing comments_services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Evalutiondate</th>
+      <th>Mobile user</th>
+      <th>Service</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments_services.each do |comments_service| %>
+      <tr>
+        <td><%= comments_service.comment %></td>
+        <td><%= comments_service.evalutiondate %></td>
+        <td><%= comments_service.mobile_user_id %></td>
+        <td><%= comments_service.service_id %></td>
+        <td><%= link_to 'Show', comments_service %></td>
+        <td><%= link_to 'Edit', edit_comments_service_path(comments_service) %></td>
+        <td><%= link_to 'Destroy', comments_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comments service', new_comments_service_path %>

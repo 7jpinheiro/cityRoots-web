@@ -1,0 +1,31 @@
+<h1>Listing itineraries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Itinerary type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @itineraries.each do |itinerary| %>
+      <tr>
+        <td><%= itinerary.name %></td>
+        <td><%= itinerary.description %></td>
+        <td><%= itinerary.itinerary_type_id %></td>
+        <td><%= link_to 'Show', itinerary %></td>
+        <td><%= link_to 'Edit', edit_itinerary_path(itinerary) %></td>
+        <td><%= link_to 'Destroy', itinerary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Itinerary', new_itinerary_path %>

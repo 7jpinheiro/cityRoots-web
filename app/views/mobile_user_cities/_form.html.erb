@@ -1,0 +1,25 @@
+<%= form_for(@mobile_user_city) do |f| %>
+  <% if @mobile_user_city.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mobile_user_city.errors.count, "error") %> prohibited this mobile_user_city from being saved:</h2>
+
+      <ul>
+      <% @mobile_user_city.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :city_id %><br>
+    <%= f.text_field :city_id %>
+  </div>
+  <div class="field">
+    <%= f.label :mobile_user_id %><br>
+    <%= f.number_field :mobile_user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
