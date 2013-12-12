@@ -126,8 +126,8 @@ body{
 }
 
 .center_body{
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: -10px;
+    margin-right: 10px;
     padding: 30px;
     background: #fff;
     min-height:100%;
@@ -148,13 +148,13 @@ list-style-type:none;
 {
 position:relative;
 background:#ccc; 
-height:60px;
+height:55px;
 margin-bottom:5px;
 }
 .link_bg
 {
- width:70px;
- height:60px;
+ width:50px;
+ height:55px;
  position:absolute;
  background:$color2; /*#16A085;*/
  color:#fff;
@@ -203,8 +203,8 @@ font-weight:bold;
 .var_nav .icon
 {
 position:relative;
-width:70px;
-height:70px;
+width:50px;
+height:50px;
 text-align:center;
 color:#fff;
 -webkit-transition:all .5s ease-in-out;
@@ -228,7 +228,7 @@ font-family:arial;
 color:#fff;
 text-decoration:none;
 text-align:left;
-margin-left: 80px;
+margin-left: 60px;
 }
 .var_nav span{
 margin-top:20px;

@@ -1,188 +1,191 @@
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>CityRoots</title>
+  <html lang="en"><head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <title>CityRoots</title>
 
-    <!-- Bootstrap core CSS -->
-    <%= stylesheet_link_tag "bootstrap.min", "layout" %>
+      <!-- Bootstrap core CSS -->
+      <%= stylesheet_link_tag "bootstrap.min", "layout" %>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <%= javascript_include_tag "html5shiv", "respond.min" %>
-    <![endif]-->
-  </head>
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <%= javascript_include_tag "html5shiv", "respond.min" %>
+      <![endif]-->
+    </head>
 
-  <body>
+    <body>
 
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-      <div class="">
-        <div class="navbar-header col-sm-2">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><i class=" glyphicon glyphicon-globe"></i> CityRoots</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active first"><a href="#">Home</a></li>
-            <li><a href="#about">Pacotes</a></li>
-            <li><a href="#about">Parceiros</a></li>
-            <li><a href="#about">Galeria</a></li>
-            <li><a href="#contact">Contactos</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> John Smith  <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Preferências</a></li>
-                <li class="divider"></li>
-                <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div><!-- /.container -->
-    </div><!-- /.navbar -->
-
-    
-</div>
-
-<div class="row row-offcanvas row-offcanvas-right">
-
-      <div class="col-xs-12 col-sm-12" style="height:100%">
-
-        <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="position:fixed; padding-left:0px;height:100%">
-          <nav>
-            <UL>
-             <li class="var_nav">
-                <div class="link_bg" style="width:100%;"></div>
-                <div class="link_title">
-                  <div class=icon> 
-                  <i class=" glyphicon glyphicon-camera"></i>
-                  </div>
-                  <a href="#"><span>Pontos de Interesse</span></a>
-                </div>
-             </li>
-             <li class="var_nav">
-                <div class="link_bg"></div>
-                <div class="link_title">
-                  <div class=icon> 
-                  <i class=" glyphicon glyphicon-globe"></i>
-                  </div>
-                  <a href="#"><span>Rotas e Percursos</span></a>
-                </div>
-             </li>
-             <li class="var_nav">
-                <div class="link_bg"></div>
-                <div class="link_title">
-                  <div class=icon> 
-                  <i class=" glyphicon glyphicon-music"></i>
-                  </div>
-                  <a href="#"><span>Eventos</span></a>
-                </div>
-             </li>
-             <li class="var_nav">
-                <div class="link_bg"></div>
-                <div class="link_title">
-                  <div class=icon> 
-                  <i class=" glyphicon glyphicon-calendar"></i>
-                  </div>
-                  <a href="#"><span>Agenda de Eventos</span></a>
-                </div>
-             </li>
-             <li class="var_nav">
-                <div class="link_bg"></div>
-                <div class="link_title">
-                  <div class=icon> 
-                  <i class=" glyphicon glyphicon-signal"></i>
-                  </div>
-                  <a href="#"><span>Estatísticas</span></a>
-                </div>
-             </li>
-            </UL>
-          </nav>
-        </div><!--/span-->
-        <div class="col-xs-12 col-md-offset-2 col-sm-10" id="body-page">
-          <div class="center_body">
-             
-              <%= yield %>
+      <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="">
+          <div class="navbar-header col-sm-2">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class=" glyphicon glyphicon-globe"></i> CityRoots</a>
           </div>
-        </div><!--/span-->
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active first"><a href="#">Home</a></li>
+              <li><a href="#about">Pacotes</a></li>
+              <li><a href="#about">Parceiros</a></li>
+              <li><a href="#about">Galeria</a></li>
+              <li><a href="#contact">Contactos</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> John Smith  <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
+                  <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Preferências</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div><!-- /.container -->
+      </div><!-- /.navbar -->
+
+      
+  </div>
+
+  <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-12" style="height:100%">
+          <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="position:fixed; padding-left:0px;height:100%">
+            <div class="row">
+            <div class="col-sm-11">
+            <nav>
+              <UL>
+               <li class="var_nav">
+                  <div class="link_bg" style="width:100%;"></div>
+                  <div class="link_title">
+                    <div class=icon> 
+                    <i class=" glyphicon glyphicon-camera"></i>
+                    </div>
+                    <a href="#"><span>Pontos de Interesse</span></a>
+                  </div>
+               </li>
+               <li class="var_nav">
+                  <div class="link_bg"></div>
+                  <div class="link_title">
+                    <div class=icon> 
+                    <i class=" glyphicon glyphicon-globe"></i>
+                    </div>
+                    <a href="#"><span>Rotas e Percursos</span></a>
+                  </div>
+               </li>
+               <li class="var_nav">
+                  <div class="link_bg"></div>
+                  <div class="link_title">
+                    <div class=icon> 
+                    <i class=" glyphicon glyphicon-music"></i>
+                    </div>
+                    <a href="#"><span>Eventos</span></a>
+                  </div>
+               </li>
+               <li class="var_nav">
+                  <div class="link_bg"></div>
+                  <div class="link_title">
+                    <div class=icon> 
+                    <i class=" glyphicon glyphicon-calendar"></i>
+                    </div>
+                    <a href="#"><span>Estabelecimentos</span></a>
+                  </div>
+               </li>
+               <!--
+               <li class="var_nav">
+                  <div class="link_bg"></div>
+                  <div class="link_title">
+                    <div class=icon> 
+                    <i class=" glyphicon glyphicon-signal"></i>
+                    </div>
+                    <a href="#"><span>Estatísticas</span></a>
+                  </div>
+               </li> -->
+              </UL>
+            </nav>
+          </div>
+        </div>
+          </div><!--/span-->
+          <div class="col-xs-12 col-md-offset-2 col-sm-10" id="body-page">
+            <div class="center_body">
+               
+                <%= yield %>
+            </div>
+          </div><!--/span-->
 
 
-      </div><!--/row-->
+        </div><!--/row-->
 
-    </div><!--/.container-->
-    <hr/>
-    <footer>
-  <div class="container" >    
+      </div><!--/.container-->
+      <hr/>
+      <footer>
+    <div class="container" >    
+      <div class="row">
+      <div class="col-lg-12">
+        <div class="col-md-3">
+          <ul class="list-unstyled">
+            <li>GitHub<li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact & support</a></li>
+            <li><a href="#">Enterprise</a></li>
+            <li><a href="#">Site status</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-unstyled">
+            <li>Applications<li>
+            <li><a href="#">Product for Mac</a></li>
+            <li><a href="#">Product for Windows</a></li>
+            <li><a href="#">Product mobile apps</a></li>              
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-unstyled">
+            <li>Services<li>
+            <li><a href="#">Web analytics</a></li>
+            <li><a href="#">Presentations</a></li>
+            <li><a href="#">Code snippets</a></li>
+            <li><a href="#">Job board</a></li>              
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-unstyled">
+            <li>Documentation<li>
+            <li><a href="#">Product Help</a></li>
+            <li><a href="#">Developer API</a></li>
+            <li><a href="#">Product Markdown</a></li>
+            <li><a href="#">Product Pages</a></li>              
+          </ul>
+        </div>  
+      </div>
+    </div>
+    <hr>
     <div class="row">
-    <div class="col-lg-12">
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li>GitHub<li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact & support</a></li>
-          <li><a href="#">Enterprise</a></li>
-          <li><a href="#">Site status</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li>Applications<li>
-          <li><a href="#">Product for Mac</a></li>
-          <li><a href="#">Product for Windows</a></li>
-          <li><a href="#">Product mobile apps</a></li>              
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li>Services<li>
-          <li><a href="#">Web analytics</a></li>
-          <li><a href="#">Presentations</a></li>
-          <li><a href="#">Code snippets</a></li>
-          <li><a href="#">Job board</a></li>              
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li>Documentation<li>
-          <li><a href="#">Product Help</a></li>
-          <li><a href="#">Developer API</a></li>
-          <li><a href="#">Product Markdown</a></li>
-          <li><a href="#">Product Pages</a></li>              
-        </ul>
-      </div>  
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="col-md-8">
-        <a href="#">Terms of Service</a>    
-        <a href="#">Privacy</a>    
-        <a href="#">Security</a>
-      </div>
-      <div class="col-md-4">
-        <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
+      <div class="col-lg-12">
+        <div class="col-md-8">
+          <a href="#">Terms of Service</a>    
+          <a href="#">Privacy</a>    
+          <a href="#">Security</a>
+        </div>
+        <div class="col-md-4">
+          <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
+        </div>
       </div>
     </div>
-  </div>
-  </footer>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-        <%= javascript_include_tag "application" %>
+    </footer>
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+          <%= javascript_include_tag "application" %>
 
-    <%= javascript_include_tag "jquery", "bootstrap", "offcanvas" %>
+      <%= javascript_include_tag "jquery", "bootstrap", "offcanvas" %>
 
 
-	</body>
+  	</body>
 
-</html>
+  </html>

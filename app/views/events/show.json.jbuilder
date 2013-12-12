@@ -1,1 +1,1 @@
-json.extract! @event, :name, :description, :schedule, :site, :email, :address, :coord, :transport, :active, :timestamp, :stardate, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id, :created_at, :updated_at
+json.extract! @event, :name, :description, :schedule, :site, :email, :address, :latitude, :longitude, :transport, :active, :timestamp, :startdate, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id, :created_at, :updated_at
