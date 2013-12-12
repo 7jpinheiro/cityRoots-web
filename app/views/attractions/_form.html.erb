@@ -56,20 +56,16 @@
     <%= f.number_field :timestamp %>
   </div>
   <div class="field">
-    <%= f.label :details %><br>
-    <%= f.text_area :details %>
-  </div>
-  <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :attraction_type_id %><br>
-    <%= f.number_field :attraction_type_id %>
+    <%= f.label :attraction_type %><br>
+    <%=  f.collection_select(:city_id, AttractionType.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
+    <%= f.label :city %><br>
+    <%=  f.collection_select(:city_id, City.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :web_user_id %><br>

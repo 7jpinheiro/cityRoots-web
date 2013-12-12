@@ -73,11 +73,11 @@
   </div>
   <div class="field">
     <%= f.label :event_type_id %><br>
-    <%= f.number_field :event_type_id %>
+    <%=  f.collection_select(:event_type_id, EventType.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
+    <%=  f.collection_select(:city_id, City.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :web_user_id %><br>

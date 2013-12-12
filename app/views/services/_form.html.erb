@@ -65,11 +65,11 @@
   </div>
   <div class="field">
     <%= f.label :service_type_id %><br>
-    <%= f.number_field :service_type_id %>
+    <%=  f.collection_select(:service_type_id, ServiceType.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
+    <%=  f.collection_select(:city_id, City.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :web_user_id %><br>
