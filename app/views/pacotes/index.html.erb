@@ -102,51 +102,104 @@
     padding-bottom: 5px;
     color: #fff;
     text-shadow: 0 1px 1px rgba(1,1,1,.8);
-    font-size: 0.45em;
+    font-size: 0.55em;
     font-weight: bold;
     text-align: center;
-}	
+}
+/*
+----> Panel premium
+*/
+.panel-profissional {
+  border-color: #B68C34;
+}
+
+.panel-profissional > .panel-heading {
+  color: #B68C34;
+  background-color: #B68C34;
+  border-color: #B68C34;
+}
+
+.panel-profissional > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #B68C34;
+}
+
+.panel-profissional > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #B68C34;
+}
+.panel-title-profissional{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+/*
+----> Panel free DB9370
+*/
+.panel-free {
+  border-color: #A20795;
+}
+
+.panel-free > .panel-heading {
+  color: #A20795;
+  background-color: #A20795;
+  border-color: #A20795;
+}
+
+.panel-free > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #A20795;
+}
+
+.panel-free > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #A20795;
+}
+.panel-title-free{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #FFFFFF;
+}
 </style>
 <div class="container">
     <div class="row">
     	<h2>Os nossos pacotes...<h2>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-primary">
+        <div class="col-xs-12 col-md-3" >
+            <div class="panel panel-free" style="height:337px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Básico</h3>
+                    <h3 class="panel-title-free"> 
+                        Free</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="the-price">
+                    <div class="the-price" style="height:76px;">
                         <h1>
-                            €10<span class="subscript">/ano</span></h1>
+                            €0<small>/ano</small>
+                        </h1>
                     </div>
                     <table class="table">
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Personalização do perfil
+                                Criação do seu perfil 
                             </td>
                         </tr>
-                        <tr class="active">
+                        <tr class="active" style="height:49px;">
                             <td>
-                                Publicações de eventos
+                                Georeferênciação do establecimento
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Métricas sobre a utilização do serviço
+                                Foto da fachada do establecimento
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="panel-footer">
-                	<a href="#basico" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
+                    <a href="pacotes/index#basico" class="btn btn-primary" role="button">Ver mais</a>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-3">
-            <div class="panel panel-success">
+            <div class="panel panel-primary" style="height:337px;">
                 <div class="cnrflash">
                     <div class="cnrflash-inner">
                         <span class="cnrflash-label">Mais
@@ -156,69 +209,68 @@
                 </div>
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Profissional</h3>
+                        Freemium</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="the-price">
+                    <div class="the-price" style="height:76px;">
                         <h1>
-                            €25<span class="subscript">/ano</span></h1>
+                            €25<small>/ano</small>
+                        </h1>
                     </div>
                     <table class="table">
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Personalização do perfil
+                                Publicação de mais conteudo multimedia
                             </td>
                         </tr>
-                        <tr class="active">
+                        <tr class="active" style="height:49px;">
                             <td>
-                                Publicações de eventos
+                                Publicação de produtos e serviços
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Métricas sobre a utilização do serviço
+                                Publicação de promoções e eventos
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <a href="#profissional" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
+                    <a href="pacotes/index#basico" class="btn btn-primary" role="button">Ver mais</a>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-3">
-            <div class="panel panel-info">
+            <div class="panel panel-profissional" style="height:337px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Avançado</h3>
+                    <h3 class="panel-title-profissional" >
+                        Premium</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="the-price">
+                    <div class="the-price" style="height:76px;">
                         <h1>
-                            €50<span class="subscript">/ano</span></h1>
+                            €50<small>/ano</small></h1>
                     </div>
                     <table class="table">
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Personalização do perfil
+                                Fazer publicidade
                             </td>
                         </tr>
-                        <tr class="active">
+                        <tr class="active" style="height:49px;">
                             <td>
-                                Publicações de eventos
+                                Dar destaque na aplicação Movel
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height:49px;">
                             <td>
-                                Métricas sobre a utilização do serviço
+                                Estatisticas
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <a href="#avancado" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
+                    <a href="pacotes/index#profissional" class="btn btn-primary" role="button">Ver mais</a>
                 </div>
             </div>
         </div>
@@ -228,21 +280,30 @@
 <hr/>
 <br/>
 <div id="basico">
-	<h2>Pacote Básico</h2>
+	<h2>Pacote Free</h2>
+    <p>
+        
+    </p>
 	<a href="#" class="btn btn-success" role="button">Assinar</a>
 </div>
 <br/>
 <hr/>
 <br/>
 <div id="profissional">
-	<h2>Pacote Profisional</h2>
+	<h2>Pacote Freemium</h2>
+    <p>
+        
+    </p>
 	<a href="#" class="btn btn-success" role="button">Assinar</a>
 </div>
 <br/>
 <hr/>
 <br/>
 <div id="avancado">
-	<h2>Pacote Avançado</h2>
+	<h2>Pacote Premium</h2>
+    <p>
+        
+    </p>
 	<a href="#" class="btn btn-success" role="button">Assinar</a>
 </div>
 
