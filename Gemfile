@@ -6,6 +6,8 @@ gem 'rails', '4.0.1'
 # Use postgreSQL as the database for Active Record
 gem 'pg'
 
+gem "crummy"
+
 gem 'rabl'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -51,7 +53,3 @@ gem 'cancan'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-#Use bootsrap ssas
-gem 'bootstrap-sass-rails'
-

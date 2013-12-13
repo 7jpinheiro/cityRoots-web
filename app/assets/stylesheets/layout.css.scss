@@ -24,7 +24,17 @@ h1{
   font-size: 50px;
   text-align: center;
 }
+form{
+  margin-left:20px;
+}
+.form-horizontal .control-label{
+  
+}
 
+.btn-default{
+  background: #ccc;
+  border: 0;
+}
 /*
  * Off Canvas
  * --------------------------------------------------
@@ -126,14 +136,21 @@ body{
 }
 
 .center_body{
-    margin-left: -10px;
-    margin-right: 10px;
-    padding: 30px;
+    margin-right: 15px;
+    padding: 10px;
     background: #fff;
     min-height:100%;
 }
+.center_body h1{
+  margin-bottom: 20px;
+  margin-top: 0px
+}
 
-
+.breadcrumb{
+  margin: 0;
+  background: #fff;
+  margin-right: 15px;
+}
 
 
 /************************ Side Bar ************************/
@@ -142,7 +159,7 @@ ul
 margin:0px;
 padding:0px;
 list-style-type:none;
--webkit-backface-visibility: hidden; backface-visibility: hidden;  
+
 }
 .var_nav
 {
@@ -238,102 +255,21 @@ display:block;
 
 
 
-/******************************* Breadcrumb ********************************/
-
-#breadcrumb {
-  list-style: none;
-  display: inline-block;
+.glyphicon { 
+  margin-right:5px; 
+  margin-left: 10px
 }
-#breadcrumb .icon {
-  font-size: 14px;
+.section-box { 
+  margin-top:0px; 
+  text-align:justify;
 }
-#breadcrumb li {
-  float: left;
-}
-#breadcrumb li a {
-  color: #4d4d4d;
-  display: block;
-  background: #a6a6a6;
-  text-decoration: none;
-  position: relative;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px 0 5px;
-  text-align: center;
-  margin-right: 23px;
-}
-#breadcrumb li:nth-child(even) a {
-  background-color: #e6e6e6;
-}
-#breadcrumb li:nth-child(even) a:before {
-  border-color: #e6e6e6;
-  border-left-color: transparent;
-}
-#breadcrumb li:nth-child(even) a:after {
-  border-left-color: #e6e6e6;
-}
-#breadcrumb li:first-child a {
-  padding-left: 15px;
-}
-#breadcrumb li:first-child a:before {
-  border: none;
-}
-#breadcrumb li:last-child a {
-  padding-right: 15px;
-}
-#breadcrumb li:last-child a:after {
-  border: none;
-}
-#breadcrumb li a:before, #breadcrumb li a:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  border: 0 solid #a6a6a6;
-  border-width: 15px 10px;
-  width: 0;
-  height: 0;
-}
-#breadcrumb li a:before {
-  left: -20px;
-  border-left-color: transparent;
-}
-#breadcrumb li a:after {
-  left: 100%;
-  border-color: transparent;
-  border-left-color: #a6a6a6;
-}
-#breadcrumb li a:hover {
-  background-color: #bfbfbf;
-}
-#breadcrumb li a:hover:before {
-  border-color: #bfbfbf;
-  border-left-color: transparent;
-}
-#breadcrumb li a:hover:after {
-  border-left-color: #bfbfbf;
-}
-#breadcrumb li a:active {
-  background-color: #e6e6e6;
-}
-#breadcrumb li.active a:hover, 
-#breadcrumb li.active a:active:hover,
-
-{
-    background-color: #ccc;
-}
-#breadcrumb li a:active:before {
-  border-color: #e6e6e6;
-  border-left-color: transparent;
-}
-#breadcrumb li a:active:after {
-  border-left-color: #e6e6e6;
-}
-
-
-.glyphicon { margin-right:5px;}
-.section-box { margin-top:0px; text-align:justify;}
 .glyphicon-star { color:#ffbf00;}
 .glyphicon-star-empty {color:#ffbf00}
 .glyphicon-comment { color:#27ae60;}
 .separator { padding-right:5px;padding-left:5px; }
-.section-box hr {margin-top: 0;margin-bottom: 5px;border: 0;border-top: 1px solid rgb(199, 199, 199);}
+.section-box hr {
+  margin-top: 0;
+  margin-bottom: 5px;border: 0;
+  border-top: 1px solid rgb(199, 199, 199);
+}
+hr {border-top: 1px solid rgb(199, 199, 199); }

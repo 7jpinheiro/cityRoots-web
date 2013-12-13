@@ -1,82 +1,124 @@
-<%= form_for(@attraction) do |f| %>
-  <% if @attraction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@attraction.errors.count, "error") %> prohibited this attraction from being saved:</h2>
+<%= form_for @attraction, :html => {:class => "form"} do |f| %>
+<% if @attraction.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@attraction.errors.count, "error") %> prohibited this attraction from being saved:</h2>
 
-      <ul>
-      <% @attraction.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :schedule %><br>
-    <%= f.text_field :schedule %>
-  </div>
-  <div class="field">
-    <%= f.label :site %><br>
-    <%= f.text_field :site %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-   <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
-  </div>
- 
-  <div class="field">
-    <%= f.label :transport %><br>
-    <%= f.text_field :transport %>
-  </div>
-  <div class="field">
-    <%= f.label :reference_point %><br>
-    <%= f.check_box :reference_point %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active %>
-  </div>
-  <div class="field">
-    <%= f.label :timestamp %><br>
-    <%= f.number_field :timestamp %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :attraction_type %><br>
-    <%=  f.collection_select(:city_id, AttractionType.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%=  f.collection_select(:city_id, City.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :web_user_id %><br>
-    <%= f.number_field :web_user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<ul>
+		<% @attraction.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
 <% end %>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Informação Basica</h3>
+	</div>
+	<div class="panel-body">
+		<div class="form-group col-sm-12">
+			<div class="col-sm-3">
+				<%= f.label :name%>
+				<%= f.text_field :name, class: "form-control",  placeholder: "Nome"%>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<%= f.label 'Categoria' %>
+			<%=  f.collection_select :attraction_type_id, AttractionType.all, :id, :name,  {prompt: "Select a category"}, {class: "form-control"}%>
+		</div>
+		<div class="form-group col-sm-4">
+			<%= f.label 'Horário', class: "control-label" %>
+			<%= f.text_area :schedule, class: "form-control", rows: "2" %>
+		</div>
+		<div class="form-group col-sm-4">
+			<%= f.label :address, class: "control-label" %>
+			<%= f.text_area :address, class: "form-control", rows: "3" %>
+		</div>
+		<div class="form-group col-sm-10">
+			<%= f.label :description, class: "control-label" %>
+			<%= f.text_area :description, class: "form-control", rows: "4" %>
+		</div>
+		<div class="actions" style="text-align:right">
+			<%= f.submit 'Submeter', :class => "btn btn-default" %>
+		</div>
+	</div>
+
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">Informação Avançada</h3>
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<%= f.label 'Preço', class: "col-sm-1 control-label" %>
+			<div class="col-sm-3">
+				<%= f.text_field :price, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :site, class: "col-sm-1 control-label" %>
+			<div class="col-sm-4">
+				<%= f.text_field :site, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :email, class: "col-sm-1 control-label" %>
+			<div class="col-sm-4">
+				<%= f.text_field :email, class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :latitude, class: "col-sm-1 control-label" %>
+				<div class="col-sm-3">
+					<%= f.text_field :latitude, class: "form-control" %>
+				</div>
+				<%= f.label :longitude, class: "col-sm-1 control-label" %>
+				<div class="col-sm-3">
+					<%= f.text_field :longitude, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group">
+
+			</div>
+			<div class="form-group">
+				<%= f.label :transport, class: "col-sm-1 control-label"  %>
+				<div class="col-sm-3">
+					<%= f.text_field :transport, class: "form-control" %>
+				</div>
+			</div>
+			<div class="checkbox">
+				<label> <%= f.check_box :reference_point %> Ponto de Referência </label>
+			</div>
+
+			<div class="checkbox">
+				<label> <%= f.check_box :active %> Activo </label>
+			</div>
+			<div class="form-group">
+				<%= f.label :timestamp, class: "col-sm-1 control-label" %>
+				<div class="col-sm-5">
+					<%= f.number_field :timestamp, class: "form-control" %>
+				</div>
+			</div>
+			<div class="actions" style="text-align:right">
+				<%= f.submit 'Submeter', :class => "btn btn-default" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Cidade', class: "col-sm-1 control-label" %>
+		<div class="col-sm-2">
+			<%=  f.collection_select :city_id, City.all, :id, :name,  {prompt: "Selecione a cidade"}, {class: "form-control"}%>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Utilizador', class: "col-sm-1 control-label" %>
+		<div class="col-sm-2">
+			<%= f.number_field :web_user_id, class: "form-control" %>
+		</div>
+	</div>
+	<div class="actions">
+		<%= f.submit 'Submeter', :class => "btn btn-default" %>
+	</div>
+	<% end %>

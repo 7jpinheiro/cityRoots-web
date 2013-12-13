@@ -1,58 +1,49 @@
-<ul id="breadcrumb">
-  <li><a href="#"><span class="glyphicon glyphicon-home"> </span> Home</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-camera"> </span> Pontos de Interesse</a></li>
-</ul>
-
 <h1>Pontos de Interesse</h1>
 
 <% @attractions.each do |attraction| %>
- <div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-          <div class="col-xs-3 col-md-3 text-center">   
-              <img src="http://www.jeronimobraga.com.pt/upload/imgs/imgcont/Santuario%20do%20Bom%20Jesus%20do%20Monte%20(Braga).jpg" alt="bootsnipp" class="img-rounded img-responsive" />
-          </div>
-          <div class="col-xs-9 col-md-9 section-box">
-            <div class="row">
-              <div class="col-md-9">
-                <h4><strong><%= link_to attraction.name, attraction %></strong></h4>
-              </div>
-              <div  class="col-md-3 text-right" style="min-height:30px">
-                <%= link_to edit_attraction_path(attraction) do %>
-                  <span class="glyphicon glyphicon-edit"></span>
-                <% end %> 
-                <%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-                  <span class="glyphicon glyphicon-remove"></span>
-                <% end %> 
-              </div>
-              
-            </div>
-            <div >
-                <p>
-                <b>Categoria: </b><%= attraction.attraction_type.name %>
-                </p>
-                <p>
-                  <b>Descrição: </b>
-                  <%= truncate attraction.description, length: 300 %>
-                  <%= link_to 'Ler mais', attraction %> 
-                </p>
-                <hr/>
-                <div class="row rating-desc">
-                  <div class="col-md-12">
-                      <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                      </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                      </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
-                      <span class="glyphicon glyphicon-comment"></span>(100 Comments)
-                  </div>
-                </div>
-              </div>
-          </div>
-      </div>
-  </div>
+<div class="col-md-12">
+	<div class="well well-sm">
+		<div class="row">
+			<div class="col-xs-3 col-md-3 text-center">
+				<%= image_tag attraction.photo_attractions.first.url, :style =>"max-height:180px; max-width:200px" %>
+			</div>
+			<div class="col-xs-9 col-md-9 section-box">
+				<div class="row">
+					<div class="col-md-8">
+						<h4><strong><%= link_to attraction.name, attraction %></strong></h4>
+					</div>
+					<div  class="col-md-4 text-right" style="min-height:30px">
+						<%= link_to edit_attraction_path(attraction) do %>
+						<span class="glyphicon glyphicon-edit"> </span>Editar
+						<% end %>
+						<%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+						<span class="glyphicon glyphicon-remove"></span>Remover
+						<% end %>
+					</div>
+				</div>
+				<div >
+					<p>
+						<b>Categoria: </b><%= attraction.attraction_type.name %>
+					</p>
+					<p>
+						<b>Descrição: </b>
+						<%= truncate attraction.description, length: 300 %>
+						<%= link_to 'Ler mais', attraction %>
+					</p>
+					<hr/>
+					<div class="row rating-desc">
+						<div class="col-md-12">
+							<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
+							<span class="glyphicon glyphicon-comment"></span>(<%= attraction.comment_attractions.size %> Comments)
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-
-    <% end %>
+<% end %>
 <br>
 
 <%= link_to 'New Attraction', new_attraction_path %>

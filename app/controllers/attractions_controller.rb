@@ -1,5 +1,7 @@
 class AttractionsController < ApplicationController
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
+  add_crumb("Home") { |instance| instance.send :root_url }
+  add_crumb "Pontos de Interesse", :attractions_url
 
   # GET /attractions
   # GET /attractions.json
@@ -10,15 +12,19 @@ class AttractionsController < ApplicationController
   # GET /attractions/1
   # GET /attractions/1.json
   def show
+    add_crumb @attraction.name, ""
   end
 
   # GET /attractions/new
   def new
+     add_crumb "Novo", ""
     @attraction = Attraction.new
   end
 
   # GET /attractions/1/edit
   def edit
+    add_crumb @attraction.name, attraction_url
+    add_crumb "Editar", ""
   end
 
   # POST /attractions
