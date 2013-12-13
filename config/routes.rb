@@ -1,7 +1,6 @@
 CityRootsWeb::Application.routes.draw do
 
   get "welcome/index"
-  get "wellcome/index"
   get "galeria/index"
   get "pacotes/index"
 
@@ -14,7 +13,7 @@ CityRootsWeb::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root to:'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

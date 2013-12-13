@@ -6,7 +6,7 @@ development:
   pool: 5
   timeout: 5000
   username: postgres
-  password:
+  password: postgres
   host: 193.136.19.202
   port: 5432
 
