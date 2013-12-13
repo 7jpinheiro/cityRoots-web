@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: cities
+#
+#  id         :integer          not null, primary key
+#  name       :string(100)      not null
+#  abv        :string(10)       not null
+#  country_id :integer          not null
+#
+
 class City < ActiveRecord::Base
 	belongs_to :country
 	has_many :mobile_user_cities

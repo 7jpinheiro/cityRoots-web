@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: itineraries
+#
+#  id                :integer          not null, primary key
+#  name              :string(100)      not null
+#  description       :string(255)
+#  itinerary_type_id :integer          not null
+#  user_id           :integer          not null
+#
+
 class Itinerary < ActiveRecord::Base
 	has_many :itinerary_attractions
 	has_many :itinerary_events
