@@ -1,5 +1,7 @@
 CityRootsWeb::Application.routes.draw do
 
+  get "welcome/index"
+  get "wellcome/index"
   get "galeria/index"
   get "pacotes/index"
 
