@@ -5,9 +5,8 @@ gem 'rails', '4.0.1'
 
 # Use postgreSQL as the database for Active Record
 gem 'pg'
-
-gem "crummy"
-
+gem "paperclip", "~> 3.0"
+gem 'jquery-fileupload-rails'
 gem 'rabl'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
