@@ -21,8 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :itinerary_type_id %><br>
-    <%=  f.collection_select(:itinerary_type_id, I
-    tineraryType.all, :id, :name) %>
+    <%=  f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

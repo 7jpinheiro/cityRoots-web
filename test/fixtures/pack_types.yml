@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: pack_types
+#
+#  id          :integer          not null, primary key
+#  name        :string(100)      not null
+#  description :string(255)
+#  duration    :integer          not null
+#  price       :integer          not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

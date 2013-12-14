@@ -41,6 +41,9 @@ gem 'devise'
 #gem to handle user permissions
 gem 'cancan'
 
+gem 'annotate', ">=2.6.0"
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
