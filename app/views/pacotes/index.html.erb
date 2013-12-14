@@ -1,248 +1,230 @@
-<style type="text/css">
-	body
-{
-    margin-top: 20px;
-}
-.panel
-{
-    text-align: center;
-}
-.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
-.panel-body
-{
-    padding: 0px;
-    text-align: center;
-}
+    <style type="text/css">
+    body
+    {
+        margin-top: 20px;
+    }
+    .panel
+    {
+        text-align: center;
+    }
+    .panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
+    .panel-body
+    {
+        padding: 0px;
+        text-align: center;
+    }
 
-.the-price
-{
-    background-color: rgba(220,220,220,.17);
-    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
-    padding: 20px;
-    margin: 0;
-}
+    .the-price
+    {
+        background-color: rgba(220,220,220,.17);
+        box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+        padding: 20px;
+        margin: 0;
+    }
 
-.the-price h1
-{
-    line-height: 1em;
-    padding: 0;
-    margin: 0;
-}
+    .the-price h1
+    {
+        line-height: 1em;
+        padding: 0;
+        margin: 0;
+    }
 
-.subscript
-{
-    font-size: 25px;
-}
+    .subscript
+    {
+        font-size: 25px;
+    }
 
-/* CSS-only ribbon styles    */
-.cnrflash
-{
-    /*Position correctly within container*/
-    position: absolute;
-    top: -9px;
-    right: 4px;
-    z-index: 1; /*Set overflow to hidden, to mask inner square*/
-    overflow: hidden; /*Set size and add subtle rounding  		to soften edges*/
-    width: 100px;
-    height: 100px;
-    border-radius: 3px 5px 3px 0;
-}
-.cnrflash-inner
-{
-    /*Set position, make larger then 			container and rotate 45 degrees*/
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 145px;
-    height: 145px;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -o-transform: rotate(45deg); /* Opera */
-    -moz-transform: rotate(45deg); /* Firefox */
-    -webkit-transform: rotate(45deg); /* Safari and Chrome */
-    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
-    -ms-transform-origin: 100% 100%;  /* IE 9 */
-    -o-transform-origin: 100% 100%; /* Opera */
-    -moz-transform-origin: 100% 100%; /* Firefox */
-    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
-    background-size: 4px,auto, auto,auto;
-    background-color: #aa0101;
-    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
-}
-.cnrflash-inner:before, .cnrflash-inner:after
-{
-    /*Use the border triangle trick to make  				it look like the ribbon wraps round it's 				container*/
-    content: " ";
-    display: block;
-    position: absolute;
-    bottom: -16px;
-    width: 0;
-    height: 0;
-    border: 8px solid #800000;
-}
-.cnrflash-inner:before
-{
-    left: 1px;
-    border-bottom-color: transparent;
-    border-right-color: transparent;
-}
-.cnrflash-inner:after
-{
-    right: 0;
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-}
-.cnrflash-label
-{
-    /*Make the label look nice*/
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    padding-bottom: 5px;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(1,1,1,.8);
-    font-size: 0.45em;
-    font-weight: bold;
-    text-align: center;
-}	
-</style>
+    /* CSS-only ribbon styles    */
+    .cnrflash
+    {
+        /*Position correctly within container*/
+        position: absolute;
+        top: -9px;
+        right: 4px;
+        z-index: 1; /*Set overflow to hidden, to mask inner square*/
+        overflow: hidden; /*Set size and add subtle rounding  		to soften edges*/
+        width: 100px;
+        height: 100px;
+        border-radius: 3px 5px 3px 0;
+    }
+    .cnrflash-inner
+    {
+        /*Set position, make larger then 			container and rotate 45 degrees*/
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 145px;
+        height: 145px;
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -o-transform: rotate(45deg); /* Opera */
+        -moz-transform: rotate(45deg); /* Firefox */
+        -webkit-transform: rotate(45deg); /* Safari and Chrome */
+        -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
+        -ms-transform-origin: 100% 100%;  /* IE 9 */
+        -o-transform-origin: 100% 100%; /* Opera */
+        -moz-transform-origin: 100% 100%; /* Firefox */
+        background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
+        background-size: 4px,auto, auto,auto;
+        background-color: #aa0101;
+        box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
+    }
+    .cnrflash-inner:before, .cnrflash-inner:after
+    {
+        /*Use the border triangle trick to make  				it look like the ribbon wraps round it's 				container*/
+        content: " ";
+        display: block;
+        position: absolute;
+        bottom: -16px;
+        width: 0;
+        height: 0;
+        border: 8px solid #800000;
+    }
+    .cnrflash-inner:before
+    {
+        left: 1px;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+    }
+    .cnrflash-inner:after
+    {
+        right: 0;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    }
+    .cnrflash-label
+    {
+        /*Make the label look nice*/
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        padding-bottom: 5px;
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(1,1,1,.8);
+        font-weight: bold;
+        text-align: center;
+    }	
+    </style>
+    <div class="page-header">
+        <h1>Pacotes <small>Selecione um pacote para começar</small></h1>
+    </div>
 <div class="container">
-    <div class="row">
-    	<h2>Os nossos pacotes...<h2>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Básico</h3>
+    <div class="col-xs-12 col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Básico</h3>
+            </div>
+            <div class="panel-body">
+                <div class="the-price">
+                    <h1>€10<span class="subscript">/ano</span></h1>
                 </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            €10<span class="subscript">/ano</span></h1>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                Personalização do perfil
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Publicações de eventos
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Métricas sobre a utilização do serviço
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                	<a href="#basico" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
-                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            Personalização do perfil
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>
+                            Publicações de eventos
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Métricas sobre a utilização do serviço
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+            	<a href="#basico" class="btn btn-primary" role="button">Ver mais</a>
+                <a href="#" class="btn btn-success" role="button">Assinar</a>
             </div>
         </div>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-success">
-                <div class="cnrflash">
-                    <div class="cnrflash-inner">
-                        <span class="cnrflash-label">Mais
-                            <br>
-                            Popular</span>
-                    </div>
-                </div>
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Profissional</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            €25<span class="subscript">/ano</span></h1>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                Personalização do perfil
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Publicações de eventos
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Métricas sobre a utilização do serviço
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <a href="#profissional" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
+    </div>
+    <div class="col-xs-12 col-md-3 col-md-offset-1">
+        <div class="panel panel-success">
+            <div class="cnrflash">
+                <div class="cnrflash-inner">
+                    <span class="cnrflash-label">Mais<br>Popular</span>
                 </div>
             </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Profissional</h3>
+            </div>
+            <div class="panel-body">
+                <div class="the-price">
+                    <h1>€25<span class="subscript">/ano</span></h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            Personalização do perfil
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>
+                            Publicações de eventos
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Métricas sobre a utilização do serviço
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <a href="#profissional" class="btn btn-primary" role="button">Ver mais</a>
+                <a href="#" class="btn btn-success" role="button">Assinar</a>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Avançado</h3>
+    </div>
+    <div class="col-xs-12 col-md-3 col-md-offset-1">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Avançado</h3>
+            </div>
+            <div class="panel-body">
+                <div class="the-price">
+                    <h1>€50<span class="subscript">/ano</span></h1>
                 </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            €50<span class="subscript">/ano</span></h1>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                Personalização do perfil
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Publicações de eventos
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Métricas sobre a utilização do serviço
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <a href="#avancado" class="btn btn-primary" role="button">Ver mais</a>
-                    <a href="#" class="btn btn-success" role="button">Assinar</a>
-                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            Personalização do perfil
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>
+                            Publicações de eventos
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Métricas sobre a utilização do serviço
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <a href="#avancado" class="btn btn-primary" role="button">Ver mais</a>
+                <a href="#" class="btn btn-success" role="button">Assinar</a>
             </div>
         </div>
     </div>
 </div>
-<br/>
-<hr/>
-<br/>
-<div id="basico">
-	<h2>Pacote Básico</h2>
-	<a href="#" class="btn btn-success" role="button">Assinar</a>
-</div>
-<br/>
-<hr/>
-<br/>
-<div id="profissional">
-	<h2>Pacote Profisional</h2>
-	<a href="#" class="btn btn-success" role="button">Assinar</a>
-</div>
-<br/>
-<hr/>
-<br/>
-<div id="avancado">
-	<h2>Pacote Avançado</h2>
-	<a href="#" class="btn btn-success" role="button">Assinar</a>
-</div>
-
+    <div class="jumbotron">
+            <h3 class="text-primary">Pacote Básico</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ante lacus. Suspendisse sed nibh nisi, ut sodales nibh. Sed vulputate fringilla consectetur. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Nunc odio arcu, varius sed blandit a, feugiat in quam. Mauris ornare ornare accumsan. Nullam nec dui metus. Aliquam eu quam massa, ac lobortis libero.
+        </div>
+        <div class="jumbotron">
+            <h3 class="text-primary">Pacote Profisional</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ante lacus. Suspendisse sed nibh nisi, ut sodales nibh. Sed vulputate fringilla consectetur. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Nunc odio arcu, varius sed blandit a, feugiat in quam. Mauris ornare ornare accumsan. Nullam nec dui metus. Aliquam eu quam massa, ac lobortis libero.
+        </div>
+        <div class="jumbotron">
+            <h3 class="text-primary">Pacote Avançado</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ante lacus. Suspendisse sed nibh nisi, ut sodales nibh. Sed vulputate fringilla consectetur. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Donec eleifend dictum magna eu hendrerit. Nunc odio arcu, varius sed blandit a, feugiat in quam. Mauris ornare ornare accumsan. Nullam nec dui metus. Aliquam eu quam massa, ac lobortis libero.
+        </div>

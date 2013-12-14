@@ -7,22 +7,35 @@ $color2: #4f6f8f;
  * Style tweaks
  * --------------------------------------------------
  */
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Doppio+One);
+
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Doppio One', sans-serif;
+  font-weight: normal;
+}
+h1.title {
+  color: #fff;
+  font-size: 50px;
+  line-height: normal;
+  text-shadow: 0 0 5px #000;
+  margin-bottom: 50px;
+}
 html {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 body {
-  padding-top: 70px;
-  font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  padding-top: 30px;
+  background: #f2f2f2;
 }
+
 footer {
   padding: 30px 0;
 }
 a:hover, a:focus{
   text-decoration: none;
-}
-h1{
-  font-size: 50px;
-  text-align: center;
 }
 form{
   margin-left:20px;
@@ -30,10 +43,26 @@ form{
 .form-horizontal .control-label{
   
 }
+.well{
+  background: #fff;
+  border-color: #d0e4ef;
+}
+.well-large{
+  padding:24px;
+}
 
 .btn-default{
   background: #ccc;
   border: 0;
+}
+.jumbotron{
+  background: #e7e7e7;
+  padding: 30px;  
+  padding-top: 15px;
+}
+.page-header{
+  border: 0;
+  margin-top: 0;
 }
 /*
  * Off Canvas
@@ -124,26 +153,22 @@ form{
  
 
 #body-page{
-    background: #f5f5f5;
     margin-top:-20px;
-    padding-top: 50px;
     min-height: 100%;
 
 }
 
-body{
-  background: #f5f5f5;
-}
-
 .center_body{
     margin-right: 15px;
+    margin-top: 90px;
     padding: 10px;
-    background: #fff;
     min-height:100%;
 }
 .center_body h1{
   margin-bottom: 20px;
-  margin-top: 0px
+  margin-top: 0px;
+  font-size: 38.5px;
+
 }
 
 .breadcrumb{
@@ -151,7 +176,11 @@ body{
   background: #fff;
   margin-right: 15px;
 }
-
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Doppio One', sans-serif;
+  font-weight: normal;
+  line-height:40px;
+}
 
 /************************ Side Bar ************************/
 ul
@@ -168,33 +197,29 @@ background:#ccc;
 height:55px;
 margin-bottom:5px;
 }
-.link_bg
-{
- width:50px;
- height:55px;
- position:absolute;
- background:$color2; /*#16A085;*/
- color:#fff;
- z-index:2;
+
+.sidebar{
+  margin-top: 50px;
 }
-.link_bg i
+.sidebar a
 {
- position:relative;
+  width:80px;
+  height:60px;
+  background: $color2;
+  z-index:3;
+  color:#fff;
+  border: 0;
+  margin-top: 5px;
+  padding-left:10px;
+  text-align: center;
+ 
 }
-.link_title
-{
-position:absolute;
-width:100%;
-z-index:3;
-color:#fff;
+.sidebar a.list-group-item:hover, .sidebar a.list-group-item:focus{
+  background: $color1;
 }
-.link_title:hover .icon
+.sidebar a i
 {
-/*-webkit-transform:rotate(360deg);
--moz-transform:rotate(360deg);
--o-transform:rotate(360deg);
--ms-transform:rotate(360deg);
-transform:rotate(360deg);  */
+   font-size: 25px;
 }
 
 
