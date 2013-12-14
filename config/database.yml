@@ -5,9 +5,9 @@ development:
   encoding: utf8
   pool: 5
   timeout: 5000
-  username: pg_user
-  password: 123456
-  host: 193.136.19.202
+  username: jprophet89
+  password:
+  host: localhost
   port: 5432
 
 # Warning: The database defined as "test" will be erased and

@@ -1,63 +1,52 @@
-<h1>Listing events</h1>
+<h1>Lista de Eventos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Schedule</th>
-      <th>Site</th>
-      <th>Email</th>
-      <th>Address</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Transport</th>
-      <th>Active</th>
-      <th>Timestamp</th>
-      <th>Startdate</th>
-      <th>Enddate</th>
-      <th>Organization</th>
-      <th>Price</th>
-      <th>Program</th>
-      <th>Event type</th>
-      <th>City</th>
-      <th>Web user</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= event.description %></td>
-        <td><%= event.schedule %></td>
-        <td><%= event.site %></td>
-        <td><%= event.email %></td>
-        <td><%= event.address %></td>
-        <td><%= event.latitude %></td>
-        <td><%= event.longitude %></td>
-        <td><%= event.transport %></td>
-        <td><%= event.active %></td>
-        <td><%= event.timestamp %></td>
-        <td><%= event.startdate %></td>
-        <td><%= event.enddate %></td>
-        <td><%= event.organization %></td>
-        <td><%= event.price %></td>
-        <td><%= event.program %></td>
-        <td><%= event.event_type_id %></td>
-        <td><%= event.city_id %></td>
-        <td><%= event.web_user_id %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @events.each do |event| %>
+<div class="col-md-12">
+  <div class="well well-sm">
+    <div class="row">
+      <div class="col-xs-3 col-md-3 text-center">
+        <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
+      </div>
+      <div class="col-xs-9 col-md-9 section-box">
+        <div class="row">
+          <div class="col-md-8">
+            <h4><strong><%= link_to event.name, event %></strong></h4>
+          </div>
+          <div  class="col-md-4 text-right" style="min-height:30px">
+            <%= link_to edit_event_path(event) do %>
+            <span class="glyphicon glyphicon-edit"> </span>Editar
+            <% end %>
+            <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+            <span class="glyphicon glyphicon-remove"></span>Remover
+            <% end %>
+          </div>
+        </div>
+        <div >
+          <p>
+            <b>Categoria: </b><%= event.event_type_id %><br/>
+            <b>Preço:</b><%= event.price %><br/>
+            <b>Descrição: </b>
+            <%= truncate event.description, length: 300 %>
+            <%= link_to 'Ler mais', event %><br/>
+          </p>
+          <p>
+              <b>Horário: </b><%= event.schedule %><br/>
+              <b>Data inicio:</b><%= event.startdate %> <br/>
+              <b>Data fecho:</b><%= event.enddate %> <br/>
+            </p>
+          <hr/>
+          <div class="row rating-desc">
+            <div class="col-md-12">
+              <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
+              <span class="glyphicon glyphicon-comment"></span>(<%= event.comment_events.size %> Comments)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<br/>
 
 <%= link_to 'New Event', new_event_path %>
