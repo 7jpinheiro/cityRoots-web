@@ -1,5 +1,6 @@
 CityRootsWeb::Application.routes.draw do
   
+  devise_for :users
   resources :pack_types
 
   resources :web_user_packs

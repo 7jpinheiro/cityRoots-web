@@ -1,45 +1,10 @@
-# Some setup you must do manually if you haven't yet:
-
-#   1. Ensure you have defined default url options in your environments files. Here
-#      is an example of default_url_options appropriate for a development environment
-#      in config/environments/development.rb:
-
-#        config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
-#      In production, :host should be set to the actual host of your application.
-
-#   2. Ensure you have defined root_url to *something* in your config/routes.rb.
-#      For example:
-
-#        root :to => "home#index"
-
-#   3. Ensure you have flash messages in app/views/layouts/application.html.erb.
-#      For example:
-
-#        <p class="notice"><%= notice %></p>
-#        <p class="alert"><%= alert %></p>
-
-#   4. If you are deploying on Heroku with Rails 3.2 only, you may want to set:
-
-#        config.assets.initialize_on_precompile = false
-
-#      On config/application.rb forcing your application to not access the DB
-#      or load models when precompiling your assets.
-
-#   5. You can copy Devise views (for customization) to your app by running:
-
-#        rails g devise:views
-
-
-
-
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = 'ca73455945a7d0ca92ce42650c5003e43f40c8cc17b69aa238bdb0f118d99ffad1fbd3713df69030faee70c3af3594517799116fa4cbf07fbf1643c97cddd30a'
+  config.secret_key = '0f5c990e6fbeac9fc89371852dd4642482e45a3369357c204d79e53b476e1f304bc82827bbcc2e82f09f1e287af469de54c7ba661390f49498aebbf5e5a7838b'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -130,7 +95,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '8bfc81fb57ff4e60b4ee23b704bd4b1e03d9386740d12092a52ba2852cdf5c7d2f6a3585277e14677600b5b1bdbda20166d278b663d47befe35a42e28ffc1c80'
+  # config.pepper = '0ddc6a072a420932e2e2add28d5ed83dd036f0a3d03a4b00b6c881e156cf056e8e11f525dfe04723f8536c52a17ed77bae87f98db0786864ab87a9db2a1a7211'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
