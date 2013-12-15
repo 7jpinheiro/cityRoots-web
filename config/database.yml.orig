@@ -6,8 +6,13 @@ development:
   pool: 5
   timeout: 5000
   username: postgres
+<<<<<<< HEAD
+  password: 123456
+  host: 93.136.19.202
+=======
   password: postgres
   host: 193.136.19.202
+>>>>>>> 818a1a8c84fdb39dbcca0bdeb8595b1524ebb231
   port: 5432
 
 # Warning: The database defined as "test" will be erased and
