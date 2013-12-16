@@ -12,7 +12,7 @@
 class CommentAttraction < ActiveRecord::Base
     validates :comment, presence:true
     validates :evaluationdate, presence:true
-    validates :attraction_id, prescene:true
+    validates :attraction_id, presence:true
 	  belongs_to :mobile_user
     belongs_to :attraction
 end

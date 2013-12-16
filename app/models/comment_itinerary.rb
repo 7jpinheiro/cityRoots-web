@@ -12,7 +12,7 @@
 class CommentItinerary < ActiveRecord::Base
   validates :comment, presence:true
   validates :evaluationdate, presence:true
-  validates :itinerary_id, prescene:true
+  validates :itinerary_id, presence:true
 	belongs_to :mobile_user
     belongs_to :itinerary
 end

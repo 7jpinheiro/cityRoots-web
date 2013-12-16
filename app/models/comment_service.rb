@@ -12,7 +12,7 @@
 class CommentService < ActiveRecord::Base
   validates :comment, presence:true
   validates :evaluationdate, presence:true
-  validates :service_id, prescene:true
+  validates :service_id, presence:true
 	belongs_to :mobile_user
     belongs_to :service
 end
