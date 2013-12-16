@@ -69,6 +69,6 @@ class CommentServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_service_params
-      params.require(:comment_service).permit(:comment, :evalutiondate, :mobile_user_id, :service_id)
+      params.require(:comment_service).permit(:comment, :evaluationdate, :mobile_user_id, :service_id)
     end
 end

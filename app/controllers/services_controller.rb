@@ -1,8 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  add_crumb("Home") { |instance| instance.send :root_url }
-  add_crumb "Estabelecimentos", :events_url
-
+  
   # GET /services
   # GET /services.json
   def index
@@ -12,19 +10,15 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
-    add_crumb @service.name, ""
   end
 
   # GET /services/new
   def new
-    add_crumb "Novo", ""
     @service = Service.new
   end
 
   # GET /services/1/edit
   def edit
-    add_crumb @service.name, service_url
-    add_crumb "Editar", ""
   end
 
   # POST /services

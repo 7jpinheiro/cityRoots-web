@@ -1,7 +1,5 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
-  add_crumb("Home") { |instance| instance.send :root_url }
-  add_crumb "Rotas", :events_url
 
   # GET /itineraries
   # GET /itineraries.json
@@ -12,19 +10,15 @@ class ItinerariesController < ApplicationController
   # GET /itineraries/1
   # GET /itineraries/1.json
   def show
-    add_crumb @itinerary.name, ""
   end
 
   # GET /itineraries/new
   def new
-    add_crumb "Novo", ""
     @itinerary = Itinerary.new
   end
 
   # GET /itineraries/1/edit
   def edit
-    add_crumb @itinerary.name, itinerary_url
-    add_crumb "Editar", ""
   end
 
   # POST /itineraries

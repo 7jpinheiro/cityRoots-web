@@ -1,1 +1,1 @@
-json.extract! @comment_itinerary, :comment, :evalutiondate, :mobile_user_id, :itinerary_id
+json.extract! @comment_itinerary, :comment, :evaluationdate, :mobile_user_id, :itinerary_id

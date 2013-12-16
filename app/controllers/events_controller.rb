@@ -1,8 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  add_crumb("Home") { |instance| instance.send :root_url }
-  add_crumb "Eventos", :events_url
-
+  
   # GET /events
   # GET /events.json
   def index
@@ -12,7 +10,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    add_crumb @event.name, ""
   end
 
   # GET /events/new
@@ -24,8 +21,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    add_crumb @event.name, event_url
-    add_crumb "Editar", ""
   end
 
   # POST /events
