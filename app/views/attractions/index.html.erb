@@ -7,7 +7,9 @@
 	<div class="well well-sm">
 		<div class="row">
 			<div class="col-xs-3 col-md-3 text-center">
-				<%= image_tag attraction.photo_attractions.first.url, :style =>"max-height:180px; max-width:200px" %>
+				<%	if !attraction.photo_attractions.first.nil? %>
+					<%=	image_tag attraction.photo_attractions.first.photo.url(:medium,false) %>
+				<% end %>
 			</div>
 			<div class="col-xs-9 col-md-9 section-box">
 				<div class="row">

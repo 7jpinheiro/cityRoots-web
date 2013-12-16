@@ -1,7 +1,5 @@
 class AttractionsController < ApplicationController
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
-  add_crumb("Home") { |instance| instance.send :root_url }
-  add_crumb "Pontos de Interesse", :attractions_url
 
   # GET /attractions
   # GET /attractions.json
@@ -12,19 +10,16 @@ class AttractionsController < ApplicationController
   # GET /attractions/1
   # GET /attractions/1.json
   def show
-    add_crumb @attraction.name, ""
   end
 
   # GET /attractions/new
   def new
-     add_crumb "Novo", ""
     @attraction = Attraction.new
+    @attraction.photo_attractions = PhotoAttraction.new 
   end
 
   # GET /attractions/1/edit
   def edit
-    add_crumb @attraction.name, attraction_url
-    add_crumb "Editar", ""
   end
 
   # POST /attractions
@@ -75,6 +70,6 @@ class AttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attraction_params
-      params.require(:attraction).permit(:name, :description, :schedule, :site, :email, :address, :coord, :transport, :reference_point, :active, :timestamp, :details, :price, :attraction_type_id, :city_id, :web_user_id)
+      params.require(:attraction).permit(:name, :description, :schedule, :site, :email, :address, :latitude, :longitude, :transport, :reference_point, :active, :timestamp, :details, :price, :attraction_type_id, :city_id, :web_user_id)
     end
 end

@@ -69,6 +69,6 @@ class CommentEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_event_params
-      params.require(:comment_event).permit(:comment, :evalutiondate, :mobile_user_id, :event_id)
+      params.require(:comment_event).permit(:comment, :evaluationdate, :mobile_user_id, :event_id)
     end
 end

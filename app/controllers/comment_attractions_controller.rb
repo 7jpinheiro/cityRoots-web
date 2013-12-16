@@ -69,6 +69,6 @@ class CommentAttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_attraction_params
-      params.require(:comment_attraction).permit(:comment, :evalutiondate, :mobile_user_id, :attraction_id)
+      params.require(:comment_attraction).permit(:comment, :evaluationdate, :mobile_user_id, :attraction_id)
     end
 end

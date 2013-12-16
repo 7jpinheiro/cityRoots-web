@@ -12,4 +12,13 @@
 
 class PhotoAttraction < ActiveRecord::Base
 	belongs_to :attraction
+
+  	#
+  	## Validations
+  	#
+  	validates :name, :presence => true, :length => { :minimum => 1, :maximum => 100 }
+  	validates :description, :presence => true, :length => { :maximum => 250 }
+
+	has_attached_file :photo, :styles => { :medium => "250x250#", :thumb => "50x50#" }
+
 end

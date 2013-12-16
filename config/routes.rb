@@ -53,7 +53,11 @@ CityRootsWeb::Application.routes.draw do
 
   resources :itineraries
 
-  resources :attractions
+  resources :attractions do
+     resources :photo_attractions
+     resources :rating_attractions
+     resources :comment_attractions
+   end
 
   resources :services
 

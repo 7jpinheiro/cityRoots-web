@@ -69,6 +69,6 @@ class CommentItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_itinerary_params
-      params.require(:comment_itinerary).permit(:comment, :evalutiondate, :mobile_user_id, :itinerary_id)
+      params.require(:comment_itinerary).permit(:comment, :evaluationdate, :mobile_user_id, :itinerary_id)
     end
 end
