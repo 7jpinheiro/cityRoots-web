@@ -1,0 +1,16 @@
+<p class="fields">
+
+<% if f.nil? %>
+<a class='btn btn-primary' href='javascript:;'>
+	Adicionar Foto
+	<%= f.file_field :photo, :style=>'position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' %>
+</a>
+<% else %>
+<%=	image_tag f.photo.url(:thumb,false) %>
+<a class='btn btn-primary' href='javascript:;'>
+	Alterar Foto
+	<%= f.file_field :photo, :style=>'position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' %>
+</a>
+<% end %>
+<%= link_to_remove_fields "remove", f %>
+</p>
