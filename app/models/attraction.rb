@@ -27,9 +27,9 @@ class Attraction < ActiveRecord::Base
   validates :email, length: {minimum: 3}
   validates :site, length: {minimum: 2}
   validates :address, presence:true,length: {minimum: 5}
-  validates :price, length: {minimum: 2}
-  validates :latitude, precence:true
-  validates :longitude, precence:true
+  #validates :price, length: {minimum: 2}
+  validates :latitude, presence:true
+  validates :longitude, presence:true
 	has_many :rating_attractions
 	has_many :comment_attractions
 	has_many :photo_attractions
