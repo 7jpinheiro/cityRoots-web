@@ -10,20 +10,43 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :itinerary_type_id %><br>
-    <%=  f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <form role="form" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-6">
+          <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+      </div>
+      <br/>
+      <br/>
+    </div>
+  </form>
+  <br/>
 <% end %>

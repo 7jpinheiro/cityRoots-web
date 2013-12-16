@@ -3,6 +3,7 @@ CityRootsWeb::Application.routes.draw do
   resources :web_users
 
   devise_for :users
+  
   resources :pack_types
 
   resources :web_user_packs
@@ -65,9 +66,14 @@ CityRootsWeb::Application.routes.draw do
 
   resources :events
 
-  get "galeria/index"
-  get "pacotes/index"
+  resources :galeria
+
+  resources :pacotes
+
+  resources :welcome
+  
   resources :countries
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
