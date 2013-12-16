@@ -31,9 +31,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    print "fuck yaeh\n\n"
     print event_params
-    print "\n\nfuck yaeh\n\n"
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
