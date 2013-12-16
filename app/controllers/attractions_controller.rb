@@ -1,11 +1,12 @@
 class AttractionsController < ApplicationController
-  before_filter :user_is_current_user
+  #before_filter :user_is_current_user
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
 
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions = current_user.attractions
+    #@attractions = current_user.attractions
+    @attractions = Attraction.all
   end
 
   # GET /attractions/1
@@ -17,7 +18,7 @@ class AttractionsController < ApplicationController
   # GET /attractions/new
   def new
     @attraction = Attraction.new
-    @attraction.photo_attractions = PhotoAttraction.new 
+    3.times { @attraction.photo_attractions.build }
   end
 
   # GET /attractions/1/edit
