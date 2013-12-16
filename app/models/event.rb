@@ -31,10 +31,10 @@ class Event < ActiveRecord::Base
   validates :site, length: {minimum: 2}
   validates :address, presence:true,length: {minimum: 5}
   validates :price, length: {minimum: 2}
-  validates :latitude, precence:true
-  validates :longitude, precence:true
-  validates :startdate, precence:true
-  validates :enddate, precence:true
+  validates :latitude, presence:true
+  validates :longitude, presence:true
+  validates :startdate, presence:true
+  validates :enddate, presence:true
   has_many :rating_events
 	has_many :comment_events
 	has_many :photo_events

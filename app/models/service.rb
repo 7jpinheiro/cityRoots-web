@@ -29,8 +29,8 @@ class Service < ActiveRecord::Base
   validates :site, length: {minimum: 2}
   validates :address, presence:true,length: {minimum: 5}
   validates :price, length: {minimum: 2}
-  validates :latitude, precence:true
-  validates :longitude, precence:true
+  validates :latitude, presence:true
+  validates :longitude, presence:true
 	has_many :rating_services
 	has_many :comment_services
 	has_many :photo_services
