@@ -76,22 +76,12 @@
 				</div>
 			</div>
 			<div class="col-md-6 ">
-				<%= image_tag  @attraction.photo_attractions, :style =>"style=height: 	300px; max-width: 500px; display: block;" %>
 	          	<div class="row" >
 	        		<div style="position:relative;">
-		          	 	<%-# f.fields_for :photo_attractions do |builder| -%>
-							<%-# if builder.object.new_record? -%>
-								<%-#= builder.label :name, "Image Caption" -%>
-								<%-#= builder.text_field :name -%>
-								<%-#= builder.label :url, "Image File" -%>
-								<%-#= builder.file_field :url -%>
-							<%-# end %>
-						<%# end %>
-
-						<a class='btn btn-primary' href='javascript:;'>
-							Adicionar Foto
-							<%= f.file_field :photo, :style=>'position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;', :onchange=>'$("#upload-file-info").html($(this).val());' %>
-						</a>				
+	        			<%= f.fields_for :photo_attractions do |builder| %>
+        				    <%= render "photo_attraction_fields", :f => builder %>
+						<% end %>	
+						<%= link_to_add_fields "Adicionar Foto", f, :photo_attractions %></p>
 						&nbsp;
 						<span class='label label-info' id="upload-file-info"></span>
 					</div>
@@ -108,6 +98,27 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group">
+	<%= f.label :timestamp, class: "col-sm-1 control-label" %>
+	<div class="col-sm-5">
+		<%= f.number_field :timestamp, class: "form-control" %>
+	</div>
+</div>		
+<div class="checkbox">
+	<label> <%= f.check_box :reference_point %> Ponto de Referência </label>
+</div>				
+<div class="form-group">
+	<%= f.label 'Cidade', class: "col-sm-1 control-label" %>
+	<div class="col-sm-2">
+		<%=  f.collection_select :city_id, City.all, :id, :name,  {prompt: "Selecione a cidade"}, {class: "form-control"}%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Utilizador', class: "col-sm-1 control-label" %>
+	<div class="col-sm-2">
+		<%= f.number_field :web_user_id, class: "form-control" %>
+	</div>
+</div>
 		<div class="actions" >
 			<%= f.submit 'Submeter', :class => "btn btn-primary " %>
 		</div>
@@ -120,27 +131,8 @@
 		<%= f.text_field :transport, class: "form-control" %>
 	</div>
 </div>
-<div class="checkbox">
-	<label> <%= f.check_box :reference_point %> Ponto de Referência </label>
-</div>				
-<div class="form-group">
-	<%= f.label :timestamp, class: "col-sm-1 control-label" %>
-	<div class="col-sm-5">
-		<%= f.number_field :timestamp, class: "form-control" %>
-	</div>
-</div>			
-<div class="form-group">
-	<%= f.label 'Cidade', class: "col-sm-1 control-label" %>
-	<div class="col-sm-2">
-		<%=  f.collection_select :city_id, City.all, :id, :name,  {prompt: "Selecione a cidade"}, {class: "form-control"}%>
-	</div>
-</div>
-<div class="form-group">
-	<%= f.label 'Utilizador', class: "col-sm-1 control-label" %>
-	<div class="col-sm-2">
-		<%= f.number_field :web_user_id, class: "form-control" %>
-	</div>
-</div>-->
+	
+-->
 
 
 <% end %>
