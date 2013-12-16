@@ -1,15 +1,17 @@
 class AttractionsController < ApplicationController
+  before_filter :user_is_current_user
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
 
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions = Attraction.all
+    @attractions = current_user.attractions
   end
 
   # GET /attractions/1
   # GET /attractions/1.json
   def show
+    
   end
 
   # GET /attractions/new
@@ -72,4 +74,12 @@ class AttractionsController < ApplicationController
     def attraction_params
       params.require(:attraction).permit(:name, :description, :schedule, :site, :email, :address, :latitude, :longitude, :transport, :reference_point, :active, :timestamp, :details, :price, :attraction_type_id, :city_id, :web_user_id)
     end
+
+    def user_is_current_user
+      unless current_user.id == params[:user_id]
+      flash[:notice] = "You may only view your own products."
+      redirect_to root_path
+    end
+  end
+
 end

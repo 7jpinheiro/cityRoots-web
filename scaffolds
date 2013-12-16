@@ -27,7 +27,7 @@ rails g scaffold city name:string abv:string country_id:integer
 rails g scaffold country name:string abv:string
 rails g scaffold language name:string abv:text description:text
 rails g scaffold mobile_user username:string active:boolean country_id:integer email:string pass:string dateofbirth:date firstname:string surname:string gender:string  language_id:integer country_id:integer
-rails g scaffold mobile_user_city city_id:ineteger mobile_user_id:integer
+rails g scaffold mobile_user_city city_id:integer mobile_user_id:integer
 rails g scaffold web_user_pack subscriptiondate:date validity:date obs:string active:boolean pack_type_id:integer web_user_id:integer 
 rails g scaffold pack_type name:string description:text duration:integer price:float
-
+rails g scaffold web_user name:string enterprisename:string obs:string nif:integer address:text active:boolean web_user_type_id:integer  city_id:integer
