@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   def new
     add_crumb "Novo", ""
     @event = Event.new
+
   end
 
   # GET /events/1/edit
@@ -30,8 +31,10 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    print "fuck yaeh\n\n"
+    print event_params
+    print "\n\nfuck yaeh\n\n"
     @event = Event.new(event_params)
-
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -73,8 +76,8 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(:name, :description, :schedule, :site, :email, :address, :coord, :transport, :active, :timestamp, :stardate, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id)
+      params.require(:event).permit(:name, :description, :schedule, :site, :email, :address, :transport, :active, :timestamp, :startdate, :longitude, :latitude, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id)
     end
 end

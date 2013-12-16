@@ -68,17 +68,11 @@
     <br/>
     <div class="row">
       <div class="form-group">
-        <%= f.label "Latitude" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
+        <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-3">
           <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control", :placeholder=>"41.32217"%>
         </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Longitude" ,:for=>"longitude" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control", :placeholder=>"-8.493226"%>
         </div>
       </div>
@@ -97,7 +91,7 @@
       <div class="form-group">
         <%= f.label "Data de inicio" ,:for=>"startdate" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control" , :type=>"date" %>
+          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control" , :type=> "date"%>
         </div>
       </div>
     </div>
@@ -106,7 +100,7 @@
       <div class="form-group">
         <%= f.label "Data de fim" ,:for=>"enddate" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control" , :type=>"date" %>
+           <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control" , :type=> "date"%>
         </div>
       </div>
     </div>
@@ -150,13 +144,11 @@
       </div>
     </div>
     <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Cidade" ,:for=>"city_id" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.collection_select( :city_id, City.all, :id, :name , {prompt: "Selecione uma Cidade"}, {class: "form-control"} ) %>
-      </div>
-    </div>
+    <!-- Value by sustem-->
+    <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
+    <%= f.text_field :city_id ,:id=>"city_id", :value=>3 , :hidden=>"hidden" %>
+    <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
+    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
     <br/>
     <div class="row">
       <div class="form-group">

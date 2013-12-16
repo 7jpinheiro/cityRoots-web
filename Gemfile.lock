@@ -44,6 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    crummy (1.8.0)
     devise (3.2.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -139,6 +140,7 @@ DEPENDENCIES
   annotate (>= 2.6.0)
   cancan
   coffee-rails (~> 4.0.0)
+  crummy
   devise
   jbuilder (~> 1.2)
   jquery-fileupload-rails
