@@ -8,6 +8,8 @@
 #
 
 class MobileUserCity < ActiveRecord::Base
+  validates :city_id, presence:true
+  validates :mobile_user_id, presence:true
 	belongs_to :city 
 	belongs_to :mobile_user
 end

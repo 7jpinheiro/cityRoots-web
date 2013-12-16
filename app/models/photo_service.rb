@@ -11,5 +11,7 @@
 #
 
 class PhotoService < ActiveRecord::Base
+  validates :url, presence:true
+  validates :service_id, presence:true
 	belongs_to :service
 end

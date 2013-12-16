@@ -9,5 +9,7 @@
 #
 
 class Language < ActiveRecord::Base
+  validates :name, presence:true
+  validates :abv, presence:true
 	belongs_to :user
 end

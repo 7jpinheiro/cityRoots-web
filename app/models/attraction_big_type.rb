@@ -8,5 +8,6 @@
 #
 
 class AttractionBigType < ActiveRecord::Base
+  validates :name, presence:true
 	has_many :attraction_types
 end

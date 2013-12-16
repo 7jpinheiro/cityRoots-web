@@ -8,6 +8,8 @@
 #
 
 class Country < ActiveRecord::Base
+    valdiates :name, presence:true
+    validates :abv, presence:true
     has_many :cities
     has_many :mobile_users
 end

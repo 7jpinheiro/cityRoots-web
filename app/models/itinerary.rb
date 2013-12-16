@@ -10,6 +10,8 @@
 #
 
 class Itinerary < ActiveRecord::Base
+  validates :name, presence:true
+  validates :description, presence:true
 	has_many :itinerary_attractions
 	has_many :itinerary_events
 	has_many :itinerary_services

@@ -11,6 +11,8 @@
 #
 
 class PhotoAttraction < ActiveRecord::Base
+  validates :url, presence:true
+  validates :attraction_id, presence:true
 	belongs_to :attraction
 
   	#
