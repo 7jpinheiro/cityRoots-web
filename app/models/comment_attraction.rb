@@ -10,6 +10,9 @@
 #
 
 class CommentAttraction < ActiveRecord::Base
-	belongs_to :mobile_user
+    validates :comment, presence:true
+    validates :evaluationdate, presence:true
+    validates :attraction_id, prescene:true
+	  belongs_to :mobile_user
     belongs_to :attraction
 end
