@@ -1,59 +1,53 @@
-<h1>Listing services</h1>
+<h1>Lista de Serviços</h1>
+<%= csrf_meta_tag %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Schedule</th>
-      <th>Site</th>
-      <th>Email</th>
-      <th>Address</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Transport</th>
-      <th>Reference point</th>
-      <th>Active</th>
-      <th>Timestamp</th>
-      <th>Capacity</th>
-      <th>Details</th>
-      <th>Service type</th>
-      <th>City</th>
-      <th>Web user</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<% @services.each do |service| %>
+<div class="col-md-12">
+  <div class="well well-sm">
+    <div class="row">
+      <div class="col-xs-3 col-md-3 text-center">
+        <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
+      </div>
+      <div class="col-xs-9 col-md-9 section-box">
+        <div class="row">
+          <div class="col-md-8">
+            <h4><strong><%= link_to service.name, service %></strong></h4>
+          </div>
+          <div  class="col-md-4 text-right" style="min-height:30px">
+            <%= link_to edit_service_path(service) do %>
+            <span class="glyphicon glyphicon-edit"> </span>Editar
+            <% end %>
+            <%= link_to service, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+            <span class="glyphicon glyphicon-remove"></span>Remover
+            <% end %>
+          </div>
+        </div>
+        <div >
+          <p>
+            <b>Categoria: </b><%= service.details %><br/>
+            <b>Descrição: </b>
+            <%= truncate service.description, length: 300 %>
+            <%= link_to 'Ler mais', service %><br/>
+          </p>
+          <p>
+              <b>Horário: </b><%= service.schedule %><br/>
+              <b>Capacidade:</b><%= service.capacity %> <br/>
+              <b>Email:</b><%= service.email %> <br/>
+              <b>Site:</b><%= service.site %> <br/>
+            </p>
+          <hr/>
+          <div class="row rating-desc">
+            <div class="col-md-12">
+              <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
+              <span class="glyphicon glyphicon-comment"></span>(<%= service.comment_services.size %> Comments)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<br/>
 
-  <tbody>
-    <% @services.each do |service| %>
-      <tr>
-        <td><%= service.name %></td>
-        <td><%= service.description %></td>
-        <td><%= service.schedule %></td>
-        <td><%= service.site %></td>
-        <td><%= service.email %></td>
-        <td><%= service.address %></td>
-        <td><%= service.latitude %></td>
-        <td><%= service.longitude %></td>
-        <td><%= service.transport %></td>
-        <td><%= service.reference_point %></td>
-        <td><%= service.active %></td>
-        <td><%= service.timestamp %></td>
-        <td><%= service.capacity %></td>
-        <td><%= service.details %></td>
-        <td><%= service.service_type_id %></td>
-        <td><%= service.city_id %></td>
-        <td><%= service.web_user_id %></td>
-        <td><%= link_to 'Show', service %></td>
-        <td><%= link_to 'Edit', edit_service_path(service) %></td>
-        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Service', new_service_path %>
+<%= link_to 'Novo Serviço', new_service_path ,:class=>"btn btn-primary"%>
