@@ -1,7 +1,6 @@
 <div class="page-header">
     <h1><%= @attraction.name %></h1>
 </div>
-<hr/>
 <div class="col-md-12">
   <div class="well well-sm">
     <div class="row">
@@ -67,9 +66,16 @@
               </tr>
         <%
            end
+           if @attraction.description != nil
+        %>
+              <tr>
+                <th style="border-top: none;">Descrição</th>
+                <td style="border-top: none;text-align:justify;"><%= @attraction.description %></td>
+              </tr>
+          <%
+             end
         %>
         </table>
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=13&markers=#{@attraction.latitude}%2C#{@attraction.longitude}" %>
       </div>
       <div class="col-md-6">
         <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
@@ -99,6 +105,10 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>
+        <br/>
+        <hr/>
+        <br/>
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=13&markers=#{@attraction.latitude}%2C#{@attraction.longitude}" %>
       </div>
     </div>
     <br>
