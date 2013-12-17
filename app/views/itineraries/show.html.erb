@@ -1,52 +1,135 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @itinerary.name %></h1>
+</div>
+<div class="col-md-12">
+  <div class="well well-sm">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <%
+             if @itinerary.description != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Descrição</th>
+                <td style="border-top: none;"><%= @itinerary.description %></td>
+              </tr>
+          <%
+             end
+             if @itinerary.itinerary_type_id != nil
+               id=@itinerary.itinerary_type_id
+               tipopoint=AttractionType.where(["id = ?", id ]).first
+               tipo=tipopoint.name;
+          %>
+              <tr>
+                <th style="border-top: none;">Tipo</th>
+                <td style="border-top: none;"><%= tipo %></td>
+              </tr>
+          <%
+             end
+             if @itinerary.itinerary_attractions != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Pontos de Interesse</th>
+                <td style="border-top: none;"></td>
+                <%
+                   @itinerary.itinerary_attractions.each  do |p|
+                       if !p.attraction.nil? %>
+                      <tr>
+                        <td style="border-top: none;"></td>
+                        <td style="border-top: none;"> <%=p.attraction.name%></td>
+                        <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
+                      </tr>
+                       <%
+                       end
+                   end
+                %>
+                </td>
+              </tr>
+          <%
+             end
+             if @itinerary.itinerary_services != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Serviços</th>
+              </tr>
+                  <%
+                     @itinerary.itinerary_services.each  do |p|
+                       if !p.service.nil? %>
+                          <tr>
+                            <td style="border-top: none;"></td>
+                            <td style="border-top: none;"><%=p.service.name%></td>
+                            <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
+                          </tr>
+                      <%
+                       end
+                      end
+                      %>
+          <%
+             end
+             if @itinerary.itinerary_events != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Eventos</th>
+                <td style="border-top: none;text-align:justify;">
+                  <%
+                     @itinerary.itinerary_events.each  do |p|
+                       if !p.event.nil? %>
+                      <tr>
+                        <td style="border-top: none;"></td>
+                        <td style="border-top: none;"> <%=p.event.name%></td>
+                        <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
+                      </tr>
+                      <%
+                         end
+                         end
+                      %>
+                </td>
+              </tr>
+          <%
+             end
+          %>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="item active">
+              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @itinerary.name %>
-</p>
-
-<p>
-  <strong>Descrição:</strong>
-  <%= @itinerary.description %>
-</p>
-
-<p>
-  <strong>Tipo de itinerario:</strong>
-  <%= @itinerary.itinerary_type_id %>
-</p>
-
-<p>
-  <strong>Pontos de interesse:</strong>
-  <% @itinerary.itinerary_attractions.each  do |p| %>
-      <% if !p.attraction.nil? %>
-          <%=  p.attraction.name  %>
-      <% end %>
-      <% end %>
-
-</p>
-
-
-<p>
-  <strong>Serviços:</strong>
-  <% @itinerary.itinerary_services.each  do |p| %>
-      <% if !p.service.nil? %>
-          <%=  p.service.name  %>
-      <% end %>
-  <% end %>
-
-</p>
-
-<p>
-  <strong>Eventos:</strong>
-  <% @itinerary.itinerary_events.each  do |p| %>
-      <% if !p.event.nil? %>
-          <%=  p.event.name  %>
-      <% end %>
-  <% end %>
-
-</p>
-
-
-<%= link_to 'Edit', edit_itinerary_path(@itinerary) %> |
-<%= link_to 'Back', itineraries_path %>
-x
+      </div>
+    </div>
+    <br>
+    <table class="table">
+      <tr class="col-md-3">
+        <td style="border-top: none;"><%= link_to 'Voltar', itineraries_path ,:class => "btn btn-default"%></td>
+        <td style="border-top: none;"><%= link_to 'Editar', edit_itinerary_path(@itinerary),:class => "btn btn-primary" %></td>
+      </tr>
+    </table>
+  </div>
+</div>

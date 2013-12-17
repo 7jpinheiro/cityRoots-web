@@ -1,53 +1,88 @@
 <%= form_for(@itinerary) do |f| %>
-  <% if @itinerary.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@itinerary.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
+    <% if @itinerary.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@itinerary.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
 
-      <ul>
-      <% @itinerary.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <form role="form" class="form-horizontal">
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+          <ul>
+            <% @itinerary.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <form role="form" class="form-horizontal">
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+          </div>
         </div>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
+          </div>
         </div>
-      </div>
-    </div>
-    <br/>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
-        </div>
-      </div>
-    </div>
-    <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <div class="col-sm-6">
-          <%= f.submit "Guardar", :class=>"btn btn-primary" %>
       </div>
       <br/>
       <br/>
-    </div>
-  </form>
-  <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <strong>Pontos da Rota</strong>
+      <div id="table"></div>
+      <div class="row">
+        <div  class=" col-md-5">
+          <table class="table">
+            <tr>
+              <td style="border-top: none;">
+                <select name="combo" id="combo" class="form-control" OnBlur="gravar_ponto(this);" >
+                  <option value="0">Selecione um ponto de interesse</option>
+                  <%
+                     allatractions=Attraction.all
+                     allatractions.each do |attrac|
+                  %>
+                      <option value="<%= attrac.id  %>"><%= attrac.name %></option>
+                  <%
+                     end
+                  %>
+                </select>
+              </td>
+              <td style="border-top: none;">
+                <a class="btn btn-success" href="#" onmousedown="gravar_ponto($.document.getElementsByName('combo'));">Adicionar</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <div class="col-sm-6">
+            <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </form>
+    <script>
+        var list_attrac=new {};
+
+        function gravar_ponto(obj){
+            alert("-->"+obj.options[obj.selectedIndex].value+"--"+obj.options[obj.selectedIndex].text);
+        }
+
+    </script>
 <% end %>
