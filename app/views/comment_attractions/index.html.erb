@@ -1,0 +1,33 @@
+<h1>Listing comment_attractions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Evalutiondate</th>
+      <th>Mobile user</th>
+      <th>Attraction</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment_attractions.each do |comment_attraction| %>
+      <tr>
+        <td><%= comment_attraction.comment %></td>
+        <td><%= comment_attraction.evaluationdate %></td>
+        <td><%= comment_attraction.mobile_user_id %></td>
+        <td><%= comment_attraction.attraction_id %></td>
+        <td><%= link_to 'Show', comment_attraction %></td>
+        <td><%= link_to 'Edit', edit_comment_attraction_path(comment_attraction) %></td>
+        <td><%= link_to 'Destroy', comment_attraction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment attraction', new_comment_attraction_path %>

@@ -1,0 +1,120 @@
+<div class="page-header">
+    <h1><%= @attraction.name %></h1>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+
+<div class="row">
+  <div class="col-md-5">    
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+                <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+                <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+                    <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+  </div>
+</div>
+
+
+    <p>
+      <strong>Name:</strong>
+      <%= @attraction.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @attraction.description %>
+    </p>
+
+    <p>
+      <strong>Schedule:</strong>
+      <%= @attraction.schedule %>
+    </p>
+
+    <p>
+      <strong>Site:</strong>
+      <%= @attraction.site %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @attraction.email %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @attraction.address %>
+    </p>
+
+    <p>
+      <strong>Latitude:</strong>
+      <%= @attraction.latitude %>
+    </p>
+    <p>
+      <strong>Longitude:</strong>
+      <%= @attraction.latitude %>
+    </p>
+
+    <p>
+      <strong>Transport:</strong>
+      <%= @attraction.transport %>
+    </p>
+
+    <p>
+      <strong>Reference point:</strong>
+      <%= @attraction.reference_point %>
+    </p>
+
+    <p>
+      <strong>Active:</strong>
+      <%= @attraction.active %>
+    </p>
+
+    <p>
+      <strong>Timestamp:</strong>
+      <%= @attraction.timestamp %>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      <%= @attraction.price %>
+    </p>
+
+    <p>
+      <strong>Attraction type:</strong>
+      <%= @attraction.attraction_type_id %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @attraction.city_id %>
+    </p>
+
+    <p>
+      <strong>Web user:</strong>
+      <%= @attraction.web_user_id %>
+    </p>
+    <%= link_to 'Edit', edit_attraction_path(@attraction) %> |
+    <%= link_to 'Back', attractions_path %>

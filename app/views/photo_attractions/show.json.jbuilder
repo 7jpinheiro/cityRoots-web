@@ -1,0 +1,1 @@
+json.extract! @photo_attraction, :url, :name, :description, :extension

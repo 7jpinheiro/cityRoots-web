@@ -1,0 +1,2 @@
+module RatingItinerariesHelper
+end

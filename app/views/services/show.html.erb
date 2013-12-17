@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @service.description %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @service.schedule %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @service.site %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @service.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @service.address %>
+</p>
+
+<p>
+  <strong>Coordinate:</strong>
+  <%= @service.latitude %>
+  <%= @service.longitude %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @service.transport %>
+</p>
+
+<p>
+  <strong>Reference point:</strong>
+  <%= @service.reference_point %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @service.active %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @service.timestamp %>
+</p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @service.capacity %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @service.details %>
+</p>
+
+<p>
+  <strong>Service type:</strong>
+  <%= @service.service_type_id %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @service.city_id %>
+</p>
+
+<p>
+  <strong>Web user:</strong>
+  <%= @service.web_user_id %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back', services_path %>

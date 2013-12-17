@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @web_user.name %>
+</p>
+
+<p>
+  <strong>Enterprisename:</strong>
+  <%= @web_user.enterprisename %>
+</p>
+
+<p>
+  <strong>Obs:</strong>
+  <%= @web_user.obs %>
+</p>
+
+<p>
+  <strong>Nif:</strong>
+  <%= @web_user.nif %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @web_user.address %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @web_user.active %>
+</p>
+
+<p>
+  <strong>Web user type:</strong>
+  <%= @web_user.web_user_type_id %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @web_user.city_id %>
+</p>
+
+<%= link_to 'Edit', edit_web_user_path(@web_user) %> |
+<%= link_to 'Back', web_users_path %>

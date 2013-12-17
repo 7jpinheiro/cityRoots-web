@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: itineraries
+#
+#  id                :integer          not null, primary key
+#  name              :string(100)      not null
+#  description       :string(255)
+#  itinerary_type_id :integer          not null
+#  user_id           :integer          not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  itinerary_type_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  itinerary_type_id: 1

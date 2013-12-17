@@ -1,0 +1,41 @@
+<h1>Listing web_users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Enterprisename</th>
+      <th>Obs</th>
+      <th>Nif</th>
+      <th>Address</th>
+      <th>Active</th>
+      <th>Web user type</th>
+      <th>City</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_users.each do |web_user| %>
+      <tr>
+        <td><%= web_user.name %></td>
+        <td><%= web_user.enterprisename %></td>
+        <td><%= web_user.obs %></td>
+        <td><%= web_user.nif %></td>
+        <td><%= web_user.address %></td>
+        <td><%= web_user.active %></td>
+        <td><%= web_user.web_user_type_id %></td>
+        <td><%= web_user.city_id %></td>
+        <td><%= link_to 'Show', web_user %></td>
+        <td><%= link_to 'Edit', edit_web_user_path(web_user) %></td>
+        <td><%= link_to 'Destroy', web_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Web user', new_web_user_path %>

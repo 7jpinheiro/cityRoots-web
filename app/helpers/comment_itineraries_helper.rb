@@ -1,0 +1,2 @@
+module CommentItinerariesHelper
+end

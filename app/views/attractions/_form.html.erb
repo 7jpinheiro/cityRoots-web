@@ -1,0 +1,138 @@
+<%= form_for @attraction, :html => {:class => "form"} do |f| %>
+	<% if @attraction.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@attraction.errors.count, "error") %> prohibited this attraction from being saved:</h2>
+			<ul>
+				<% @attraction.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="well well-large clearfix">
+		<div class="page-header">
+	    	<h1><%= link_to @attraction.name, @attraction %></h1>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+		      	<div class="row">
+					<div class="form-group col-sm-9 ">
+						<%= f.label :name%>
+						<%= f.text_field :name, class: "form-control ", placeholder: "Nome"%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label 'Categoria' %>
+						<%=  f.collection_select :attraction_type_id, AttractionType.all, :id, :name,  {prompt: "Select a category"}, {class: "form-control"}%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label 'Preço', class: "control-label" %>
+						<%= f.text_field :price, class: "form-control" %>
+					</div>
+				</div>					
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label :site, class: "control-label" %>
+						<%= f.text_field :site, class: "form-control" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label :email, class: "control-label" %>
+						<%= f.text_field :email, class: "form-control" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label 'Horário', class: "control-label" %>
+						<%= f.text_area :schedule, class: "form-control", rows: "2" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-9">
+						<%= f.label :address, class: "control-label" %>
+						<%= f.text_area :address, class: "form-control", rows: "3" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<%= f.label :latitude, class: "col-sm-1 control-label" %>
+						<%= f.text_field :latitude, class: "form-control" %>
+					</div>
+					<div class="form-group  col-sm-6">
+						<%= f.label :longitude, class: "col-sm-1 control-label" %>
+						<%= f.text_field :longitude, class: "form-control" %>
+					</div>
+				</div>			
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<%= f.label :description, class: "control-label" %>
+						<%= f.text_area :description, class: "form-control", rows: "4" %>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 ">
+	          	<div class="row" >
+	        		<div style="position:relative;">
+	        			<%= f.fields_for :photo_attractions do |builder| %>
+        				    <%= render "photo_attraction_fields", :f => builder %>
+						<% end %>	
+						<%= link_to_add_fields "Adicionar Foto", f, :photo_attractions %></p>
+						&nbsp;
+						<span class='label label-info' id="upload-file-info"></span>
+					</div>
+		        </div>
+		        <div class="row">
+					<div class="form-group col-sm-12 ">
+						<div class="checkbox">
+							<label> <%= f.check_box :active %> Ponto de Interesse Activo </label>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 60px;">
+		 			<iframe width="550px" height="250px"  frameborder="0" scrolling="no"  src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=new+york+city&amp;aq=&amp;sll=37.6,-95.665&amp;sspn=60.867771,135.263672&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=New+York&amp;z=11&amp;iwloc=A&amp;output=embed" style="margin-left: 15px;"></iframe>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+	<%= f.label :timestamp, class: "col-sm-1 control-label" %>
+	<div class="col-sm-5">
+		<%= f.number_field :timestamp, class: "form-control" %>
+	</div>
+</div>		
+<div class="checkbox">
+	<label> <%= f.check_box :reference_point %> Ponto de Referência </label>
+</div>				
+<div class="form-group">
+	<%= f.label 'Cidade', class: "col-sm-1 control-label" %>
+	<div class="col-sm-2">
+		<%=  f.collection_select :city_id, City.all, :id, :name,  {prompt: "Selecione a cidade"}, {class: "form-control"}%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Utilizador', class: "col-sm-1 control-label" %>
+	<div class="col-sm-2">
+		<%= f.number_field :web_user_id, class: "form-control" %>
+	</div>
+</div>
+		<div class="actions" >
+			<%= f.submit 'Submeter', :class => "btn btn-primary " %>
+		</div>
+	</div>
+
+<!--
+<div class="form-group">
+	<%= f.label :transport, class: "col-sm-1 control-label"  %>
+	<div class="col-sm-3">
+		<%= f.text_field :transport, class: "form-control" %>
+	</div>
+</div>
+	
+-->
+
+
+<% end %>

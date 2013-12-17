@@ -1,0 +1,1 @@
+json.extract! @itinerary_attraction, :itinerary_id, :attraction_id

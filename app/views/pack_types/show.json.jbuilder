@@ -1,0 +1,1 @@
+json.extract! @pack_type, :name, :description, :duration, :price

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @comment_service.comment %>
+</p>
+
+<p>
+  <strong>Evaluationdate:</strong>
+  <%= @comment_service.evaluationdate %>
+</p>
+
+<p>
+  <strong>Mobile user:</strong>
+  <%= @comment_service.mobile_user_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @comment_service.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_comment_service_path(@comment_service) %> |
+<%= link_to 'Back', comment_services_path %>

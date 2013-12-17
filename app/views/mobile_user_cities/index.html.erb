@@ -1,0 +1,29 @@
+<h1>Listing mobile_user_cities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>Mobile user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mobile_user_cities.each do |mobile_user_city| %>
+      <tr>
+        <td><%= mobile_user_city.city_id %></td>
+        <td><%= mobile_user_city.mobile_user_id %></td>
+        <td><%= link_to 'Show', mobile_user_city %></td>
+        <td><%= link_to 'Edit', edit_mobile_user_city_path(mobile_user_city) %></td>
+        <td><%= link_to 'Destroy', mobile_user_city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mobile user city', new_mobile_user_city_path %>

@@ -1,4 +1,5 @@
 CityRootsWeb::Application.routes.draw do
+<<<<<<< HEAD
 
   get "welcome/index"
   get "galeria/index"
@@ -6,6 +7,81 @@ CityRootsWeb::Application.routes.draw do
 
   devise_for :users
   devise_for :installs
+=======
+  
+  resources :web_users
+
+  devise_for :users
+  
+  resources :pack_types
+
+  resources :web_user_packs
+
+  resources :mobile_user_cities
+
+  resources :mobile_users
+
+  resources :languages
+
+  resources :cities
+
+  resources :comment_itineraries
+
+  resources :comment_attractions
+
+  resources :comment_events
+
+  resources :comment_services
+
+  resources :rating_itineraries
+
+  resources :rating_attractions
+
+  resources :rating_events
+
+  resources :rating_services
+
+  resources :photo_attractions
+
+  resources :photo_events
+
+  resources :photo_services
+
+  resources :attraction_big_types
+
+  resources :attraction_types
+
+  resources :service_types
+
+  resources :event_types
+
+  resources :itinerary_types
+
+  resources :itinerary_attractions
+
+  resources :itinerary_events
+
+  resources :itinerary_services
+
+  resources :itineraries
+
+  resources :attractions do
+     resources :photo_attractions
+     resources :rating_attractions
+     resources :comment_attractions
+   end
+
+  resources :services
+
+  resources :events
+
+  resources :galeria
+
+  resources :pacotes
+
+  resources :welcome
+  
+>>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
   resources :countries
 
   
@@ -19,10 +95,11 @@ CityRootsWeb::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root to:'welcome#index'
 
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact_create', :via => :post
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

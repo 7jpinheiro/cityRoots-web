@@ -1,0 +1,163 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <form role="form" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Festa de S.João" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Descrição" ,:for=>"descricao" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Horário" ,:for=>"horario" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :schedule ,:id=>"horario" , :class=>"form-control", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :site ,:id=>"site" , :class=>"form-control", :placeholder=>"www.festasaojoao.pt" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :email ,:id=>"email" , :class=>"form-control", :placeholder=>"email@festasaojoao.pt" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_area :email ,:id=>"morada" , :class=>"form-control", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-3">
+          <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control", :placeholder=>"41.32217"%>
+        </div>
+        <div class="col-sm-3">
+          <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control", :placeholder=>"-8.493226"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control", :placeholder=>"Autocarros a partir das 15:00"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Data de inicio" ,:for=>"startdate" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control" , :type=> "date"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Data de fim" ,:for=>"enddate" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+           <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control" , :type=> "date"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Organização" ,:for=>"organization" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control" , :placeholder=>"Camara de Braga"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Preço" ,:for=>"price" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <%= f.text_field :price ,:id=>"price" , :class=>"form-control" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
+            <span class="input-group-addon">€</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Programação" ,:for=>"program" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :program ,:id=>"program" , :class=>"form-control" , :placeholder=>"15 horas Abertura oficial"%>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Tipo de Evento" ,:for=>"event_type" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.collection_select( :event_type_id, EventType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <!-- Value by sustem-->
+    <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
+    <%= f.text_field :city_id ,:id=>"city_id", :value=>3 , :hidden=>"hidden" %>
+    <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
+    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-6">
+          <%= f.submit :class=>"btn btn-primary" %>
+      </div>
+      <br/>
+      <br/>
+    </div>
+  </form>
+  <br/>
+<% end %>

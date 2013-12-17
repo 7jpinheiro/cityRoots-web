@@ -1,0 +1,33 @@
+<h1>Listing photo_services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Extension</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @photo_services.each do |photo_service| %>
+      <tr>
+        <td><%= photo_service.url %></td>
+        <td><%= photo_service.name %></td>
+        <td><%= photo_service.description %></td>
+        <td><%= photo_service.extension %></td>
+        <td><%= link_to 'Show', photo_service %></td>
+        <td><%= link_to 'Edit', edit_photo_service_path(photo_service) %></td>
+        <td><%= link_to 'Destroy', photo_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Photo service', new_photo_service_path %>

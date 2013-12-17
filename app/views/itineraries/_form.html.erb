@@ -1,0 +1,53 @@
+<%= form_for(@itinerary) do |f| %>
+  <% if @itinerary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@itinerary.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
+
+      <ul>
+      <% @itinerary.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <form role="form" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+        </div>
+      </div>
+    </div>
+    <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
+    <br/>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-6">
+          <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+      </div>
+      <br/>
+      <br/>
+    </div>
+  </form>
+  <br/>
+<% end %>

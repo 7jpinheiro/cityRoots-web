@@ -1,0 +1,1 @@
+json.extract! @itinerary_type, :name, :description

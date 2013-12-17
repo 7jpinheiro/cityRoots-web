@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subscriptiondate:</strong>
+  <%= @web_user_pack.subscriptiondate %>
+</p>
+
+<p>
+  <strong>Validity:</strong>
+  <%= @web_user_pack.validity %>
+</p>
+
+<p>
+  <strong>Obs:</strong>
+  <%= @web_user_pack.obs %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @web_user_pack.active %>
+</p>
+
+<p>
+  <strong>Pack type:</strong>
+  <%= @web_user_pack.pack_type_id %>
+</p>
+
+<p>
+  <strong>Web user:</strong>
+  <%= @web_user_pack.web_user_id %>
+</p>
+
+<%= link_to 'Edit', edit_web_user_pack_path(@web_user_pack) %> |
+<%= link_to 'Back', web_user_packs_path %>

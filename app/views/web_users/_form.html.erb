@@ -1,0 +1,49 @@
+<%= form_for(@web_user) do |f| %>
+  <% if @web_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@web_user.errors.count, "error") %> prohibited this web_user from being saved:</h2>
+
+      <ul>
+      <% @web_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :enterprisename %><br>
+    <%= f.text_field :enterprisename %>
+  </div>
+  <div class="field">
+    <%= f.label :obs %><br>
+    <%= f.text_field :obs %>
+  </div>
+  <div class="field">
+    <%= f.label :nif %><br>
+    <%= f.number_field :nif %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :web_user_type_id %><br>
+    <%= f.number_field :web_user_type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :city_id %><br>
+    <%= f.number_field :city_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

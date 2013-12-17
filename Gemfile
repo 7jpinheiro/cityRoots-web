@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
-
+gem 'crummy'
 # Use postgreSQL as the database for Active Record
 gem 'pg'
-
+gem "paperclip", "~> 3.0"
+gem 'jquery-fileupload-rails'
+gem 'rabl'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -38,6 +40,9 @@ gem 'devise'
 #gem to handle user permissions
 gem 'cancan'
 
+gem 'annotate', ">=2.6.0"
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -50,7 +55,3 @@ gem 'cancan'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-#Use bootsrap ssas
-gem 'bootstrap-sass-rails'
-

@@ -1,0 +1,2 @@
+module ItineraryAttractionsHelper
+end

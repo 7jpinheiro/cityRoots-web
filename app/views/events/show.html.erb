@@ -1,0 +1,98 @@
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @event.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @event.description %>
+  </p>
+
+  <p>
+    <strong>Schedule:</strong>
+    <%= @event.schedule %>
+  </p>
+
+  <p>
+    <strong>Site:</strong>
+    <%= @event.site %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @event.email %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @event.address %>
+  </p>
+
+  <p>
+    <strong>Latitude:</strong>
+    <%= @event.latitude %>
+  </p>
+  <p>
+    <strong>Longitude:</strong>
+    <%= @event.latitude %>
+  </p>
+
+  <p>
+    <strong>Transport:</strong>
+    <%= @event.transport %>
+  </p>
+
+  <p>
+    <strong>Active:</strong>
+    <%= @event.active %>
+  </p>
+
+  <p>
+    <strong>Timestamp:</strong>
+    <%= @event.timestamp %>
+  </p>
+
+  <p>
+    <strong>Stardate:</strong>
+    <%= @event.startdate %>
+  </p>
+
+  <p>
+    <strong>Enddate:</strong>
+    <%= @event.enddate %>
+  </p>
+
+  <p>
+    <strong>Organization:</strong>
+    <%= @event.organization %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= @event.price %>
+  </p>
+
+  <p>
+    <strong>Program:</strong>
+    <%= @event.program %>
+  </p>
+
+  <p>
+    <strong>Event type:</strong>
+    <%= @event.event_type_id %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @event.city_id %>
+  </p>
+
+  <p>
+    <strong>Web user:</strong>
+    <%= @event.web_user_id %>
+  </p>
+
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Back', events_path %>

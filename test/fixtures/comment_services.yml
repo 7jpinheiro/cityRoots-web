@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: comment_services
+#
+#  id             :integer          not null, primary key
+#  comment        :text             not null
+#  evaluationdate :date             not null
+#  mobile_user_id :integer          not null
+#  service_id     :integer          not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comment: MyText
+  evalutiondate: 2013-12-11
+  mobile_user_id: 1
+  service_id: 1
+
+two:
+  comment: MyText
+  evalutiondate: 2013-12-11
+  mobile_user_id: 1
+  service_id: 1

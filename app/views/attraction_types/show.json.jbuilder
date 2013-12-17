@@ -1,0 +1,1 @@
+json.extract! @attraction_type, :name, :description, :attraction_big_types_id
