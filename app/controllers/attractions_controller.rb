@@ -5,10 +5,12 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    @attraction = Attraction.where("id = id")
+    @attractions=Attraction.all
+    @attraction=Attraction.all
     @photo_attraction=PhotoAttraction.all
     respond_to do |format|
-      format.json { render :json => { :attraction =>@attraction ,:photo_attraction => @photo_attraction }}
+      format.html { @attractions }
+      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
     end
   end
 
@@ -18,9 +20,9 @@ class AttractionsController < ApplicationController
     @attraction=Attraction.find(params[:id])
     @photo_attraction=PhotoAttraction.where("attraction_id = ?",params[:id])
     respond_to do |format|
-        format.html { redirect_to @attraction, notice: 'Attraction was successfully created.' }
-        format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
-      end
+      format.html { @attraction }
+      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+    end
   end
 
   # GET /attractions/new
