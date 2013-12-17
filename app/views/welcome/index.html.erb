@@ -1,191 +1,3 @@
-<<<<<<< HEAD
-<style type="text/css">
-    body
-{
-    margin-top: 20px;
-}
-.panel
-{
-    text-align: center;
-}
-.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
-.panel-body
-{
-    padding: 0px;
-    text-align: center;
-}
-
-.the-price
-{
-    background-color: rgba(220,220,220,.17);
-    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
-    padding: 20px;
-    margin: 0;
-}
-
-.the-price h1
-{
-    line-height: 1em;
-    padding: 0;
-    margin: 0;
-}
-
-.subscript
-{
-    font-size: 25px;
-}
-
-/* CSS-only ribbon styles    */
-.cnrflash
-{
-    /*Position correctly within container*/
-    position: absolute;
-    top: -9px;
-    right: 4px;
-    z-index: 1; /*Set overflow to hidden, to mask inner square*/
-    overflow: hidden; /*Set size and add subtle rounding        to soften edges*/
-    width: 100px;
-    height: 100px;
-    border-radius: 3px 5px 3px 0;
-}
-.cnrflash-inner
-{
-    /*Set position, make larger then            container and rotate 45 degrees*/
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 145px;
-    height: 145px;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -o-transform: rotate(45deg); /* Opera */
-    -moz-transform: rotate(45deg); /* Firefox */
-    -webkit-transform: rotate(45deg); /* Safari and Chrome */
-    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
-    -ms-transform-origin: 100% 100%;  /* IE 9 */
-    -o-transform-origin: 100% 100%; /* Opera */
-    -moz-transform-origin: 100% 100%; /* Firefox */
-    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
-    background-size: 4px,auto, auto,auto;
-    background-color: #aa0101;
-    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
-}
-.cnrflash-inner:before, .cnrflash-inner:after
-{
-    /*Use the border triangle trick to make                 it look like the ribbon wraps round it's                container*/
-    content: " ";
-    display: block;
-    position: absolute;
-    bottom: -16px;
-    width: 0;
-    height: 0;
-    border: 8px solid #800000;
-}
-.cnrflash-inner:before
-{
-    left: 1px;
-    border-bottom-color: transparent;
-    border-right-color: transparent;
-}
-.cnrflash-inner:after
-{
-    right: 0;
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-}
-.cnrflash-label
-{
-    /*Make the label look nice*/
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    padding-bottom: 5px;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(1,1,1,.8);
-    font-size: 0.95em;
-    font-weight: bold;
-    text-align: center;
-}   
-/*
-----> Panel premium
-*/
-.panel-profissional {
-  border-color: #B68C34;
-}
-
-.panel-profissional > .panel-heading {
-  color: #B68C34;
-  background-color: #B68C34;
-  border-color: #B68C34;
-}
-
-.panel-profissional > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #B68C34;
-}
-
-.panel-profissional > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #B68C34;
-}
-.panel-title-profissional{
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 16px;
-  color: #FFFFFF;
-}
-
-/*
-----> Panel free DB9370
-*/
-.panel-free {
-  border-color: #A20795;
-}
-
-.panel-free > .panel-heading {
-  color: #A20795;
-  background-color: #A20795;
-  border-color: #A20795;
-}
-
-.panel-free > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #A20795;
-}
-
-.panel-free > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #A20795;
-}
-.panel-title-free{
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 16px;
-  color: #FFFFFF;
-}
-</style>
-<div class="row">
-    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-        
-        <!-- Text -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <%= image_tag "Index/douro.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/faro.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/lisboa.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/palacio.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption">
-                </div>
-=======
  <%= stylesheet_link_tag "pricing_table" %>
 <div class="row">
     <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
@@ -205,30 +17,17 @@
             <div class="item">
                 <%= image_tag "Index/palacio.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
                 <div class="carousel-caption"></div>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
             </div>
         </div>
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-<<<<<<< HEAD
-            <span class="glyphicon glyphicon-chevron-left"></span>
-=======
                <span class="glyphicon glyphicon-chevron-left"></span>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
         </a>
         <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
     </div>
 </div>
-<<<<<<< HEAD
-<hr/>
-<div class="container">
-    <h3>Perfeito para comerciantes</h3>
-    <br/>
-    <div class="col-xs-12 col-md-3" >
-        <div class="panel panel-free" style="height:374px;">
-=======
 <br/>
 <br/>
 <div class="container">
@@ -237,7 +36,6 @@
     </div>
     <div class="col-xs-12 col-md-3" >
         <div class="panel panel-free">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
             <div class="panel-heading">
                 <h3 class="panel-title-free"> 
                     Free</h3>
@@ -245,37 +43,21 @@
             <div class="panel-body">
                 <div class="the-price" style="height:76px;">
                     <h1>
-<<<<<<< HEAD
-                        €0<small>/ano</small>
-                    </h1>
-                </div>
-                <table class="table">
-                    <tr style="height:61px;">
-=======
                             €0<small>/ano</small>
                     </h1>
                 </div>
                 <table class="table">
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Criação do seu perfil 
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr class="active" style="height:61px;">
-=======
                     <tr class="active">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Georeferênciação do establecimento
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr style="height:61px;">
-=======
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Foto da fachada do establecimento
                         </td>
@@ -283,15 +65,6 @@
                 </table>
             </div>
             <div class="panel-footer">
-<<<<<<< HEAD
-                <a href="pacotes/index#free" class="btn btn-primary" role="button">Ver mais</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-3">
-        <div class="panel panel-primary" style="height:374px;">
-            <div class="cnrflash">
-=======
                     <a href="pacotes/index#basico" class="btn btn-primary" role="button">Ver mais</a>
             </div>
         </div>
@@ -299,7 +72,6 @@
     <div class="col-xs-12 col-md-3 col-md-offset-1">
         <div class="panel panel-primary">
                 <div class="cnrflash">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                 <div class="cnrflash-inner">
                     <span class="cnrflash-label">Mais
                         <br>
@@ -313,37 +85,21 @@
             <div class="panel-body">
                 <div class="the-price" style="height:76px;">
                     <h1>
-<<<<<<< HEAD
-                        €25<small>/ano</small>
-                    </h1>
-                </div>
-                <table class="table">
-                    <tr style="height:61px;">
-=======
                             €25<small>/ano</small>
                     </h1>
                 </div>
                 <table class="table">
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Publicação de mais conteudo multimedia
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr class="active" style="height:61px;">
-=======
                     <tr class="active">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Publicação de produtos e serviços
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr style="height:61px;">
-=======
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Publicação de promoções e eventos
                         </td>
@@ -351,21 +107,12 @@
                 </table>
             </div>
             <div class="panel-footer">
-<<<<<<< HEAD
-                <a href="pacotes/index#freemium" class="btn btn-primary" role="button">Ver mais</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-3">
-        <div class="panel panel-profissional" style="height:374px;">
-=======
                     <a href="pacotes/index#basico" class="btn btn-primary" role="button">Ver mais</a>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-md-3 col-md-offset-1">
         <div class="panel panel-profissional">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
             <div class="panel-heading">
                 <h3 class="panel-title-profissional" >
                     Premium</h3>
@@ -376,29 +123,17 @@
                         €50<small>/ano</small></h1>
                 </div>
                 <table class="table">
-<<<<<<< HEAD
-                    <tr style="height:61px;">
-=======
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Fazer publicidade
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr class="active" style="height:61px;">
-=======
                     <tr class="active">
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Dar destaque na aplicação Movel
                         </td>
                     </tr>
-<<<<<<< HEAD
-                    <tr style="height:61px;">
-=======
                     <tr>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
                         <td>
                             Estatisticas
                         </td>
@@ -406,19 +141,6 @@
                 </table>
             </div>
             <div class="panel-footer">
-<<<<<<< HEAD
-                <a href="pacotes/index#premium" class="btn btn-primary" role="button">Ver mais</a>
-            </div>
-        </div>
-    </div>  
-</div>
-<hr class="featurette-divider"/>
-<div class="featurette">
-    <%= image_tag 'Index/Logo.png', :class=>"featurette-image pull-right" %>
-    <h2 class="featurette-heading">CityRoots</h2><h4><span class="muted">Feel each place</span></h4>
-    <p class="lead muted">
-        A aplicação CityRoots oferece aos turistas nacionais e internacionais que pretendam conhecer Portugal um acesso rápido e fácil às raízes das nossas cidades, com a informação do que melhor e mais característico elas têm para lhes oferecer.
-=======
                 <a href="pacotes/index#profissional" class="btn btn-primary" role="button">Ver mais</a>
             </div>
         </div>
@@ -434,46 +156,17 @@
     </div>
     <p class="lead muted">
             A aplicação CityRoots oferece aos turistas nacionais e internacionais que pretendam conhecer Portugal um acesso rápido e fácil às raízes das nossas cidades, com a informação do que melhor e mais característico elas têm para lhes oferecer.
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
     </p>
     <br/>
     <br/>
     <h4 class="muted">Conteúdos em que pode confiar</h4>
     <p class="lead">
-<<<<<<< HEAD
-        Por valorizarmos a qualidade e a credibilidade das fontes de informação, procuramos estabelecer parcerias com câmaras municipais, postos de turismo, teatros, museus e outras instituições culturais. Desta forma, disponibilizamos conteúdos confiáveis, completos, atualizados e classificados pelos próprios turistas.
-=======
             Por valorizarmos a qualidade e a credibilidade das fontes de informação, procuramos estabelecer parcerias com câmaras municipais, postos de turismo, teatros, museus e outras instituições culturais. Desta forma, disponibilizamos conteúdos confiáveis, completos, atualizados e classificados pelos próprios turistas.
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
     </p>
     <br/>
     <br/>
     <h4 class="muted">Ondes as raízes nascem...</h4>
     <p class="lead">
-<<<<<<< HEAD
-        Uma das nossas missões é chegar às cidades mais pequenas e vilas de interesse turístico, cujas raízes patrimoniais e culturais não são devidamente divulgadas.
-    </p>
-    <h5 class="text-center">
-        Não deixe o melhor por conhecer e sentir!
-    </h5>
-    <h5 class="text-center">
-        Não perca os melhores eventos!
-    </h5>
-    <h5 class="text-center">
-        Crie os seus planos de visita!
-    </h5>
-    <h5 class="text-center">
-        Consulte conteúdos e mapas sem acesso à internet!
-    </h5>
-    <h5 class="text-center">
-        Saiba o que se passa à sua volta e como chegar através da integração com GPS! Informação confiável e avaliada pelos próprios utilizadores!
-    </h5>
-    <h5 class="text-center">
-        Suporte a diversos idiomas!
-    </h5>
-    <h5 class="text-center">
-        <b><i>Divulgue o seu negócio! - restauração, hotelaria, lojas, lazer, diversão noturna, etc.</b></i>
-=======
             Uma das nossas missões é chegar às cidades mais pequenas e vilas de interesse turístico, cujas raízes patrimoniais e culturais não são devidamente divulgadas.
     </p>
     <h5 class="text-center">
@@ -496,6 +189,5 @@
     </h5>
     <h5 class="text-center">
             <b><i>Divulgue o seu negócio! - restauração, hotelaria, lojas, lazer, diversão noturna, etc.</b></i>
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
     </h5>
 </div>
