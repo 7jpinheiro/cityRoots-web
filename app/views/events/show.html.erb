@@ -1,98 +1,146 @@
-  <p id="notice"><%= notice %></p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= @event.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @event.description %>
-  </p>
-
-  <p>
-    <strong>Schedule:</strong>
-    <%= @event.schedule %>
-  </p>
-
-  <p>
-    <strong>Site:</strong>
-    <%= @event.site %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= @event.email %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= @event.address %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= @event.latitude %>
-  </p>
-  <p>
-    <strong>Longitude:</strong>
-    <%= @event.latitude %>
-  </p>
-
-  <p>
-    <strong>Transport:</strong>
-    <%= @event.transport %>
-  </p>
-
-  <p>
-    <strong>Active:</strong>
-    <%= @event.active %>
-  </p>
-
-  <p>
-    <strong>Timestamp:</strong>
-    <%= @event.timestamp %>
-  </p>
-
-  <p>
-    <strong>Stardate:</strong>
-    <%= @event.startdate %>
-  </p>
-
-  <p>
-    <strong>Enddate:</strong>
-    <%= @event.enddate %>
-  </p>
-
-  <p>
-    <strong>Organization:</strong>
-    <%= @event.organization %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= @event.price %>
-  </p>
-
-  <p>
-    <strong>Program:</strong>
-    <%= @event.program %>
-  </p>
-
-  <p>
-    <strong>Event type:</strong>
-    <%= @event.event_type_id %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= @event.city_id %>
-  </p>
-
-  <p>
-    <strong>Web user:</strong>
-    <%= @event.web_user_id %>
-  </p>
-
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Back', events_path %>
+<div class="page-header">
+  <h1><%= @event.name %></h1>
+</div>
+<div class="col-md-12">
+  <div class="well well-sm">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <%
+             if @event.address != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Morada</th>
+                <td style="border-top: none;"><%= @event.address %></td>
+              </tr>
+          <%
+             end
+             if @event.schedule != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Horário</th>
+                <td style="border-top: none;"><%= @event.schedule %></td>
+              </tr>
+          <%
+             end
+             if @event.site != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Site</th>
+                <td style="border-top: none;"><%= @event.site %></td>
+              </tr>
+          <%
+             end
+             if @event.email != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Email</th>
+                <td style="border-top: none;"><%= @event.email %></td>
+              </tr>
+          <%
+             end
+             if @event.transport != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Transporte</th>
+                <td style="border-top: none;"><%= @event.transport %></td>
+              </tr>
+          <%
+             end
+             if @event.startdate != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Data</th>
+                <td style="border-top: none;"><%= @event.startdate %> até <%= @event.enddate %></td>
+              </tr>
+          <%
+             end
+             if @event.price != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Preço</th>
+                <td style="border-top: none;"><%= @event.price %></td>
+              </tr>
+          <%
+             end
+             if @event.organization != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Orgização</th>
+                <td style="border-top: none;"><%= @event.organization %></td>
+              </tr>
+          <%
+             end
+             if @event.event_type_id != nil
+               id=@event.event_type_id
+               event_tipo=EventType.where(["id = ?", id ]).first
+               evento=event_tipo.name;
+          %>
+              <tr>
+                <th style="border-top: none;">Tipo</th>
+                <td style="border-top: none;"><%= evento %></td>
+              </tr>
+          <%
+             end
+             if @event.program != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Programação</th>
+                <td style="border-top: none;text-align:justify;"><%= @event.program %></td>
+              </tr>
+          <%
+             end
+             if @event.description != nil
+          %>
+              <tr>
+                <th style="border-top: none;">Descrição</th>
+                <td style="border-top: none;text-align:justify;"><%= @event.description %></td>
+              </tr>
+          <%
+             end
+          %>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="item active">
+              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+      </div>
+    </div>
+    <br>
+    <table class="table">
+      <tr class="col-md-3">
+        <td style="border-top: none;"><%= link_to 'Voltar', events_path ,:class => "btn btn-default"%></td>
+        <td style="border-top: none;"><%= link_to 'Editar', edit_event_path(@event),:class => "btn btn-primary" %></td>
+      </tr>
+    </table>
+  </div>
+</div>
