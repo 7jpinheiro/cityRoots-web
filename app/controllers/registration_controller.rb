@@ -8,7 +8,7 @@ class RegistrationController < ApplicationController
     def create
 
         @user = user.new
-        # @user.username = params[:member][:username]
+        @user.username = params[:user][:username]
         @user.email = params[:user][:email]
         @user.password = params[:user][:password]
         @user.password_confirmation =params[:user][:password_confirmation]
@@ -17,12 +17,15 @@ class RegistrationController < ApplicationController
         @city = City.new
         @city.city_id = params[:city][:id]
 
+        @country = Country.new
+        @country.country_id = params[:country][:id]
 
         @user.valid?
 
         if @user.errors.blank?
             @user.save
             @city.save
+            @country.save
         else
             render :action => "new"
         end
