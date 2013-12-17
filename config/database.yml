@@ -5,13 +5,9 @@ development:
   encoding: utf8
   pool: 5
   timeout: 5000
-  username: postgres
-<<<<<<< HEAD
-  password: 
-=======
+  username: jprophet89
   password:
->>>>>>> 66995fd85219464fa529d5840daf9428d3794567
-  host: localhost
+  host: 172.19.102.207
   port: 5432
 
 # Warning: The database defined as "test" will be erased and
