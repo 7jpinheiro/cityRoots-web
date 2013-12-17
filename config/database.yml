@@ -6,8 +6,8 @@ development:
   pool: 5
   timeout: 5000
   username: jprophet89
-  password: 
-  host: localhost
+  password:
+  host: 172.19.102.207
   port: 5432
 
 # Warning: The database defined as "test" will be erased and

@@ -1,11 +1,4 @@
-class User < ActiveRecord::Base
-	validates :email , presence: true
-	validates :encrypted_password , presence: true
-	validates :city_id , presence: false
-	validates :language_id , presence: true
-	belongs_to :city
-	belongs_to :language
-	
+class Install < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
