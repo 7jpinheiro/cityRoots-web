@@ -55,6 +55,23 @@
               </tr>
         <%
            end
+           if @attraction.reference_point != nil
+             if @attraction.reference_point == true
+            %>
+                  <tr>
+                    <th style="border-top: none;">Ponto Interesse</th>
+                    <td style="border-top: none;">Sim</td>
+                  </tr>
+              <%
+             else
+              %>
+                  <tr>
+                    <th style="border-top: none;">Ponto de interesse</th>
+                    <td style="border-top: none;">Não</td>
+                  </tr>
+              <%
+             end
+           end
            if @attraction.attraction_type_id != nil
              id=@attraction.attraction_type_id
              tipopoint=AttractionType.where(["id = ?", id ]).first
