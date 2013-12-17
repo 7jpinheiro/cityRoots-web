@@ -1,18 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nome:</strong>
   <%= @itinerary.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descrição:</strong>
   <%= @itinerary.description %>
 </p>
 
 <p>
-  <strong>Itinerary type:</strong>
+  <strong>Tipo de itinerario:</strong>
   <%= @itinerary.itinerary_type_id %>
+</p>
+
+<p>
+  <strong>Pontos de interesse</strong>
+  <%= @attractions.each do |p| %>
+
 </p>
 
 <%= link_to 'Edit', edit_itinerary_path(@itinerary) %> |
