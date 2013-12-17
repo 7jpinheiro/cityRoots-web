@@ -1,6 +1,11 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
+
+
+  #@attractions = Itinerary.find(params[:id]).itinerary_attractions.collect { |att| att.attraction.name}
+
+
   # GET /itineraries
   # GET /itineraries.json
   def index
@@ -60,6 +65,7 @@ class ItinerariesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
