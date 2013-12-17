@@ -1,18 +1,12 @@
 CityRootsWeb::Application.routes.draw do
-<<<<<<< HEAD
-
-  get "welcome/index"
   get "galeria/index"
   get "pacotes/index"
 
   devise_for :users
   devise_for :installs
-=======
-  
+
   resources :web_users
 
-  devise_for :users
-  
   resources :pack_types
 
   resources :web_user_packs
@@ -81,7 +75,6 @@ CityRootsWeb::Application.routes.draw do
 
   resources :welcome
   
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
   resources :countries
 
   
@@ -91,13 +84,7 @@ CityRootsWeb::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root to:'welcome#index'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root to:'welcome#index'
-
-  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+    match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact_create', :via => :post
   # Example of regular route:
 
