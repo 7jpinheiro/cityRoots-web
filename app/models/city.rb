@@ -11,7 +11,7 @@
 class City < ActiveRecord::Base
   validates :name, presence:true
   validates :abv, presence:true
-  validates :contry_id, presence:true
+  validates :country_id, presence:true
 	belongs_to :country
 	has_many :mobile_user_cities
 	has_many :web_users
