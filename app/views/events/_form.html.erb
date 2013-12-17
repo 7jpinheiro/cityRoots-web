@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-  
   <form role="form" class="form-horizontal">
     <div class="row">
       <div class="form-group">
@@ -61,7 +60,7 @@
       <div class="form-group">
         <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_area :email ,:id=>"morada" , :class=>"form-control", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
+          <%= f.text_area :address ,:id=>"morada" , :class=>"form-control", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
         </div>
       </div>
     </div>
@@ -146,7 +145,7 @@
     <br/>
     <!-- Value by sustem-->
     <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-    <%= f.text_field :city_id ,:id=>"city_id", :value=>3 , :hidden=>"hidden" %>
+    <%= f.text_field :city_id ,:id=>"city_id", :value=>1 , :hidden=>"hidden" %>
     <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
     <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
     <br/>
@@ -154,10 +153,10 @@
       <div class="form-group">
         <div class="col-sm-6">
           <%= f.submit :class=>"btn btn-primary" %>
+        </div>
+        <br/>
+        <br/>
       </div>
-      <br/>
-      <br/>
     </div>
   </form>
-  <br/>
 <% end %>
