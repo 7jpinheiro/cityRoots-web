@@ -3,7 +3,7 @@ class ItinerariesController < ApplicationController
 
 
 
-  @attractions = Itinerary.find(params[:id]).itinerary_attractions.collect { |att| att.attraction.name}
+  #@attractions = Itinerary.find(params[:id]).itinerary_attractions.collect { |att| att.attraction.name}
 
 
   # GET /itineraries

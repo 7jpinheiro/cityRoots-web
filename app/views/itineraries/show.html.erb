@@ -16,10 +16,37 @@
 </p>
 
 <p>
-  <strong>Pontos de interesse</strong>
-  <%= @attractions.each do |p| %>
+  <strong>Pontos de interesse:</strong>
+  <% @itinerary.itinerary_attractions.each  do |p| %>
+      <% if !p.attraction.nil? %>
+          <%=  p.attraction.name  %>
+      <% end %>
+      <% end %>
 
 </p>
 
+
+<p>
+  <strong>Serviços:</strong>
+  <% @itinerary.itinerary_services.each  do |p| %>
+      <% if !p.service.nil? %>
+          <%=  p.service.name  %>
+      <% end %>
+  <% end %>
+
+</p>
+
+<p>
+  <strong>Eventos:</strong>
+  <% @itinerary.itinerary_events.each  do |p| %>
+      <% if !p.event.nil? %>
+          <%=  p.event.name  %>
+      <% end %>
+  <% end %>
+
+</p>
+
+
 <%= link_to 'Edit', edit_itinerary_path(@itinerary) %> |
 <%= link_to 'Back', itineraries_path %>
+x
