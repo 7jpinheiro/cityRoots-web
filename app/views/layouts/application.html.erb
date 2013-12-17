@@ -38,8 +38,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <% if user_signed_in?
-                        if current_user.name != nil
-                  %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= current_user.name %>  <b class="caret"></b></a><%
+                        if current_user.username != nil
+                  %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= current_user.username %>  <b class="caret"></b></a><%
                         else
                           %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
                         end
@@ -49,7 +49,7 @@
                         <li><a href="#"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Preferências</a></li>
                         <li class="divider"></li>
-                        <%= link_to destroy_user_session_path do%>
+                        <%= link_to destroy_user_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete do%>
                           <i class=" glyphicon glyphicon-off"></i> Logout
                         <% end %>
                       </ul>
