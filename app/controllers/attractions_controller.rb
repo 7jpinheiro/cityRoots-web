@@ -73,7 +73,12 @@ class AttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attraction_params
-      params.require(:attraction).permit(:name, :description, :schedule, :site, :email, :address, :latitude, :longitude, :transport, :reference_point, :active, :timestamp, :details, :price, :attraction_type_id, :city_id, :web_user_id)
+      params.require(:attraction).permit(:name, 
+        :description, :schedule, :site, :email, 
+        :address, :latitude, :longitude, :transport, 
+        :reference_point, :active, :timestamp, :details, 
+        :price, :attraction_type_id, :city_id, :web_user_id, 
+        :photo_attraction_attributes => [:photo, :attraction_id ])
     end
 
     def user_is_current_user

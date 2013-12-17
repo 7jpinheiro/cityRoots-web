@@ -30,19 +30,25 @@
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                  <li><%= link_to "Home", :controller=>"welcome" , :action=>"index" %></li>
+                  <li><%= link_to "Home", welcome_index_path %></li>
                   <li><%= link_to "Pacotes", pacotes_path %></li>
                   <li><a href="#about">Parceiros</a></li>
                   <li><%= link_to "Galeria", galeria_path %></li>
                   <li><%= link_to "Contactos", contact_path %></li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
+                  <li><%= link_to "Login", user_session_path, :class=>"first"  %></li>
+                  <li><%= link_to "Registo", new_user_registration_path %></li>
                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> John Smith  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                     
                       <li><a href="#"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
                       <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Preferências</a></li>
                       <li class="divider"></li>
-                      <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+                      <%= link_to destroy_user_session_path do%>
+                        <i class=" glyphicon glyphicon-off"></i> Logout
+                      <% end %>
                     </ul>
                   </li>
                 </ul>
@@ -87,6 +93,7 @@
 
           </div><!--/.container-->
           <hr/>
+<!--          
       <footer>
         <div class="container" >    
           <div class="row">
@@ -142,7 +149,7 @@
             </div>
           </div>
         </div>
-        </footer>
+        </footer> -->
           <!-- Bootstrap core JavaScript
           ================================================== -->
           <!-- Placed at the end of the document so the pages load faster -->

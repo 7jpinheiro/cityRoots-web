@@ -6,12 +6,12 @@
 <div class="col-md-12">
 	<div class="well well-sm">
 		<div class="row">
-			<div class="col-xs-3 col-md-3 text-center">
+			<div class="col-xs-4 col-md-3 text-center">
 				<%	if !attraction.photo_attractions.first.nil? %>
-					<%=	image_tag attraction.photo_attractions.first.photo.url(:medium,false) %>
+					<%=	image_tag attraction.photo_attractions.first.photo.url(:medium,false), :style =>'max-width:100%; max-height:100%'  %>
 				<% end %>
 			</div>
-			<div class="col-xs-9 col-md-9 section-box">
+			<div class="col-xs-8 col-md-9 section-box">
 				<div class="row">
 					<div class="col-md-8">
 						<h4><strong><%= link_to attraction.name, attraction %></strong></h4>
@@ -31,7 +31,12 @@
 					</p>
 					<p>
 						<b>Descrição: </b>
-						<%= truncate attraction.description, length: 300 %>
+						<div class="hidden-xs"> 
+							<%= truncate attraction.description, length: 300 %>
+						</div>
+						<div class="visible-xs"> 
+							<%= truncate attraction.description, length: 100 %>
+						</div>
 						<%= link_to 'Ler mais', attraction %>
 					</p>
 					<hr/>
