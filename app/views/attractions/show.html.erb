@@ -112,6 +112,10 @@
       </div>
     </div>
     <br>
+    <% @attraction.comment_attractions.each do |c| %>
+    <%=  c.comment  %>
+    <% end %> 
+
     <table class="table">
       <tr class="col-md-3">
         <td style="border-top: none;"><%= link_to 'Voltar', attractions_path ,:class => "btn btn-default"%></td>

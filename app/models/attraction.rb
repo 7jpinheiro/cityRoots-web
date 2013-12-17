@@ -38,5 +38,5 @@ class Attraction < ActiveRecord::Base
 	belongs_to :web_user
 	belongs_to :city
 
-	accepts_nested_attributes_for :photo_attractions, :reject_if => lambda { |t| t['photo_attraction'].nil? }
+	accepts_nested_attributes_for :photo_attractions, :reject_if => lambda { |t| t['photo_attraction'].nil? }, :allow_destroy => true
 end

@@ -150,8 +150,13 @@ form{
 .navbar-inverse{
     border: 0;
 }
- 
 
+#sidebar .active a{
+  background: $color1;
+}
+#sidebar li {
+  display:inherit;
+}
 #body-page{
     margin-top:-20px;
     min-height: 100%;

@@ -78,7 +78,7 @@
 			<div class="col-md-6 ">
 	          	<div class="row" >
 	        		<div style="position:relative;">
-	        			<%= f.fields_for :photo_attractions do |builder| %>
+	        			<%= f.fields_for photo_attractions do |builder| %>
         				    <%= render "photo_attraction_fields", :f => builder %>
 						<% end %>	
 						<%= link_to_add_fields "Adicionar Foto", f, :photo_attractions %></p>
