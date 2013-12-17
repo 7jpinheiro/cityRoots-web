@@ -27,10 +27,6 @@ CityRootsWeb::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-<<<<<<< HEAD
-
-=======
   Paperclip.options[:command_path] = "/usr/local/bin/"
->>>>>>> 991ee0e7b2fd2f3972c9c0f512b430469ebb2ad4
 
 end
