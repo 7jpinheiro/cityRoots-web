@@ -11,13 +11,13 @@
 #
 
 class MobileUser < ActiveRecord::Base
-	belongs_to :user 
-	has_many :comments_events
-	has_many :comments_services
-	has_many :comments_attractions
-	has_many :comments_itineraries
-	has_many :rating_events
-	has_many :rating_services
-	has_many :rating_attractions
-	has_many :rating_itineraries
+	belongs_to :user
+	has_many :comments_events, dependent: :destroy
+	has_many :comments_services, dependent: :destroy
+	has_many :comments_attractions, dependent: :destroy
+	has_many :comments_itineraries, dependent: :destroy
+	has_many :rating_events, dependent: :destroy
+	has_many :rating_services, dependent: :destroy
+	has_many :rating_attractions, dependent: :destroy
+	has_many :rating_itineraries, dependent: :destroy
 end

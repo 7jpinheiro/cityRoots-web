@@ -30,11 +30,19 @@
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                  <li><%= link_to "Home", welcome_index_path %></li>
-                  <li><%= link_to "Pacotes", pacotes_path %></li>
+                  <li class="<%= is_active?(welcome_index_path) %>">
+                      <%= link_to "Home", welcome_index_path %>
+                  </li>
+                  <li class="<%= is_active?(pacotes_path) %>">
+                      <%= link_to "Pacotes", pacotes_path %>
+                  </li>
+                  <li class="<%= is_active?(galeria_path) %>">
+                      <%= link_to "Galeria", galeria_path %>
+                  </li>
+                  <li class="<%= is_active?(contact_path) %>">
+                      <%= link_to "Contactos", contact_path %>
+                  </li>
                   <li><a href="#about">Parceiros</a></li>
-                  <li><%= link_to "Galeria", galeria_path %></li>
-                  <li><%= link_to "Contactos", contact_path %></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <% if user_signed_in?
@@ -70,21 +78,31 @@
             <div class="col-xs-12 col-sm-12" style="height:100%">
               <div class="col-xs-6 col-sm-1 sidebar-offcanvas" id="sidebar" role="navigation">
                 <div class="list-group sidebar">
-                  <%= link_to attractions_path, :class=>"list-group-item" do%>
-                    <i class=" glyphicon glyphicon-tower"></i> Pontos
-                  <% end %>
-                  <%= link_to itineraries_path, :class=>"list-group-item" do%>
-                      <i class=" glyphicon glyphicon-globe"></i> Rotas
-                  <% end %>
-                  <%= link_to events_path, :class=>"list-group-item" do%>
-                      <i class=" glyphicon glyphicon-music"></i>Eventos
-                  <% end %>
-                  <%= link_to services_path, :class=>"list-group-item" do%>
-                    <i class=" glyphicon glyphicon-home"></i>Serviços
-                  <%end%>
-                  <%= link_to services_path, :class=>"list-group-item" do%>
-                    <i class=" glyphicon glyphicon-signal"></i>Estatistica
-                  <%end%>
+                    <li class="<%= is_active?(attractions_path) %>">
+                      <%= link_to attractions_path, :class=>"list-group-item" do %>
+                          <i class=" glyphicon glyphicon-tower"></i> Pontos
+                      <% end %>
+                    </li>
+                    <li class="<%= is_active?(itineraries_path) %>">
+                      <%= link_to itineraries_path, :class=>"list-group-item" do %>
+                          <i class=" glyphicon glyphicon-globe"></i> Rotas
+                      <% end %>
+                    </li>
+                    <li class="<%= is_active?(events_path) %>">
+                      <%= link_to events_path, :class=>"list-group-item"  do %>
+                        <i class=" glyphicon glyphicon-music"></i>Eventos
+                      <% end %>
+                    </li>
+                    <li class="<%= is_active?(services_path) %>">
+                      <%= link_to services_path, :class=>"list-group-item"  do %>
+                        <i class=" glyphicon glyphicon-home"></i>Serviços
+                      <%end%>
+                    </li>
+                    <li class="<%= is_active?(services_path) %>">
+                      <%= link_to services_path, :class=>"list-group-item " do %>
+                        <i class=" glyphicon glyphicon-signal"></i>Estatistica
+                      <%end%>
+                    </li>
                 </div>
               </div><!--/span-->
               <div class="col-xs-12 col-sm-11" id="body-page">
@@ -163,6 +181,8 @@
           <!-- Placed at the end of the document so the pages load faster -->
               <%= javascript_include_tag "application" %>
 
+
+          <%= javascript_include_tag :defaults, :cache => true %>  
           <%= javascript_include_tag "jquery", "bootstrap", "offcanvas" %>
       	</body>
 

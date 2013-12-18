@@ -1,5 +1,6 @@
 class AttractionsController < ApplicationController
   #before_filter :user_is_current_user
+  skip_before_filter :verify_authenticity_token  
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
 
   # GET /attractions
@@ -29,7 +30,6 @@ class AttractionsController < ApplicationController
   # GET /attractions/new
   def new
     @attraction = Attraction.new
-    3.times { @attraction.photo_attractions.build }
   end
 
   # GET /attractions/1/edit

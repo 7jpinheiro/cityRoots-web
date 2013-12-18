@@ -95,24 +95,20 @@
         </table>
       </div>
       <div class="col-md-6">
+        <% if !@attraction.photo_attractions.blank? %>
         <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="item active">
-              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
+           
+            <% @attraction.photo_attractions.each_with_index do |p,i| %>
+              <% if i==0 %>
+                <div class="item active">
+              <% else %>
+                <div class="item">
+              <% end %>
+                <%= image_tag p.photo.url(:original,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+                <div class="carousel-caption"></div>
+              </div>
+              <% end %>
           </div>
           <!-- Controls -->
           <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
@@ -125,10 +121,21 @@
         <br/>
         <hr/>
         <br/>
+        <% end %>
+        
         <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=13&markers=#{@attraction.latitude}%2C#{@attraction.longitude}" %>
       </div>
     </div>
     <br>
+    <% @attraction.comment_attractions.each do |c| %>
+      <b> Comentário: </b>
+      <%=  c.comment  %>
+      <p>
+      <b> Utilizador: </b> <%=  c.mobile_user.firstname  %>
+
+      <hr/>
+    <% end %> 
+
     <table class="table">
       <tr class="col-md-3">
         <td style="border-top: none;"><%= link_to 'Voltar', attractions_path ,:class => "btn btn-default"%></td>

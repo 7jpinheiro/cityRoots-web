@@ -9,5 +9,5 @@
 
 class AttractionBigType < ActiveRecord::Base
   validates :name, presence:true
-	has_many :attraction_types
+	has_many :attraction_types, dependent: :destroy
 end

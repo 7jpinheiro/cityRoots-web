@@ -8,7 +8,7 @@
 <% else %>
 <%=	image_tag f.object.photo.url(:thumb,false) %>
 <% end %>
-<%= a.hidden_field :attraction_id, @attraction.id %>
+
 
 <%= link_to_remove_fields "remove", f %>
 </p>

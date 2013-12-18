@@ -31,10 +31,10 @@ class Service < ActiveRecord::Base
   validates :price, length: {minimum: 2}
   validates :latitude, presence:true
   validates :longitude, presence:true
-	has_many :rating_services
-	has_many :comment_services
-	has_many :photo_services
-	has_many :itenerary_services
+	has_many :rating_services, dependent: :destroy
+	has_many :comment_services, dependent: :destroy
+	has_many :photo_services, dependent: :destroy
+	has_many :itenerary_services, dependent: :destroy
 	belongs_to :service_type
 	belongs_to :web_user
 	belongs_to :city

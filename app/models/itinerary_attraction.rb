@@ -13,5 +13,5 @@ class ItineraryAttraction < ActiveRecord::Base
   validates :itinerary_id, presence:true
   validates :attraction_id, presence:true
   belongs_to :itenerary
-	belongs_to :attraction
+  belongs_to :attraction
 end
