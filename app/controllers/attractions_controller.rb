@@ -8,6 +8,7 @@ class AttractionsController < ApplicationController
     @attractions=Attraction.all
     @attraction=Attraction.all
     @photo_attraction=PhotoAttraction.all
+
     respond_to do |format|
       format.html { @attractions }
       format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}

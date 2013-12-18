@@ -40,7 +40,7 @@
       </div>
       <hr/>
       <strong>Pontos da Rota</strong>
-      <div id="table"></div>
+      <div id="tt"></div>
       <div class="row">
         <div  class=" col-md-5">
           <table class="table">
@@ -77,12 +77,30 @@
         </div>
       </div>
     </form>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script>
-        var list_attrac=new {};
+        var list_attrac=new Array();
 
         function gravar_ponto(obj){
-            alert("-->"+obj.options[obj.selectedIndex].value+"--"+obj.options[obj.selectedIndex].text);
+            var tmp=new Object();
+            tmp["name"]=obj.options[obj.selectedIndex].text;
+            tmp["id"]=obj.options[obj.selectedIndex].value;
+            list_attrac.push(tmp);
+            update_list();
         }
 
+        function update_list(){
+            alert("entrou"+list_attrac.length);
+            var htmlstr="<table class='table table-bordered'>";
+            var i=0;
+            for (i=0;i<list_attrac.length;i++){
+                alert("entoru"+i);
+                var ob=list_attrac[i];
+                htmlstr+="<tr><td>"+ob["name"]+"</td><td>Ponto de interesse</td><td><a class='btn btn-danger' href='#'>Apagar</a></td></tr>";
+            }
+            htmlstr+="</table>";
+            alert(htmlstr);
+            $.document.getElementById("tt").html(htmlstr).show();
+        }
     </script>
 <% end %>
