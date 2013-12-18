@@ -6,14 +6,25 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    #@attractions = current_user.attractions
-    @attractions = Attraction.all
+    @attractions=Attraction.all
+    @attraction=Attraction.all
+    @photo_attraction=PhotoAttraction.all
+
+    respond_to do |format|
+      format.html { @attractions }
+      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+    end
   end
 
   # GET /attractions/1
   # GET /attractions/1.json
   def show
-    
+    @attraction=Attraction.find(params[:id])
+    @photo_attraction=PhotoAttraction.where("attraction_id = ?",params[:id])
+    respond_to do |format|
+      format.html { @attraction }
+      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+    end
   end
 
   # GET /attractions/new
@@ -29,7 +40,6 @@ class AttractionsController < ApplicationController
   # POST /attractions.json
   def create
     @attraction = Attraction.new(attraction_params)
-
     respond_to do |format|
       if @attraction.save
         format.html { redirect_to @attraction, notice: 'Attraction was successfully created.' }
