@@ -1087,10 +1087,10 @@ ALTER SEQUENCE services_id_seq OWNED BY services.id;
 CREATE TABLE users (
     id bigint NOT NULL,
     email character varying(255) NOT NULL,
-    username character varying(50) NOT NULL,
+    username character varying(50),
     encrypted_password character varying(500) NOT NULL,
     language_id integer NOT NULL,
-    country_id integer NOT NULL,
+    country_id integer,
     reset_password_token character varying(150),
     reset_password_sent_at date,
     remember_created_at date,
@@ -1490,9 +1490,9 @@ SELECT pg_catalog.setval('attraction_types_id_seq', 1, false);
 --
 
 COPY attractions (id, name, description, schedule, site, email, address, latitude, longitude, transport, active, "timestamp", reference_point, price, attraction_type_id, city_id, web_user_id) FROM stdin;
-1	Bom Jesus	A Igreja do Bom Jesus foi desenhada pelo arquitecto Carlos Amarante, por encomenda do Arcebispo D. Gaspar de Bragança, para substituir uma primitiva igreja, mandada construir por D. Rodrigo de Moura Teles que se encontrava em ruínas. As obras começaram em 1 de Junho de 1784, tendo ficado concluídas em 1811.\nÉ um dos primeiros edifícios neoclássicos em Portugal, e a fachada é ladeada por duas torres e termina num frontão triangular.	\N	www.estanciadobomjesus.com	geral@estanciadobomjesus.com	Monte do Bom Jesus 4715-056 Braga	8.22375298	41.331707	\N	t	1387019634	t	\N	5	3	1
 2	Sé de Braga	A Sé Catedral é considerada como um centro de irradiação episcopal e um dos mais importantes templos do românico português, a sua história remonta à obra do primeiro bispo, D. Pedro de Braga, correspondendo à restauração da Sé episcopal em 1070, de que não se conservam vestígios.\nNesta catedral encontram-se os túmulos de Henrique de Borgonha e sua mulher, Teresa de Leão, os condes do Condado Portucalense, pais do rei D. Afonso Henriques.	\N	www.se-braga.pt	info@se-braga.pt, tmsb.educar@gmail.com	Monte do Bom Jesus 4715-056 Braga	8.25389671	41.3259697	\N	t	1387019634	t	\N	5	3	1
 3	Tesouro - Museu da Sé de Braga	As coleções do Tesouro-Museu da Sé de Braga (TMSB) testemunham, no seu conjunto, mais de XV séculos da história da Arte e da vida da Igreja em Braga. Em formação desde a sua fundação, em 1930, o TMSB acolhe um valioso espólio, constituído por coleções de cerâmica, escultura, medalhística, mobiliário, numismática, ourivesaria, pintura, têxtil.\nA Exposição Permanente, Raízes de Eternidade. Jesus Cristo – Uma Igreja, consagrada à arte sacra, permite, através dos diferentes núcleos, revisitar a vida de Jesus Cristo e a história da Igreja em Braga. Esta é contada tomando como referência alguns arcebispos, desde o século V até ao século XX. A narração é complementada com os núcleos dedicados à paramentaria e ourivesaria.	De 3ª feira a domingo\nEncerra à 2ª feira.\n09h00-12h30 | 14h00-17h30 (18h30 no Verão)	www.se-braga.pt/tesouro_museu.php	catedralbraga@hotmail.com,tmsb.educar@gmail.com	Tesouro-Museu da Sé de Braga\nR. D. Paio Mendes, s/n 4700-424 Braga	8.25389671	41.3259697	\N	t	1387019634	f	Adultos e crianças a partir dos 10 anos: 3 €\nCrianças de 6 a 10 anos: 50% de desconto\nCrianças e jovens integrados em visitas escolares e acompanhantes: 50% de desconto\nCrianças com menos de 6 anos: gratuito	6	3	1
+1	Bom Jesus	A Igreja do Bom Jesus foi desenhada pelo arquitecto Carlos Amarante, por encomenda do Arcebispo D. Gaspar de Bragança, para substituir uma primitiva igreja, mandada construir por D. Rodrigo de Moura Teles que se encontrava em ruínas. As obras começaram em 1 de Junho de 1784, tendo ficado concluídas em 1811.\r\nÉ um dos primeiros edifícios neoclássicos em Portugal, e a fachada é ladeada por duas torres e termina num frontão triangular.		www.estanciadobomjesus.com	geral@estanciadobomjesus.com	Monte do Bom Jesus 4715-056 Braga	8.22375298	41.331707	\N	t	1387019634	t		5	3	1
 \.
 
 
@@ -1500,7 +1500,7 @@ COPY attractions (id, name, description, schedule, site, email, address, latitud
 -- Name: attractions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('attractions_id_seq', 1, false);
+SELECT pg_catalog.setval('attractions_id_seq', 6, true);
 
 
 --
@@ -2138,10 +2138,6 @@ SELECT pg_catalog.setval('pack_types_id_seq', 1, false);
 --
 
 COPY photo_attractions (id, name, photo_file_name, photo_content_type, photo_file_size, photo_updated_at, description, attraction_id) FROM stdin;
-1	Bom Jesus	Bom_Jesus4.jpg	image/jpeg	135004	2013-12-16	bom jesus	1
-2	Bom Jesus	Bom_Jesus3.jpg	image/jpeg	508351	2013-12-16	Bom jesus	1
-3	Bom Jesus	Bom_Jesus2.jpg	image/jpeg	1413025	2013-12-16	Bom Jeus	1
-4	Bom Jesus	Bom_Jesus1.jpg	image/jpeg	8823454	2013-12-16	Bom Jesus	1
 \.
 
 
@@ -2334,6 +2330,7 @@ COPY users (id, email, username, encrypted_password, language_id, country_id, re
 10	7jpinheiro@gmail.com	jpinheiro	password	1	188	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 12	flavirrl@gmail.com	flavirrl	password	1	188	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 11	catarina.sofia2@gmail.com	cat	password	1	188	c4afb3fa33786175c54af6ef9f165dca96584738ab8e594842a35648d972b736	2013-12-15	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+15	katrinaoli@hotmail.com	\N	$2a$10$uGU4H8gYgn/EYSRv6kT86ug7zv7rzszVLFyJWHe8In0ACn5kBrgyK	2	\N	\N	\N	\N	4	2013-12-17	2013-12-17	127.0.0.1	127.0.0.1	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -2341,7 +2338,7 @@ COPY users (id, email, username, encrypted_password, language_id, country_id, re
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 15, true);
 
 
 --
