@@ -9,7 +9,7 @@ class ItineraryAttractionsController < ApplicationController
 
   # GET /itinerary_attractions/1
   # GET /itinerary_attractions/1.json
-  def show
+  def show4
   end
 
   # GET /itinerary_attractions/new
@@ -58,7 +58,7 @@ class ItineraryAttractionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to itinerary_attractions_url }
       format.json { head :no_content }
-    end
+    end    
   end
 
   private

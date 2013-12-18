@@ -16,7 +16,7 @@ class WebUserPack < ActiveRecord::Base
     validates :validity, presence:true
     validates :pack_type_id, presence:true
     validates :web_user_id, presence:true
-    has_many :services
-    has_many :web_users_packs
+    has_many :services, dependent: :destroy
+    has_many :web_users_packs, dependent: :destroy
     belongs_to :web_users_type
 end

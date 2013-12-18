@@ -10,6 +10,6 @@
 class Country < ActiveRecord::Base
     validates :name, presence:true
     validates :abv, presence:true
-    has_many :cities
-    has_many :mobile_users
+    has_many :cities, dependent: :destroy
+    has_many :mobile_users, dependent: :destroy
 end

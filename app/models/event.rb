@@ -35,10 +35,10 @@ class Event < ActiveRecord::Base
   validates :longitude, presence:false
   validates :startdate, presence:true
   validates :enddate, presence:true
-  has_many :rating_events
-	has_many :comment_events
-	has_many :photo_events
-	has_many :itenerary_events
+  has_many :rating_events, dependent: :destroy
+	has_many :comment_events, dependent: :destroy
+	has_many :photo_events, dependent: :destroy
+	has_many :itenerary_events, dependent: :destroy
 	belongs_to :event_type
 	belongs_to :web_user
 	belongs_to :city

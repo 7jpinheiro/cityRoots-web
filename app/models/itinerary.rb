@@ -12,11 +12,11 @@
 class Itinerary < ActiveRecord::Base
   validates :name, presence:true
   validates :description, presence:true
-	has_many :itinerary_attractions
-	has_many :itinerary_events
-	has_many :itinerary_services
-	has_many :ratting_itineraries
-	has_many :comment_itineraries
+	has_many :itinerary_attractions, dependent: :destroy
+	has_many :itinerary_events, dependent: :destroy
+	has_many :itinerary_services, dependent: :destroy
+	has_many :ratting_itineraries, dependent: :destroy
+	has_many :comment_itineraries, dependent: :destroy
 	belongs_to :itinerary_type
 	belongs_to :user
 end

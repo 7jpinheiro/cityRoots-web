@@ -9,5 +9,5 @@
 
 class ServiceType < ActiveRecord::Base
   validates :name, presence:true
-	has_many :services
+	has_many :services, dependent: :destroy
 end

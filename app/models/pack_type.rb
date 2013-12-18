@@ -13,5 +13,5 @@ class PackType < ActiveRecord::Base
     validates :name, presence:true
     validates :duration, presence:true
     validates :price, presence:true
-    has_many :web_users_packs	
+    has_many :web_users_packs, dependent: :destroy
 end

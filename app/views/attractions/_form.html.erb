@@ -12,7 +12,10 @@
 
 	<div class="well well-large clearfix">
 		<div class="page-header">
-	    	<h1><%= link_to @attraction.name, @attraction %></h1>
+			<% unless @attraction.name.nil? %>
+				<h1><%= link_to @attraction.name, @attraction %></h1>	
+			<% end %>
+	    	
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
@@ -78,10 +81,12 @@
 			<div class="col-md-6 ">
 	          	<div class="row" >
 	        		<div style="position:relative;">
-	        			<%= f.fields_for photo_attractions do |builder| %>
-        				    <%= render "photo_attraction_fields", :f => builder %>
+	        			<% if @attraction.photo_attractions.first.nil? %>
+		        			<%= f.fields_for :photo_attractions do |builder| %>
+	        				    <%= render "photo_attraction_fields", :f => builder %>
+							<% end %>
 						<% end %>	
-						<%= link_to_add_fields "Adicionar Foto", f, :photo_attractions %></p>
+						<%= link_to_add_fields "Nova Foto", f, :photo_attractions %></p>
 						&nbsp;
 						<span class='label label-info' id="upload-file-info"></span>
 					</div>
