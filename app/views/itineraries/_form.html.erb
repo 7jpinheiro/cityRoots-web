@@ -41,30 +41,7 @@
       <hr/>
       <strong>Pontos da Rota</strong>
       <div id="tt"></div>
-      <div class="row">
-        <div  class=" col-md-5">
-          <table class="table">
-            <tr>
-              <td style="border-top: none;">
-                <select name="combo" id="combo" class="form-control" OnBlur="gravar_ponto(this);" >
-                  <option value="0">Selecione um ponto de interesse</option>
-                  <%
-                     allatractions=Attraction.all
-                     allatractions.each do |attrac|
-                  %>
-                      <option value="<%= attrac.id  %>"><%= attrac.name %></option>
-                  <%
-                     end
-                  %>
-                </select>
-              </td>
-              <td style="border-top: none;">
-                <a class="btn btn-success" href="#" onmousedown="gravar_ponto($.document.getElementsByName('combo'));">Adicionar</a>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
+      <div></div>
       <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
       <br/>
       <div class="row">
@@ -77,30 +54,59 @@
         </div>
       </div>
     </form>
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script>
         var list_attrac=new Array();
+        var list_events=new Array();
+        var list_servic=new Array();
+        var obj=new Object();
 
-        function gravar_ponto(obj){
-            var tmp=new Object();
-            tmp["name"]=obj.options[obj.selectedIndex].text;
-            tmp["id"]=obj.options[obj.selectedIndex].value;
-            list_attrac.push(tmp);
+        function init(){
+            <%
+                allatractions=Attraction.all
+                allatractions.each do |attrac|%>
+                    list_attrac.push({'name':'<%= attrac.name%>','id':<%= attrac.id%>});
+                <%
+                end
+                allevents=Event.all
+                allevents.each do |event|%>
+                    list_events.push({'name':'<%= event.name%>','id':<%= event.id%>});
+                <%
+                end
+                allservices=Service.all
+                allservices.each do |service|%>
+                    list_servic.push({'name':'<%= service.name%>','id':<%= service.id%>});
+                <%
+                end
+        %>
+        }
+
+        function gravar_ponto(){
+            list_attrac.push(obj);
+            obj=new Object();
             update_list();
         }
 
         function update_list(){
-            alert("entrou"+list_attrac.length);
-            var htmlstr="<table class='table table-bordered'>";
-            var i=0;
-            for (i=0;i<list_attrac.length;i++){
-                alert("entoru"+i);
+            var htmlstr="<table class='table table-bordered' style='width: 75%;'>";
+            for (var i=0;i<list_attrac.length;i++){
                 var ob=list_attrac[i];
-                htmlstr+="<tr><td>"+ob["name"]+"</td><td>Ponto de interesse</td><td><a class='btn btn-danger' href='#'>Apagar</a></td></tr>";
+                htmlstr+="<tr><td>"+ob["name"]+"</td><td>Ponto de interesse</td><td><a class='btn btn-danger' onmousedown='delete_ponto("+ob['id']+");'>Apagar</a></td></tr>";
             }
             htmlstr+="</table>";
-            alert(htmlstr);
-            $.document.getElementById("tt").html(htmlstr).show();
+            $('#tt').html(htmlstr).show();
+        }
+
+        function delete_ponto(id){
+            var tmparray=new Array();
+            for (var i=0;i<list_attrac.length;i++){
+                var od=list_attrac[i];
+                if(od['id']!=id){
+                    tmparray.push(od);
+                }
+            }
+            list_attrac=tmparray;
+            update_list();
         }
     </script>
 <% end %>
