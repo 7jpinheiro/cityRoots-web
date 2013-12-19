@@ -7,9 +7,8 @@
           <title>CityRoots</title>
           <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
           <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-
           <!-- Bootstrap core CSS -->
-          <%= stylesheet_link_tag "bootstrap", "layout" %>
+          <%= stylesheet_link_tag "bootstrap.min", "font-awesome.min", "bootflat", "bootflat-extensions","bootflat-square", "layout" %>
           <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
           <!--[if lt IE 9]>
             <%= javascript_include_tag "html5shiv", "respond.min" %>
@@ -49,18 +48,18 @@
                 <ul class="nav navbar-nav navbar-right">
                   <% if user_signed_in?
                         if current_user.username != nil
-                  %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= current_user.username %>  <b class="caret"></b></a><%
+                  %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %>  <b class="caret"></b></a><%
                         else
-                          %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
+                          %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
                         end
                   %>
                       <ul class="dropdown-menu">
                        
-                        <li><a href="#"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Preferências</a></li>
+                        <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Preferências</a></li>
                         <li class="divider"></li>
                         <%= link_to destroy_user_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete do%>
-                          <i class=" glyphicon glyphicon-off"></i> Logout
+                          <i class=" fa fa-off"></i> Logout
                         <% end %>
                       </ul>
                     </li>
@@ -82,32 +81,32 @@
                 <div class="list-group sidebar">
                     <li class="<%= is_active?(attractions_path) %>">
                       <%= link_to attractions_path, :class=>"list-group-item" do %>
-                          <i class=" glyphicon glyphicon-tower"></i> Pontos
+                          <i class=" fa fa-tower"></i> Pontos
                       <% end %>
                     </li>
                     <li class="<%= is_active?(itineraries_path) %>">
                       <%= link_to itineraries_path, :class=>"list-group-item" do %>
-                          <i class=" glyphicon glyphicon-globe"></i> Rotas
+                          <i class=" fa fa-globe"></i> Rotas
                       <% end %>
                     </li>
                     <li class="<%= is_active?(events_path) %>">
                       <%= link_to events_path, :class=>"list-group-item"  do %>
-                        <i class=" glyphicon glyphicon-music"></i>Eventos
+                        <i class=" fa fa-music"></i>Eventos
                       <% end %>
                     </li>
                     <li class="<%= is_active?(services_path) %>">
                       <%= link_to services_path, :class=>"list-group-item"  do %>
-                        <i class=" glyphicon glyphicon-home"></i>Serviços
+                        <i class=" fa fa-home"></i>Serviços
                       <%end%>
                     </li>
                     <li class="<%= is_active?(services_path) %>">
                       <%= link_to services_path, :class=>"list-group-item " do %>
-                        <i class=" glyphicon glyphicon-signal"></i>Estatistica
+                        <i class=" fa fa-bar-chart-o"></i>Estatistica
                       <%end%>
                     </li>
                 </div>
               </div><!--/span-->
-              <div class="col-xs-12 col-sm-11" id="body-page">
+              <div class="col-xs-12 col-sm-11 col-sm-offset-1" id="body-page">
                 <div class="row">
                 <div class="center_body">                
                   <%= yield %>
@@ -181,7 +180,7 @@
           ================================================== -->
           <!-- Placed at the end of the document so the pages load faster -->
               <%= javascript_include_tag "application" %>
-          <%= javascript_include_tag "jquery", "bootstrap", "offcanvas" %>
+          <%= javascript_include_tag "bootstrap.min", "jquery-1.10.1.min","offcanvas" %>
       	</body>
 
       </html>
