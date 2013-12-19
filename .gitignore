@@ -24,3 +24,9 @@ doc/
 .DS_Store
 .idea
 .secret
+
+app/assets/.DS_Store
+
+app/.DS_Store
+
+app/assets/.DS_Store
