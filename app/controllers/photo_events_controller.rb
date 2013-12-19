@@ -14,6 +14,7 @@ class PhotoEventsController < ApplicationController
 
   # GET /photo_events/new
   def new
+    puts "$$$$$$$$$$$$$$ ENTRA NO NEW PHOTO EVENTS $$$$$$$$$$$$$$"
     @photo_event = PhotoEvent.new
   end
 
@@ -24,6 +25,7 @@ class PhotoEventsController < ApplicationController
   # POST /photo_events
   # POST /photo_events.json
   def create
+    puts "$$$$$$$$$$$$$$ ENTRA NO CREATE PHOTO EVENTS $$$$$$$$$$$$$$"
     @photo_event = PhotoEvent.new(photo_event_params)
 
     respond_to do |format|
@@ -40,6 +42,7 @@ class PhotoEventsController < ApplicationController
   # PATCH/PUT /photo_events/1
   # PATCH/PUT /photo_events/1.json
   def update
+    puts "$$$$$$$$$$$$$$ ENTRA NO UPDATE PHOTO EVENTS $$$$$$$$$$$$$$"
     respond_to do |format|
       if @photo_event.update(photo_event_params)
         format.html { redirect_to @photo_event, notice: 'Photo event was successfully updated.' }
@@ -69,6 +72,6 @@ class PhotoEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_event_params
-      params.require(:photo_event).permit(:url, :name, :description, :extension)
+      params.require(:photo_event).permit(:name, :description, :photo)
     end
 end

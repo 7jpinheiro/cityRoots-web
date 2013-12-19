@@ -55,6 +55,7 @@ class AttractionsController < ApplicationController
   # PATCH/PUT /attractions/1.json
   def update
     respond_to do |format|
+      puts "----------" + attraction_params.inspect + "----------"
       if @attraction.update(attraction_params)
         format.html { redirect_to @attraction, notice: 'Attraction was successfully updated.' }
         format.json { head :no_content }
@@ -87,8 +88,8 @@ class AttractionsController < ApplicationController
         :description, :schedule, :site, :email, 
         :address, :latitude, :longitude, :transport, 
         :reference_point, :active, :timestamp, :details, 
-        :price, :attraction_type_id, :city_id, :web_user_id, 
-        :photo_attraction_attributes => [:photo, :attraction_id ])
+        :price, :attraction_type_id, :city_id, :web_user_id,
+        photo_attractions_attributes: :photo)
     end
 
     def user_is_current_user

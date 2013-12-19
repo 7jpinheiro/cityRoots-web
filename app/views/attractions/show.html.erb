@@ -27,7 +27,11 @@
         %>
               <tr>
                 <th style="border-top: none;">Site</th>
-                <td style="border-top: none;"><%= @attraction.site %></td>
+                <td style="border-top: none;">
+                    <a href="http:\\<%= @attraction.site %>" target="_black" id="ex-link">
+                      <%= @attraction.site %>
+                    <a/>
+                </td>
               </tr>
         <%
            end

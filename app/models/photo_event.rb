@@ -13,4 +13,5 @@
 class PhotoEvent < ActiveRecord::Base
   validates :url, presence:true
 	belongs_to :event
+	has_attached_file :photo, :styles => { :medium => "250x250#", :thumb => "50x50#" }
 end

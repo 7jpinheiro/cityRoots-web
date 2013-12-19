@@ -9,14 +9,13 @@
 			</ul>
 		</div>
 	<% end %>
-
-	<div class="well well-large clearfix">
-		<div class="page-header">
+	<div class="page-header">
 			<% unless @attraction.name.nil? %>
 				<h1><%= link_to @attraction.name, @attraction %></h1>	
-			<% end %>
-	    	
-		</div>
+			<% end %>    	
+	</div>
+	<div class="well well-large clearfix">
+		
 		<div class="row">
 			<div class="col-sm-6">
 		      	<div class="row">
@@ -82,8 +81,9 @@
 	          	<div class="row" >
 	        		<div style="position:relative;">
 	        			<% if @attraction.photo_attractions.first.nil? %>
-		        			<%= f.fields_for :photo_attractions do |builder| %>
-	        				    <%= render "photo_attraction_fields", :f => builder %>
+	        			semantic_form_for
+		        			<%= f.fields_for :photo_attractions, :html => {:multipart => true} do |builder| %>
+	        				   <%= render "photo_attraction_fields", :f => builder %>
 							<% end %>
 						<% end %>	
 						<%= link_to_add_fields "Nova Foto", f, :photo_attractions %></p>

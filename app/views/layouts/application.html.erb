@@ -26,7 +26,10 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><i class=" glyphicon glyphicon-globe"></i> CityRoots</a>
+                <%= link_to welcome_index_path, :class => "navbar-brand" do%>
+                    <i class=" glyphicon glyphicon-globe"></i> CityRoots
+                <% end %>
+                
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -108,7 +111,7 @@
               <div class="col-xs-12 col-sm-11" id="body-page">
                 <div class="row">
                 <div class="center_body">                
-                  <%= csrf_meta_tag %>
+
                   <%= yield %>
                 </div>
                 </div> 
@@ -180,9 +183,6 @@
           ================================================== -->
           <!-- Placed at the end of the document so the pages load faster -->
               <%= javascript_include_tag "application" %>
-
-
-          <%= javascript_include_tag :defaults, :cache => true %>  
           <%= javascript_include_tag "jquery", "bootstrap", "offcanvas" %>
       	</body>
 
