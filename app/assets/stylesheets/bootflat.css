@@ -1507,7 +1507,7 @@ fieldset[disabled] .radio,
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-    background-color: #2986b9;
+    background-color: #727272;
     color:#fff;
 }
 .nav-pills .dropdown-toggle .caret,
