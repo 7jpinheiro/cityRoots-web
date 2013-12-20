@@ -25,7 +25,10 @@
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
         <span class="icon-bar"></span>
       </button>
-      <a href="index.html" class="navbar-brand"><%= image_tag "Index/logo_CR.png", :style=>"width: 20px;height: 20px;" %> CityRoots</a>
+      <span class="navbar-brand">
+        <%= image_tag "Index/logo_CR.png", :style=>"width: 20px;height: 20px;" %>
+        <%= link_to "CityRoots" , welcome_index_path , :style => "color:inherit;text-decoration:none;cursor:pointer;" %>
+      </span>
     </div>
     <nav class="collapse navbar-collapse bf-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -39,7 +42,14 @@
          if user_signed_in?
       %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Logout" , "#"  %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
+                <li><a href="/users/sign_up" style="color: #FFFFFF;"><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Perfil</a></li>
+                <li class="divider"></li>
+                <li><a href="/users/sign_up" style="color: #ffffff;"><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Perfil</a></li>
+              </ul>
+            </li>
           </ul>
       <%
          else
@@ -47,7 +57,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;background-color: #636363;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
+              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
                 <form accept-charset="UTF-8" action="/users/sign_in" class="new_user" id="new_user" method="post">
                   <input name="authenticity_token" type="hidden" value="FsNCc7Cw+HAGNqsnOLzRC5KfZwJb0duGe/CI0bMPa7w=" />
                   <li><input style="margin-left: 25px;margin-bottom:10px;width: 250px;" class="form-control form-control-square"  autofocus="autofocus" id="user_email" name="user[email]" type="email" placeholder="Email"></li>
@@ -56,9 +66,9 @@
                   <li><input style="margin-left: 25px;margin-right: 25px;width: 250px;"name="commit" type="submit" value="Login"  class="btn btn-info btn-block btn-s btn-square"></li>
                 </form>
                 <li class="divider"></li>
-                <li><%= link_to "Ainda não tem conta?",  do %><i class="fa fa-pencil-square-o"></i><% end %></li>
-                <li><a href="#"><i class="fa fa-facebook-square fa-fw"></i> <strong>Login by Facebook</strong></a></li>
-                <li><a href="#"><i class="fa fa-google-plus-square fa-fw"></i> <strong>Login by Google +</strong></a></li>
+                <li><a href="/users/sign_up" style="color: #FFFFFF;"><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar</a></li>
+                <li><a href="#" style="color: #3b5998;"><i class="fa fa-facebook-square fa-fw" style="margin-left: 5px;"></i> Login by Facebook</a></li>
+                <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
 
               </ul>
             </li>
