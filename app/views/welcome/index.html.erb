@@ -1,35 +1,13 @@
  <%= stylesheet_link_tag "pricing_table" %>
+<br/>
+<br/>
 <div class="row">
-    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="item active">
-                <%= image_tag "Index/douro.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/faro.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/lisboa.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                    <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-                <%= image_tag "Index/palacio.jpg" , { style: "text-align:center; vertical-align:middle; height:400px; width: 100%;" } %>
-                <div class="carousel-caption"></div>
-            </div>
-        </div>
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-               <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+  <div class="col-md-12">
+    <div class="container">
+      <%= image_tag 'Index/Logo.png' , :style => "width:300px;"%>
     </div>
+  </div>
 </div>
-<br/>
-<br/>
 <div class="container">
     <div class="page-header">
         <h1>Perfeito para comerciantes</h1>
@@ -65,7 +43,7 @@
                 </table>
             </div>
             <div class="panel-footer">
-              <%= link_to "Ver mais", pacotes_path , :class => "btn btn-primary" %>
+              <%= link_to "Ver mais", pacotes_path , :class => "btn btn-primary btn-square" %>
             </div>
         </div>
     </div>

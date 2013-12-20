@@ -1,8 +1,11 @@
 CityRootsWeb::Application.routes.draw do
+  get "mobile/index"
+  get "web/index"
   get "galeria/index"
   get "pacotes/index"
 
   devise_for :users
+
   devise_for :installs
 
   resources :web_users
@@ -74,6 +77,10 @@ CityRootsWeb::Application.routes.draw do
   resources :pacotes
 
   resources :welcome
+
+  resources :web
+
+  resources :mobile
   
   resources :countries
 
