@@ -97,22 +97,37 @@
      if user_signed_in?
   %>
       <div class="col-md-2">
-        <ul class="nav nav-pills-square nav-stacked">
-          <li style="background: #428bca;.nav>li.active>a>hover>backgound:#FFFFFF" class="active"><%= link_to "#",:style=>"color: #FFFFFF;" do
-          %><i class="fa fa-user"></i> Perfil<%
-          end%></li>
-          <li style="background: #428bca;"><%= link_to attractions_path,:style=>"color: #FFFFFF;" do
-          %><i class="fa fa-map-marker"></i> Pontos de interesse<%
-             end%></li>
-          <li style="background: #428bca;"><%= link_to events_path,:style=>"color: #FFFFFF;" do
-          %><i class="fa fa-group"></i> Eventos<%
-             end%></li>
-          <li style="background: #428bca;"><%= link_to services_path,:style=>"color: #FFFFFF;" do
-          %><i class="fa fa-cutlery"></i> Serviços<%
-             end%></li>
-          <li style="background: #428bca;"><%= link_to "#",:style=>"color: #FFFFFF;" do
-          %><i class="fa fa-bar-chart-o"></i> Estatisticas<%
-             end%></li>
+        <ul class="nav nav-pills nav-stacked nav-pills-square">
+          <li class="active">
+            <%= link_to "#" do
+            %><i class="fa fa-user"></i> Perfil<%
+            end%>
+          </li>
+          <li class="active">
+            <%= link_to attractions_path do
+            %><i class="fa fa-map-marker"></i> Pontos de Interesse<%
+             end%>
+          </li>
+          <li class="active">
+            <%= link_to events_path do
+            %><i class="fa fa-group"></i> Eventos<%
+             end%>
+          </li>
+          <li class="active">
+            <%= link_to itineraries_path do
+            %><i class="fa fa-road"></i> Rotas<%
+             end%>
+          </li>
+          <li class="active">
+            <%= link_to services_path do
+            %><i class="fa fa-cutlery"></i> Serviços<%
+             end%>
+          </li>
+          <li class="active">
+            <%= link_to "#" do
+            %><i class="fa fa-bar-chart-o"></i> Estatisticas<%
+             end%>
+          </li>
         </ul>
       </div>
       <div class="col-md-9" id="body-page">
