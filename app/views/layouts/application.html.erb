@@ -32,11 +32,28 @@
     </div>
     <nav class="collapse navbar-collapse bf-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Home" , welcome_index_path  %></li>
-        <li><%= link_to "Web" , web_index_path %></li>
-        <li><%= link_to "Mobile", mobile_index_path  %></li>
-        <li><%= link_to "Galeria", galeria_path  %></li>
-        <li><%= link_to "Contactos", contact_path %></li>
+
+        <%
+           if user_signed_in?
+        %>
+            <li><%= link_to "POIS" , attractions_path  %></li>
+            <li><%= link_to "Rotas" , itineraries_path  %></li>
+            <li><%= link_to "Eventos" , events_path  %></li>
+            <li><%= link_to "Gastronomia" , services_path  %></li>
+            <li><%= link_to "Cultura" , events_path  %></li>
+            <li><%= link_to "Actividades" , services_path  %></li>
+            <li><%= link_to "NightLife" , events_path  %></li>
+        <%
+            else
+           %>
+            <li><%= link_to "Home" , welcome_index_path  %></li>
+            <li><%= link_to "Web" , web_index_path %></li>
+            <li><%= link_to "Mobile", mobile_index_path  %></li>
+            <li><%= link_to "Galeria", galeria_path  %></li>
+            <li><%= link_to "Contactos", contact_path %></li>
+            <%
+           end
+        %>
       </ul>
       <%
          if user_signed_in?
@@ -76,7 +93,7 @@
                     <li><%= f.submit "Login" , :style=>"margin-left: 25px;margin-right: 25px;width: 250px;", :class=>"btn btn-s btn-info btn-square" %></li>
                 <% end %>
                 <li class="divider"></li>
-                <li><a href="/users/sign_up" style="color: #FFFFFF;"><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar</a></li>
+                <li><%= link_to new_user_registration_path ,:style=>"color: #FFFFFF;" do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
                 <li><a href="#" style="color: #3b5998;"><i class="fa fa-facebook-square fa-fw" style="margin-left: 5px;"></i> Login by Facebook</a></li>
                 <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
 
@@ -93,66 +110,15 @@
 <br/>
 <br/>
 <div class="row">
-  <%
-     if user_signed_in?
-  %>
-      <div class="col-md-2">
-        <ul class="nav nav-pills nav-stacked nav-pills-square">
-          <li class="active">
-            <%= link_to "#" do
-            %><i class="fa fa-user"></i> Perfil<%
-            end%>
-          </li>
-          <li class="active">
-            <%= link_to attractions_path do
-            %><i class="fa fa-map-marker"></i> Pontos de Interesse<%
-             end%>
-          </li>
-          <li class="active">
-            <%= link_to events_path do
-            %><i class="fa fa-group"></i> Eventos<%
-             end%>
-          </li>
-          <li class="active">
-            <%= link_to itineraries_path do
-            %><i class="fa fa-road"></i> Rotas<%
-             end%>
-          </li>
-          <li class="active">
-            <%= link_to services_path do
-            %><i class="fa fa-cutlery"></i> Serviços<%
-             end%>
-          </li>
-          <li class="active">
-            <%= link_to "#" do
-            %><i class="fa fa-bar-chart-o"></i> Estatisticas<%
-             end%>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-9" id="body-page">
-        <div class="row">
-          <div class="center_body">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-  <%
-     else
-  %>
-      <div class="col-md-1">
-      </div>
-      <div class="col-md-10" id="body-page">
-          <div class="center_body">
-            <%= yield %>
-          </div>
-      </div>
-      <div class="col-md-1">
-      </div>
-  <%
-     end
-  %>
-
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10" id="body-page">
+    <div class="center_body">
+      <%= yield %>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
 </div><!--/row-->
 <hr/>
 <!--
