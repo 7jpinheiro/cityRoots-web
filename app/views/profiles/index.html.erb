@@ -29,10 +29,9 @@
     <hr/>
     <br/>
       <%
-         user=WebUser.where("id=?",current_user.id).first
-         tipo=user.web_user_type.name
+
       %>
-      <strong>Gestão de conteudos da sua entidade do tipo <%= tipo %></strong>
+      <strong>Gestão de conteudos da sua entidade</strong>
       <%
          webuser=WebUser.where("id=?",current_user.id).first;
          if webuser == nil
@@ -50,7 +49,7 @@
             <dt>Os seus POIS <span class="badge badge-danger badge-square"><%= n_attra%></span></dt>
             <dd><%= link_to "Novo Ponto de interrese" , new_attraction_path %></dd>
             <dt>Os seus Eventos <span class="badge badge-danger badge-square"><%= n_evets%></span></dt>
-            <dd><%= link_to "Novo Evento" , new_event_path %></dd>
+            <dd><%= link_to "Novo Evento" , new_event_translation_path %></dd>
             <dt>As suas Rota <span class="badge badge-danger badge-square"><%= n_rotas%></span></dt>
             <dd><%= link_to "Novo Rota" , new_itinerary_path %></dd>
             <dt>Os seus Serviços <span class="badge badge-danger badge-square"><%= n_servicos%></span></dt>

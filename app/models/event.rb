@@ -43,9 +43,11 @@ class Event < ActiveRecord::Base
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy
 	has_many :photo_events, dependent: :destroy
-	has_many :itenerary_events, dependent: :destroy
+	has_many :itinerary_events, dependent: :destroy
+  has_many :event_translations, dependent: :destroy
 	belongs_to :event_type
 	belongs_to :web_user
 	belongs_to :city
+  accepts_nested_attributes_for :event_translations
   accepts_nested_attributes_for :photo_events, :reject_if => lambda { |t| t['photo_event'].nil? }, :allow_destroy => true
 end

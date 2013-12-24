@@ -1,4 +1,6 @@
 CityRootsWeb::Application.routes.draw do
+  resources :types
+
   resources :event_translations
 
   resources :wevent_translations

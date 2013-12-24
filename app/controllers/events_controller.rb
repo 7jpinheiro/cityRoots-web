@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   def new
     add_crumb "Novo", ""
     @event = Event.new
+    @event_translation=EventTranslation.new
 
   end
 
@@ -26,16 +27,23 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    print event_params
-    @event = Event.new(event_params)
+    @event_trans = EventTranslation.new
+    @event = Event.new
+    parametros=Hash.new(event_params)
+    puts "A minha resposta\n\n\n"
+    puts parametros
+    puts "\n\n\n"
+    puts event_params.inspect
+    puts "\n\n\n"
+
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    #  if @event.save
+    #    format.html { redirect_to @event, notice: 'Event was successfully created.' }
+    #    format.json { render action: 'show', status: :created, location: @event }
+    #  else
+    #    format.html { render action: 'new' }
+    #    format.json { render json: @event.errors, status: :unprocessable_entity }
+    #  end
     end
   end
 
@@ -72,7 +80,25 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(:name, :description, :schedule, :site, :email, :address, :transport, :active, :timestamp, :startdate, :longitude, :latitude, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id,
-         photo_events_attributes: :photo)
+      params.require(:event).permit(
+          :site,
+          :email,
+          :address,
+          :latitude,
+          :longitude,
+          :startdate,
+          :enddate,
+          :organization,
+          :price,
+          :program,
+          :rating,
+          :accessibility,
+          :city_id,
+          :event_type,
+          :event_translation,
+          :timestamp,
+          :active,
+          :web_user_id
+      )
     end
 end

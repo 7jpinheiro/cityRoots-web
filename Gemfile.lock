@@ -145,6 +145,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-fileupload-rails
   jquery-rails
+  json
   paperclip (~> 3.0)
   pg
   rabl
