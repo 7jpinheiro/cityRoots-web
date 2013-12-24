@@ -1,0 +1,81 @@
+<%
+   user=User.where("id=?",current_user.id).first;
+   pais=Country.where("id=?",user.country_id).first;
+   paisid=pais.name;
+   #lang=Language.where("id=?",user.language.name).first;
+   #ling=lang.name;
+%>
+<h3>Bem vindo <%= user.username%></h3>
+<br/>
+<div class="row">
+  <div class="col-md-5">
+      <br/>
+      <strong> As suas informações</strong>
+      <dl class="dl-horizontal">
+        <dt>Username</dt>
+        <dd><%= user.username%></dd>
+        <dt>Email</dt>
+        <dd><%= user.email%></dd>
+        <dt>Linguagem</dt>
+        <dd><%= user.language.name%></dd>
+        <dt>País</dt>
+        <dd><%= paisid%></dd>
+      </dl>
+      <%= link_to edit_user_registration_path, :class=>"btn btn-primary btn-square" do
+      %><i class="fa fa-edit"></i> Editar<%
+       end
+    %>
+    <br/>
+    <hr/>
+    <br/>
+      <%
+         user=WebUser.where("id=?",current_user.id).first
+         tipo=user.web_user_type.name
+      %>
+      <strong>Gestão de conteudos da sua entidade do tipo <%= tipo %></strong>
+      <%
+         webuser=WebUser.where("id=?",current_user.id).first;
+         if webuser == nil
+      %>
+          <p class="text text-warning">Para poder adicionar eventos tem de adicionar conteudo a sua conta. </p>
+          <%= link_to "Adicionar conteudo", new_web_user_path ,:class=>"btn btn-primary btn-square" %>
+      <%
+         else
+           n_evets=Event.find_all_by_web_user_id(current_user.id).length
+           n_attra=Attraction.find_all_by_web_user_id(current_user.id).length
+           n_rotas=Itinerary.find_all_by_user_id(current_user.id).length
+           n_servicos=Service.find_all_by_web_user_id(current_user.id).length
+      %>
+          <dl class="dl-horizontal">
+            <dt>Os seus POIS <span class="badge badge-danger badge-square"><%= n_attra%></span></dt>
+            <dd><%= link_to "Novo Ponto de interrese" , new_attraction_path %></dd>
+            <dt>Os seus Eventos <span class="badge badge-danger badge-square"><%= n_evets%></span></dt>
+            <dd><%= link_to "Novo Evento" , new_event_path %></dd>
+            <dt>As suas Rota <span class="badge badge-danger badge-square"><%= n_rotas%></span></dt>
+            <dd><%= link_to "Novo Rota" , new_itinerary_path %></dd>
+            <dt>Os seus Serviços <span class="badge badge-danger badge-square"><%= n_servicos%></span></dt>
+            <dd><%= link_to "Novo Serviço" , new_service_path %></dd>
+          </dl>
+      <%  end
+      %>
+      </div>
+  <div class="col-md-6">
+      <br/>
+      <p>
+        <strong>Os seus pacotes</strong>
+      <p class="text-muted">
+        Estes pacotes têm a intenção de promover o seu negocio assim como os seus eventos, pontos de interesse ou seguintes.
+      </p>
+      </p>
+      <table class="table table-bordered">
+        <tr>
+          <th>Tipo</th>
+          <th>Data compra</th>
+          <th>Data de Expiração</th>
+        </tr>
+      </table>
+      <p>
+        <%= link_to "Ver mais pacotes", pacotes_path , :class => "btn btn-primary btn-square"%>
+      </p>
+  </div>
+</div>
