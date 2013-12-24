@@ -25,16 +25,21 @@
 #
 
 class Event < ActiveRecord::Base
-  validates :name, presence:true ,length: {minimum: 2}
-  validates :description, presence:true, length: {minimum: 5}
-  validates :email, presence: true , length: {minimum: 2}
   validates :site, presence: false
+  validates :email, presence: true , length: {minimum: 2}
   validates :address, presence: true, length: {minimum: 5}
-  validates :price , presence: false
   validates :latitude, presence:false
   validates :longitude, presence:false
   validates :startdate, presence:true
   validates :enddate, presence:true
+  validates :organization , presence: false
+  validates :price , presence: false
+  validates :program, presence:true ,length: {minimum: 2}
+  validates :rating, presence:true, length: {minimum: 5}
+
+
+
+
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy
 	has_many :photo_events, dependent: :destroy

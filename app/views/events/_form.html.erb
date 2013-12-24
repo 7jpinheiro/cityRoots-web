@@ -26,7 +26,7 @@
       <div class="form-group">
         <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Festa de S.João" %>
+          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control form-control-square", :placeholder=>"Festa de S.João" %>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <div class="form-group">
         <%= f.label "Descrição" ,:for=>"descricao" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
+          <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       <div class="form-group">
         <%= f.label "Horário" ,:for=>"horario" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :schedule ,:id=>"horario" , :class=>"form-control", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
+          <%= f.text_field :schedule ,:id=>"horario" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
       <div class="form-group">
         <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :email ,:id=>"email" , :class=>"form-control", :placeholder=>"email@festasaojoao.pt" %>
+          <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@festasaojoao.pt" %>
         </div>
       </div>
     </div>
@@ -80,10 +80,10 @@
       <div class="form-group">
         <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-3">
-          <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control", :placeholder=>"41.32217"%>
+          <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
         </div>
         <div class="col-sm-3">
-          <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control", :placeholder=>"-8.493226"%>
+          <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
       <div class="form-group">
         <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control", :placeholder=>"Autocarros a partir das 15:00"%>
+          <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Autocarros a partir das 15:00"%>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
       <div class="form-group">
         <%= f.label "Data de inicio" ,:for=>"startdate" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control" , :type=> "date"%>
+          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control form-control-square" , :type=> "date"%>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
       <div class="form-group">
         <%= f.label "Data de fim" ,:for=>"enddate" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-           <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control" , :type=> "date"%>
+           <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control form-control-square" , :type=> "date"%>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
       <div class="form-group">
         <%= f.label "Organização" ,:for=>"organization" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control" , :placeholder=>"Camara de Braga"%>
+          <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control form-control-square" , :placeholder=>"Camara de Braga"%>
         </div>
       </div>
     </div>
@@ -129,7 +129,7 @@
         <%= f.label "Preço" ,:for=>"price" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
           <div class="input-group">
-            <%= f.text_field :price ,:id=>"price" , :class=>"form-control" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
+            <%= f.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
             <span class="input-group-addon">€</span>
           </div>
         </div>
@@ -140,7 +140,7 @@
       <div class="form-group">
         <%= f.label "Programação" ,:for=>"program" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :program ,:id=>"program" , :class=>"form-control" , :placeholder=>"15 horas Abertura oficial"%>
+          <%= f.text_field :program ,:id=>"program" , :class=>"form-control form-control-square" , :placeholder=>"15 horas Abertura oficial"%>
         </div>
       </div>
     </div>
@@ -156,14 +156,18 @@
     <br/>
     <!-- Value by sustem-->
     <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-    <%= f.text_field :city_id ,:id=>"city_id", :value=>1 , :hidden=>"hidden" %>
+    <%
+        users=WebUser.where("id=?",current_user.id).first;
+        cityid=users.city_id;
+    %>
+    <%= f.text_field :city_id ,:id=>"city_id", :value=>cityid , :hidden=>"hidden" %>
     <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
-    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
+    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
     <br/>
     <div class="row">
       <div class="form-group">
         <div class="col-sm-6">
-          <%= f.submit :class=>"btn btn-primary" %>
+          <%= f.submit :class=>"btn btn-primary btn-square" %>
         </div>
         <br/>
         <br/>

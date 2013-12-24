@@ -36,13 +36,11 @@
         <%
            if user_signed_in?
         %>
-            <li><%= link_to "POIS" , attractions_path  %></li>
-            <li><%= link_to "Rotas" , itineraries_path  %></li>
+            <li><%= link_to "Perfil" , profiles_index_path  %></li>
+            <li><%= link_to "Pontos de interesse" , attractions_path  %></li>
             <li><%= link_to "Eventos" , events_path  %></li>
-            <li><%= link_to "Gastronomia" , services_path  %></li>
-            <li><%= link_to "Cultura" , events_path  %></li>
-            <li><%= link_to "Actividades" , services_path  %></li>
-            <li><%= link_to "NightLife" , events_path  %></li>
+            <li><%= link_to "Rotas" , itineraries_path  %></li>
+            <li><%= link_to "Serviços" , services_path  %></li>
         <%
             else
            %>
@@ -67,7 +65,13 @@
             %><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
                end%>
               <ul class="dropdown-menu dropdown-menu-square" style="width:200px;background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
-                <li><a href="/users/sign_up" style="color: #FFFFFF;"><i class="fa fa-cogs" style="margin-left: 8px;"></i> Perfil</a></li>
+                <li>
+                  <%= link_to profiles_index_path , :style=>"color: #FFFFFF;" do
+                  %>
+                    <i class="fa fa-cogs"></i> Perfil
+                  <%
+                  end%>
+                </li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to destroy_install_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete, :style=>"color: #FFFFFF;" do%>

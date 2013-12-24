@@ -1,4 +1,11 @@
 CityRootsWeb::Application.routes.draw do
+  resources :event_translations
+
+  resources :wevent_translations
+
+  resources :web_user_types
+
+  get "profiles/index"
   get "mobile/index"
   get "web/index"
   get "galeria/index"
@@ -84,6 +91,8 @@ CityRootsWeb::Application.routes.draw do
   
   resources :countries
 
+  resource :profiles
+
   devise_for :users
   
   # The priority is based upon order of creation: first created -> highest priority.
@@ -92,7 +101,7 @@ CityRootsWeb::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root to:'welcome#index'
 
-    match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact_create', :via => :post
   # Example of regular route:
 

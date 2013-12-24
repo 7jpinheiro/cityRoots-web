@@ -10,40 +10,54 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :enterprisename %><br>
-    <%= f.text_field :enterprisename %>
-  </div>
-  <div class="field">
-    <%= f.label :obs %><br>
-    <%= f.text_field :obs %>
-  </div>
-  <div class="field">
-    <%= f.label :nif %><br>
-    <%= f.number_field :nif %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active %>
-  </div>
-  <div class="field">
-    <%= f.label :web_user_type_id %><br>
-    <%= f.number_field :web_user_type_id %>
-  </div>
-  <div class="field">
-    <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <form role="form" class="form-horizontal">
+      <div class="row">
+        <%= f.text_field :id ,:id=>"nome" ,:type=>"hidden" , :value=>current_user.id %>
+        <%= f.text_field :active ,:id=>"active" ,:type=>"hidden" , :value=>"1" %>
+        <div class="form-group">
+          <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control form-control-square", :placeholder=>"Nome da sua empresa" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Nif." ,:for=>"nif" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :nif ,:id=>"nif" , :class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"A sua Morada" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Tipo" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Cidade" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div><%= f.submit "Guardar" , :class=>"btn btn-primary btn-block btn-square" , :style=>"width:100px;" %></div>
+    </form>
 <% end %>

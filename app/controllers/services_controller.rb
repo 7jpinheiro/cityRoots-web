@@ -69,6 +69,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :description, :schedule, :site, :email, :address, :coord, :transport, :reference_point, :active, :timestamp, :capacity, :details, :service_type_id, :city_id, :web_user_id)
+      params.require(:service).permit(:name, :description, :schedule, :site, :email, :address, :latitude, :transport, :reference_point, :active, :timestamp, :capacity, :details, :service_type_id, :city_id, :web_user_id)
     end
 end

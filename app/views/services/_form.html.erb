@@ -1,141 +1,145 @@
 <%= form_for(@service) do |f| %>
-  <% if @service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+    <% if @service.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
 
-      <ul>
-      <% @service.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @service.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <form role="form" class="form-horizontal">
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Restaurante Zé da Esquina" %>
+    <form role="form" class="form-horizontal">
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control form-control-square", :placeholder=>"Restaurante Zé da Esquina" %>
+          </div>
         </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control", :placeholder=>"Restaurante na esquina com optimos grelhados", :style=>"height:135px;" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :schedule ,:id=>"schedule" , :class=>"form-control", :placeholder=>"Aberto das 9:00 as 19:00" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :site ,:id=>"site" , :class=>"form-control", :placeholder=>"www.esquinadoze.pt" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :email ,:id=>"email" , :class=>"form-control", :placeholder=>"reservas@esquinadoze.pt" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :address ,:id=>"address" , :class=>"form-control", :placeholder=>"Esquina da Avenida Central" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-3">
-          <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control", :placeholder=>"41.32217"%>
-        </div>
-        <div class="col-sm-3">
-          <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control", :placeholder=>"-8.493226"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Morada" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control", :placeholder=>"Autocarro nº207" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Referências Geográficas" ,:for=>"reference_point" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :reference_point ,:id=>"reference_point" , :class=>"form-control", :placeholder=>"Perto da bomba da Galp" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Capacidade" ,:for=>"capacity" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :capacity ,:id=>"capacity" , :class=>"form-control", :placeholder=>"Capacidade para 50 pessoas" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Capacidade" ,:for=>"details" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :details ,:id=>"details" , :class=>"form-control", :placeholder=>"Detalhes extras..." %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Tipo de Evento" ,:for=>"service_type" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.collection_select( :service_type_id, ServiceType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
-        </div>
-      </div>
-    </div>
-    <!-- Value by sustem-->
-    <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-    <%= f.text_field :city_id ,:id=>"city_id", :value=>3 , :hidden=>"hidden" %>
-    <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
-    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <div class="col-sm-6">
-          <%= f.submit :class=>"btn btn-primary" %>
       </div>
       <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control form-control-square", :placeholder=>"Restaurante na esquina com optimos grelhados", :style=>"height:135px;" %>
+          </div>
+        </div>
+      </div>
       <br/>
-    </div>
-  </form>
-  <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Aberto das 9:00 as 19:00" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :site ,:id=>"site" , :class=>"form-control form-control-square", :placeholder=>"www.esquinadoze.pt" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"reservas@esquinadoze.pt" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"Esquina da Avenida Central" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-3">
+            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
+          </div>
+          <div class="col-sm-3">
+            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Autocarro nº207" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Referências Geográficas" ,:for=>"reference_point" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :reference_point ,:id=>"reference_point" , :class=>"form-control form-control-square", :placeholder=>"Perto da bomba da Galp" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Capacidade" ,:for=>"capacity" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :capacity ,:id=>"capacity" , :class=>"form-control form-control-square", :placeholder=>"Capacidade para 50 pessoas" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Detalhes" ,:for=>"details" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.text_field :details ,:id=>"details" , :class=>"form-control form-control-square", :placeholder=>"Detalhes extras..." %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <%= f.label "Tipo de Serviço" ,:for=>"service_type" , :class=>"col-sm-1 control-label" %>
+          <div class="col-sm-6">
+            <%= f.collection_select( :service_type_id, ServiceType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          </div>
+        </div>
+      </div>
+      <!-- Value by sustem-->
+      <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
+      <%
+         user=WebUser.where("id=?",current_user.id).first
+      %>
+      <%= f.text_field :city_id ,:id=>"city_id", :value=> user.city_id, :hidden=>"hidden" %>
+      <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
+      <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <div class="col-sm-6">
+            <%= f.submit :class=>"btn btn-primary btn-square" %>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </form>
+    <br/>
 <% end %>

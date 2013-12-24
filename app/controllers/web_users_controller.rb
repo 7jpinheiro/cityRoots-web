@@ -69,6 +69,6 @@ class WebUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def web_user_params
-      params.require(:web_user).permit(:name, :enterprisename, :obs, :nif, :address, :active, :web_user_type_id, :city_id)
+      params.require(:web_user).permit(:name, :id, :nif, :address, :active, :web_user_type_id, :city_id)
     end
 end
