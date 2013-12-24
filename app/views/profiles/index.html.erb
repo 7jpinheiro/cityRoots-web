@@ -46,13 +46,21 @@
            n_servicos=Service.find_all_by_web_user_id(current_user.id).length
       %>
           <dl class="dl-horizontal">
-            <dt>Os seus POIS <span class="badge badge-danger badge-square"><%= n_attra%></span></dt>
+            <dt>Os seus POIS
+              <%= link_to attractions_path do %><span class="badge badge-danger badge-square"><%= n_attra%></span><% end %>
+            </dt>
             <dd><%= link_to "Novo Ponto de interrese" , new_attraction_path %></dd>
-            <dt>Os seus Eventos <span class="badge badge-danger badge-square"><%= n_evets%></span></dt>
+            <dt>Os seus Eventos
+              <%= link_to events_path do %><span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
+            </dt>
             <dd><%= link_to "Novo Evento" , new_event_translation_path %></dd>
-            <dt>As suas Rota <span class="badge badge-danger badge-square"><%= n_rotas%></span></dt>
+            <dt>As suas Rota
+              <%= link_to itineraries_path do %><span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
+            </dt>
             <dd><%= link_to "Novo Rota" , new_itinerary_path %></dd>
-            <dt>Os seus Serviços <span class="badge badge-danger badge-square"><%= n_servicos%></span></dt>
+            <dt>Os seus Serviços
+              <%= link_to services_path do %><span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+            </dt>
             <dd><%= link_to "Novo Serviço" , new_service_path %></dd>
           </dl>
       <%  end

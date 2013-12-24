@@ -79,7 +79,9 @@ CityRootsWeb::Application.routes.draw do
 
   resources :services
 
-  resources :events
+  resources :events do
+    resource :event_translations
+  end
 
   resources :galeria
 

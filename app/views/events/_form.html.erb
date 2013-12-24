@@ -1,4 +1,4 @@
-<%= form_for([@event,@event_translation]) do |f| %>
+<%= form_for(@event) do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -22,40 +22,53 @@
             &nbsp;
             <span class='label label-info' id="upload-file-info"></span>
           </div>
-        <%= fields_for :event_translation do |e| %>
+        <%= f.fields_for :event_translations do |e| %>
             <div class="row">
               <div class="form-group">
-                <%= e.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
+                <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
                 <div class="col-sm-6">
-                  <%= e.text_field :name ,:id=>"name" , :class=>"form-control", :placeholder=>"Festa de S.João" %>
+                  <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Festa de S.João" %>
                 </div>
               </div>
             </div>
             <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= e.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= e.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <%
+           lang=Language.where("id=?",current_user.language_id).first
+        %>
+        <%= e.text_field :language , :type=>"hidden" , :value=>lang.name%>
         <% end %>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Descrição" ,:for=>"descricao" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <textarea name="descricao" class="form-control form-control-square" placeholder="Festa muito popular em Braga" style="height:135px;"></textarea>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Horário" ,:for=>"horario" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <input type="text" name="horario"  class="form-control form-control-square" placeholder="Segunda a Sexta das 10:00 as 21:00"/>
-        </div>
-      </div>
-    </div>
-    <br/>
     <div class="row">
       <div class="form-group">
         <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_field :site ,:id=>"site" , :class=>"form-control", :placeholder=>"www.festasaojoao.pt" %>
+          <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.festasaojoao.pt" %>
         </div>
       </div>
     </div>
@@ -73,7 +86,7 @@
       <div class="form-group">
         <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= f.text_area :address ,:id=>"morada" , :class=>"form-control", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
+          <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
         </div>
       </div>
     </div>
@@ -86,15 +99,6 @@
         </div>
         <div class="col-sm-3">
           <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <input type="text" name="transporte"  class="form-control form-control-square" placeholder="Autocarros a partir das 15:00"/>
         </div>
       </div>
     </div>
@@ -149,13 +153,26 @@
     <br/>
     <div class="row">
       <div class="form-group">
-        <%= f.label "Tipo de Evento" ,:for=>"event_type" , :class=>"col-sm-1 control-label" %>
+        <label class="col-sm-1 control-label"><i class="fa fa-wheelchair"></i></label>
         <div class="col-sm-6">
-          <%= f.collection_select( :event_type, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
         </div>
       </div>
     </div>
     <br/>
+    <%= fields_for :event_types do |type| %>
+    <div class="row">
+      <div class="form-group">
+        <%= type.label "Tipo de Evento" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
+        <div class="col-sm-6">
+          <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+        </div>
+      </div>
+    </div>
+    <br/>
+        <%
+        end
+        %>
     <!-- Value by sustem-->
     <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
     <%

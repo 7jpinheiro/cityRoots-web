@@ -1,10 +1,13 @@
 <h1>Lista dos seus eventos Eventos</h1>
+<%= csrf_meta_tags %>
 <br>
 <%= link_to 'Novo Evento', new_event_path, :class=>"btn btn-primary btn-square" %>
 <br>
 <%
     @events=Event.where("web_user_id=?",current_user.id);
     @events.each do |event|
+
+        trans=EventTranslation.where("event_id=?",event.id).first
 %>
 <br/>
 <div class="col-md-12">
@@ -17,27 +20,23 @@
       <div class="col-xs-9 col-md-9 section-box">
         <div class="row">
           <div class="col-md-8">
-            <h4><strong><%= link_to event.name, event %></strong></h4>
+           <h4><strong><%= link_to trans.name, event %></strong></h4>
           </div>
           <div  class="col-md-4 text-right" style="min-height:30px">
             <%= link_to edit_event_path(event) do %>
             <span class="fa fa-edit"> </span>Editar
             <% end %>
             <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-            <span class="fa fa-trash-o"></span>Remover
+             <span class="fa fa-trash-o"></span>Remover
             <% end %>
           </div>
         </div>
         <div >
           <p>
-            <b>Categoria: </b><%= event.event_type_id %><br/>
             <b>Preço:</b><%= event.price %><br/>
-            <b>Descrição: </b>
-            <%= truncate event.description, length: 300 %>
-            <%= link_to 'Ler mais', event %><br/>
           </p>
           <p>
-              <b>Horário: </b><%= event.schedule %><br/>
+              <b>Categoria:</b><br/>
               <b>Data inicio:</b><%= event.startdate %> <br/>
               <b>Data fecho:</b><%= event.enddate %> <br/>
             </p>
@@ -45,7 +44,7 @@
           <div class="row rating-desc">
             <div class="col-md-12">
               <span class="fa fa-star"/><span class="fa fa-star"/><span class="fa fa-star"/><span class="fa fa-star-half-full"/><span class="fa fa-star-o"/>(36)<span class="separator">|</span>
-              <span class="fa fa-comment"></span>(<%= event.comment_events.size %> Comments)
+
             </div>
           </div>
         </div>

@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   validates :organization , presence: false
   validates :price , presence: false
   validates :program, presence:true ,length: {minimum: 2}
-  validates :rating, presence:true, length: {minimum: 5}
+  validates :rating, presence: false
 
 
 
@@ -45,9 +45,10 @@ class Event < ActiveRecord::Base
 	has_many :photo_events, dependent: :destroy
 	has_many :itinerary_events, dependent: :destroy
   has_many :event_translations, dependent: :destroy
-	belongs_to :event_type
+	has_many :event_types , dependent: :destroy
 	belongs_to :web_user
 	belongs_to :city
+  accepts_nested_attributes_for :event_types
   accepts_nested_attributes_for :event_translations
   accepts_nested_attributes_for :photo_events, :reject_if => lambda { |t| t['photo_event'].nil? }, :allow_destroy => true
 end

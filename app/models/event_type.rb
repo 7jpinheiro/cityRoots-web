@@ -8,6 +8,6 @@
 #
 
 class EventType < ActiveRecord::Base
-	has_many :events, dependent: :destroy
-  has_many :types , dependent: :destroy
+	belongs_to :events
+  belongs_to :types
 end

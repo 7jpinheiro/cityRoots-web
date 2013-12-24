@@ -1,5 +1,9 @@
+<%
+    trans=EventTranslation.where("event_id=?",@event.id).first
+
+%>
 <div class="page-header">
-  <h1><%= @event.name %></h1>
+  <h1><%= trans.name %></h1>
 </div>
 <div class="col-md-12">
   <div class="well well-sm">
@@ -15,11 +19,11 @@
               </tr>
           <%
              end
-             if @event.schedule != nil
+             if trans.schedule != nil
           %>
               <tr>
                 <th style="border-top: none;">Horário</th>
-                <td style="border-top: none;"><%= @event.schedule %></td>
+                <td style="border-top: none;"><%= trans.schedule %></td>
               </tr>
           <%
              end
@@ -39,11 +43,11 @@
               </tr>
           <%
              end
-             if @event.transport != nil
+             if trans.transport != nil
           %>
               <tr>
                 <th style="border-top: none;">Transporte</th>
-                <td style="border-top: none;"><%= @event.transport %></td>
+                <td style="border-top: none;"><%= trans.transport %></td>
               </tr>
           <%
              end
@@ -71,17 +75,7 @@
               </tr>
           <%
              end
-             if @event.event_type_id != nil
-               id=@event.event_type_id
-               event_tipo=EventType.where(["id = ?", id ]).first
-               evento=event_tipo.name;
-          %>
-              <tr>
-                <th style="border-top: none;">Tipo</th>
-                <td style="border-top: none;"><%= evento %></td>
-              </tr>
-          <%
-             end
+
              if @event.program != nil
           %>
               <tr>
@@ -90,11 +84,11 @@
               </tr>
           <%
              end
-             if @event.description != nil
+             if trans.description != nil
           %>
               <tr>
                 <th style="border-top: none;">Descrição</th>
-                <td style="border-top: none;text-align:justify;"><%= @event.description %></td>
+                <td style="border-top: none;text-align:justify;"><%= trans.description %></td>
               </tr>
           <%
              end
@@ -138,8 +132,8 @@
     <br>
     <table class="table">
       <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', events_path ,:class => "btn btn-default"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_event_path(@event),:class => "btn btn-primary" %></td>
+        <td style="border-top: none;"><%= link_to 'Voltar', events_path ,:class => "btn btn-default btn-square"%></td>
+        <td style="border-top: none;"><%= link_to 'Editar', edit_event_path(@event),:class => "btn btn-primary btn-square" %></td>
       </tr>
     </table>
   </div>

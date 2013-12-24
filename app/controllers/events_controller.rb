@@ -16,7 +16,8 @@ class EventsController < ApplicationController
   def new
     add_crumb "Novo", ""
     @event = Event.new
-    @event_translation=EventTranslation.new
+    1.times{@event.event_translations.build}
+    1.times{@event.event_types.build}
 
   end
 
@@ -27,23 +28,15 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event_trans = EventTranslation.new
-    @event = Event.new
-    parametros=Hash.new(event_params)
-    puts "A minha resposta\n\n\n"
-    puts parametros
-    puts "\n\n\n"
-    puts event_params.inspect
-    puts "\n\n\n"
-
+    @event = Event.new(event_params)
     respond_to do |format|
-    #  if @event.save
-    #    format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #    format.json { render action: 'show', status: :created, location: @event }
-    #  else
-    #    format.html { render action: 'new' }
-    #    format.json { render json: @event.errors, status: :unprocessable_entity }
-    #  end
+      if @event.save
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @event }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -80,25 +73,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(
-          :site,
-          :email,
-          :address,
-          :latitude,
-          :longitude,
-          :startdate,
-          :enddate,
-          :organization,
-          :price,
-          :program,
-          :rating,
-          :accessibility,
-          :city_id,
-          :event_type,
-          :event_translation,
-          :timestamp,
-          :active,
-          :web_user_id
-      )
+      params.require(:event).permit(:site,:email,:address,:latitude,:longitude,:startdate,:enddate,:organization,:price,:program,:rating,:accessibility,:city_id,:timestamp,:active,:web_user_id,event_types_attributes:[:id,:event_id,:type_id],event_translations_attributes: [:name,:schedule,:transport,:language,:description,:event_id])
     end
+
 end
