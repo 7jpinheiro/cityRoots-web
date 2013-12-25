@@ -1,140 +1,144 @@
 <%
-    trans=EventTranslation.where("event_id=?",@event.id).first
+   trans=EventTranslation.where("event_id=?",@event.id).first
 
 %>
-<div class="page-header">
-  <h1><%= trans.name %></h1>
-</div>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table">
-          <%
-             if @event.address != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Morada</th>
-                <td style="border-top: none;"><%= @event.address %></td>
-              </tr>
-          <%
-             end
-             if trans.schedule != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Horário</th>
-                <td style="border-top: none;"><%= trans.schedule %></td>
-              </tr>
-          <%
-             end
-             if @event.site != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Site</th>
-                <td style="border-top: none;"><%= @event.site %></td>
-              </tr>
-          <%
-             end
-             if @event.email != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Email</th>
-                <td style="border-top: none;"><%= @event.email %></td>
-              </tr>
-          <%
-             end
-             if trans.transport != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Transporte</th>
-                <td style="border-top: none;"><%= trans.transport %></td>
-              </tr>
-          <%
-             end
-             if @event.startdate != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Data</th>
-                <td style="border-top: none;"><%= @event.startdate %> até <%= @event.enddate %></td>
-              </tr>
-          <%
-             end
-             if @event.price != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Preço</th>
-                <td style="border-top: none;"><%= @event.price %></td>
-              </tr>
-          <%
-             end
-             if @event.organization != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Orgização</th>
-                <td style="border-top: none;"><%= @event.organization %></td>
-              </tr>
-          <%
-             end
-
-             if @event.program != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Programação</th>
-                <td style="border-top: none;text-align:justify;"><%= @event.program %></td>
-              </tr>
-          <%
-             end
-             if trans.description != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Descrição</th>
-                <td style="border-top: none;text-align:justify;"><%= trans.description %></td>
-              </tr>
-          <%
-             end
-          %>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-          </div>
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-        <br/>
-        <hr/>
-        <br/>
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
-      </div>
+<div class="well well-lg">
+  <h1><%= trans.name%></h1>
+  <br/>
+  <%= link_to edit_event_path(@event) do
+  %><i class="fa fa-edit"></i> Editar<%
+   end
+%>
+  <hr/>
+  <div class="row">
+    <div class="col-sm-6">
+      <dl class="dl-horizontal">
+        <%
+           if @event.rating != 0
+        %>
+            <dt>Classificação</dt>
+            <dd>
+              <%
+                 val=event.rating
+                 indice=0;
+                 while val >0
+              %><span class="fa fa-star"></span><%
+               val=val-1
+               indice=indice+1
+               end
+               while indice <5
+            %><span class="fa fa-star-o"></span><%
+               indice=indice+1
+               end
+            %>
+            </dd>
+        <%
+           end
+           if trans.description != nil
+        %>
+            <dt>Descrição</dt>
+            <dd><%= trans.description%></dd>
+        <%
+           end
+           if @event.address != nil
+        %>
+            <dt>Morada</dt>
+            <dd><%= @event.address %></dd>
+        <%
+           end
+           if trans.schedule != nil
+        %>
+            <dt>Horário</dt>
+            <dd><%= trans.schedule %></dd>
+        <%
+           end
+           if @event.site != nil
+        %>
+            <dt>Site</dt>
+            <dd><%= @event.site %></dd>
+        <%
+           end
+           if @event.email != nil
+        %>
+            <dt>Email</dt>
+            <dd><%= @event.email %></dd>
+        <%
+           end
+           if trans.transport != nil
+        %>
+            <dt>Transporte</dt>
+            <dd><%= trans.transport %></dd>
+        <%
+           end
+           if @event.startdate != nil
+        %>
+            <dt>Data</dt>
+            <dd>
+              <%= @event.startdate %>
+              <%
+                 if @event.enddate != nil%>
+                  até <%= @event.enddate %>
+              <%  end
+              %>
+            </dd>
+        <%
+           end
+           if @event.price != nil
+        %>
+            <dt>Preço</dt>
+            <dd><%= @event.price %></dd>
+        <%
+           end
+           if @event.organization != nil
+        %>
+            <dt>Organização</dt>
+            <dd><%= @event.organization %></dd>
+        <%
+           end
+           if @event.program != nil
+        %>
+            <dt>Programação</dt>
+            <dd><%= @event.program %></dd>
+        <%
+           end
+        %>
+      </dl>
+      <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
-    <br>
-    <table class="table">
-      <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', events_path ,:class => "btn btn-default btn-square"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_event_path(@event),:class => "btn btn-primary btn-square" %></td>
-      </tr>
-    </table>
+    <div class="col-sm-6">
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+    </div>
   </div>
+  <hr>
+  <%
+  @coments=CommentEvent.where("event_id=?",@event.id).all
+  if @coments != nil
+  %>
+  <div class="row">
+    <h3>Comentários</h3>
+    <%
+    @coments.each do |co|%>
+        <div class="media-body bubble-body bubble-arrow-left">
+          <div class="bubble-inner">
+            <%
+            if co.mobile_user_id != nil
+                usermovel=User.where("id=?",co.mobile_user_id).first
+                nome=usermovel.username
+            else
+                nome="Anonimo"
+            end
+            %>
+            <h4 class="media-heading bubble-heading"><%= nome %></h4>
+            <div class="bubble-content">
+              <p><%= co.comment %></p><p>
+            </p></div>
+          </div>
+        </div>
+    <%
+    end
+    %>
+  </div>
+  <%
+  end
+  %>
 </div>

@@ -5,11 +5,21 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @event_translations=EventTranslation.all
+    respond_to do |format|
+      format.html{}
+      format.json{render :json => @events.as_json( :include => :event_translations) }
+    end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @events=Event.find(params[:id])
+    respond_to do |format|
+      format.html { @events }
+      format.json { render :json => @events.as_json(:include => :event_translations)}
+    end
   end
 
   # GET /events/new

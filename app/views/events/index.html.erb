@@ -4,10 +4,9 @@
 <%= link_to 'Novo Evento', new_event_path, :class=>"btn btn-primary btn-square" %>
 <br>
 <%
-    @events=Event.where("web_user_id=?",current_user.id);
-    @events.each do |event|
-
-        trans=EventTranslation.where("event_id=?",event.id).first
+@events=Event.where("web_user_id=?",current_user.id)
+@events.each do |event|
+    trans=EventTranslation.where("event_id=?",event.id).first
 %>
 <br/>
 <div class="col-md-12">
@@ -33,6 +32,9 @@
         </div>
         <div >
           <p>
+            <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', event %>
+          </p>
+          <p>
             <b>Preço:</b><%= event.price %><br/>
           </p>
           <p>
@@ -43,8 +45,25 @@
           <hr/>
           <div class="row rating-desc">
             <div class="col-md-12">
-              <span class="fa fa-star"/><span class="fa fa-star"/><span class="fa fa-star"/><span class="fa fa-star-half-full"/><span class="fa fa-star-o"/>(36)<span class="separator">|</span>
-
+              <%
+              val=event.rating
+              indice=0;
+              while val >0
+                %><span class="fa fa-star"></span><%
+                val=val-1
+                indice=indice+1
+              end
+              while indice <5
+                %><span class="fa fa-star-o"></span><%
+                indice=indice+1
+              end
+              %>
+              <span class="separator">|</span>
+              <%
+              commes=CommentEvent.where("event_id=?",event.id).all
+              size=commes.length
+              %>
+              <span class="fa fa-comment"></span>(<%= size %> Comments)
             </div>
           </div>
         </div>
