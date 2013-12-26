@@ -1,4 +1,5 @@
-<%= form_for(@event) do |f| %>
+<script src="http://blueimp.github.io/jQuery-File-Upload/css/jquery.fileupload.css"></script>
+<%= form_for(@event,:html=>{:multipart=>true}) do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -13,25 +14,16 @@
   <form role="form" class="form-horizontal">
 
     <div style="position:relative;">
-                <% if @event.photo_events.first.nil? %>
-                  <%= f.fields_for :photo_events, :html => {:multipart => true} do |builder| %>
-                     <%= render "photo_event_fields", :f => builder %>
-              <% end %>
-            <% end %> 
-            <%= link_to_add_fields "Nova Foto", f, :photo_events %></p>
-            &nbsp;
-            <span class='label label-info' id="upload-file-info"></span>
-          </div>
         <%= f.fields_for :event_translations do |e| %>
-            <div class="row">
-              <div class="form-group">
-                <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
-                <div class="col-sm-6">
-                  <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Festa de S.João" %>
-                </div>
-              </div>
+        <div class="row">
+          <div class="form-group">
+            <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Festa de S.João" %>
             </div>
-            <br/>
+          </div>
+        </div>
+        <br/>
         <div class="row">
           <div class="form-group">
             <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
@@ -165,11 +157,18 @@
       <div class="form-group">
         <%= type.label "Tipo de Evento" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
         <div class="col-sm-6">
-          <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+          <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
         </div>
       </div>
     </div>
     <br/>
+          <% if @event.photo_events.first.nil? %>
+              semantic_form_for
+              <%= f.fields_for :photo_events, :html => {:multipart => true} do |builder| %>
+                  <%= render "photo_attraction_fields", :f => builder %>
+              <% end %>
+          <% end %>
+          <%= link_to_add_fields "Nova Foto", f, :photo_events %></p>
         <%
         end
         %>
@@ -191,6 +190,7 @@
         <br/>
         <br/>
       </div>
+    </div>
     </div>
   </form>
 <% end %>

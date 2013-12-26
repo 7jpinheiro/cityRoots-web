@@ -37,8 +37,7 @@ class Event < ActiveRecord::Base
   validates :program, presence:true ,length: {minimum: 2}
   validates :rating, presence: false
 
-
-
+  has_attached_file :image
 
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy
@@ -48,7 +47,7 @@ class Event < ActiveRecord::Base
 	has_many :event_types , dependent: :destroy
 	belongs_to :web_user
 	belongs_to :city
-  accepts_nested_attributes_for :event_types
-  accepts_nested_attributes_for :event_translations
-  accepts_nested_attributes_for :photo_events, :reject_if => lambda { |t| t['photo_event'].nil? }, :allow_destroy => true
+  accepts_nested_attributes_for :event_types , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :event_translations , :reject_if => :all_blank, :allow_destroy => true
+  #accepts_nested_attributes_for :photo_events , :allow_destroy => true
 end

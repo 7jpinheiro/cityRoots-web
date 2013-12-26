@@ -1,9 +1,7 @@
 CityRootsWeb::Application.routes.draw do
   resources :types
 
-  resources :event_translations
-
-  resources :wevent_translations
+  resources :event_translations , :only => :destroy
 
   resources :web_user_types
 
@@ -80,7 +78,7 @@ CityRootsWeb::Application.routes.draw do
   resources :services
 
   resources :events do
-    resource :event_translations
+    resource :event_translations, :only => [:new, :create,:destroy,:update]
   end
 
   resources :galeria

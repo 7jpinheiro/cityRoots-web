@@ -5,7 +5,7 @@ gem 'rails', '4.0.1'
 gem 'crummy'
 # Use postgreSQL as the database for Active Record
 gem 'pg'
-gem "paperclip", "~> 3.0"
+gem 'paperclip'
 gem 'jquery-fileupload-rails'
 gem 'rabl'
 # Use SCSS for stylesheets
@@ -34,7 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+gem "cocoon"
 # gem to handle login pages
 gem 'devise'
 #gem to handle user permissions

@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @events=Event.find(params[:id])
     respond_to do |format|
       format.html { @events }
-      format.json { render :json => @events.as_json(:include => :event_translations)}
+      format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:event_types,:photo_events])}
     end
   end
 
@@ -26,18 +26,23 @@ class EventsController < ApplicationController
   def new
     add_crumb "Novo", ""
     @event = Event.new
+    1.times{@event.photo_events.build}
     1.times{@event.event_translations.build}
     1.times{@event.event_types.build}
+    1.times{@event.photo_events.build}
 
   end
 
   # GET /events/1/edit
   def edit
+    @events=Event.find(params[:id])
+    1.times{@event.photo_events.build}
   end
 
   # POST /events
   # POST /events.json
   def create
+    puts "\n\n\n\n"+ event_params.inspect + "\n\n\n\n\n"
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -83,7 +88,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(:site,:email,:address,:latitude,:longitude,:startdate,:enddate,:organization,:price,:program,:rating,:accessibility,:city_id,:timestamp,:active,:web_user_id,event_types_attributes:[:id,:event_id,:type_id],event_translations_attributes: [:name,:schedule,:transport,:language,:description,:event_id])
+      params.require(:event).permit(:id,:site,:email,:address,:latitude,:longitude,:startdate,:enddate,:organization,:price,:program,:rating,:photo_events,:accessibility,:city_id,:timestamp,:active,:web_user_id,event_types_attributes:[:id,:event_id,:type_id, :_destroy],event_translations_attributes: [:id,:name,:schedule,:transport,:language,:description,:event_id, :_destroy],photo_events_attributes: [:id,:name,:photo_file_name,:photo_content_type,:photo_file_size,:photo_updated_at,:description,:image,:event_id, :_destroy])
     end
 
 end

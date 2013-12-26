@@ -11,7 +11,7 @@
 %>
   <hr/>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <dl class="dl-horizontal">
         <%
            if @event.rating != 0
@@ -37,7 +37,7 @@
            if trans.description != nil
         %>
             <dt>Descrição</dt>
-            <dd><%= trans.description%></dd>
+            <dd style="text-overflow: ellipsis;width: 150px;"><%= trans.description%></dd>
         <%
            end
            if @event.address != nil
@@ -106,6 +106,12 @@
       <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
     <div class="col-sm-6">
+      <%
+      if @event.photo_events != nil%>
+
+      <%
+      end
+      %>
       <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
     </div>
   </div>

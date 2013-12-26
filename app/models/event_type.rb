@@ -8,6 +8,6 @@
 #
 
 class EventType < ActiveRecord::Base
-	belongs_to :events
-  belongs_to :types
+	belongs_to :event
+  belongs_to :type
 end
