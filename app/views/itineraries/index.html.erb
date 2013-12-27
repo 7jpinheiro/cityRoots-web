@@ -1,46 +1,76 @@
 <h1>Lista de Rotas</h1>
 <%= csrf_meta_tag %>
-
-<%= link_to 'Nova Rota', new_itinerary_path , :class=>"btn btn-primary btn-square" %>
+<br>
+<%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %>
+<br>
 
 <% @itineraries.each do |itinerary| %>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-xs-3 col-md-3 text-center">
-        <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
-      </div>
-      <div class="col-xs-9 col-md-9 section-box">
+    <br/>
+    <div class="col-md-12">
+      <div class="well well-sm">
         <div class="row">
-          <div class="col-md-8">
-            <h4><strong><%= link_to itinerary.name, itinerary %></strong></h4>
+          <div class="col-xs-3 col-md-3 text-center">
+            <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
           </div>
-          <div  class="col-md-4 text-right" style="min-height:30px">
-            <%= link_to edit_itinerary_path(itinerary) do %>
-            <span class="glyphicon glyphicon-edit"> </span>Editar
-            <% end %>
-            <%= link_to itinerary, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-            <span class="glyphicon glyphicon-remove"></span>Remover
-            <% end %>
-          </div>
-        </div>
-        <div >
-          <p>
-            <b>Descrição: </b>
-            <%= truncate itinerary.description, length: 300 %>
-            <%= link_to 'Ler mais', itinerary %><br/>
-          </p>
-          <hr/>
-          <div class="row rating-desc">
-            <div class="col-md-12">
-              <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
-              <span class="glyphicon glyphicon-comment"></span>(<%= itinerary.comment_itineraries.size %> Comments)
+          <div class="col-xs-9 col-md-9 section-box">
+            <div class="row">
+              <div class="col-md-8">
+                <h4><strong><%= link_to itinerary.name, itinerary %></strong></h4>
+              </div>
+              <div  class="col-md-4 text-right" style="min-height:30px">
+                <%= link_to edit_itinerary_path(itinerary) do %>
+                    <span class="fa fa-edit"> </span>Editar
+                <% end %>
+                <%= link_to itinerary, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                    <span class="fa fa-trash-o"></span>Remover
+                <% end %>
+              </div>
+            </div>
+            <div >
+              <p>
+                <b>Descrição: </b>
+                <%= truncate itinerary.description, length: 300 %>
+                <%= link_to 'Ler mais', itinerary %><br/>
+              </p>
+              <hr/>
+              <div class="row rating-desc">
+                <div class="col-md-12">
+                  <%
+                     @ratings=RatingItinerary.where("itinerary_id=?",itinerary.id).all
+                     ratin=0
+                     if @ratings != nil
+                       index=0
+                       @ratings.each do |rati|
+                         ratin=ratin+rati.rating
+                         index=index+1
+                       end
+                     else
+                       ratin=0
+                     end
+                     val=ratin
+                     indice=0;
+                     while val >0
+                  %><span class="fa fa-star"></span><%
+                   val=val-1
+                   indice=indice+1
+                   end
+                   while indice <5
+                %><span class="fa fa-star-o"></span><%
+                   indice=indice+1
+                   end
+                %>
+                  <span class="separator">|</span>
+                  <%
+                     commes=CommentItinerary.where("itinerary_id=?",itinerary.id).all
+                     size=commes.length
+                  %>
+                  <span class="fa fa-comment"></span>(<%= size %> Comments)
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 <% end %>
 <br/>

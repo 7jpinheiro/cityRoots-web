@@ -9,9 +9,6 @@
 #
 
 class ItineraryAttraction < ActiveRecord::Base
-  validates :order, presence:true, length: {minimum: 2}
-  validates :itinerary_id, presence:true
-  validates :attraction_id, presence:true
 
   belongs_to :itinerary
   belongs_to :attraction

@@ -46,25 +46,30 @@
         <div class="col-md-4">
           <strong>Pontos da Rota</strong>
           <p class="text-muted">Pontos de interesse</p>
-          <%= f.fields_for :itinerary_attractions do |builder| %>
-              <%= builder.collection_select(:attraction_id,Attraction.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
-
-          <% end %>
+          <div id="field">
+            <%= f.fields_for :itinerary_attractions do |builder| %>
+                <%= builder.collection_select(:attraction_id,Attraction.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+                <%= link_to_remove_fields "remove", builder %>
+            <% end %>
+          </div>
 
           <p class="text-muted">Eventos</p>
           <%= f.fields_for :itinerary_events do |builder1| %>
-              <%= builder1.collection_select(:event_id,EventTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+              <%= builder1.text_field :order, :id =>"order"%>
+              <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
 
           <% end %>
 
           <p class="text-muted">Serviços</p>
           <%= f.fields_for :itinerary_services do |builder2| %>
+              <%= builder2.text_field :order, :id =>"order"%>
               <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
 
           <% end %>
 
         </div>
       </div>
+      <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
     </form>
-    <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
+
 <% end %>

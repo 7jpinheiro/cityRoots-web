@@ -1,5 +1,5 @@
 class Type < ActiveRecord::Base
-  belongs_to :event_type
-  belongs_to :attraction_type
-  belongs_to :service_type
+  has_many :event_type, dependent: :destroy
+  has_many :attraction_type, dependent: :destroy
+  has_many :service_type, dependent: :destroy
 end

@@ -5,130 +5,76 @@
   <div class="well well-sm">
     <div class="row">
       <div class="col-md-6">
-        <table class="table">
+         <dl class="dl-horizontal">
           <%
              if @itinerary.description != nil
           %>
-              <tr>
-                <th style="border-top: none;">Descrição</th>
-                <td style="border-top: none;"><%= @itinerary.description %></td>
-              </tr>
+                <dt>Descrição</dt>
+                <dd><%= @itinerary.description %></dd>
           <%
              end
              if @itinerary.itinerary_type_id != nil
-               id=@itinerary.itinerary_type_id
-               tipopoint=AttractionType.where(["id = ?", id ]).first
+               tipopoint=ItineraryType.where(["id = ?", @itinerary.itinerary_type_id ]).first
                tipo=tipopoint.name;
           %>
-              <tr>
-                <th style="border-top: none;">Tipo</th>
-                <td style="border-top: none;"><%= tipo %></td>
-              </tr>
+                <dt>Tipo</dt>
+                <dd><%= tipo %></dd>
           <%
              end
-             if @itinerary.itinerary_attractions != nil
+             @itinerary_att=ItineraryAttraction.where("itinerary_id=?",@itinerary.id).all
+             if @itinerary_att.length != 0
           %>
-              <tr>
-                <th style="border-top: none;">Pontos de Interesse</th>
-                <td style="border-top: none;"></td>
+               <dt>Prontos de Interesse</dt>
+               <dd></dd>
+               <%
+                  @itinerary_att.each  do |p|
+                    att=AttractionTranslation.where("attraction_id=?",p.attraction_id).first
+               %>
+                   <dt class="text-muted"><small><%= att.name%></small></dt>
+                   <dd><%= link_to "Ver mais", attraction_path(p.attraction_id) , :class=>"label label-primary label-square" %></dd>
+               <%
+                  end
+             end
+             @itinerary_servi=ItineraryService.where("itinerary_id=?",@itinerary.id).all
+             if @itinerary_servi.length != 0
+          %>
+                <dt>Serviços</dt>
+                <dd></dd>
                 <%
-                   @itinerary.itinerary_attractions.each  do |p|
-                       if !p.attraction.nil? %>
-                      <tr>
-                        <td style="border-top: none;"></td>
-                        <td style="border-top: none;"> <%=p.attraction.name%></td>
-                        <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
-                      </tr>
-                       <%
-                       end
-                   end
+                   @itinerary_servi.each  do |p|
+                       ser=ServiceTranslation.where("service_id=?",p.service_id).first
                 %>
-                </td>
-              </tr>
-          <%
+                        <dt class="text-muted"><small><%= ser.name%></small></dt>
+                        <dd><%= link_to "Ver mais", service_path(p.service_id) , :class=>"label label-primary label-square" %></dd>
+                       <%
+                   end
              end
-             if @itinerary.itinerary_services != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Serviços</th>
-              </tr>
-                  <%
-                     @itinerary.itinerary_services.each  do |p|
-                       if !p.service.nil? %>
-                          <tr>
-                            <td style="border-top: none;"></td>
-                            <td style="border-top: none;"><%=p.service.name%></td>
-                            <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
-                          </tr>
-                      <%
-                       end
-                      end
-                      %>
-          <%
-             end
-             if @itinerary.itinerary_events != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Eventos</th>
-                <td style="border-top: none;text-align:justify;">
-                  <%
-                     @itinerary.itinerary_events.each  do |p|
-                       if !p.event.nil? %>
-                      <tr>
-                        <td style="border-top: none;"></td>
-                        <td style="border-top: none;"> <%=p.event.name%></td>
-                        <td style="border-top: none;"><span class="label label-primary">Ver mais</span></td>
-                      </tr>
-                      <%
-                         end
-                         end
-                      %>
-                </td>
-              </tr>
-          <%
+             @itinerary_even=ItineraryEvent.where("itinerary_id=?",@itinerary.id).all
+             if @itinerary_even.length != 0
+                       %>
+               <dt>Eventos</dt>
+               <dd></dd>
+               <%
+                  @itinerary_even.each  do |p|
+                    eve=EventTranslation.where("event_id=?",p.event_id).first
+               %>
+                   <dt class="text-muted"><small><%= eve.name%></small></dt>
+                   <dd><%= link_to "Ver mais", event_path(p.event_id) , :class=>"label label-primary label-square" %></dd>
+               <%
+                  end
              end
           %>
-        </table>
+        </dl>
       </div>
       <div class="col-md-6">
-        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-          </div>
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-        <br/>
-        <hr/>
-        <br/>
 
       </div>
     </div>
     <br>
     <table class="table">
       <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', itineraries_path ,:class => "btn btn-default"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_itinerary_path(@itinerary),:class => "btn btn-primary" %></td>
+        <td style="border-top: none;"><%= link_to 'Voltar', itineraries_path ,:class => "btn btn-default btn-square"%></td>
+        <td style="border-top: none;"><%= link_to 'Editar', edit_itinerary_path(@itinerary),:class => "btn btn-primary btn-square" %></td>
       </tr>
     </table>
   </div>
