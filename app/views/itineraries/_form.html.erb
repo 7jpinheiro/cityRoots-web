@@ -40,7 +40,6 @@
               </div>
             </div>
           </div>
-          <hr/>
           <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
           <br/>
         </div>
@@ -54,13 +53,13 @@
 
           <p class="text-muted">Eventos</p>
           <%= f.fields_for :itinerary_events do |builder1| %>
-              <%= builder1.collection_select(:id,EventTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+              <%= builder1.collection_select(:event_id,EventTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
 
           <% end %>
 
           <p class="text-muted">Serviços</p>
           <%= f.fields_for :itinerary_services do |builder2| %>
-              <%= builder2.collection_select(:id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+              <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
 
           <% end %>
 

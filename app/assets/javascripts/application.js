@@ -14,5 +14,4 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require turbolinks
-//= require nested_form
 //= require_tree .
