@@ -162,16 +162,16 @@
       </div>
     </div>
     <br/>
-          <% if @event.photo_events.first.nil? %>
-              semantic_form_for
-              <%= f.fields_for :photo_events, :html => {:multipart => true} do |builder| %>
-                  <%= render "photo_attraction_fields", :f => builder %>
-              <% end %>
-          <% end %>
-          <%= link_to_add_fields "Nova Foto", f, :photo_events %></p>
         <%
         end
         %>
+      <% if @event.photo_events.first.nil? %>
+          semantic_form_for
+          <%= f.fields_for :photo_events, :html => {:multipart => true} do |builder| %>
+              <%= render "photo_attraction_fields", :f => builder %>
+          <% end %>
+      <% end %>
+      <%= link_to_add_fields "Nova Foto", f, :photo_events %>
     <!-- Value by sustem-->
     <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
     <%

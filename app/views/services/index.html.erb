@@ -7,7 +7,7 @@
 <%
    @services=Service.where("web_user_id=?",current_user.id)
    @services.each do |service|
-     trans=ServiceTranslation.where("event_id=?",service.id).first
+     serv=ServiceTranslation.where("service_id=?",service.id).first
 %>
     <br/>
     <div class="col-md-12">
@@ -20,7 +20,14 @@
           <div class="col-xs-9 col-md-9 section-box">
             <div class="row">
               <div class="col-md-8">
-                <h4><strong><%= link_to trans.name, service %></strong></h4>
+                <h4>
+                  <strong><%= link_to serv.name, service %></strong>
+                  <%
+                  if service.accessibility !=0
+                  %><small><i class="fa fa-wheelchair"></i></small><%
+                  end
+                  %>
+                </h4>
               </div>
               <div  class="col-md-4 text-right" style="min-height:30px">
                 <%= link_to edit_service_path(service) do %>
@@ -34,11 +41,11 @@
             <div >
               <p>
                 <b>Descrição: </b>
-                <%= truncate service.description, length: 300 %>
+                <%= truncate serv.description, length: 300 %>
                 <%= link_to 'Ler mais', service %><br/>
               </p>
               <p>
-                <b>Horário: </b><%= service.schedule %><br/>
+                <b>Horário: </b><%= serv.schedule %><br/>
                 <b>Capacidade:</b><%= service.capacity %> <br/>
                 <b>Email:</b><%= service.email %> <br/>
                 <b>Site:</b><%= service.site %> <br/>
@@ -61,7 +68,7 @@
                 %>
                   <span class="separator">|</span>
                   <%
-                     commes=CommentService.where("event_id=?",service.id).all
+                     commes=CommentService.where("service_id=?",service.id).all
                      size=commes.length
                   %>
                   <span class="fa fa-comment"></span>(<%= size %> Comments)

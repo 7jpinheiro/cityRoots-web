@@ -23,19 +23,26 @@
 #
 
 class Service < ActiveRecord::Base
-  validates :name, presence:true ,length: {minimum: 2}
-  validates :description, presence:true, length: {minimum: 2}
-  validates :email, length: {minimum: 3}
+
   validates :site, length: {minimum: 2}
+  validates :email, length: {minimum: 3}
   validates :address, presence:true,length: {minimum: 5}
-  validates :price, length: {minimum: 2}
-  validates :latitude, presence:true
-  validates :longitude, presence:true
-	has_many :rating_services, dependent: :destroy
+  validates :latitude, presence:false
+  validates :longitude, presence:false
+  validates :capacity, presence:true
+  validates :details, presence:true
+
+  belongs_to :web_user
+  belongs_to :city
+
+  has_many :service_types, dependent: :destroy
+  has_many :service_translations , dependent: :destroy
+  has_many :rating_services, dependent: :destroy
 	has_many :comment_services, dependent: :destroy
 	has_many :photo_services, dependent: :destroy
 	has_many :itenerary_services, dependent: :destroy
-	belongs_to :service_type
-	belongs_to :web_user
-	belongs_to :city
+
+  accepts_nested_attributes_for :service_types , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :service_translations , :reject_if => :all_blank, :allow_destroy => true
+
 end

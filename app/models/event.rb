@@ -37,8 +37,6 @@ class Event < ActiveRecord::Base
   validates :program, presence:true ,length: {minimum: 2}
   validates :rating, presence: false
 
-  has_attached_file :image
-
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy
 	has_many :photo_events, dependent: :destroy

@@ -5,16 +5,28 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
     @services = Service.all
+    respond_to do |format|
+      format.html{}
+      format.json{render :json => @services.as_json( :include => [:service_translations,:photo_services,:service_types]) }
+    end
   end
 
   # GET /services/1
   # GET /services/1.json
   def show
+    @service=Service.find(params[:id])
+    respond_to do |format|
+      format.html { @service }
+      format.json { render :json => @service.as_json( :include => [:service_translations,:photo_services,:service_types,:city]) }
+    end
   end
 
   # GET /services/new
   def new
     @service = Service.new
+    1.times{@service.photo_services.build}
+    1.times{@service.service_translations.build}
+    1.times{@service.service_types.build}
   end
 
   # GET /services/1/edit
@@ -69,6 +81,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :description, :schedule, :site, :email, :address, :latitude, :transport, :reference_point, :active, :timestamp, :capacity, :details, :service_type_id, :city_id, :web_user_id)
+      params.require(:service).permit( :site, :email, :address, :latitude,:longitude, :reference_point, :active, :timestamp, :capacity, :details, :rating, :accessibility, :city_id, :web_user_id, service_types_attributes:[:id,:service_id,:type_id, :_destroy],service_translations_attributes:[:id,:name,:schedule,:language,:description,:transport,:service_id, :_destroy])
     end
 end

@@ -69,6 +69,6 @@ class ItineraryTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_type_params
-      params.require(:itinerary_type).permit(:name, :description)
+      params.require(:itinerary_type).permit(:id,:name, :description)
     end
 end

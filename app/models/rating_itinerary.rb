@@ -14,6 +14,8 @@ class RatingItinerary < ActiveRecord::Base
   validates :evaluationdate, presence:true
   validates :mobile_user_id, presence:true
   validates :itinerary_id, presence:true
-	belongs_to :mobile_user
-    belongs_to :event
+
+  belongs_to :mobile_user
+  belongs_to :event
+
 end

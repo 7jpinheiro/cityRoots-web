@@ -1,133 +1,147 @@
-<div class="page-header">
-  <h1><%= @service.name %></h1>
-</div>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table">
-          <%
-             if @service.address != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Morada</th>
-                <td style="border-top: none;"><%= @service.address %></td>
-              </tr>
-          <%
-             end
-             if @service.schedule != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Horário</th>
-                <td style="border-top: none;"><%= @service.schedule %></td>
-              </tr>
-          <%
-             end
-             if @service.site != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Site</th>
-                <td style="border-top: none;"><%= @service.site %></td>
-              </tr>
-          <%
-             end
-             if @service.email != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Email</th>
-                <td style="border-top: none;"><%= @service.email %></td>
-              </tr>
-          <%
-             end
-             if @service.transport != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Transporte</th>
-                <td style="border-top: none;"><%= @service.transport %></td>
-              </tr>
-          <%
-             end
+<%
+   servi=ServiceTranslation.where("service_id=?",@service.id).first
 
-             if @service.service_type_id != nil
-               id=@service.service_type_id
-               tipopoint=ServiceType.where(["id = ?", id ]).first
-               tipo=tipopoint.name;
-          %>
-              <tr>
-                <th style="border-top: none;">Tipo</th>
-                <td style="border-top: none;"><%= tipo %></td>
-              </tr>
-          <%
-             end
-             if @service.description != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Descrição</th>
-                <td style="border-top: none;text-align:justify;"><%= @service.description %></td>
-              </tr>
-          <%
-             end
-             if @service.capacity != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Lotação</th>
-                <td style="border-top: none;text-align:justify;"><%= @service.capacity %></td>
-              </tr>
-          <%
-             end
-             if @service.details != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Informação Adicional</th>
-                <td style="border-top: none;text-align:justify;"><%= @service.details %></td>
-              </tr>
-          <%
-             end
-          %>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-          </div>
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-        <br/>
-        <hr/>
-        <br/>
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=13&markers=#{@service.latitude}%2C#{@service.longitude}" %>
-      </div>
+%>
+<div class="well well-lg">
+  <h1>
+    <%= servi.name%>
+    <%
+    if @service.accessibility !=0
+        %><small><i class="fa fa-wheelchair"></i></small><%
+    end
+    %>
+  </h1>
+  <br/>
+  <%= link_to edit_service_path(@service) do
+  %><i class="fa fa-edit"></i> Editar<%
+   end
+%>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6">
+      <dl class="dl-horizontal">
+        <%
+           if @service.rating != 0
+        %>
+            <dt>Classificação</dt>
+            <dd>
+              val=event.rating
+              <%
+                 indice=0;
+                 while val >0
+              %><span class="fa fa-star"></span><%
+               val=val-1
+               indice=indice+1
+               end
+               while indice <5
+            %><span class="fa fa-star-o"></span><%
+               indice=indice+1
+               end
+            %>
+            </dd>
+        <%
+           end
+           if servi.description != nil
+        %>
+            <dt>Descrição</dt>
+            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.description%></dd>
+        <%
+           end
+           if servi.schedule != nil
+        %>
+            <dt>Horário</dt>
+            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.schedule%></dd>
+        <%
+           end
+           if servi.transport != nil
+        %>
+            <dt>Transporte</dt>
+            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.transport%></dd>
+        <%
+           end
+           if @service.site != nil
+        %>
+            <dt>Site</dt>
+            <dd><%= @service.site %></dd>
+        <%
+           end
+           if @service.email != nil
+        %>
+            <dt>Email</dt>
+            <dd><%= @service.email %></dd>
+        <%
+           end
+           if @service.address != nil
+        %>
+            <dt>Morada</dt>
+            <dd><%= @service.address %></dd>
+        <%
+           end
+           if @service.reference_point == true
+        %>
+            <dt>Ponto de Referência</dt>
+            <dd>
+              <i class="fa fa-check"></i>
+            </dd>
+        <%
+           end
+           if @service.capacity != nil
+        %>
+            <dt>Capacidade</dt>
+            <dd><%= @service.capacity %></dd>
+        <%
+           end
+           if @service.details != nil
+        %>
+            <dt>Detalhes</dt>
+            <dd><%= @service.details %></dd>
+        <%
+           end
+        %>
+      </dl>
+      <span style="border-top: none;"><%= link_to 'Voltar', services_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
-    <br>
-    <table class="table">
-      <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', services_path ,:class => "btn btn-default"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_service_path(@service),:class => "btn btn-primary" %></td>
-      </tr>
-    </table>
-  </div>
-</div>
+    <div class="col-sm-6">
+      <%
+         if @service.photo_services != nil%>
 
+      <%
+         end
+      %>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@service.latitude}%2C#{@service.longitude}" %>
+    </div>
+  </div>
+  <hr>
+  <%
+     @coments=CommentService.where("service_id=?",@service.id).all
+     if @coments != nil
+  %>
+      <div class="row">
+        <h3>Comentários</h3>
+        <%
+           @coments.each do |co|%>
+            <div class="media-body bubble-body bubble-arrow-left">
+              <div class="bubble-inner">
+                <%
+                   if co.mobile_user_id != nil
+                     usermovel=User.where("id=?",co.mobile_user_id).first
+                     nome=usermovel.username
+                   else
+                     nome="Anonimo"
+                   end
+                %>
+                <h4 class="media-heading bubble-heading"><%= nome %></h4>
+                <div class="bubble-content">
+                  <p><%= co.comment %></p><p>
+                </p></div>
+              </div>
+            </div>
+        <%
+           end
+        %>
+      </div>
+  <%
+     end
+  %>
+</div>
 

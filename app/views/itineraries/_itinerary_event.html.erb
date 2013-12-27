@@ -1,0 +1,3 @@
+<p>
+  <%= f.collection_select(:id,EventTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %> <%= link_to_remove_fields "remove", f %>
+</p>

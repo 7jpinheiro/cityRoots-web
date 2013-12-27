@@ -1,6 +1,7 @@
 <h1>Lista de Rotas</h1>
 <%= csrf_meta_tag %>
 
+<%= link_to 'Nova Rota', new_itinerary_path , :class=>"btn btn-primary btn-square" %>
 
 <% @itineraries.each do |itinerary| %>
 <div class="col-md-12">
@@ -43,5 +44,3 @@
 </div>
 <% end %>
 <br/>
-
-<%= link_to 'Nova Rota', new_itinerary_path , :class=>"btn btn-primary" %>

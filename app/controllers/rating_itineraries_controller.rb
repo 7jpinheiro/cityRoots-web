@@ -69,6 +69,6 @@ class RatingItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_itinerary_params
-      params.require(:rating_itinerary).permit(:rating, :evaluationdate, :mobile_user_id, :itinerary_id)
+      params.require(:rating_itinerary).permit(:id,:rating, :evaluationdate, :mobile_user_id, :itinerary_id)
     end
 end

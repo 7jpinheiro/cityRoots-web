@@ -69,6 +69,6 @@ class ItineraryAttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_attraction_params
-      params.require(:itinerary_attraction).permit(:itinerary_id, :attraction_id)
+      params.require(:itinerary_attraction).permit(:id,:order,:itinerary_id, :attraction_id)
     end
 end

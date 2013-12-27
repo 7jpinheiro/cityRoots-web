@@ -3,7 +3,12 @@
 
 %>
 <div class="well well-lg">
-  <h1><%= trans.name%></h1>
+  <h1>
+    <%= trans.name%>
+    <% if @event.accessibility != 0 %>
+      <small><i class="fa fa-wheelchair"></i></small>
+    <% end %>
+  </h1>
   <br/>
   <%= link_to edit_event_path(@event) do
   %><i class="fa fa-edit"></i> Editar<%
@@ -18,8 +23,8 @@
         %>
             <dt>Classificação</dt>
             <dd>
+              val=event.rating
               <%
-                 val=event.rating
                  indice=0;
                  while val >0
               %><span class="fa fa-star"></span><%

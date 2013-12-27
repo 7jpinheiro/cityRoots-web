@@ -12,101 +12,60 @@
     <% end %>
     <form role="form" class="form-horizontal">
       <div class="row">
-        <div class="form-group">
-          <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group">
+              <%= f.label "Nome" ,:for=>"nome" , :class=>"col-md-3 control-label" %>
+              <div class="col-md-6">
+                <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
-          </div>
-        </div>
-      </div>
-      <hr/>
-      <strong>Pontos da Rota</strong>
-      <div id="tt"></div>
-      <div></div>
-      <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <div class="col-sm-6">
-            <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+          <br/>
+          <div class="row">
+            <div class="form-group">
+              <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-3 control-label" %>
+              <div class="col-sm-6">
+                <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
+              </div>
+            </div>
           </div>
           <br/>
           <br/>
+          <div class="row">
+            <div class="form-group">
+              <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-3 control-label" %>
+              <div class="col-sm-6">
+                <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
+          <br/>
+        </div>
+        <div class="col-md-4">
+          <strong>Pontos da Rota</strong>
+          <p class="text-muted">Pontos de interesse</p>
+          <%= f.fields_for :itinerary_attractions do |builder| %>
+              <%= builder.collection_select(:attraction_id,Attraction.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+
+          <% end %>
+
+          <p class="text-muted">Eventos</p>
+          <%= f.fields_for :itinerary_events do |builder1| %>
+              <%= builder1.collection_select(:id,EventTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+
+          <% end %>
+
+          <p class="text-muted">Serviços</p>
+          <%= f.fields_for :itinerary_services do |builder2| %>
+              <%= builder2.collection_select(:id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+
+          <% end %>
+
         </div>
       </div>
     </form>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script>
-        var list_attrac=new Array();
-        var list_events=new Array();
-        var list_servic=new Array();
-        var obj=new Object();
-
-        function init(){
-            <%
-                allatractions=Attraction.all
-                allatractions.each do |attrac|%>
-                    list_attrac.push({'name':'<%= attrac.name%>','id':<%= attrac.id%>});
-                <%
-                end
-                allevents=Event.all
-                allevents.each do |event|%>
-                    list_events.push({'name':'<%= event.name%>','id':<%= event.id%>});
-                <%
-                end
-                allservices=Service.all
-                allservices.each do |service|%>
-                    list_servic.push({'name':'<%= service.name%>','id':<%= service.id%>});
-                <%
-                end
-        %>
-        }
-
-        function gravar_ponto(){
-            list_attrac.push(obj);
-            obj=new Object();
-            update_list();
-        }
-
-        function update_list(){
-            var htmlstr="<table class='table table-bordered' style='width: 75%;'>";
-            for (var i=0;i<list_attrac.length;i++){
-                var ob=list_attrac[i];
-                htmlstr+="<tr><td>"+ob["name"]+"</td><td>Ponto de interesse</td><td><a class='btn btn-danger' onmousedown='delete_ponto("+ob['id']+");'>Apagar</a></td></tr>";
-            }
-            htmlstr+="</table>";
-            $('#tt').html(htmlstr).show();
-        }
-
-        function delete_ponto(id){
-            var tmparray=new Array();
-            for (var i=0;i<list_attrac.length;i++){
-                var od=list_attrac[i];
-                if(od['id']!=id){
-                    tmparray.push(od);
-                }
-            }
-            list_attrac=tmparray;
-            update_list();
-        }
-    </script>
+    <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
 <% end %>

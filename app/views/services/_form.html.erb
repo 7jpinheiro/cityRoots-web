@@ -10,35 +10,49 @@
           </ul>
         </div>
     <% end %>
-
     <form role="form" class="form-horizontal">
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control form-control-square", :placeholder=>"Restaurante Zé da Esquina" %>
+      <%= f.fields_for :service_translations do |e| %>
+          <div class="row">
+            <div class="form-group">
+              <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
+              <div class="col-sm-6">
+                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Restaurante " %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control form-control-square", :placeholder=>"Restaurante na esquina com optimos grelhados", :style=>"height:135px;" %>
+          <br/>
+          <div class="row">
+            <div class="form-group">
+              <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
+              <div class="col-sm-6">
+                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Aberto das 9:00 as 19:00" %>
+          <br/>
+          <div class="row">
+            <div class="form-group">
+              <%= e.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
+              <div class="col-sm-6">
+                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <br/>
+          <br/>
+          <div class="row">
+            <div class="form-group">
+              <%= e.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
+              <div class="col-sm-6">
+                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <%
+             lang=Language.where("id=?",current_user.language_id).first
+          %>
+          <%= e.text_field :language , :type=>"hidden" , :value=>lang.name%>
+      <% end %>
       <div class="row">
         <div class="form-group">
           <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
@@ -80,18 +94,9 @@
       <br/>
       <div class="row">
         <div class="form-group">
-          <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
+          <label class="col-sm-1 control-label">Ponto de referência</label>
           <div class="col-sm-6">
-            <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Autocarro nº207" %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Referências Geográficas" ,:for=>"reference_point" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :reference_point ,:id=>"reference_point" , :class=>"form-control form-control-square", :placeholder=>"Perto da bomba da Galp" %>
+            <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
           </div>
         </div>
       </div>
@@ -116,12 +121,26 @@
       <br/>
       <div class="row">
         <div class="form-group">
-          <%= f.label "Tipo de Serviço" ,:for=>"service_type" , :class=>"col-sm-1 control-label" %>
+          <label class="col-sm-1 control-label"><i class="fa fa-wheelchair"></i></label>
           <div class="col-sm-6">
-            <%= f.collection_select( :service_type_id, ServiceType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+            <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
           </div>
         </div>
       </div>
+      <br/>
+      <%= fields_for :service_types do |type| %>
+          <div class="row">
+            <div class="form-group">
+              <%= type.label "Tipo de Serviço" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
+              <div class="col-sm-6">
+                <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
+              </div>
+            </div>
+          </div>
+          <br/>
+      <%
+         end
+      %>
       <!-- Value by sustem-->
       <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
       <%

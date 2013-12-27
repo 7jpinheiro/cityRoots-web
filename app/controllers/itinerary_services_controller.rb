@@ -69,6 +69,6 @@ class ItineraryServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_service_params
-      params.require(:itinerary_service).permit(:itinerary_id, :service_id)
+      params.require(:itinerary_service).permit(:id,:order,:itinerary_id, :service_id)
     end
 end

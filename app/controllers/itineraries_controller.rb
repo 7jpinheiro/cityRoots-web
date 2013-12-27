@@ -1,11 +1,6 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
-
-
-  #@attractions = Itinerary.find(params[:id]).itinerary_attractions.collect { |att| att.attraction.name}
-
-
   # GET /itineraries
   # GET /itineraries.json
   def index
@@ -19,7 +14,11 @@ class ItinerariesController < ApplicationController
 
   # GET /itineraries/new
   def new
+    add_crumb "Novo", ""
     @itinerary = Itinerary.new
+    1.times{@itinerary.itinerary_attractions.build}
+    1.times{@itinerary.itinerary_events.build}
+    1.times{@itinerary.itinerary_services.build}
   end
 
   # GET /itineraries/1/edit
@@ -75,6 +74,6 @@ class ItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_params
-      params.require(:itinerary).permit(:name,:user_id, :description, :itinerary_type_id)
+      params.require(:itinerary).permit(:name, :description,:user_id, :itinerary_type_id,itinerary_types_attributes:[:id,:name,:description],rating_itineraries_attributes:[:id,:rating,:evaluationdate,:itinerary_id,:mobile_user_id],comment_itineraries_attributes:[:id,:comment,:evaluationdate,:itinerary_id,:mobile_user_id],itinerary_attractions_attributes:[:id,:order,:itinerary_id,:attraction_id,:_destroy],itinerary_services_attributes:[:id,:order,:itinerary_id,:service_id,:_destroy],itinerary_events_attributes:[:id,:order,:itinerary_id,:event_id,:_destroy])
     end
 end

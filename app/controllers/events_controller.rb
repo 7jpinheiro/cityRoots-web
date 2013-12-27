@@ -5,7 +5,6 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    @event_translations=EventTranslation.all
     respond_to do |format|
       format.html{}
       format.json{render :json => @events.as_json( :include => :event_translations) }
@@ -29,8 +28,6 @@ class EventsController < ApplicationController
     1.times{@event.photo_events.build}
     1.times{@event.event_translations.build}
     1.times{@event.event_types.build}
-    1.times{@event.photo_events.build}
-
   end
 
   # GET /events/1/edit

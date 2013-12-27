@@ -1,4 +1,6 @@
 CityRootsWeb::Application.routes.draw do
+  resources :service_translations
+
   resources :types
 
   resources :event_translations , :only => :destroy

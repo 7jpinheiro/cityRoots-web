@@ -9,5 +9,5 @@
 
 class ItineraryType < ActiveRecord::Base
   validates :name, presence:true
-	belongs_to :itenerary
+	belongs_to :itinerary
 end

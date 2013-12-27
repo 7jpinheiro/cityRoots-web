@@ -69,6 +69,6 @@ class ItineraryEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_event_params
-      params.require(:itinerary_event).permit(:itinerary_id, :event_id)
+      params.require(:itinerary_event).permit(:id,:order,:itinerary_id, :event_id)
     end
 end
