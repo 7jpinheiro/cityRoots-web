@@ -1,0 +1,10 @@
+<% if @photo_event.new_record? %>
+alert('Failed');
+<% else %>
+if ($('div.upload') !== undefined) {
+    $('div.upload').remove();
+}
+if ($('ul.thumbnails') !== undefined) {
+    $('ul.thumbnails').append("<%=j render partial: 'photo_events/upload', locals: { photo_event: @photo_event } %>");
+}
+<% end %>
