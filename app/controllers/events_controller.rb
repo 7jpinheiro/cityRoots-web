@@ -14,9 +14,8 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    add_crumb "Novo", ""
     @event = Event.new
-
+    1.times{@event.photo_events.build}
   end
 
   # GET /events/1/edit
@@ -72,7 +71,8 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(:name, :description, :schedule, :site, :email, :address, :transport, :active, :timestamp, :startdate, :longitude, :latitude, :enddate, :organization, :price, :program, :event_type_id, :city_id, :web_user_id,
-         photo_events_attributes: :photo)
+      params.require(:event).permit!
+
+      #(:name, :description, :schedule, :site, :email, :address, :transport, :active, :timestamp, :startdate, :longitude, :latitude, :enddate, :organization, :price, :program, :event_type_id, :photo, :city_id, :web_user_id, photo_events_attributes: [:photo, :event_id, :id])
     end
 end

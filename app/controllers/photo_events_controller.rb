@@ -26,17 +26,7 @@ class PhotoEventsController < ApplicationController
   # POST /photo_events.json
   def create
     puts "$$$$$$$$$$$$$$ ENTRA NO CREATE PHOTO EVENTS $$$$$$$$$$$$$$"
-    @photo_event = PhotoEvent.new(photo_event_params)
-
-    respond_to do |format|
-      if @photo_event.save
-        format.html { redirect_to @photo_event, notice: 'Photo event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo_event }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @photo_event.errors, status: :unprocessable_entity }
-      end
-    end
+    @photo_event = PhotoEvent.create photo_event_params
   end
 
   # PATCH/PUT /photo_events/1
@@ -72,6 +62,6 @@ class PhotoEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_event_params
-      params.require(:photo_event).permit(:name, :description, :photo)
+      params.require(:photo_event).permit(:name, :description, :photo, :event_id)
     end
 end

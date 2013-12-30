@@ -1,5 +1,5 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
+<%= form_for @event do |f| %>
+        <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
@@ -13,15 +13,12 @@
   <form role="form" class="form-horizontal">
 
     <div style="position:relative;">
-                <% if @event.photo_events.first.nil? %>
-                  <%= f.fields_for :photo_events, :html => {:multipart => true} do |builder| %>
-                     <%= render "photo_event_fields", :f => builder %>
-              <% end %>
-            <% end %> 
-            <%= link_to_add_fields "Nova Foto", f, :photo_events %></p>
-            &nbsp;
-            <span class='label label-info' id="upload-file-info"></span>
-          </div>
+              <%= f.fields_for :photo_events, :html => {:multipart => true}  do |builder| %>
+                <%= builder.label :photo, "Upload Image:" %>
+                <%= builder.file_field :photo, multiple: true %>
+                <%= builder.hidden_field :event_id,  :value => 11 %>
+    <% end %>
+    </div>
     <div class="row">
       <div class="form-group">
         <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>

@@ -42,5 +42,5 @@ class Event < ActiveRecord::Base
 	belongs_to :event_type
 	belongs_to :web_user
 	belongs_to :city
-  accepts_nested_attributes_for :photo_events, :reject_if => lambda { |t| t['photo_event'].nil? }, :allow_destroy => true
+  accepts_nested_attributes_for :photo_events
 end

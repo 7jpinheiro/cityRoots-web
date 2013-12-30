@@ -16,10 +16,9 @@
   <tbody>
     <% @photo_events.each do |photo_event| %>
       <tr>
-        <td><%= photo_event.url %></td>
+        <td><%= image_tag photo_event.photo.url(:thumb,false) %></td>
         <td><%= photo_event.name %></td>
         <td><%= photo_event.description %></td>
-        <td><%= photo_event.extension %></td>
         <td><%= link_to 'Show', photo_event %></td>
         <td><%= link_to 'Edit', edit_photo_event_path(photo_event) %></td>
         <td><%= link_to 'Destroy', photo_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
