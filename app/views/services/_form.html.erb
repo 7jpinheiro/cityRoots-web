@@ -11,6 +11,18 @@
         </div>
     <% end %>
     <form role="form" class="form-horizontal">
+      <%
+         @user=WebUser.where("id=?",current_user.id).all
+         if @user.length==0
+      %>
+          <script type="text/javascript">
+              window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
+          </script>
+      <%
+         else
+           cityid=@user.first.city_id
+         end
+      %>
       <%= f.fields_for :service_translations do |e| %>
           <div class="row">
             <div class="form-group">
@@ -128,7 +140,7 @@
         </div>
       </div>
       <br/>
-      <%= fields_for :service_types do |type| %>
+      <%= f.fields_for :service_types do |type| %>
           <div class="row">
             <div class="form-group">
               <%= type.label "Tipo de Serviço" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
@@ -143,10 +155,7 @@
       %>
       <!-- Value by sustem-->
       <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-      <%
-         user=WebUser.where("id=?",current_user.id).first
-      %>
-      <%= f.text_field :city_id ,:id=>"city_id", :value=> user.city_id, :hidden=>"hidden" %>
+      <%= f.text_field :city_id ,:id=>"city_id", :value=> cityid, :hidden=>"hidden" %>
       <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
       <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
       <br/>

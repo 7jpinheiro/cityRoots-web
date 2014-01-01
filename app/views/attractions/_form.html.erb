@@ -15,7 +15,6 @@
 			<% end %>    	
 	</div>
 	<div class="well well-large clearfix">
-		
 		<div class="row">
 			<div class="col-sm-6">
 		      	<div class="row">
@@ -111,7 +110,8 @@
 </div>		
 <div class="checkbox">
 	<label> <%= f.check_box :reference_point %> Ponto de Referência </label>
-</div>				
+</div>
+      <%= f.text_field :city_id, %>
 <div class="form-group">
 	<%= f.label 'Cidade', class: "col-sm-1 control-label" %>
 	<div class="col-sm-2">

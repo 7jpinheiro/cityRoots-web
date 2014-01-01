@@ -6,7 +6,7 @@
   <h1>
     <%= trans.name%>
     <% if @event.accessibility != 0 %>
-      <small><i class="fa fa-wheelchair"></i></small>
+        <small><i class="fa fa-wheelchair"></i></small>
     <% end %>
   </h1>
   <br/>
@@ -39,10 +39,27 @@
             </dd>
         <%
            end
-           if trans.description != nil
+           @tipos=@event.event_types.all
+           if @tipos.length!=0
         %>
-            <dt>Descrição</dt>
-            <dd style="text-overflow: ellipsis;width: 150px;"><%= trans.description%></dd>
+              <dt>Tipo</dt>
+              <dd>
+              <%
+                 @tipos.each do |tipo|
+                   @type=Type.where("id=?",tipo.type_id)
+              %>
+                  <%= @type.first.name %><br/>
+            <%
+               end
+            %>
+              </dd>
+            <%
+
+            end
+        if trans.description != nil
+        %>
+        <dt>Descrição</dt>
+        <dd style="text-overflow: ellipsis;width: 150px;"><%= trans.description%></dd>
         <%
            end
            if @event.address != nil
@@ -112,44 +129,44 @@
     </div>
     <div class="col-sm-6">
       <%
-      if @event.photo_events != nil%>
+         if @event.photo_events != nil%>
 
       <%
-      end
+         end
       %>
       <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
     </div>
   </div>
   <hr>
   <%
-  @coments=CommentEvent.where("event_id=?",@event.id).all
-  if @coments != nil
+     @coments=CommentEvent.where("event_id=?",@event.id).all
+     if @coments != nil
   %>
-  <div class="row">
-    <h3>Comentários</h3>
-    <%
-    @coments.each do |co|%>
-        <div class="media-body bubble-body bubble-arrow-left">
-          <div class="bubble-inner">
-            <%
-            if co.mobile_user_id != nil
-                usermovel=User.where("id=?",co.mobile_user_id).first
-                nome=usermovel.username
-            else
-                nome="Anonimo"
-            end
-            %>
-            <h4 class="media-heading bubble-heading"><%= nome %></h4>
-            <div class="bubble-content">
-              <p><%= co.comment %></p><p>
-            </p></div>
-          </div>
-        </div>
-    <%
-    end
-    %>
-  </div>
+      <div class="row">
+        <h3>Comentários</h3>
+        <%
+           @coments.each do |co|%>
+            <div class="media-body bubble-body bubble-arrow-left">
+              <div class="bubble-inner">
+                <%
+                   if co.mobile_user_id != nil
+                     usermovel=User.where("id=?",co.mobile_user_id).first
+                     nome=usermovel.username
+                   else
+                     nome="Anonimo"
+                   end
+                %>
+                <h4 class="media-heading bubble-heading"><%= nome %></h4>
+                <div class="bubble-content">
+                  <p><%= co.comment %></p><p>
+                </p></div>
+              </div>
+            </div>
+        <%
+           end
+        %>
+      </div>
   <%
-  end
+     end
   %>
 </div>

@@ -41,6 +41,23 @@
             </dd>
         <%
            end
+           @servic=@service.service_types.all
+           if @servic.length!=0
+        %>
+            <dt>Tipo</dt>
+            <dd>
+              <%
+                 @servic.each do |tipo|
+                   @servi=Type.where("id=?",tipo.type_id)
+              %>
+                  <%= @servi.first.name %><br/>
+              <%
+                 end
+              %>
+            </dd>
+        <%
+
+           end
            if servi.description != nil
         %>
             <dt>Descrição</dt>

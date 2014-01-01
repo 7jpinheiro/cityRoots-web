@@ -12,7 +12,18 @@
     </div>
   <% end %>
   <form role="form" class="form-horizontal">
-
+    <%
+       @user=WebUser.where("id=?",current_user.id).all
+       if @user.length==0
+         %>
+        <script type="text/javascript">
+            window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
+        </script>
+        <%
+       else
+          cityid=@user.first.city_id
+       end
+    %>
     <div style="position:relative;">
         <%= f.fields_for :event_translations do |e| %>
         <div class="row">
@@ -152,7 +163,7 @@
       </div>
     </div>
     <br/>
-    <%= fields_for :event_types do |type| %>
+    <%= f.fields_for :event_types do |type| %>
     <div class="row">
       <div class="form-group">
         <%= type.label "Tipo de Evento" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
@@ -174,10 +185,6 @@
       <%= link_to_add_fields "Nova Foto", f, :photo_events %>
     <!-- Value by sustem-->
     <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-    <%
-        users=WebUser.where("id=?",current_user.id).first;
-        cityid=users.city_id;
-    %>
     <%= f.text_field :city_id ,:id=>"city_id", :value=>cityid , :hidden=>"hidden" %>
     <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
     <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>

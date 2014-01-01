@@ -36,10 +36,28 @@
           </div>
         </div>
         <div >
+            <%
+               @tipos=event.event_types.all
+               if @tipos.length!=0
+                 %>
+              <p>
+                <b>Tipo</b>
+              <%
+                @tipos.each do |tipo|
+                    @type=Type.where("id=?",tipo.type_id)
+               %>
+                <%= @type.first.name %><span> </span>
+              <%
+                 end
+                 %>
+              </p>
+                <%
+               end
+            %>
+
           <p>
             <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', event %>
           </p>
-          <p>
             <b>Preço:</b><%= event.price %><br/>
           </p>
           <p>

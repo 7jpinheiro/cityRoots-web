@@ -31,6 +31,9 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @service = Service.find(params[:id])
+    1.times{@service.service_types.build}
+    1.times{@service.photo_services.build}
   end
 
   # POST /services

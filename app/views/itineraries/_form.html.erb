@@ -11,6 +11,16 @@
         </div>
     <% end %>
     <form role="form" class="form-horizontal">
+      <%
+         users=WebUser.where("id=?",current_user.id).all
+         if users.length==0
+      %>
+          <script type="text/javascript">
+              window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
+          </script>
+      <%
+         end
+      %>
       <div class="row">
         <div class="col-md-6">
           <div class="row">
