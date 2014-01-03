@@ -69,6 +69,6 @@ class ServiceTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_type_params
-      params.require(:service_type).permit(:name, :description)
+      params.require(:service_type).permit(:id,:service_id, :type_id)
     end
 end

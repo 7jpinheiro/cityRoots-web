@@ -50,7 +50,7 @@
               </div>
             </div>
           </div>
-          <%= f.text_field :user_id ,:id=>"user_id", :value=>1 , :hidden=>"hidden" %>
+          <%= f.text_field :user_id ,:id=>"user_id", :value=>current_user.id , :hidden=>"hidden" %>
           <br/>
         </div>
         <div class="col-md-4">

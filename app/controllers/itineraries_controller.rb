@@ -5,6 +5,10 @@ class ItinerariesController < ApplicationController
   # GET /itineraries.json
   def index
     @itineraries = Itinerary.all
+    respond_to do |format|
+      format.html{}
+      format.json{render :json => @itineraries.as_json( :include => [:events, :attractions,:services]) }
+    end
   end
 
   # GET /itineraries/1
@@ -29,7 +33,6 @@ class ItinerariesController < ApplicationController
   # POST /itineraries.json
   def create
     @itinerary = Itinerary.new(itinerary_params)
-
     respond_to do |format|
       if @itinerary.save
         format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }

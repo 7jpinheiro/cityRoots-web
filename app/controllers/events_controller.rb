@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = Event.all
     respond_to do |format|
       format.html{}
-      format.json{render :json => @events.as_json( :include => :event_translations) }
+      format.json{render :json => @events.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }
     end
   end
 
@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     @events=Event.find(params[:id])
     respond_to do |format|
       format.html { @events }
-      format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:event_types,:photo_events])}
+      format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:photo_events,:city,:types])}
     end
   end
 
@@ -33,13 +33,11 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @events=Event.find(params[:id])
-    1.times{@event.photo_events.build}
   end
 
   # POST /events
   # POST /events.json
   def create
-    puts "\n\n\n\n"+ event_params.inspect + "\n\n\n\n\n"
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -55,7 +53,6 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    puts "----------" + event_params.inspect + "----------"
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

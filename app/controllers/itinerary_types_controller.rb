@@ -25,7 +25,6 @@ class ItineraryTypesController < ApplicationController
   # POST /itinerary_types.json
   def create
     @itinerary_type = ItineraryType.new(itinerary_type_params)
-
     respond_to do |format|
       if @itinerary_type.save
         format.html { redirect_to @itinerary_type, notice: 'Itinerary type was successfully created.' }

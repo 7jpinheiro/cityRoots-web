@@ -40,7 +40,8 @@ class Service < ActiveRecord::Base
   has_many :rating_services, dependent: :destroy
 	has_many :comment_services, dependent: :destroy
 	has_many :photo_services, dependent: :destroy
-	has_many :itenerary_services, dependent: :destroy
+	has_many :itinerary_services, dependent: :destroy
+  has_many :types, :through=> :service_types
 
   accepts_nested_attributes_for :service_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :service_translations , :reject_if => :all_blank, :allow_destroy => true
