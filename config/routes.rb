@@ -1,4 +1,6 @@
 CityRootsWeb::Application.routes.draw do
+  resources :attraction_translations
+
   resources :service_translations
 
   resources :types

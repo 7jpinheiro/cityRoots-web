@@ -1,58 +1,93 @@
-<div class="page-header">
-    <h1>Pontos de Interesse</h1>
-</div>
-
-<% @attractions.each do |attraction| %>
-<div class="col-md-12">
-	<div class="well well-sm">
-		<div class="row">
-			<div class="col-xs-4 col-md-3 text-center">
-				<%	unless attraction.photo_attractions.first.nil? %>
-					<%=	image_tag attraction.photo_attractions.first.photo.url(:medium,false), :style =>'max-width:100%; max-height:100%'  %>
-				<% end %>
-			</div>
-			<div class="col-xs-8 col-md-9 section-box">
-				<div class="row">
-					<div class="col-md-8">
-						<h4><strong><%= link_to attraction.name, attraction %></strong></h4>
-					</div>
-					<div  class="col-md-4 text-right" style="min-height:30px">
-						<%= link_to edit_attraction_path(attraction) do %>
-						<span class="glyphicon glyphicon-edit"> </span>Editar
-						<% end %>
-						<%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-						<span class="glyphicon glyphicon-remove"></span>Remover
-						<% end %>
-					</div>
-				</div>
-				<div >
-					<p>
-						<b>Categoria: </b><%= attraction.attraction_type.name %>
-					</p>
-					<p>
-						<b>Descrição: </b>
-						<div class="hidden-xs"> 
-							<%= truncate attraction.description, length: 300 %>
-						</div>
-						<div class="visible-xs"> 
-							<%= truncate attraction.description, length: 100 %>
-						</div>
-						<%= link_to 'Ler mais', attraction %>
-					</p>
-					<hr/>
-					<div class="row rating-desc">
-						<div class="col-md-12">
-							<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
-							<span class="glyphicon glyphicon-comment"></span>(<%= attraction.comment_attractions.size %> Comments)
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<% end %>
+<h1>Lista dos seus Pontos de Interesse</h1>
+<%= csrf_meta_tags %>
 <br>
+<%= link_to 'Novo Ponto de Interesse', new_attraction_path, :class=>"btn btn-primary btn-square" %>
+<br>
+<%
+   @attraction=Attraction.where("web_user_id=?",current_user.id).all
+   @attraction.each do |attraction|
+    trans=AttractionTranslation.where("attraction_id=?",attraction.id).first
+%>
+    <br/>
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <div class="row">
+          <div class="col-xs-3 col-md-3 text-center">
+            <%	unless attraction.photo_attractions.first.nil? %>
+                <%=	image_tag attraction.photo_attractions.first.photo.url(:medium,false), :style =>'max-width:100%; max-height:100%'  %>
+            <% end %>
+          </div>
+          <div class="col-xs-9 col-md-9 section-box">
+            <div class="row">
+              <div class="col-md-8">
+                <h4>
+                  <strong><%= link_to trans.name, event %></strong>
+                  <% if attraction.accessibility != 0 %>
+                      <small><i class="fa fa-wheelchair"></i></small>
+                  <% end %>
+                </h4>
+              </div>
+              <div  class="col-md-4 text-right" style="min-height:30px">
+                <%= link_to edit_attraction_path(attraction) do %>
+                    <span class="fa fa-edit"> </span>Editar
+                <% end %>
+                <%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                    <span class="fa fa-trash-o"></span>Remover
+                <% end %>
+              </div>
+            </div>
+            <div >
+              <%
+                 @tipos=attraction.attraction_types.all
+                 if @tipos.length!=0
+              %>
+                  <p>
+                    <b>Tipo</b>
+                    <%
+                       @tipos.each do |tipo|
+                         @type=Type.where("id=?",tipo.type_id)
+                    %>
+                        <%= @type.first.name %><span> </span>
+                    <%
+                       end
+                    %>
+                  </p>
+              <%
+                 end
+              %>
 
-<%= link_to 'New Attraction', new_attraction_path %>
+              <p>
+                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', event %>
+                <b>Preço:</b><%= attraction.price %><br/>
+              </p>
+              <hr/>
+              <div class="row rating-desc">
+                <div class="col-md-12">
+                  <%
+                     val=event.rating
+                     indice=0;
+                     while val >0
+                  %><span class="fa fa-star"></span><%
+                   val=val-1
+                   indice=indice+1
+                   end
+                   while indice <5
+                %><span class="fa fa-star-o"></span><%
+                   indice=indice+1
+                   end
+                %>
+                  <span class="separator">|</span>
+                  <%
+                     commes=CommentAttraction.where("attraction_id=?",attraction.id).all
+                     size=commes.length
+                  %>
+                  <span class="fa fa-comment"></span>(<%= size %> Comments)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<br/>
