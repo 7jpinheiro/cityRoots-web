@@ -1,10 +1,13 @@
-<h1>Lista de Rotas</h1>
+<h1>Lista das suas Rotas</h1>
 <%= csrf_meta_tag %>
 <br>
 <%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %>
 <br>
 
-<% @itineraries.each do |itinerary| %>
+<%
+   @itineraries=Itinerary.where("user_id=?",current_user.id).all
+   @itineraries.each do |itinerary|
+%>
     <br/>
     <div class="col-md-12">
       <div class="well well-sm">

@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
     @services = Service.all
     respond_to do |format|
       format.html{}
-      format.json{render :json => @services.as_json( :include => [:service_translations,:photo_services,:service_types]) }
+      format.json{render :json => @services.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
     end
   end
 
@@ -17,7 +17,7 @@ class ServicesController < ApplicationController
     @service=Service.find(params[:id])
     respond_to do |format|
       format.html { @service }
-      format.json { render :json => @service.as_json( :include => [:service_translations,:photo_services,:service_types,:city]) }
+      format.json { render :json => @service.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
     end
   end
 
@@ -31,13 +31,13 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @service = Service.find(params[:id])
   end
 
   # POST /services
   # POST /services.json
   def create
     @service = Service.new(service_params)
-
     respond_to do |format|
       if @service.save
         format.html { redirect_to @service, notice: 'Service was successfully created.' }
@@ -81,6 +81,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit( :site, :email, :address, :latitude,:longitude, :reference_point, :active, :timestamp, :capacity, :details, :rating, :accessibility, :city_id, :web_user_id, service_types_attributes:[:id,:service_id,:type_id, :_destroy],service_translations_attributes:[:id,:name,:schedule,:language,:description,:transport,:service_id, :_destroy])
+      params.require(:service).permit( :site, :email, :address, :latitude,:longitude, :reference_point, :active, :timestamp, :capacity, :details, :rating, :accessibility, :city_id, :web_user_id, service_types_attributes:[:id,:service_id,:type_id, :_destroy],service_translations_attributes:[:id,:name,:schedule,:language,:description,:transport,:service_id,:_destroy])
     end
 end

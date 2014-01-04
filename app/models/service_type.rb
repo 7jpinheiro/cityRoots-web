@@ -8,6 +8,6 @@
 #
 
 class ServiceType < ActiveRecord::Base
-  validates :name, presence:true
-	has_many :services, dependent: :destroy
+  belongs_to :service, dependent: :destroy
+  belongs_to :type , dependent: :destroy
 end

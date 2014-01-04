@@ -22,21 +22,27 @@
 #
 
 class Attraction < ActiveRecord::Base
-  validates :name, :true ,length: {minimum: 2}
-  validates :description, presence:true, length: {minimum: 2}
-  validates :email, length: {minimum: 3}
   validates :site, length: {minimum: 2}
+  validates :email, length: {minimum: 3}
   validates :address, presence:true,length: {minimum: 5}
-  validates :price, length: {minimum: 2}
   validates :latitude, presence:true
   validates :longitude, presence:true
-	has_many :rating_attractions, dependent: :destroy
+  validates :price, length: {minimum: 2}
+
+
+  belongs_to :web_user
+  belongs_to :city
+
+  has_many :rating_attractions, dependent: :destroy
 	has_many :comment_attractions, dependent: :destroy
 	has_many :photo_attractions, dependent: :destroy
 	has_many :itinerary_attractions, dependent: :destroy
-	belongs_to :attraction_type
-	belongs_to :web_user
-	belongs_to :city
-	accepts_nested_attributes_for :photo_attractions, :reject_if => lambda { |t| t['photo_attraction'].nil? }, :allow_destroy => true
+  has_many :attraction_types , dependent: :destroy
+  has_many :attraction_translations , dependent: :destroy
+  has_many :types , :through => :attraction_types
+
+  accepts_nested_attributes_for :attraction_types , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :attraction_translations , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :photo_attractions, :reject_if => lambda { |t| t['photo_attraction'].nil? }, :allow_destroy => true
 
 end

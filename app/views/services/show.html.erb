@@ -2,6 +2,56 @@
    servi=ServiceTranslation.where("service_id=?",@service.id).first
 
 %>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+<script type="text/javascript">
+
+
+    var stockholm = new google.maps.LatLng(<%= @service.latitude %>, <%= @service.longitude %>);
+    var parliament = new google.maps.LatLng(<%= @service.latitude %>, <%= @service.longitude %>);
+    var marker;
+    var map;
+
+    function initialize() {
+        // Create an array of styles.
+        var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+        // Create a new StyledMapType object, passing it the array of styles,
+        // as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles,
+                {name: "Styled Map"});
+
+
+        var mapOptions = {
+            zoom: 11,
+            center: stockholm
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+        marker = new google.maps.Marker({
+            map:map,
+            draggable:true,
+            animation: google.maps.Animation.DROP,
+            position: parliament
+        });
+        google.maps.event.addListener(marker, 'click', toggleBounce);
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+    }
+
+    function toggleBounce() {
+
+        if (marker.getAnimation() != null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 <div class="well well-lg">
   <h1>
     <%= servi.name%>
@@ -40,6 +90,23 @@
             %>
             </dd>
         <%
+           end
+           @servic=@service.service_types.all
+           if @servic.length!=0
+        %>
+            <dt>Tipo</dt>
+            <dd>
+              <%
+                 @servic.each do |tipo|
+                   @servi=Type.where("id=?",tipo.type_id)
+              %>
+                  <%= @servi.first.name %><br/>
+              <%
+                 end
+              %>
+            </dd>
+        <%
+
            end
            if servi.description != nil
         %>
@@ -108,7 +175,7 @@
       <%
          end
       %>
-      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@service.latitude}%2C#{@service.longitude}" %>
+      <div id="map-canvas" style="width: 100%; height: 400px"></div>
     </div>
   </div>
   <hr>

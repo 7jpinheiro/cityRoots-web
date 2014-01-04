@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @attraction_translation.name %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @attraction_translation.schedule %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @attraction_translation.language %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @attraction_translation.description %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @attraction_translation.transport %>
+</p>
+
+<%= link_to 'Edit', edit_attraction_translation_path(@attraction_translation) %> |
+<%= link_to 'Back', attraction_translations_path %>

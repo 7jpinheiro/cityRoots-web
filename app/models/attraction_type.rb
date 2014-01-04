@@ -9,7 +9,8 @@
 #
 
 class AttractionType < ActiveRecord::Base
-  validates :name, presence:true
-	belongs_to :attraction_big_type
-	has_many :attractions, dependent: :destroy
+
+	belongs_to :attraction
+	belongs_to :type
+
 end

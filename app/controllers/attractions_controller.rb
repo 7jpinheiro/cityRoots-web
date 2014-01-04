@@ -7,12 +7,9 @@ class AttractionsController < ApplicationController
   # GET /attractions.json
   def index
     @attractions=Attraction.all
-    @attraction=Attraction.all
-    @photo_attraction=PhotoAttraction.all
-
     respond_to do |format|
-      format.html { @attractions }
-      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+      format.html{}
+      format.json{render :json => @attractions.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
     end
   end
 
@@ -20,16 +17,16 @@ class AttractionsController < ApplicationController
   # GET /attractions/1.json
   def show
     @attraction=Attraction.find(params[:id])
-    @photo_attraction=PhotoAttraction.where("attraction_id = ?",params[:id])
     respond_to do |format|
       format.html { @attraction }
-      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+      format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
     end
   end
 
   # GET /attractions/new
   def new
     @attraction = Attraction.new
+    1.times{@attraction.attraction_translations.build}
   end
 
   # GET /attractions/1/edit
@@ -55,7 +52,6 @@ class AttractionsController < ApplicationController
   # PATCH/PUT /attractions/1.json
   def update
     respond_to do |format|
-      puts "----------" + attraction_params.inspect + "----------"
       if @attraction.update(attraction_params)
         format.html { redirect_to @attraction, notice: 'Attraction was successfully updated.' }
         format.json { head :no_content }
@@ -84,12 +80,23 @@ class AttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attraction_params
-      params.require(:attraction).permit(:name, 
-        :description, :schedule, :site, :email, 
-        :address, :latitude, :longitude, :transport, 
-        :reference_point, :active, :timestamp, :details, 
-        :price, :attraction_type_id, :city_id, :web_user_id,
-        photo_attractions_attributes: :photo)
+      params.require(:attraction).permit(
+          :site,
+          :email,
+          :address,
+          :latitude,
+          :longitude,
+          :reference_point,
+          :active,
+          :timestamp,
+          :accessibility,
+          :price,
+          :city_id,
+          :web_user_id,
+          attraction_translations_attributes: [:id,:name,:schedule,:transport,:language,:description,:event_id, :_destroy],
+          attraction_types_attributes: [:id,:attraction_id,:type_id,:_destroy],
+          photo_attractions_attributes: :photo
+      )
     end
 
     def user_is_current_user
