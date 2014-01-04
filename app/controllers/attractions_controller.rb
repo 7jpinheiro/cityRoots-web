@@ -8,8 +8,8 @@ class AttractionsController < ApplicationController
   def index
     @attractions=Attraction.all
     respond_to do |format|
-      format.html { @attractions }
-      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+      format.html{}
+      format.json{render :json => @attractions.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
     end
   end
 
@@ -17,10 +17,9 @@ class AttractionsController < ApplicationController
   # GET /attractions/1.json
   def show
     @attraction=Attraction.find(params[:id])
-    @photo_attraction=PhotoAttraction.where("attraction_id = ?",params[:id])
     respond_to do |format|
       format.html { @attraction }
-      format.json { render :json => { :attraction =>@attraction,:photo_attraction => @photo_attraction }}
+      format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
     end
   end
 

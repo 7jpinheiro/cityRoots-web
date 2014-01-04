@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-md-8">
                 <h4>
-                  <strong><%= link_to trans.name, event %></strong>
+                  <strong><%= link_to trans.name, attraction %></strong>
                   <% if attraction.accessibility != 0 %>
                       <small><i class="fa fa-wheelchair"></i></small>
                   <% end %>
@@ -57,14 +57,16 @@
               %>
 
               <p>
-                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', event %>
-                <b>Preço:</b><%= attraction.price %><br/>
+                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', attraction %><br/>
+                <b>Horário:</b><%= trans.schedule %><br/>
+                <b>Transporte:</b><%= trans.transport %><br/>
+                <b>Preço:</b><%= attraction.price %>
               </p>
               <hr/>
               <div class="row rating-desc">
                 <div class="col-md-12">
                   <%
-                     val=event.rating
+                     val=attraction.rating
                      indice=0;
                      while val >0
                   %><span class="fa fa-star"></span><%
