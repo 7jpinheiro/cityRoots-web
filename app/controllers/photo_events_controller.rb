@@ -24,17 +24,17 @@ class PhotoEventsController < ApplicationController
   # POST /photo_events
   # POST /photo_events.json
   def create
-    @photo_event = PhotoEvent.new(photo_event_params)
+    @photo_event = PhotoEvent.create photo_event_params
 
-    respond_to do |format|
-      if @photo_event.save
-        format.html { redirect_to @photo_event, notice: 'Photo event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo_event }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @photo_event.errors, status: :unprocessable_entity }
-      end
-    end
+  #  respond_to do |format|
+  #    if @photo_event.save
+  #      format.html { redirect_to @photo_event, notice: 'Photo event was successfully created.' }
+  #      format.json { render action: 'show', status: :created, location: @photo_event }
+  #    else
+  #      format.html { render action: 'new' }
+  #      format.json { render json: @photo_event.errors, status: :unprocessable_entity }
+  #    end
+  #  end
   end
 
   # PATCH/PUT /photo_events/1

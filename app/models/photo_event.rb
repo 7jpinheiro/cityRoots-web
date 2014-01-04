@@ -14,5 +14,6 @@ class PhotoEvent < ActiveRecord::Base
 
 
 	belongs_to :event
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100" }
+  has_attached_file :photo, :styles => { :medium => "3000x3000#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/:style/missing.png"
+
 end

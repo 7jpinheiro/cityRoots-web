@@ -176,6 +176,39 @@
         <%
            end
         %>
+        <ul class="thumbnails"></ul>
+        <%= form_for @photo_event=PhotoEvent.new, :url => photo_events_path, html: { multipart: true } do |f| %>
+            <% if @photo_event.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@photo_event.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+
+                  <ul>
+                    <% @photo_event.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <div class="actions">
+              <%= f.label :photo %>
+              <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]' %>
+              <%= f.hidden_field :event_id,  :value => @event.id %>
+            </div>
+        <% end %>
+
+        <% # jquery upload template # %>
+        <script id="template-upload" type="text/x-tmpl">
+            <div class="upload">
+            {%=o.name%}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                     <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <br/>
         <!-- Value by sustem-->
         <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
         <%= f.text_field :city_id ,:id=>"city_id", :value=>cityid , :hidden=>"hidden" %>

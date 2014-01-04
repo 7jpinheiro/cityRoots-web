@@ -161,6 +161,36 @@
            end
         %>
       </dl>
+      <ul class="thumbnails"></ul>
+      <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
+          <% if @photo_attraction.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+
+                <ul>
+                  <% @photo_attraction.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="actions">
+            <%= f.label :photo %>
+            <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]' %>
+            <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
+          </div>
+      <% end %>
+      <% # jquery upload template # %>
+      <script id="template-upload" type="text/x-tmpl">
+            <div class="upload">
+            {%=o.name%}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                     <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </script>
       <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
     <div class="col-sm-6">

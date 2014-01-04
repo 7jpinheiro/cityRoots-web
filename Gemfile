@@ -6,7 +6,7 @@ gem 'crummy'
 
 # Use postgreSQL as the database for Active Record
 gem 'pg'
-gem 'paperclip'
+gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
 gem 'rabl'
 

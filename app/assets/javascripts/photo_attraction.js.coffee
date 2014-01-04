@@ -1,7 +1,7 @@
 jQuery ->
   $('#photo_attraction_photo').attr('name','photo_attraction[photo]')
 
-  $('#new_photo_event').fileupload
+  $('#new_photo_attraction').fileupload
     dataType: 'script'
     add: (e, data) ->
       types = /(\.|\/)(gif|jpe?g|png|mov|mpeg|mpeg4|avi)$/i

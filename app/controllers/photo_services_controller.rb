@@ -24,17 +24,17 @@ class PhotoServicesController < ApplicationController
   # POST /photo_services
   # POST /photo_services.json
   def create
-    @photo_service = PhotoService.new(photo_service_params)
+    @photo_service = PhotoService.create photo_service_params
 
-    respond_to do |format|
-      if @photo_service.save
-        format.html { redirect_to @photo_service, notice: 'Photo service was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo_service }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @photo_service.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+    #  if @photo_service.save
+    #    format.html { redirect_to @photo_service, notice: 'Photo service was successfully created.' }
+    #    format.json { render action: 'show', status: :created, location: @photo_service }
+    #  else
+    #    format.html { render action: 'new' }
+    #    format.json { render json: @photo_service.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /photo_services/1

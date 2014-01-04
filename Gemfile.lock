@@ -148,7 +148,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   json
-  paperclip
+  paperclip (~> 3.0)
   pg
   rabl
   rails (= 4.0.1)
