@@ -10,7 +10,6 @@ class EventsController < ApplicationController
       format.json{render :json => @events.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }
     end
   end
-
   # GET /events/1
   # GET /events/1.json
   def show
