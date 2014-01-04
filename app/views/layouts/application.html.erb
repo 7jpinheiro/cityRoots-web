@@ -64,7 +64,8 @@
                else
             %><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
                end%>
-              <ul class="dropdown-menu dropdown-menu-square" style="width:200px;background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
+              <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
+              <ul class="dropdown-menu dropdown-menu-square" style="width:200px;">
                 <li>
                   <%= link_to profiles_index_path , :style=>"color: #FFFFFF;" do
                   %>
@@ -87,7 +88,8 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63);">
+              <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
+              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;">
                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
                     <li><%= f.email_field :email, :autofocus => true, :style=>"margin-left: 25px;margin-bottom:10px;width: 250px;", :class=>"form-control form-control-square", :placeholder=>"Email" %></li>
                     <li><%= f.password_field :password , :style=>"margin-left: 25px;margin-bottom:10px;width: 250px;", :class=>"form-control form-control-square", :placeholder=>"Password" %></li>
@@ -97,7 +99,7 @@
                     <li><%= f.submit "Login" , :style=>"margin-left: 25px;margin-right: 25px;width: 250px;", :class=>"btn btn-s btn-info btn-square" %></li>
                 <% end %>
                 <li class="divider"></li>
-                <li><%= link_to new_user_registration_path ,:style=>"color: #FFFFFF;" do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
+                <li><%= link_to new_user_registration_path do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
                 <li><a href="#" style="color: #3b5998;"><i class="fa fa-facebook-square fa-fw" style="margin-left: 5px;"></i> Login by Facebook</a></li>
                 <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
 
