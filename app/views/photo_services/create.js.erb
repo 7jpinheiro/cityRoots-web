@@ -1,0 +1,11 @@
+<% if @photo_service.new_record? %>
+alert('Failed');
+<% else %>
+alert('entra create');
+if ($('div.upload') !== undefined) {
+    $('div.upload').remove();
+}
+if ($('ul.thumbnails') !== undefined) {
+    $('ul.thumbnails').append("<%=j render partial: 'photo_services/upload', locals: { photo_service: @photo_service } %>");
+}
+<% end %>

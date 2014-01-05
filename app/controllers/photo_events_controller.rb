@@ -69,6 +69,6 @@ class PhotoEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_event_params
-      params.require(:photo_event).permit(:name, :description, :photo, :event_id)
+      params.require(:photo_event).permit(:description, :photo, :event_id)
     end
 end

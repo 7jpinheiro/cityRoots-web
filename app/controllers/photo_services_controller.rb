@@ -69,6 +69,6 @@ class PhotoServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_service_params
-      params.require(:photo_service).permit(:url, :name, :description, :extension)
+      params.require(:photo_service).permit( :description, :photo, :service_id)
     end
 end

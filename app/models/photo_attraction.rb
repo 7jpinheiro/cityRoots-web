@@ -12,7 +12,7 @@
 
 class PhotoAttraction < ActiveRecord::Base
   	validates :attraction_id, presence:true
-	belongs_to :attraction
+	  belongs_to :attraction
 
   	#
   	## Validations
