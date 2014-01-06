@@ -22,7 +22,7 @@ Páginas:
 
 Funcionalidades:
 
-[X] - Imagens com paperclip e jQuery File Upload
+[X] - Imagens com paperclip e jQuery File Upload  
 [ ] - Aninhamento dos modulos   
 [X] - Mapas   
 [X] - Login com devise  
