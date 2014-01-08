@@ -27,6 +27,7 @@ class AttractionsController < ApplicationController
   def new
     @attraction = Attraction.new
     1.times{@attraction.attraction_translations.build}
+    1.times{@attraction.attraction_types.build}
   end
 
   # GET /attractions/1/edit
@@ -84,16 +85,26 @@ class AttractionsController < ApplicationController
           :site,
           :email,
           :address,
+          :phone,
           :latitude,
           :longitude,
+          :source,
           :reference_point,
           :active,
           :timestamp,
           :accessibility,
-          :price,
           :city_id,
           :web_user_id,
-          attraction_translations_attributes: [:id,:name,:schedule,:transport,:language,:description,:event_id, :_destroy],
+          attraction_translations_attributes: [
+              :id,
+              :name,
+              :schedule,
+              :price,
+              :language_id,
+              :description,
+              :transport,
+              :attraction_id
+          ],
           attraction_types_attributes: [:id,:attraction_id,:type_id,:_destroy],
           photo_attractions_attributes: :photo
       )

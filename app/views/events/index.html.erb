@@ -1,4 +1,4 @@
-<h1>Lista dos seus eventos Eventos</h1>
+<h1>Lista dos seus Eventos</h1>
 <%= csrf_meta_tags %>
 <br>
 <%= link_to 'Novo Evento', new_event_path, :class=>"btn btn-primary btn-square" %>
@@ -58,7 +58,7 @@
           <p>
             <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', event %>
           </p>
-            <b>Preço:</b><%= event.price %><br/>
+            <b>Preço:</b><%= trans.price %><br/>
           </p>
           <p>
               <b>Data inicio:</b><%= event.startdate %> <br/>

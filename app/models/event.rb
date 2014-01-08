@@ -33,8 +33,6 @@ class Event < ActiveRecord::Base
   validates :startdate, presence:true
   validates :enddate, presence:true
   validates :organization , presence: false
-  validates :price , presence: false
-  validates :program, presence:true ,length: {minimum: 2}
   validates :rating, presence: false
 
   has_many :rating_events, dependent: :destroy
