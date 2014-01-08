@@ -62,10 +62,31 @@
               </div>
             </div>
             <br/>
+            <div class="row">
+              <div class="form-group">
+                <%= e.label "Preço" ,:for=>"price" , :class=>"col-sm-1 control-label" %>
+                <div class="col-sm-6">
+                  <div class="input-group">
+                    <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
+                    <span class="input-group-addon">€</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group">
+                <%= e.label "Programação" ,:for=>"program" , :class=>"col-sm-1 control-label" %>
+                <div class="col-sm-6">
+                  <%= e.text_field :program ,:id=>"program" , :class=>"form-control form-control-square" , :placeholder=>"15 horas Abertura oficial"%>
+                </div>
+              </div>
+            </div>
+            <br/>
             <%
                lang=Language.where("id=?",current_user.language_id).first
             %>
-            <%= e.text_field :language , :type=>"hidden" , :value=>lang.name%>
+            <%= e.text_field :language_id , :type=>"hidden" , :value=>lang.id%>
         <% end %>
         <div class="row">
           <div class="form-group">
@@ -81,6 +102,15 @@
             <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
             <div class="col-sm-6">
               <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@festasaojoao.pt" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Telefone" ,:for=>"phone" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control form-control-square", :placeholder=>"253 323 532" %>
             </div>
           </div>
         </div>
@@ -126,30 +156,18 @@
         <br/>
         <div class="row">
           <div class="form-group">
+            <%= f.label "Origem" ,:for=>"source" , :class=>"col-sm-1 control-label" %>
+            <div class="col-sm-6">
+              <%= f.text_area :source ,:id=>"source" , :class=>"form-control  form-control-square", :placeholder=>"Tradição começada a 2 anos..." , :style=>"height:135px;"%>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
             <%= f.label "Organização" ,:for=>"organization" , :class=>"col-sm-1 control-label" %>
             <div class="col-sm-6">
               <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control form-control-square" , :placeholder=>"Camara de Braga"%>
-            </div>
-          </div>
-        </div>
-        <br/>
-        <div class="row">
-          <div class="form-group">
-            <%= f.label "Preço" ,:for=>"price" , :class=>"col-sm-1 control-label" %>
-            <div class="col-sm-6">
-              <div class="input-group">
-                <%= f.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
-                <span class="input-group-addon">€</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br/>
-        <div class="row">
-          <div class="form-group">
-            <%= f.label "Programação" ,:for=>"program" , :class=>"col-sm-1 control-label" %>
-            <div class="col-sm-6">
-              <%= f.text_field :program ,:id=>"program" , :class=>"form-control form-control-square" , :placeholder=>"15 horas Abertura oficial"%>
             </div>
           </div>
         </div>

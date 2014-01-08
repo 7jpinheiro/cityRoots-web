@@ -63,7 +63,7 @@
           <%
              lang=Language.where("id=?",current_user.language_id).first
           %>
-          <%= e.text_field :language , :type=>"hidden" , :value=>lang.name%>
+          <%= e.text_field :language_id , :type=>"hidden" , :value=>lang.id%>
       <% end %>
       <div class="row">
         <div class="form-group">

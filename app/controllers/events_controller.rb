@@ -25,7 +25,6 @@ class EventsController < ApplicationController
   def new
     add_crumb "Novo", ""
     @event = Event.new
-    1.times{@event.photo_events.build}
     1.times{@event.event_translations.build}
     1.times{@event.event_types.build}
   end
@@ -82,7 +81,44 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through. 
     def event_params
-      params.require(:event).permit(:id,:site,:email,:address,:latitude,:longitude,:startdate,:enddate,:organization,:price,:program,:rating,:photo_events,:accessibility,:city_id,:timestamp,:active,:web_user_id,event_types_attributes:[:id,:event_id,:type_id, :_destroy],event_translations_attributes: [:id,:name,:schedule,:transport,:language,:description,:event_id, :_destroy],photo_events_attributes: [:id,:name,:photo_file_name,:photo_content_type,:photo_file_size,:photo_updated_at,:description,:image,:event_id, :_destroy])
+      params.require(:event).permit(
+          :id,
+          :site,
+          :email,
+          :address,
+          :phone,
+          :latitude,
+          :longitude,
+          :startdate,
+          :enddate,
+          :organization,
+          :source,
+          :rating,
+          :photo_events,
+          :accessibility,
+          :city_id,
+          :timestamp,
+          :active,
+          :web_user_id,
+          event_types_attributes:[
+              :id,
+              :event_id,
+              :type_id,
+              :_destroy
+          ],
+          event_translations_attributes: [
+              :id,
+              :name,
+              :schedule,
+              :price,
+              :language_id,
+              :program,
+              :description,
+              :transport,
+              :event_id,
+              :_destroy
+          ],
+          photo_events_attributes: [:id,:name,:photo_file_name,:photo_content_type,:photo_file_size,:photo_updated_at,:description,:image,:event_id, :_destroy])
     end
 
 end

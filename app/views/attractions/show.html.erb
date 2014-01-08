@@ -28,11 +28,14 @@
           map = new google.maps.Map(document.getElementById('map-canvas'),
                   mapOptions);
 
+          var image="<%= image_url "maker.png"%>";
+
           marker = new google.maps.Marker({
               map:map,
               draggable:true,
               animation: google.maps.Animation.DROP,
-              position: parliament
+              position: parliament,
+              icon: image
           });
           google.maps.event.addListener(marker, 'click', toggleBounce);
           //Associate the styled map with the MapTypeId and set it to display.
@@ -139,10 +142,22 @@
             <dd><%= @attraction.email %></dd>
         <%
            end
+           if @attraction.phone != nil
+        %>
+            <dt>Email</dt>
+            <dd><%= @attraction.phone %></dd>
+        <%
+           end
            if trans.transport != nil
         %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
+        <%
+           end
+           if @attraction.source != nil
+        %>
+            <dt>Email</dt>
+            <dd><%= @attraction.source %></dd>
         <%
            end
            if @attraction.reference_point == true
@@ -153,10 +168,10 @@
             </dd>
             <%
             end
-           if @attraction.price != nil
+           if trans.price != nil
         %>
             <dt>Preço</dt>
-            <dd><%= @attraction.price %></dd>
+            <dd><%= trans.price %></dd>
         <%
            end
         %>

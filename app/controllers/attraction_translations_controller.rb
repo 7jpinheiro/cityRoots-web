@@ -69,6 +69,15 @@ class AttractionTranslationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attraction_translation_params
-      params.require(:attraction_translation).permit(:name, :schedule, :language, :description, :transport)
+      params.require(:attraction_translation).permit(
+          :id,
+          :name,
+          :schedule,
+          :price,
+          :language_id,
+          :description,
+          :transport,
+          :attraction_id
+      )
     end
 end

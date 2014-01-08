@@ -29,11 +29,14 @@
         map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
 
+        var image="<%= image_url "maker.png"%>";
+
         marker = new google.maps.Marker({
             map:map,
             draggable:true,
             animation: google.maps.Animation.DROP,
-            position: parliament
+            position: parliament,
+            icon: image
         });
         google.maps.event.addListener(marker, 'click', toggleBounce);
         //Associate the styled map with the MapTypeId and set it to display.
@@ -137,6 +140,12 @@
             <dd><%= @event.email %></dd>
         <%
            end
+           if @event.phone != nil
+        %>
+            <dt>Telemovel</dt>
+            <dd><%= @event.phone %></dd>
+        <%
+           end
            if trans.transport != nil
         %>
             <dt>Transporte</dt>
@@ -156,10 +165,10 @@
             </dd>
         <%
            end
-           if @event.price != nil
+           if trans.price != nil
         %>
             <dt>Preço</dt>
-            <dd><%= @event.price %></dd>
+            <dd><%= trans.price %></dd>
         <%
            end
            if @event.organization != nil
@@ -168,10 +177,16 @@
             <dd><%= @event.organization %></dd>
         <%
            end
-           if @event.program != nil
+           if trans.program != nil
         %>
             <dt>Programação</dt>
-            <dd><%= @event.program %></dd>
+            <dd><%= trans.program %></dd>
+        <%
+           end
+           if @event.source != nil
+        %>
+            <dt>Origem</dt>
+            <dd><%= @event.source %></dd>
         <%
            end
         %>

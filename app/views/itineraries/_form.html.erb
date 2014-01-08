@@ -58,7 +58,7 @@
           <p class="text-muted">Pontos de interesse</p>
           <div id="field">
             <%= f.fields_for :itinerary_attractions do |builder| %>
-                <%= builder.collection_select(:attraction_id,Attraction.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+                <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
                 <%= link_to_remove_fields "remove", builder %>
             <% end %>
           </div>

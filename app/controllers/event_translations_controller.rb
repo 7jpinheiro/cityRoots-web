@@ -69,6 +69,6 @@ class EventTranslationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_translation_params
-      params.require(:event_translation).permit(:id,:name, :schedule, :language, :description, :transport)
+      params.require(:event_translation).permit(:id,:name, :schedule,:price, :language_id,:program, :description, :transport,:event_id)
     end
 end
