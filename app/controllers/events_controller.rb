@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.web_user.events
+
+    @events = current_user.web_user.events if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
       format.json{render :json => Event.all.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }

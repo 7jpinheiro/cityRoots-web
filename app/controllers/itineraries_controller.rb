@@ -5,7 +5,7 @@ class ItinerariesController < ApplicationController
   # GET /itineraries
   # GET /itineraries.json
   def index
-    @itineraries = current_user.web_user.itinerary
+    @itineraries = current_user.web_user.itinerary if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
       format.json{render :json =>  Itinerary.all.as_json( :include => [:events, :attractions,:services]) }

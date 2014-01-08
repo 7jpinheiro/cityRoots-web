@@ -5,7 +5,7 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions= current_user.web_user.attractions
+    @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
       format.json{render :json => Attraction.all.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }

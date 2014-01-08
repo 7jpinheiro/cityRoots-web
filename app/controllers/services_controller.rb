@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = current_user.web_user.services
+    @services = current_user.web_user.services if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
       format.json{render :json => Service.all.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
