@@ -1,12 +1,11 @@
 class AttractionsController < ApplicationController
-  #before_filter :user_is_current_user
-  skip_before_filter :verify_authenticity_token  
+  load_and_authorize_resource
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
 
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions=Attraction.all
+    @attractions= current_user.web_user.attractions
     respond_to do |format|
       format.html{}
       format.json{render :json => @attractions.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
@@ -32,6 +31,7 @@ class AttractionsController < ApplicationController
 
   # GET /attractions/1/edit
   def edit
+
   end
 
   # POST /attractions

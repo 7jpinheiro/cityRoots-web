@@ -10,6 +10,8 @@ gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
 gem 'rabl'
 
+gem 'cancan'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

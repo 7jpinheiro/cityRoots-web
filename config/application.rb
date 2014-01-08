@@ -36,8 +36,6 @@ module CityRootsWeb
         :host => "cityroots.com"
     }
 
-
-
   end
 
 
