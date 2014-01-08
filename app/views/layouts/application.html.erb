@@ -38,13 +38,21 @@
            if user_signed_in?
         %>
             <li><%= link_to "Perfil" , profiles_index_path  %></li>
-            <li><%= link_to "Pontos de interesse" , attractions_path  %></li>
-            <li><%= link_to "Eventos" , events_path  %></li>
-            <li><%= link_to "Rotas" , itineraries_path  %></li>
-            <li><%= link_to "Serviços" , services_path  %></li>
         <%
+                if current_user.role? (:entidade)
+        %>
+                <li><%= link_to "Pontos de interesse" , attractions_path  %></li>
+                <li><%= link_to "Eventos" , events_path  %></li>
+                <li><%= link_to "Rotas" , itineraries_path  %></li>
+        <%
+                end
+                if current_user.role? (:restauracao)
+        %>
+                <li><%= link_to "Serviços" , services_path  %></li>
+        <%
+                end
             else
-           %>
+        %>
             <li><%= link_to "Home" , welcome_index_path  %></li>
             <li><%= link_to "Web" , web_index_path %></li>
             <li><%= link_to "Mobile", mobile_index_path  %></li>
@@ -68,7 +76,7 @@
               <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
               <ul class="dropdown-menu dropdown-menu-square" style="width:200px;">
                 <li>
-                  <%= link_to profiles_index_path , :style=>"color: #FFFFFF;" do
+                  <%= link_to profiles_index_path do
                   %>
                     <i class="fa fa-cogs"></i> Perfil
                   <%
@@ -76,7 +84,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to destroy_install_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete, :style=>"color: #FFFFFF;" do%>
+                  <%= link_to destroy_install_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete do%>
                       <i class="fa fa-times-circle" style="margin-left: 8px;"></i> Logout
                   <%end%>
                 </li>

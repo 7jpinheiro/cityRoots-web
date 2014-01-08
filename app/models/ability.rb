@@ -8,6 +8,11 @@ class Ability
       can :manage, Attraction, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
       can :manage, Itinerary, :web_user_id => user.id
+      can :manage, AttractionTranslation, :web_user_id => user.id
+      can :manage, AttractionType, :web_user_id => user.id
+      can :create, Attraction
+      can :create, AttractionTranslation
+      can :create, AttractionType
     end
 
     if user.role?(:restauracao)
@@ -23,7 +28,7 @@ class Ability
     end
 
     can :read, :all
-
+    can :manage, :all
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -1,5 +1,5 @@
 class AttractionsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:create]
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
 
   # GET /attractions

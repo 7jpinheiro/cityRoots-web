@@ -1,7 +1,16 @@
 class ServicesController < ApplicationController
-  load_and_authorize_resource
+  
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+  
+  load_and_authorize_resource 
+
+
   # GET /services
   # GET /services.json
   def index

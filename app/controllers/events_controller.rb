@@ -1,5 +1,12 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
+  
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   
   # GET /events
