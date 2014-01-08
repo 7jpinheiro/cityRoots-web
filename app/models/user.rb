@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     puts "create ---------------------" + @list_roles.inspect + "-----------------------------"
     if self.web_user
       @list_roles.push "restauracao" if self.web_user.web_user_type.name == "Restauração"
-      @list_roles.push "entidade" if self.web_user.web_user_type.name == "Turismo"
+      @list_roles.push "entidade" if self.web_user.web_user_type.name == "Turismo/Câmara"
     end
     @list_roles.push "mobile" if self.mobile_user
   end
