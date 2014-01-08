@@ -5,10 +5,10 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+    @services = current_user.web_user.services
     respond_to do |format|
       format.html{}
-      format.json{render :json => @services.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
+      format.json{render :json => Service.all.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
     end
   end
 

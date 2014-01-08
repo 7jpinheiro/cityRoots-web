@@ -5,10 +5,10 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = current_user.web_user.events
     respond_to do |format|
       format.html{}
-      format.json{render :json => @events.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }
+      format.json{render :json => Event.all.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }
     end
   end
   # GET /events/1

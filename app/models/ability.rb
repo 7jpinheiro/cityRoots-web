@@ -4,28 +4,25 @@ class Ability
   def initialize(user)
     user ||= User.new # Guest user
     if user.role?(:entidade)
-      puts "entra ---------------------------"
+      can :read, :all
       can :manage, Attraction, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
       can :manage, Itinerary, :web_user_id => user.id
-    else
-      puts "nao é ENTIDADE ---------------------------"
     end
 
     if user.role?(:restauracao)
-      puts "entra2 ---------------------------"
+      can :read, :all
       can :manage, Service, :web_user_id => user.id
-    else
-      puts "nao é REST ---------------------------"
     end
+
     if user.role?(:mobile)
-      puts "entra3 ---------------------------"
+      can :read, :all
       can :read, Attraction
       can :read, Service
       can :read, Event
-    else
-      puts "nao é MOBILE ---------------------------"
     end
+
+    can :read, :all
 
     # Define abilities for the passed in user here. For example:
     #

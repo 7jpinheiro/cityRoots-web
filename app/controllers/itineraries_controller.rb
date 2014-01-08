@@ -5,10 +5,10 @@ class ItinerariesController < ApplicationController
   # GET /itineraries
   # GET /itineraries.json
   def index
-    @itineraries = Itinerary.all
+    @itineraries = current_user.web_user.itinerary
     respond_to do |format|
       format.html{}
-      format.json{render :json => @itineraries.as_json( :include => [:events, :attractions,:services]) }
+      format.json{render :json =>  Itinerary.all.as_json( :include => [:events, :attractions,:services]) }
     end
   end
 
@@ -19,7 +19,6 @@ class ItinerariesController < ApplicationController
 
   # GET /itineraries/new
   def new
-    add_crumb "Novo", ""
     @itinerary = Itinerary.new
     1.times{@itinerary.itinerary_attractions.build}
     1.times{@itinerary.itinerary_events.build}
