@@ -11,7 +11,7 @@
 #
 
 class MobileUser < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :user, :foreign_key => "id"
 	has_many :comments_events, dependent: :destroy
 	has_many :comments_services, dependent: :destroy
 	has_many :comments_attractions, dependent: :destroy
