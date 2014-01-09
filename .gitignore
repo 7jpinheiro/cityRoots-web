@@ -25,6 +25,8 @@ doc/
 .idea
 .secret
 
+public/system/photo_services
+
 app/assets/.DS_Store
 
 app/.DS_Store
