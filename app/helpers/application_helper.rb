@@ -12,13 +12,6 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
 
-  def is_active?(link_path)
-    if current_page?(link_path)
-      "active"
-    else
-      ""
-    end
-  end
 
   def is_active?(link_path)
     if current_page?(link_path)

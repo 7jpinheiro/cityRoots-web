@@ -24,16 +24,17 @@ class PhotoAttractionsController < ApplicationController
   # POST /photo_attractions
   # POST /photo_attractions.json
   def create
-    @photo_attraction = PhotoAttraction.create photo_attraction_params
-    #respond_to do |format|
-    #  if @photo_attraction.save
-    #    format.html { redirect_to @photo_attraction, notice: 'Photo attraction was successfully created.' }
-    #    format.json { render action: 'show', status: :created, location: @photo_attraction }
-    #  else
-    #    format.html { render action: 'new' }
-    #    format.json { render json: @photo_attraction.errors, status: :unprocessable_entity }
-    #  end
-    #end
+    puts "------------------ create" + photo_attraction_params.inspect + "------------------"
+    @photo_attraction = PhotoAttraction.new(photo_attraction_params)
+    puts "------------------ hhjhjhj" + @photo_attraction.inspect + "------------------"
+
+      if @photo_attraction.save
+        puts "------------------ create successfully"
+        flash.now[:alert] = 'Save photo attraction!'
+      else
+        puts "------------------ create error"
+        flash.now[:alert] = 'Error while saving photo attraction!'
+      end
   end
 
   # PATCH/PUT /photo_attractions/1

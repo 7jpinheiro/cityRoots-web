@@ -1,7 +1,7 @@
-<% if @photo_event.new_record? %>
+<% puts @photo_event.inspect + "---------------------"
+if @photo_event.new_record? %>
 alert('Failed');
 <% else %>
-alert('entra create');
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();
 }

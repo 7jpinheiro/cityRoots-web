@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
-  
+
   load_and_authorize_resource 
 
 
@@ -47,6 +47,19 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.json
   def create
+    @num_serv = current_user.web_user.services. 
+    íf(current_user.role? :comercial_basic )
+      if(num_serv<1)
+
+      else
+        errors
+        
+    íf(current_user.role? :comercial_basic )
+      if(num_serv<5)
+
+      else
+        errors
+
     @service = Service.new(service_params)
     respond_to do |format|
       if @service.save

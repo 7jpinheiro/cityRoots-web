@@ -1,4 +1,6 @@
-<% if @photo_attraction.new_record? %>
+
+<% puts @photo_attraction.inspect + "---------------------"
+if @photo_attraction.new_record? %>
 alert('Failed');
 <% else %>
 if ($('div.upload') !== undefined) {

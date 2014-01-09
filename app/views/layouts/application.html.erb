@@ -12,6 +12,7 @@
   <!-- Bootstrap core CSS -->
   <%= stylesheet_link_tag "bootstrap", "bootflat-extensions","bootflat-square", "screen" %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <%= javascript_include_tag "application" %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <%= javascript_include_tag "html5shiv", "respond.min" %>
@@ -20,14 +21,14 @@
 
 <body>
 <!-- NAV Bar-->
-<header class="navbar navbar-inverse navbar-fixed-top bf-docs-nav" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <%= image_tag "Index/logo_CR.png", :style=>"width: 20px;height: 20px;" %>
+        <%= image_tag "Index/logo_CR.png", :style=>"width: 18px;height: 18px;" %>
         <%= link_to "CityRoots" , welcome_index_path , :style => "color:inherit;text-decoration:none;cursor:pointer;" %>
       </span>
     </div>
@@ -37,30 +38,49 @@
         <%
            if user_signed_in?
         %>
-            <li><%= link_to "Perfil" , profiles_index_path  %></li>
         <%
                 if current_user.role? (:entidade)
         %>
-                <li><%= link_to "Pontos de interesse" , attractions_path  %></li>
-                <li><%= link_to "Eventos" , events_path  %></li>
-                <li><%= link_to "Rotas" , itineraries_path  %></li>
+              <li class="<%= is_active?(attractions_path) %>"> 
+                <%= link_to "Pontos de interesse" , attractions_path  %>
+              </li>
+              <li class="<%= is_active?(itineraries_path) %>"> 
+                <%= link_to "Rotas" , itineraries_path  %>
+              </li>
+              <li class="<%= is_active?(events_path) %>"> 
+                <%= link_to "Eventos" , events_path  %>
+              </li>
         <%
                 end
                 if current_user.role? (:restauracao)
         %>
-                <li><%= link_to "Serviços" , services_path  %></li>
+              <li class="<%= is_active?(services_path) %>">                 
+                <%= link_to "Serviços" , services_path  %>
+              </li>
         <%
                 end
             else
         %>
-            <li><%= link_to "Home" , welcome_index_path  %></li>
-            <li><%= link_to "Web" , web_index_path %></li>
-            <li><%= link_to "Mobile", mobile_index_path  %></li>
-            <li><%= link_to "Galeria", galeria_path  %></li>
-            <li><%= link_to "Contactos", contact_path %></li>
+            <li class="<%= is_active?(welcome_index_path) %>"> 
+              <%= link_to "Home" , welcome_index_path  %>
+            </li>
+            <li class="<%= is_active?(web_index_path) %>"> 
+
+              <%= link_to "Web" , web_index_path %>
+            </li>
+            <li class="<%= is_active?(mobile_index_path) %>"> 
+
+              <%= link_to "Mobile", mobile_index_path  %>
+            </li>
+            <li class="<%= is_active?(galeria_path) %>"> 
+              <%= link_to "Galeria", galeria_path  %>
+            </li>
             <%
            end
         %>
+        <li class="<%= is_active?(contact_path) %>"> 
+          <%= link_to "Contactos", contact_path %>
+        </li>
       </ul>
       <%
          if user_signed_in?
@@ -74,7 +94,7 @@
             %><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
                end%>
               <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
-              <ul class="dropdown-menu dropdown-menu-square" style="width:200px;">
+              <ul class="dropdown-menu dropdown-menu-square">
                 <li>
                   <%= link_to profiles_index_path do
                   %>
@@ -221,7 +241,7 @@
         s.parentNode.insertBefore(t, s);
     })();
 </script>
-<%= javascript_include_tag "application" %>
+
 <%= javascript_include_tag "bootstrap.min"%>
 </body>
 

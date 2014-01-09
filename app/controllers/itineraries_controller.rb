@@ -1,5 +1,5 @@
 class ItinerariesController < ApplicationController
-  load_and_authorize_resource
+  
   before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
   before_filter do
@@ -7,6 +7,8 @@ class ItinerariesController < ApplicationController
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
+  
+  load_and_authorize_resource
 
   # GET /itineraries
   # GET /itineraries.json
