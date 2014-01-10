@@ -14,7 +14,9 @@ CityRootsWeb::Application.routes.draw do
   get "web/index"
   get "galeria/index"
   get "pacotes/index"
-
+  get "payments/new"
+  get "payments/sucess"
+  get "payments/failure"
 
 
   devise_for :installs

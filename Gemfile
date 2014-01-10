@@ -60,3 +60,8 @@ gem 'json'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+
+#gem activemerchant
+gem 'activemerchant'
