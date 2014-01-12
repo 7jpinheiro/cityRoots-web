@@ -170,7 +170,6 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   json
-  nested_form
   paperclip (~> 3.0)
   pg
   rabl
