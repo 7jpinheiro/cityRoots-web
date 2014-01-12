@@ -58,19 +58,25 @@
 <style>
     #map-canvas { height: 100% }
 </style>
-<div class="well well-lg">
+<div class="page-header">
   <h1>
     <%= trans.name%>
     <% if @attraction.accessibility != 0 %>
         <small><i class="fa fa-wheelchair"></i></small>
     <% end %>
-  </h1>
-  <br/>
+
+  </h1><br/>
   <%= link_to edit_attraction_path(@attraction) do
   %><i class="fa fa-edit"></i> Editar<%
    end
 %>
-  <hr/>
+
+</div>
+
+<div class="well well-lg">
+
+
+
   <div class="row">
     <div class="col-md-6">
       <dl class="dl-horizontal">

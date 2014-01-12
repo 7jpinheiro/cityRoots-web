@@ -14,6 +14,7 @@ class ItinerariesController < ApplicationController
   # GET /itineraries.json
   def index
     @itinerary = Itinerary.where("user_id=?",current_user.id).all;
+    @itineraries = current_user.itineraries if  current_user
     respond_to do |format|
       format.html{ }
       format.json{render :json =>  Itinerary.all.as_json( :include => [:itinerary_events,:itinerary_attractions,:itinerary_services,:events, :attractions,:services]) }
