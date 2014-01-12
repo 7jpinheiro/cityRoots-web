@@ -11,7 +11,7 @@ gem 'jquery-fileupload-rails'
 gem 'rabl'
 
 gem 'cancan'
-
+gem "nested_form"
 # used to get Rails variables in JS
 gem 'gon'
 # Use SCSS for stylesheets
