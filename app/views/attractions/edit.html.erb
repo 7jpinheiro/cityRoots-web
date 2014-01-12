@@ -1,3 +1,12 @@
+<div class="page-header">
+  <h1>
+    <%= @attraction.attraction_translations.first.name %>
+    <% if @attraction.accessibility != 0 %>
+        <small><i class="fa fa-wheelchair"></i></small>
+    <% end %>
+  </h1>
+</div>
+
 <%= csrf_meta_tag %>
 
 <%= render 'form' %>

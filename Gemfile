@@ -8,10 +8,12 @@ gem 'crummy'
 gem 'pg'
 gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
+
 gem 'rabl'
 
 gem 'cancan'
-
+# used to get Rails variables in JS
+gem 'gon'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

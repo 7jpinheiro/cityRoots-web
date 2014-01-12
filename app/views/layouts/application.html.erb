@@ -7,6 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>CityRoots</title>
+  <%= include_gon %>
   <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <!-- Bootstrap core CSS -->
@@ -17,11 +18,12 @@
   <!--[if lt IE 9]>
   <%= javascript_include_tag "html5shiv", "respond.min" %>
   <![endif]-->
+
 </head>
 
 <body>
 <!-- NAV Bar-->
-<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
@@ -144,16 +146,10 @@
 <br/>
 <br/>
 <br/>
-<div class="row">
-  <div class="col-md-1">
-  </div>
-  <div class="col-md-10" id="body-page">
-    <div class="center_body">
+<div class="container">
+    <div class="bs-docs-section">
       <%= yield %>
     </div>
-  </div>
-  <div class="col-md-1">
-  </div>
 </div><!--/row-->
 <hr/>
 <!--

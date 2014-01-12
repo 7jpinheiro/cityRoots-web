@@ -11,19 +11,21 @@
 	<% end %>
     <form role="form" class="form-horizontal">
       <%
-         @user=WebUser.where("id=?",current_user.id).all
-         if @user.length==0
-      %>
-          <script type="text/javascript">
-              window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
-          </script>
-      <%
-         else
-           cityid=@user.first.city_id
-         end
+        cityid=current_user.web_user.city_id
       %>
       <div style="position:relative;">
-        <%= f.fields_for :attraction_translations do |e| %>
+        <%= f.hidden_field :id , :value=>@attraction.id%>
+        <%= f.fields_for @attraction_translation do |e| %>
+            <div class="row">
+              <div class="form-group">
+                <%= e.label "Linguagem" ,:for=>"language_id" , :class=>"col-sm-1 control-label" %>
+                <div class="col-sm-6">
+                  <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Linguagem", selected: @attraction_translation}, {class: "form-control form-control-square"}) %>
+                </div>
+              </div>
+            </div>
+            <br/>
+
             <div class="row">
               <div class="form-group">
                 <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
@@ -33,6 +35,7 @@
               </div>
             </div>
             <br/>
+
             <div class="row">
               <div class="form-group">
                 <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
@@ -182,3 +185,4 @@
       </div>
     </form>
 <% end %>
+

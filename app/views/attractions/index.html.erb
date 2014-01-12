@@ -1,4 +1,6 @@
-<h1>Lista dos seus Pontos de Interesse</h1>
+<div class="page-header">
+    <h1>Lista dos seus Pontos de Interesse</h1>
+</div>
 <%= csrf_meta_tags %>
 <br>
 <%= link_to 'Novo Ponto de Interesse', new_attraction_path, :class=>"btn btn-primary btn-square" %>
@@ -57,7 +59,7 @@
               %>
 
               <p>
-                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <%= link_to 'Ler mais', attraction %><br/>
+                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <br/>
                 <b>Horário:</b><%= trans.schedule %><br/>
                 <b>Transporte:</b><%= trans.transport %><br/>
                 <b>Preço:</b><%= trans.price %>

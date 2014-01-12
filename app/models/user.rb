@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	belongs_to :city
 	belongs_to :language
   has_one :web_user, :foreign_key => "id"
+  has_many :itineraries
   has_one :mobile_user, :foreign_key => "id"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

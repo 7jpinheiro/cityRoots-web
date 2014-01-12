@@ -22,6 +22,8 @@ class AttractionsController < ApplicationController
   # GET /attractions/1.json
   def show
     @attraction=Attraction.find(params[:id])
+    @attraction_translation = @attraction.attraction_translations.first
+
     respond_to do |format|
       format.html { @attraction }
       format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
@@ -31,13 +33,15 @@ class AttractionsController < ApplicationController
   # GET /attractions/new
   def new
     @attraction = Attraction.new
-    1.times{@attraction.attraction_translations.build}
-    1.times{@attraction.attraction_types.build}
+    @attraction_translation = @attraction.attraction_translations.build
+    @attraction.attraction_types.build
   end
 
   # GET /attractions/1/edit
   def edit
-
+    @attraction=Attraction.find(params[:id])
+    @attraction_translation = @attraction.attraction_translations.first
+    gon.attractions_translations =@attraction.attraction_translations
   end
 
   # POST /attractions
@@ -115,12 +119,5 @@ class AttractionsController < ApplicationController
           photo_attractions_attributes: :photo
       )
     end
-
-    def user_is_current_user
-      unless current_user.id == params[:user_id]
-      flash[:notice] = "You may only view your own products."
-      redirect_to root_path
-    end
-  end
 
 end
