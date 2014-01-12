@@ -13,10 +13,10 @@ class ItinerariesController < ApplicationController
   # GET /itineraries
   # GET /itineraries.json
   def index
-    @itineraries = current_user.itineraries if  current_user
+    @itineraries = current_user.web_user.itinerary if  current_user  && current_user.web_user
     respond_to do |format|
-      format.html{}
-      format.json{render :json =>  Itinerary.all.as_json( :include => [:events, :attractions,:services]) }
+      format.html{ }
+      format.json{render :json =>  Itinerary.all.as_json( :include => [:itinerary_events,:itinerary_attractions,:itinerary_services,:events, :attractions,:services]) }
     end
   end
 
@@ -41,6 +41,10 @@ class ItinerariesController < ApplicationController
   # POST /itineraries.json
   def create
     @itinerary = Itinerary.new(itinerary_params)
+    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    print itinerary_params;
+    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
     respond_to do |format|
       if @itinerary.save
         format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
@@ -85,6 +89,32 @@ class ItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_params
-      params.require(:itinerary).permit(:name, :description,:user_id, :itinerary_type_id,itinerary_types_attributes:[:id,:name,:description],rating_itineraries_attributes:[:id,:rating,:evaluationdate,:itinerary_id,:mobile_user_id],comment_itineraries_attributes:[:id,:comment,:evaluationdate,:itinerary_id,:mobile_user_id],itinerary_attractions_attributes:[:id,:order,:itinerary_id,:attraction_id,:_destroy],itinerary_services_attributes:[:id,:order,:itinerary_id,:service_id,:_destroy],itinerary_events_attributes:[:id,:order,:itinerary_id,:event_id,:_destroy])
+      params.require(:itinerary).permit(
+          :name,
+          :description,
+          :user_id,
+          :itinerary_type_id,
+          itinerary_attractions_attributes:[
+              :id,
+              :order,
+              :itinerary_id,
+              :attraction_id,
+              :_destroy
+          ],
+          itinerary_events_attributes:[
+              :id,
+              :order,
+              :itinerary_id,
+              :event_id,
+              :_destroy
+          ],
+          itinerary_services_attributes:[
+              :id,
+              :order,
+              :itinerary_id,
+              :service_id,
+              :_destroy
+          ]
+      )
     end
 end

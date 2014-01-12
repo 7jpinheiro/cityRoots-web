@@ -5,9 +5,11 @@ class Ability
     user ||= User.new # Guest user
     if user.role?(:entidade)
       can :read, :all
+      can :create, :all
       can :manage, Attraction, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
-      can :manage, Itinerary, :web_user_id => user.id
+      can :manage, Service, :web_user_id => user.id
+      can :manage, Itinerary, :user_id => user.id
       can :manage, AttractionTranslation, :web_user_id => user.id
       can :manage, AttractionType, :web_user_id => user.id
       can :create, Attraction

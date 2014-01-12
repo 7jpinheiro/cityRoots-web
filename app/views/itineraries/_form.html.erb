@@ -1,4 +1,4 @@
-<%= form_for(@itinerary) do |f| %>
+<%= nested_form_for(@itinerary) do |f| %>
     <% if @itinerary.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@itinerary.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
@@ -12,8 +12,8 @@
     <% end %>
     <form role="form" class="form-horizontal">
       <%
-         users=WebUser.where("id=?",current_user.id).all
-         if users.length==0
+         @users=WebUser.where("id=?",current_user.id).all
+         if @users.size==0
       %>
           <script type="text/javascript">
               window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
@@ -53,33 +53,79 @@
           <%= f.text_field :user_id ,:id=>"user_id", :value=>current_user.id , :hidden=>"hidden" %>
           <br/>
         </div>
+      </div>
+      <div class="row">
+        <h4>Pontos da rota</h4>
+        <br/>
         <div class="col-md-4">
-          <strong>Pontos da Rota</strong>
-          <p class="text-muted">Pontos de interesse</p>
-          <div id="field">
-            <%= f.fields_for :itinerary_attractions do |builder| %>
-                <%= builder.text_field :order, :id =>"order"%>
-                <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
-            <% end %>
-          </div>
+          <strong>Pontos de Interesse</strong>
+          <br>
 
-          <p class="text-muted">Eventos</p>
+          <%= f.fields_for :itinerary_attractions do |builder| %>
+              <div class="well">
+              <form role="form">
+                <div class="form-group">
+                    <label for="order">Ordem</label><br/>
+                    <%= builder.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                </div>
+                <br/>
+                <div class="form-group">
+                  <label for="ponto">Ponto</label>
+                  <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control"}) %>
+                </div>
+                <%= builder.link_to_remove "Remover Ponto" %>
+                  </form>
+              </div>
+          <% end %>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_attractions %></p>
+        </div>
+        <div class="col-md-4">
+          <strong>Eventos</strong>
+          <br>
           <%= f.fields_for :itinerary_events do |builder1| %>
-              <%= builder1.text_field :order, :id =>"order"%>
-              <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
-
+              <div class="well">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="order">Ordem</label><br/>
+                    <%= builder1.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                  </div>
+                  <br/>
+                  <div class="form-group">
+                    <label for="ponto">Ponto</label>
+                    <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control"}) %>
+                  </div>
+                  <%= builder1.link_to_remove "Remover Ponto" %>
+                </form>
+              </div>
           <% end %>
-
-          <p class="text-muted">Serviços</p>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_events %></p>
+        </div>
+        <div class="col-md-4">
+          <strong>Serviços</strong>
+          <br>
           <%= f.fields_for :itinerary_services do |builder2| %>
-              <%= builder2.text_field :order, :id =>"order"%>
-              <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
-
+              <div class="well">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="order">Ordem</label><br/>
+                    <%= builder2.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                  </div>
+                  <br/>
+                  <div class="form-group">
+                    <label for="ponto">Ponto</label>
+                <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+                  </div>
+                  <%= builder2.link_to_remove "Remover Ponto" %>
+                </form>
+              </div>
           <% end %>
-
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services %></p>
         </div>
       </div>
-      <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
+      <br/>
+      <br/>
+      <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+      <br/>
+      <br/>
     </form>
-
 <% end %>
