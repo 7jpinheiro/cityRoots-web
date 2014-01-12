@@ -10,6 +10,7 @@
 #
 
 class Itinerary < ActiveRecord::Base
+
   validates :name, presence:true
   validates :description, presence:true
 
@@ -21,10 +22,6 @@ class Itinerary < ActiveRecord::Base
 	has_many :itinerary_attractions, dependent: :destroy
 	has_many :itinerary_events, dependent: :destroy
 	has_many :itinerary_services, dependent: :destroy
-  has_many :events , :through => :itinerary_events
-  has_many :services , :through => :itinerary_services
-  has_many :attractions , :through => :itinerary_attractions
-
 
   accepts_nested_attributes_for :itinerary_attractions , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :itinerary_events , :reject_if => :all_blank, :allow_destroy => true

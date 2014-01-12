@@ -190,9 +190,10 @@
         <%
            end
         %>
-
-
       </dl>
+      <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
+    </div>
+    <div class="col-sm-6">
       <ul class="thumbnails"></ul>
       <%= form_for @photo_event=PhotoEvent.new, :url => photo_events_path, html: { multipart: true } do |f| %>
           <% if @photo_event.errors.any? %>
@@ -207,10 +208,13 @@
               </div>
           <% end %>
           <div class="actions">
-            <%= f.label :photo %>
-            <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]' %>
+            <%= f.label :photo %><br/>
+            <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]',:class=>"filestyle" %>
             <%= f.hidden_field :event_id,  :value => @event.id %>
           </div>
+          <script>
+              $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicione uma Foto"});
+          </script>
       <% end %>
       <% # jquery upload template # %>
       <script id="template-upload" type="text/x-tmpl">
@@ -223,16 +227,8 @@
                 </div>
             </div>
         </script>
-
-      <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
-    </div>
-    <div class="col-sm-6">
-      <%
-         if @event.photo_events != nil%>
-
-      <%
-         end
-      %>
+      <br/>
+      <br/>
       <div id="map-canvas" style="width: 100%; height: 400px"></div>
     </div>
   </div>

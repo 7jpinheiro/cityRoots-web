@@ -10,9 +10,9 @@
   <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <!-- Bootstrap core CSS -->
-  <%= stylesheet_link_tag "bootstrap", "bootflat-extensions","bootflat-square", "screen" %>
+  <%= stylesheet_link_tag "bootstrap", "flatty", "screen" %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application" , "bootstrap-filestyle.min", "nested_form" %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <%= javascript_include_tag "html5shiv", "respond.min" %>
@@ -21,7 +21,7 @@
 
 <body>
 <!-- NAV Bar-->
-<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
