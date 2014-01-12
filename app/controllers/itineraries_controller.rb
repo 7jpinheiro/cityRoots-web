@@ -38,10 +38,9 @@ class ItinerariesController < ApplicationController
   # POST /itineraries
   # POST /itineraries.json
   def create
+    puts itinerary_params.inspect + "---------------------------"
     @itinerary = Itinerary.new(itinerary_params)
-    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    print itinerary_params;
-    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
 
     respond_to do |format|
       if @itinerary.save
@@ -57,6 +56,8 @@ class ItinerariesController < ApplicationController
   # PATCH/PUT /itineraries/1
   # PATCH/PUT /itineraries/1.json
   def update
+    puts itinerary_params.inspect + "--------------------------- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+
     respond_to do |format|
       if @itinerary.update(itinerary_params)
         format.html { redirect_to @itinerary, notice: 'Itinerary was successfully updated.' }

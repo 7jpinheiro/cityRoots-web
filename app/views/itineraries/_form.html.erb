@@ -1,4 +1,5 @@
 <%= nested_form_for(@itinerary) do |f| %>
+    <div>
     <% if @itinerary.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@itinerary.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
@@ -11,16 +12,6 @@
         </div>
     <% end %>
     <form role="form" class="form-horizontal">
-      <%
-         @users=WebUser.where("id=?",current_user.id).all
-         if @users.size==0
-      %>
-          <script type="text/javascript">
-              window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
-          </script>
-      <%
-         end
-      %>
       <div class="row">
         <div class="col-md-6">
           <div class="row">
@@ -63,18 +54,16 @@
 
           <%= f.fields_for :itinerary_attractions do |builder| %>
               <div class="well">
-              <form role="form">
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="order">Ordem</label><br/>
                     <%= builder.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
-                </div>
-                <br/>
-                <div class="form-group">
-                  <label for="ponto">Ponto</label>
-                  <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control"}) %>
-                </div>
-                <%= builder.link_to_remove "Remover Ponto" %>
-                  </form>
+                  </div>
+                  <br/>
+                  <div class="form-group">
+                    <label for="ponto">Ponto</label>
+                    <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control"}) %>
+                  </div>
+                  <%= builder.link_to_remove "Remover Ponto" %>
               </div>
           <% end %>
           <p><%= f.link_to_add "Adicionar Ponto", :itinerary_attractions %></p>
@@ -84,8 +73,7 @@
           <br>
           <%= f.fields_for :itinerary_events do |builder1| %>
               <div class="well">
-                <form role="form">
-                  <div class="form-group">
+«                  <div class="form-group">
                     <label for="order">Ordem</label><br/>
                     <%= builder1.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
                   </div>
@@ -95,7 +83,6 @@
                     <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control"}) %>
                   </div>
                   <%= builder1.link_to_remove "Remover Ponto" %>
-                </form>
               </div>
           <% end %>
           <p><%= f.link_to_add "Adicionar Ponto", :itinerary_events %></p>
@@ -105,7 +92,7 @@
           <br>
           <%= f.fields_for :itinerary_services do |builder2| %>
               <div class="well">
-                <form role="form">
+
                   <div class="form-group">
                     <label for="order">Ordem</label><br/>
                     <%= builder2.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
@@ -113,10 +100,9 @@
                   <br/>
                   <div class="form-group">
                     <label for="ponto">Ponto</label>
-                <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
+                    <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control"}) %>
                   </div>
                   <%= builder2.link_to_remove "Remover Ponto" %>
-                </form>
               </div>
           <% end %>
           <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services %></p>
@@ -128,4 +114,5 @@
       <br/>
       <br/>
     </form>
+    </div>
 <% end %>
