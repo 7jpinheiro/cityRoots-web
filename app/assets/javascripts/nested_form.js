@@ -5,6 +5,7 @@
   };
 
   NestedFormEvents.prototype = {
+
     addFields: function(e) {
       // Setup
       var link      = e.currentTarget;
