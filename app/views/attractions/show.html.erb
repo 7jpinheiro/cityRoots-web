@@ -64,8 +64,8 @@
         <small><i class="fa fa-wheelchair"></i></small>
     <% end %>
 
-  </h1><br/>
-  <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 5px'} do%>
+  </h1>
+  <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 10px'} do%>
        <i class="fa fa-edit"></i> Editar
   <%end%>
 
@@ -201,7 +201,6 @@
               </div>
           <% end %>
           <div class="actions">
-            <%= f.label :photo %><br/>
             <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
             <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
           </div>

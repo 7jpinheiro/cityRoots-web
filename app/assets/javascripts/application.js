@@ -13,7 +13,6 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
-//= require turbolinks
 //= require_tree .
 
 // delete characters on users#edit and users#new

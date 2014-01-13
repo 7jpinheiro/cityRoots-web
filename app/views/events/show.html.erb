@@ -54,13 +54,16 @@
 
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-<div class="well well-lg">
+<div class="page-header">
   <h1>
     <%= trans.name%>
     <% if @event.accessibility != 0 %>
         <small><i class="fa fa-wheelchair"></i></small>
     <% end %>
   </h1>
+</div>
+<div class="well well-lg">
+
   <br/>
   <%= link_to edit_event_path(@event) do
   %><i class="fa fa-edit"></i> Editar<%
@@ -207,7 +210,6 @@
               </div>
           <% end %>
           <div class="actions">
-            <%= f.label :photo %><br/>
             <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]',:class=>"filestyle" %>
             <%= f.hidden_field :event_id,  :value => @event.id %>
           </div>
