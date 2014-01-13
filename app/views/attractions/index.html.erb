@@ -30,7 +30,7 @@
                 </h4>
               </div>
               <div  class="col-md-4 text-right" style="min-height:30px">
-                <%= link_to edit_attraction_path(attraction) do %>
+                <%= link_to edit_attraction_path(attraction), {:style => 'margin-right: 5px'} do %>
                     <span class="fa fa-edit"> </span>Editar
                 <% end %>
                 <%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
