@@ -14,7 +14,8 @@ CityRootsWeb::Application.routes.draw do
   get "web/index"
   get "galeria/index"
   get "pacotes/index"
-  get "payments/new"
+  get "/payments/new", to:"payments#new", as:"new_payment"
+  post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
 
