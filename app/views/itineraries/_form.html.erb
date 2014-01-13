@@ -73,7 +73,7 @@
           <br>
           <%= f.fields_for :itinerary_events do |builder1| %>
               <div class="well">
-«                  <div class="form-group">
+                  <div class="form-group">
                     <label for="order">Ordem</label><br/>
                     <%= builder1.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
                   </div>

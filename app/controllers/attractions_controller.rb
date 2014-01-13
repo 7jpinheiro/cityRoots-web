@@ -14,7 +14,7 @@ class AttractionsController < ApplicationController
     @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
-      format.json{render :json => Attraction.all.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
+      format.json{render :json => Attraction.all.to_json(:include=>{:attraction_translations=>{:include=>:language}},:city=>{})}
     end
   end
 

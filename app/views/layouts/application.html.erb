@@ -13,7 +13,7 @@
   <!-- Bootstrap core CSS -->
   <%= stylesheet_link_tag "bootstrap", "flatty", "screen" %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <%= javascript_include_tag "application" , "bootstrap-filestyle.min", "nested_form" %>
+  <%= javascript_include_tag "application" , "bootstrap-filestyle.min", "nested_form", "modal" %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <%= javascript_include_tag "html5shiv", "respond.min" %>
@@ -221,11 +221,6 @@
     }(document, "script", "twitter-wjs"));
 </script>
 <script>
-    $(function() {
-        $( "#accordion" ).accordion();
-    });
-</script>
-<script>
     var _gauges = _gauges || [];
     (function() {
         var t   = document.createElement('script');
@@ -238,7 +233,7 @@
     })();
 </script>
 
-<%= javascript_include_tag "bootstrap.min"%>
+<%= javascript_include_tag "bootstrap.min" %>
 </body>
 
 </html>
