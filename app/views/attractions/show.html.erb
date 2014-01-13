@@ -66,10 +66,13 @@
     <% end %>
 
   </h1><br/>
-  <%= link_to edit_attraction_path(@attraction) do
-  %><i class="fa fa-edit"></i> Editar<%
-   end
-%>
+  <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 5px'} do%>
+       <i class="fa fa-edit"></i> Editar
+  <%end%>
+
+  <%= link_to @attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+      <span class="fa fa-trash-o"></span>Remover
+  <% end %>
 
 </div>
 
