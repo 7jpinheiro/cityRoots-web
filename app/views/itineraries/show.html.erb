@@ -1,4 +1,7 @@
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+<script>
+  var locations=[];
+</script>
 <div class="page-header">
   <h1><%= @itinerary.name %></h1>
 </div>
@@ -30,9 +33,64 @@
                <%
                   @itinerary_att.each  do |p|
                     att=AttractionTranslation.where("attraction_id=?",p.attraction_id).first
+                    att2=Attraction.where("id=?",p.attraction_id).first
+                    target1="#att#{att.attraction_id}"
+                    target2="att#{att.attraction_id}"
                %>
-                   <dt class="text-muted"><small><%= att.name%></small></dt>
-                   <dd><%= link_to "Ver mais", attraction_path(p.attraction_id) , :class=>"label label-primary label-square" %></dd>
+                   <script>
+                     var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>];
+                     locations.push(att);
+                   </script>
+                   <dt class="text-muted" style="width: 200px;"><small><%= att.name%> </small> </dt>
+                   <dd>
+                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
+                      Ver mais
+                    </span>
+                   </dd>
+                   <!-- Modal -->
+                   <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                           <h4 class="modal-title" id="myModalLabel"><%= att.name %></h4>
+                         </div>
+                         <div class="modal-body">
+                           <dl class="horizontal">
+                             <%
+                             if att.description != nil
+                             %>
+                             <dt>Descrição</dt>
+                             <dd><%= att.description%></dd>
+                             <%
+                             end
+                             if att.schedule != nil
+                             %>
+                                 <dt>Horário</dt>
+                                 <dd><%= att.schedule%></dd>
+                             <%
+                             end
+                             if att.transport!= nil
+                             %>
+                                 <dt>Transporte</dt>
+                                 <dd><%= att.transport%></dd>
+                             <%
+                             end
+                             if att.price != nil
+                             %>
+                                 <dt>Preço</dt>
+                                 <dd><%= att.price%></dd>
+                             <%
+                             end
+                             %>
+                           </dl>
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                         </div>
+                       </div><!-- /.modal-content -->
+                     </div><!-- /.modal-dialog -->
+                   </div><!-- /.modal -->
                <%
                   end
              end
@@ -44,9 +102,58 @@
                 <%
                    @itinerary_servi.each  do |p|
                        ser=ServiceTranslation.where("service_id=?",p.service_id).first
+                       ser2=Service.where("id=?",p.service_id).first
+                       target1="#att#{ser.service_id}"
+                       target2="att#{ser.service_id}"
                 %>
-                        <dt class="text-muted"><small><%= ser.name%></small></dt>
-                        <dd><%= link_to "Ver mais", service_path(p.service_id) , :class=>"label label-primary label-square" %></dd>
+                 <script>
+                     var ser=["<%= ser.name %>",<%= ser2.latitude %>,<%= ser2.longitude %>,<%= p.order %>];
+                     locations.push(ser);
+                 </script>
+                   <dt class="text-muted" style="width: 200px;"><small><%= ser.name%> </small> </dt>
+                   <dd>
+                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
+                      Ver mais
+                    </span>
+                   </dd>
+                   <!-- Modal -->
+                   <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                           <h4 class="modal-title" id="myModalLabel"><%= ser.name %></h4>
+                         </div>
+                         <div class="modal-body">
+                           <dl class="horizontal">
+                             <%
+                                if ser.description != nil
+                             %>
+                                 <dt>Descrição</dt>
+                                 <dd><%= ser.description%></dd>
+                             <%
+                                end
+                                if ser.schedule != nil
+                             %>
+                                 <dt>Horário</dt>
+                                 <dd><%= ser.schedule%></dd>
+                             <%
+                                end
+                                if ser.transport!= nil
+                             %>
+                                 <dt>Transporte</dt>
+                                 <dd><%= ser.transport%></dd>
+                             <%
+                                end
+                             %>
+                           </dl>
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                         </div>
+                       </div><!-- /.modal-content -->
+                     </div><!-- /.modal-dialog -->
+                   </div><!-- /.modal -->
                        <%
                    end
              end
@@ -58,9 +165,70 @@
                <%
                   @itinerary_even.each  do |p|
                     eve=EventTranslation.where("event_id=?",p.event_id).first
+                    eve2=Event.where("id=?",p.event_id).first
+                    target1="#att#{eve.event_id}"
+                    target2="att#{eve.event_id}"
                %>
-                   <dt class="text-muted"><small><%= eve.name%></small></dt>
-                   <dd><%= link_to "Ver mais", event_path(p.event_id) , :class=>"label label-primary label-square" %></dd>
+                 <script>
+                     var even=["<%= eve.name %>",<%= eve2.latitude %>,<%= eve2.longitude %>,<%= p.order %>];
+                     locations.push(even);
+                 </script>
+                 <dt class="text-muted" style="width: 200px;"><small><%= eve.name%> </small> </dt>
+                 <dd>
+                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
+                      Ver mais
+                    </span>
+                 </dd>
+                 <!-- Modal -->
+                 <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                         <h4 class="modal-title" id="myModalLabel"><%= eve.name %></h4>
+                       </div>
+                       <div class="modal-body">
+                         <dl class="horizontal">
+                           <%
+                              if eve.description != nil
+                           %>
+                               <dt>Descrição</dt>
+                               <dd><%= eve.description%></dd>
+                           <%
+                              end
+                              if eve.schedule != nil
+                           %>
+                               <dt>Horário</dt>
+                               <dd><%= eve.schedule%></dd>
+                           <%
+                              end
+                              if eve.transport!= nil
+                           %>
+                               <dt>Transporte</dt>
+                               <dd><%= eve.transport%></dd>
+                           <%
+                              end
+                              if eve.price != nil
+                           %>
+                               <dt>Preço</dt>
+                               <dd><%= eve.price%></dd>
+                           <%
+                              end
+                              if eve.program != nil
+                           %>
+                               <dt>Programa</dt>
+                               <dd><%= eve.program%></dd>
+                           <%
+                              end
+                           %>
+                         </dl>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                       </div>
+                     </div><!-- /.modal-content -->
+                   </div><!-- /.modal-dialog -->
+                 </div><!-- /.modal -->
                <%
                   end
              end
@@ -80,3 +248,43 @@
     </table>
   </div>
 </div>
+<script type="text/javascript">
+    function initialize() {
+        var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+        var mapOptions = {
+            zoom: 13,
+            center: new google.maps.LatLng(locations[0][1],locations[0][2])
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+
+
+        var image ="<%= image_url "maker.png"%>";
+
+        // Shapes define the clickable region of the icon.
+        // The type defines an HTML &lt;area&gt; element 'poly' which
+        // traces out a polygon as a series of X,Y points. The final
+        // coordinate closes the poly by connecting to the first
+        // coordinate.
+
+        var shape = {
+            coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+            type: 'poly'
+        };
+
+        for (var i = 0; i < locations.length; i++) {
+            var beach = locations[i];
+            var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                icon: image,
+                title: beach[0],
+                zIndex: beach[3]
+            });
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

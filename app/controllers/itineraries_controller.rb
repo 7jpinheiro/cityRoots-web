@@ -28,9 +28,6 @@ class ItinerariesController < ApplicationController
   # GET /itineraries/new
   def new
     @itinerary = Itinerary.new
-    1.times{@itinerary.itinerary_attractions.build}
-    1.times{@itinerary.itinerary_events.build}
-    1.times{@itinerary.itinerary_services.build}
   end
 
   # GET /itineraries/1/edit

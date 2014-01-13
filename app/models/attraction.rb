@@ -39,6 +39,7 @@ class Attraction < ActiveRecord::Base
   has_many :attraction_types , dependent: :destroy
   has_many :attraction_translations , dependent: :destroy
   has_many :types , :through => :attraction_types
+  has_many :languages , :through => :attraction_translations
 
   accepts_nested_attributes_for :attraction_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :attraction_translations , :reject_if => :all_blank, :allow_destroy => true

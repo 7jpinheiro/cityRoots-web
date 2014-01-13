@@ -10,7 +10,7 @@ gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
 gem 'rabl'
 
-gem 'cancan'
+
 gem "nested_form"
 # used to get Rails variables in JS
 gem 'gon'
