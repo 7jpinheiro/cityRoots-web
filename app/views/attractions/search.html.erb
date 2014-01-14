@@ -15,7 +15,7 @@
 <br>
 <%
 
-   @attraction.each do |attraction|
+   @attractions.each do |attraction|
      trans=AttractionTranslation.where("attraction_id=?",attraction.id).first
 %>
     <br/>

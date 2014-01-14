@@ -38,7 +38,7 @@ class AttractionsController < ApplicationController
   end
 
   def search
-    @events = Attraction.search(params[:search],current_user)
+    @attractions = Attraction.search(params[:search],current_user)
     render 'attractions/search'
   end
 
