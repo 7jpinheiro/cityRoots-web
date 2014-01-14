@@ -30,12 +30,9 @@ class Itinerary < ActiveRecord::Base
 
 
   def self.search(search)
-    puts search
     if search
-      puts 'ola mndo'
       self.where("name LIKE ?", "%#{search}%")
     else
-      puts 'oooooooo'
       self.all
     end
   end

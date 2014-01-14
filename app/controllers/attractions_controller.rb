@@ -37,6 +37,11 @@ class AttractionsController < ApplicationController
     @attraction.attraction_types.build
   end
 
+  def search
+    @events = Attraction.search(params[:search],current_user)
+    render 'attractions/search'
+  end
+
   # GET /attractions/1/edit
   def edit
     @attraction=Attraction.find(params[:id])

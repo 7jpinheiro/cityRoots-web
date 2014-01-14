@@ -19,6 +19,8 @@ CityRootsWeb::Application.routes.draw do
   get "payments/sucess"
   get "payments/failure"
   get "itineraries/search", to:"itineraries#search", as:"itineraries_search"
+  get "events/search", to:"events#search", as:"events_search"
+  get "attractions/search", to:"attractions#search", as:"attractions_search"
 
   devise_for :installs
 

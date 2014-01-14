@@ -30,6 +30,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def search
+    @events = Event.search(params[:search],current_user)
+    render 'events/search'
+  end
+
   # GET /events/new
   def new
     add_crumb "Novo", ""

@@ -47,4 +47,14 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :event_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :event_translations , :reject_if => :all_blank, :allow_destroy => true
   #accepts_nested_attributes_for :photo_events , :allow_destroy => true
+
+
+  def self.search(search,user)
+    if search
+      EventTranslation.where("name LIKE ?", "%#{search}%").collect {|et| et.event}
+    else
+      self.all
+    end
+  end
+
 end

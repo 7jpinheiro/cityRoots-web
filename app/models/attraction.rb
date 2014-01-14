@@ -47,5 +47,12 @@ class Attraction < ActiveRecord::Base
 
 
 
+  def self.search(search,user)
+    if search
+      AttractionTranslation.where("name LIKE ?", "%#{search}%").collect {|at| at.attraction}
+    else
+      self.all
+    end
+  end
 
 end

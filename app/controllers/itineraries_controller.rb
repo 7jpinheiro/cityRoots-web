@@ -30,7 +30,6 @@ class ItinerariesController < ApplicationController
 
   def search
     @itineraries = Itinerary.search(params[:search])
-    puts @itineraries.inspect
     render 'itineraries/search'
   end
 
