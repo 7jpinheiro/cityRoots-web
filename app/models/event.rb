@@ -51,7 +51,9 @@ class Event < ActiveRecord::Base
 
   def self.search(search,user)
     if search
-      EventTranslation.where("name LIKE ?", "%#{search}%").collect {|et| et.event}
+      #Funciona mas teoricamente mais lento
+      #EventTranslation.where("name LIKE ?", "%#{search}%").keep_if {|et| et.event.web_user_id == user.id}
+      Event.joins(:event_translations).where("event_translations.name LIKE ? AND events.web_user_id == ?", "%#{search}%", user.id)
     else
       self.all
     end
