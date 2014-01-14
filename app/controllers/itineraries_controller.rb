@@ -24,6 +24,14 @@ class ItinerariesController < ApplicationController
   # GET /itineraries/1
   # GET /itineraries/1.json
   def show
+
+  end
+
+
+  def search
+    @itineraries = Itinerary.search(params[:search])
+    puts @itineraries.inspect
+    render 'itineraries/search'
   end
 
   # GET /itineraries/new

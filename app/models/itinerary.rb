@@ -26,4 +26,19 @@ class Itinerary < ActiveRecord::Base
   accepts_nested_attributes_for :itinerary_attractions , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :itinerary_events , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :itinerary_services , :reject_if => :all_blank, :allow_destroy => true
+
+
+
+  def self.search(search)
+    puts search
+    if search
+      puts 'ola mndo'
+      self.where("name LIKE ?", "%#{search}%")
+    else
+      puts 'oooooooo'
+      self.all
+    end
+  end
+
+
 end

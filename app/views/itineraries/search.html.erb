@@ -1,5 +1,5 @@
 <div class="page-header">
-<h1>Lista das suas Rotas</h1>
+  <h1>Lista das suas Rotas</h1>
 </div>
 
 <%= form_tag itineraries_search_path, :method => 'get' do %>
@@ -15,7 +15,6 @@
 <br>
 
 <%
-   @itineraries=Itinerary.where("user_id=?",current_user.id).all
    @itineraries.each do |itinerary|
 %>
     <br/>
@@ -48,7 +47,7 @@
               <div class="visible-xs">
                 <%= truncate itinerary.description, length: 100 %>
               </div><br/>
-                <%= link_to 'Ler mais', itinerary %><br/>
+              <%= link_to 'Ler mais', itinerary %><br/>
               </p>
               <hr/>
               <div class="row rating-desc">

@@ -45,4 +45,7 @@ class Attraction < ActiveRecord::Base
   accepts_nested_attributes_for :attraction_translations , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :photo_attractions, :reject_if => lambda { |t| t['photo_attraction'].nil? }, :allow_destroy => true
 
+
+
+
 end

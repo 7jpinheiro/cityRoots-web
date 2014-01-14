@@ -18,7 +18,7 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
-
+  get "itineraries/search", to:"itineraries#search", as:"itineraries_search"
 
   devise_for :installs
 
