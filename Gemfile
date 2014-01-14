@@ -8,7 +8,10 @@ gem 'crummy'
 gem 'pg'
 gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
+
 gem 'rabl'
+gem "nested_form"
+
 
 
 gem "nested_form"
@@ -62,3 +65,8 @@ gem 'json'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+
+#gem activemerchant
+gem 'activemerchant'
