@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: attraction_types
+#
+#  id            :integer          not null, primary key
+#  type_id       :integer          not null
+#  attraction_id :integer          not null
+#
+
   # == Schema Information
 #
 # Table name: attraction_types

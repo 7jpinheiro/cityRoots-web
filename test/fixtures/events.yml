@@ -3,23 +3,20 @@
 # Table name: events
 #
 #  id            :integer          not null, primary key
-#  name          :string(100)      not null
-#  description   :text
-#  schedule      :string(255)
-#  site          :string(100)
-#  email         :string(100)
+#  site          :string(255)
+#  email         :string(255)
 #  address       :string(255)
+#  phone         :string(30)
 #  latitude      :float
 #  longitude     :float
-#  transport     :string(100)
-#  active        :boolean          not null
+#  source        :text
+#  active        :boolean          default(TRUE), not null
 #  timestamp     :integer          not null
-#  startdate     :date             not null
-#  enddate       :date             not null
+#  startdate     :date
+#  enddate       :date
 #  organization  :string(100)
-#  price         :string(255)      not null
-#  program       :string(500)
-#  event_type_id :integer          not null
+#  rating        :float            default(0.0), not null
+#  accessibility :boolean          default(FALSE), not null
 #  city_id       :integer          not null
 #  web_user_id   :integer          not null
 #

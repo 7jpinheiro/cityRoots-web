@@ -2,9 +2,9 @@
 #
 # Table name: service_types
 #
-#  id          :integer          not null, primary key
-#  name        :string(100)      not null
-#  description :string(255)
+#  id         :integer          not null, primary key
+#  service_id :integer          not null
+#  type_id    :integer          not null
 #
 
 class ServiceType < ActiveRecord::Base

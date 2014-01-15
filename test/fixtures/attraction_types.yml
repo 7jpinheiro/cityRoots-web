@@ -2,10 +2,9 @@
 #
 # Table name: attraction_types
 #
-#  id                      :integer          not null, primary key
-#  name                    :string(100)      not null
-#  description             :string(255)
-#  attraction_big_types_id :integer          not null
+#  id            :integer          not null, primary key
+#  type_id       :integer          not null
+#  attraction_id :integer          not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
