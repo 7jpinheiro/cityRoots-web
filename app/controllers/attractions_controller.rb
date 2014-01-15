@@ -17,7 +17,7 @@ class AttractionsController < ApplicationController
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Attraction.all.to_json(:include=>{:attraction_translations=>{:include=>:language}},:city=>{})}
+      format.json{render :json => Attraction.all.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -29,7 +29,7 @@ class AttractionsController < ApplicationController
 
     respond_to do |format|
       format.html { @attraction }
-      format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
+      format.json{render :json => @attraction.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
     end
   end
 

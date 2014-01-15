@@ -22,7 +22,13 @@ class ItinerariesController < ApplicationController
     end
     respond_to do |format|
       format.html{ }
-      format.json{render :json =>  Itinerary.all.as_json( :include => [:itinerary_events,:itinerary_attractions,:itinerary_services,:events, :attractions,:services]) }
+      format.json{render :json =>  Itinerary.all.as_json( :include => {
+          :itinerary_attractions=>{:include=>{:attraction=>{:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}}},
+          :itinerary_events=>{:include=>{:event=>{:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}}}},
+          :itinerary_services=>{:include=>{:service=>{:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}}}},
+          :comment_itineraries=>{:include=>{:mobile_user=>{}}},
+          :rating_itineraries=>{:include=>{:mobile_user=>{}}}
+      }) }
     end
   end
 
