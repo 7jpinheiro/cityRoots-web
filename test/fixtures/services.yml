@@ -3,21 +3,20 @@
 # Table name: services
 #
 #  id              :integer          not null, primary key
-#  name            :string(100)      not null
-#  description     :text
-#  schedule        :string(255)
-#  site            :string(100)
-#  email           :string(100)
+#  site            :string(255)
+#  email           :string(255)
 #  address         :string(255)
+#  phone           :string(30)
 #  latitude        :float
 #  longitude       :float
-#  transport       :string(100)
-#  active          :boolean          not null
+#  source          :text
+#  active          :boolean          default(TRUE), not null
 #  timestamp       :integer          not null
 #  reference_point :boolean          not null
 #  capacity        :integer
 #  details         :string(255)
-#  service_type_id :integer          not null
+#  rating          :float            default(0.0), not null
+#  accessibility   :boolean          default(FALSE), not null
 #  web_user_id     :integer          not null
 #  city_id         :integer          not null
 #

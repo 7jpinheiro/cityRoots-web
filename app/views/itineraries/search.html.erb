@@ -1,48 +1,39 @@
 <div class="page-header">
-    <h1>Lista dos seus Serviços</h1>
+  <h1>Lista das suas Rotas</h1>
 </div>
 
-<%= form_tag services_path, :method=>'get' do  |f|%>
+<%= form_tag itineraries_search_path, :method => 'get' do %>
     <p>
-      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_service_name_services_path%>
+      <%= text_field_tag :search, params[:search] %>
       <%= submit_tag "Search", :name => nil %>
     </p>
 <% end %>
 
 <%= csrf_meta_tag %>
+<br>
+<%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %>
+<br>
 
-<br>
-<%= link_to 'Novo Serviço', new_service_path ,:class=>"btn btn-primary btn-square"%>
-<br>
 <%
-   @services.each do |service|
-     serv=ServiceTranslation.where("service_id=?",service.id).first
+   @itineraries.each do |itinerary|
 %>
     <br/>
     <div class="col-md-12">
       <div class="well well-sm">
         <div class="row">
           <div class="col-xs-3 col-md-3 text-center">
-
             <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
           </div>
           <div class="col-xs-9 col-md-9 section-box">
             <div class="row">
               <div class="col-md-8">
-                <h4>
-                  <strong><%= link_to serv.name, service %></strong>
-                  <%
-                  if service.accessibility !=0
-                  %><small><i class="fa fa-wheelchair"></i></small><%
-                  end
-                  %>
-                </h4>
+                <h4><strong><%= link_to itinerary.name, itinerary %></strong></h4>
               </div>
               <div  class="col-md-4 text-right" style="min-height:30px">
-                <%= link_to edit_service_path(service) do %>
+                <%= link_to edit_itinerary_path(itinerary) do %>
                     <span class="fa fa-edit"> </span>Editar
                 <% end %>
-                <%= link_to service, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                <%= link_to itinerary, method: :delete, data: { confirm: 'Are you sure?'}  do %>
                     <span class="fa fa-trash-o"></span>Remover
                 <% end %>
               </div>
@@ -50,20 +41,30 @@
             <div >
               <p>
                 <b>Descrição: </b>
-                <%= truncate serv.description, length: 300 %>
-                <%= link_to 'Ler mais', service %><br/>
-              </p>
-              <p>
-                <b>Horário: </b><%= serv.schedule %><br/>
-                <b>Capacidade:</b><%= service.capacity %> <br/>
-                <b>Email:</b><%= service.email %> <br/>
-                <b>Site:</b><%= service.site %> <br/>
+              <div class="hidden-xs">
+                <%= truncate itinerary.description, length: 300 %>
+              </div>
+              <div class="visible-xs">
+                <%= truncate itinerary.description, length: 100 %>
+              </div><br/>
+              <%= link_to 'Ler mais', itinerary %><br/>
               </p>
               <hr/>
               <div class="row rating-desc">
                 <div class="col-md-12">
                   <%
-                     val=service.rating
+                     @ratings=RatingItinerary.where("itinerary_id=?",itinerary.id).all
+                     ratin=0
+                     if @ratings != nil
+                       index=0
+                       @ratings.each do |rati|
+                         ratin=ratin+rati.rating
+                         index=index+1
+                       end
+                     else
+                       ratin=0
+                     end
+                     val=ratin
                      indice=0;
                      while val >0
                   %><span class="fa fa-star"></span><%
@@ -77,7 +78,7 @@
                 %>
                   <span class="separator">|</span>
                   <%
-                     commes=CommentService.where("service_id=?",service.id).all
+                     commes=CommentItinerary.where("itinerary_id=?",itinerary.id).all
                      size=commes.length
                   %>
                   <span class="fa fa-comment"></span>(<%= size %> Comments)

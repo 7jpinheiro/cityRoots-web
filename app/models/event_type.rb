@@ -2,9 +2,9 @@
 #
 # Table name: event_types
 #
-#  id          :integer          not null, primary key
-#  name        :string(100)      not null
-#  description :string(255)
+#  id       :integer          not null, primary key
+#  event_id :integer          not null
+#  type_id  :integer          not null
 #
 
 class EventType < ActiveRecord::Base

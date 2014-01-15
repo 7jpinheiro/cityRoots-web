@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      not null
+#  username               :string(50)
+#  encrypted_password     :string(500)      not null
+#  type                   :string(255)
+#  serviceid              :text
+#  language_id            :integer
+#  country_id             :integer
+#  reset_password_token   :string(150)
+#  reset_password_sent_at :date
+#  remember_created_at    :date
+#  sign_in_count          :integer
+#  current_sign_in_at     :date
+#  last_sign_in_at        :date
+#  current_sign_in_ip     :string(50)
+#  last_sign_in_ip        :string(50)
+#  confirmation_token     :string(150)
+#  confirmed_at           :date
+#  confirmation_sent_at   :date
+#  unconfirmed_email      :string(50)
+#  failed_attempts        :integer
+#  unlock_token           :string(50)
+#  locked_at              :date
+#
+
 
 class User < ActiveRecord::Base
 	validates :email , presence: true

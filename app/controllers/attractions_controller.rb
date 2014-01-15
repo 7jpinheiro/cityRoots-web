@@ -11,10 +11,14 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions= current_user.web_user.attractions.page(params[:page]).per(1) if  current_user  && current_user.web_user
+    unless(params[:search].nil?)
+      @attractions = Attraction.search(params[:search],current_user)
+    else
+      @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
+    end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Attraction.all.to_json(:include=>{:attraction_translations=>{:include=>:language}},:city=>{})}
+      format.json{render :json => Attraction.all.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -23,9 +27,10 @@ class AttractionsController < ApplicationController
   def show
     @attraction=Attraction.find(params[:id])
     @attraction_translation = @attraction.attraction_translations.first
+
     respond_to do |format|
       format.html { @attraction }
-      format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }
+      format.json{render :json => @attraction.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -80,6 +85,14 @@ class AttractionsController < ApplicationController
       format.html { redirect_to attractions_url }
       format.json { head :no_content }
     end
+  end
+
+  def autocomplete_attraction_name
+    attractions = AttractionTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    result = attractions.collect do |t|
+      { value: t.name }
+    end
+    render json: result
   end
 
   private

@@ -1,12 +1,20 @@
 <div class="page-header">
     <h1>Lista dos seus Eventos</h1>
 </div>
+
+<%= form_tag events_path, :method=>'get' do  |f|%>
+    <p>
+      <%#= f.text_field :search , :class=>"attractions_with_autocomplete form-control form-control-square", params[:search]%>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_event_name_events_path%>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+<% end %>
+
 <%= csrf_meta_tags %>
 <br>
 <%= link_to 'Novo Evento', new_event_path, :class=>"btn btn-primary btn-square" %>
 <br>
 <%
-@events=Event.where("web_user_id=?",current_user.id)
 @events.each do |event|
     trans=EventTranslation.where("event_id=?",event.id).first
 %>

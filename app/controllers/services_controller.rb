@@ -14,10 +14,14 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = current_user.web_user.services if  current_user  && current_user.web_user
+    unless(params[:search].nil?)
+      @services = Service.search(params[:search],current_user)
+    else
+      @services = current_user.web_user.services if  current_user  && current_user.web_user
+    end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Service.all.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
+      format.json{render :json => Service.all.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -27,7 +31,7 @@ class ServicesController < ApplicationController
     @service=Service.find(params[:id])
     respond_to do |format|
       format.html { @service }
-      format.json { render :json => @service.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
+      format.json { render :json => @service.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -47,18 +51,19 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.json
   def create
-    @num_serv = current_user.web_user.services. 
-    íf(current_user.role? :comercial_basic )
-      if(num_serv<1)
+    #@num_serv = current_user.web_user.services.
+    #if(current_user.role? :comercial_basic )
+     # if(num_serv<1)
 
-      else
-        errors
+<<<<<<< HEAD
+      #else
+       # errors
         
-    íf(current_user.role? :comercial_basic )
-      if(num_serv<5)
+    #if(current_user.role? :comercial_basic )
+     # if(num_serv<5)
 
-      else
-        errors
+      #else
+       # errors
 
     @service = Service.new(service_params)
     respond_to do |format|
@@ -70,6 +75,17 @@ class ServicesController < ApplicationController
         format.json { render json: @service.errors, status: :unprocessable_entity }
       end
     end
+     # end
+    #end
+    #end
+  end
+
+  def autocomplete_service_name
+    services = ServiceTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    result = services.collect do |t|
+      { value: t.name }
+    end
+    render json: result
   end
 
   # PATCH/PUT /services/1
@@ -137,4 +153,5 @@ class ServicesController < ApplicationController
           ]
       )
     end
+
 end

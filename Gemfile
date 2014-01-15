@@ -53,6 +53,8 @@ gem 'annotate', ">=2.6.0"
 # pagination
 gem "kaminari"
 
+gem "jquery-ui-rails"
+
 gem 'json'
 
 # Use ActiveModel has_secure_password

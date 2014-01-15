@@ -22,8 +22,25 @@ class Itinerary < ActiveRecord::Base
 	has_many :itinerary_attractions, dependent: :destroy
 	has_many :itinerary_events, dependent: :destroy
 	has_many :itinerary_services, dependent: :destroy
+  has_many :attractions , :through => :itinerary_attractions
+  has_many :attraction_translations , :through => :attractions
+  has_many :attraction_types , :through => :attractions
+  has_many :types , :through => :attraction_types
 
   accepts_nested_attributes_for :itinerary_attractions , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :itinerary_events , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :itinerary_services , :reject_if => :all_blank, :allow_destroy => true
+
+
+
+  def self.search(search,user)
+    if search
+    #.where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+      Itinerary.where("user_id=? and LOWER(name) LIKE LOWER(?)",user.id, "%#{search}%")
+    else
+      self.all
+    end
+  end
+
+
 end

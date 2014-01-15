@@ -1,13 +1,20 @@
 <div class="page-header">
 <h1>Lista das suas Rotas</h1>
 </div>
+
+<%= form_tag itineraries_path, :method=>'get' do  |f|%>
+    <p>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+<% end %>
+
 <%= csrf_meta_tag %>
 <br>
 <%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %>
 <br>
 
 <%
-   @itineraries=Itinerary.where("user_id=?",current_user.id).all
    @itineraries.each do |itinerary|
 %>
     <br/>

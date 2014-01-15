@@ -19,7 +19,6 @@ CityRootsWeb::Application.routes.draw do
   get "payments/sucess"
   get "payments/failure"
 
-
   devise_for :installs
 
   resources :web_users
@@ -74,17 +73,20 @@ CityRootsWeb::Application.routes.draw do
 
   resources :itinerary_services
 
-  resources :itineraries
+  resources :itineraries do
+    get :autocomplete_itinerary_name, :on => :collection
+  end
 
   resources :attractions do
-     resources :photo_attractions
-     resources :rating_attractions
-     resources :comment_attractions
-   end
+    get :autocomplete_attraction_name, :on => :collection
+  end
 
-  resources :services
+  resources :services do
+    get :autocomplete_service_name, :on => :collection
+  end
 
   resources :events do
+    get :autocomplete_event_name, :on => :collection
     resource :event_translations, :only => [:new, :create,:destroy,:update]
   end
 
