@@ -11,7 +11,7 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
+    @attractions= current_user.web_user.attractions.page(params[:page]).per(1) if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
       format.json{render :json => Attraction.all.to_json(:include=>{:attraction_translations=>{:include=>:language}},:city=>{})}
@@ -23,7 +23,6 @@ class AttractionsController < ApplicationController
   def show
     @attraction=Attraction.find(params[:id])
     @attraction_translation = @attraction.attraction_translations.first
-
     respond_to do |format|
       format.html { @attraction }
       format.json{render :json => @attraction.as_json( :include => [:attraction_translations, :comment_attractions,:photo_attractions,:city,:types]) }

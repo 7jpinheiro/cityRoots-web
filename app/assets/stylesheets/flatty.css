@@ -5388,7 +5388,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 5px 14px;
   background-color: #18bc9c;
   border: 1px solid transparent;
-  border-radius: 15px;
+  border-radius: 3px;
 }
 
 .pager li > a:hover,
