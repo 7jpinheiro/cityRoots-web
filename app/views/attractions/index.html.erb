@@ -4,8 +4,8 @@
 
 <%= form_tag attractions_path, :method=>'get' do  |f|%>
     <p>
-      <%#= f.text_field :search , :class=>"attractions_with_autocomplete form-control form-control-square", params[:search]%>
-      <%= text_field_tag :search, params[:search], class: "attractions_with_autocomplete", 'data-autocompleteUrl' => autocomplete_attraction_name_attractions_path%>
+      <%#= f.text_field :search , :class=>"with_autocomplete form-control form-control-square", params[:search]%>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_attraction_name_attractions_path%>
       <%= submit_tag "Search", :name => nil %>
     </p>
 <% end %>

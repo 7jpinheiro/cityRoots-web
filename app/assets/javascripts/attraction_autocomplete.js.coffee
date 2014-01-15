@@ -1,9 +1,9 @@
 $ ->
-  $('.attractions_with_autocomplete').autocomplete
+  $('.with_autocomplete').autocomplete
     minLength: 2
     source: (request, response) ->
       $.ajax
-        url: $('.attractions_with_autocomplete').data('autocompleteurl')
+        url: $('.with_autocomplete').data('autocompleteurl')
         dataType: "json"
         data:
           name: request.term

@@ -82,6 +82,7 @@ CityRootsWeb::Application.routes.draw do
   resources :services
 
   resources :events do
+    get :autocomplete_event_name, :on => :collection
     resource :event_translations, :only => [:new, :create,:destroy,:update]
   end
 

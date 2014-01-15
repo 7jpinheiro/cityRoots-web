@@ -13,8 +13,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-
-    @events = current_user.web_user.events if  current_user  && current_user.web_user
+    unless(params[:search].nil?)
+      @events = Event.search(params[:search],current_user)
+    else
+      @events = current_user.web_user.events if  current_user  && current_user.web_user
+    end
     respond_to do |format|
       format.html{}
       format.json{render :json => Event.all.as_json( :include => [:event_translations, :comment_events,:photo_events,:city,:types]) }
@@ -28,11 +31,6 @@ class EventsController < ApplicationController
       format.html { @events }
       format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:photo_events,:city,:types])}
     end
-  end
-
-  def search
-    @events = Event.search(params[:search],current_user)
-    render 'events/search'
   end
 
   # GET /events/new
@@ -86,6 +84,15 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def autocomplete_event_name
+    events = EventTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    result = events.collect do |t|
+      { value: t.name }
+    end
+    render json: result
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
