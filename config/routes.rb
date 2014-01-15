@@ -73,7 +73,9 @@ CityRootsWeb::Application.routes.draw do
 
   resources :itinerary_services
 
-  resources :itineraries
+  resources :itineraries do
+    get :autocomplete_itinerary_name, :on => :collection
+  end
 
   resources :attractions do
     get :autocomplete_attraction_name, :on => :collection

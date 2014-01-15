@@ -13,8 +13,13 @@ class ItinerariesController < ApplicationController
   # GET /itineraries
   # GET /itineraries.json
   def index
-    @itinerary = Itinerary.where("user_id=?",current_user.id).all;
-    @itineraries = current_user.itineraries if  current_user
+    unless(params[:search].nil?)
+      puts "entrou aqui"
+      @itineraries = Itinerary.search(params[:search],current_user)
+    else
+      puts "bananas"
+      @itineraries = current_user.itineraries if  current_user
+    end
     respond_to do |format|
       format.html{ }
       format.json{render :json =>  Itinerary.all.as_json( :include => [:itinerary_events,:itinerary_attractions,:itinerary_services,:events, :attractions,:services]) }
@@ -26,11 +31,12 @@ class ItinerariesController < ApplicationController
   def show
 
   end
-
-
-  def search
-    @itineraries = Itinerary.search(params[:search])
-    render 'itineraries/search'
+  def autocomplete_itinerary_name
+    itineraries = Itinerary.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    result = itineraries.collect do |t|
+      { value: t.name }
+    end
+    render json: result
   end
 
   # GET /itineraries/new

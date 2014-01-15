@@ -29,9 +29,10 @@ class Itinerary < ActiveRecord::Base
 
 
 
-  def self.search(search)
+  def self.search(search,user)
     if search
-      self.where("name LIKE ?", "%#{search}%")
+    #.where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+      Itinerary.where("user_id=? and LOWER(name) LIKE LOWER(?)",user.id, "%#{search}%")
     else
       self.all
     end

@@ -2,9 +2,9 @@
 <h1>Lista das suas Rotas</h1>
 </div>
 
-<%= form_tag itineraries_search_path, :method => 'get' do %>
+<%= form_tag itineraries_path, :method=>'get' do  |f|%>
     <p>
-      <%= text_field_tag :search, params[:search] %>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%>
       <%= submit_tag "Search", :name => nil %>
     </p>
 <% end %>
@@ -15,7 +15,6 @@
 <br>
 
 <%
-   @itineraries=Itinerary.where("user_id=?",current_user.id).all
    @itineraries.each do |itinerary|
 %>
     <br/>
