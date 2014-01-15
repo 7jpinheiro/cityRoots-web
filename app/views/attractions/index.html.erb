@@ -59,7 +59,13 @@
               %>
 
               <p>
-                <b>Descrição: </b> <%= truncate trans.description, length: 100 %> <br/>
+                <b>Descrição: </b>
+              <div class="hidden-xs">
+                <%= truncate trans.description, length: 300 %>
+              </div>
+              <div class="visible-xs">
+                <%= truncate trans.description, length: 100 %>
+              </div><br/>
                 <b>Horário:</b><%= trans.schedule %><br/>
                 <b>Transporte:</b><%= trans.transport %><br/>
                 <b>Preço:</b><%= trans.price %>

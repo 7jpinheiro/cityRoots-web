@@ -29,4 +29,13 @@ CityRootsWeb::Application.configure do
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+        :login => "city2roots-facilitator_api1.gmail.com",
+        :password => "1389368061",
+        :signature => "AjGJ1XBX-jlc1uYt3AajHcqWC2TfAkjxuKJNKGxx56--PbTirz0WyhjF"
+    )
+  end
+
 end
