@@ -55,7 +55,6 @@ class ServicesController < ApplicationController
     #if(current_user.role? :comercial_basic )
      # if(num_serv<1)
 
-<<<<<<< HEAD
       #else
        # errors
         
