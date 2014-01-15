@@ -1,6 +1,5 @@
 class AttractionsController < ApplicationController
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
-  
   before_filter do
     resource = controller_path.singularize.gsub('/', '_').to_sym
     method = "#{resource}_params"
@@ -11,7 +10,11 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
+    unless(params[:search].nil?)
+      @attractions = Attraction.search(params[:search],current_user)
+    else
+      @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
+    end
     respond_to do |format|
       format.html{}
       format.json{render :json => Attraction.all.to_json(:include=>{:attraction_translations=>{:include=>:language}},:city=>{})}
@@ -37,10 +40,6 @@ class AttractionsController < ApplicationController
     @attraction.attraction_types.build
   end
 
-  def search
-    @attractions = Attraction.search(params[:search],current_user)
-    render 'attractions/search'
-  end
 
   # GET /attractions/1/edit
   def edit
@@ -86,6 +85,14 @@ class AttractionsController < ApplicationController
       format.html { redirect_to attractions_url }
       format.json { head :no_content }
     end
+  end
+
+  def autocomplete_attraction_name
+    attractions = AttractionTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    result = attractions.collect do |t|
+      { value: t.name }
+    end
+    render json: result
   end
 
   private

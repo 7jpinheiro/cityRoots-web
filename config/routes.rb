@@ -18,9 +18,6 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
-  get "itineraries/search", to:"itineraries#search", as:"itineraries_search"
-  get "events/search", to:"events#search", as:"events_search"
-  get "attractions/search", to:"attractions#search", as:"attractions_search"
 
   devise_for :installs
 
@@ -79,10 +76,8 @@ CityRootsWeb::Application.routes.draw do
   resources :itineraries
 
   resources :attractions do
-     resources :photo_attractions
-     resources :rating_attractions
-     resources :comment_attractions
-   end
+    get :autocomplete_attraction_name, :on => :collection
+  end
 
   resources :services
 

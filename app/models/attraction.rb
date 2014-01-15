@@ -49,7 +49,7 @@ class Attraction < ActiveRecord::Base
 
   def self.search(search,user)
     if search
-      Attraction.joins(:attraction_translations).where("attractions.web_user_id=? and attraction_translations.name LIKE ?", user.id,"%#{search}%")
+      Attraction.joins(:attraction_translations).where("attractions.web_user_id=? and LOWER(attraction_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
     else
       self.all
     end

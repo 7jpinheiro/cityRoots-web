@@ -51,6 +51,7 @@ gem 'cancan'
 
 gem 'annotate', ">=2.6.0"
 
+gem "jquery-ui-rails"
 
 gem 'json'
 

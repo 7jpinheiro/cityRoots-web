@@ -2,9 +2,10 @@
     <h1>Lista dos seus Pontos de Interesse</h1>
 </div>
 
-<%= form_tag attractions_search_path, :method => 'get' do %>
+<%= form_tag attractions_path, :method=>'get' do  |f|%>
     <p>
-      <%= text_field_tag :search, params[:search] %>
+      <%#= f.text_field :search , :class=>"attractions_with_autocomplete form-control form-control-square", params[:search]%>
+      <%= text_field_tag :search, params[:search], class: "attractions_with_autocomplete", 'data-autocompleteUrl' => autocomplete_attraction_name_attractions_path%>
       <%= submit_tag "Search", :name => nil %>
     </p>
 <% end %>
@@ -14,8 +15,7 @@
 <%= link_to 'Novo Ponto de Interesse', new_attraction_path, :class=>"btn btn-primary btn-square" %>
 <br>
 <%
-   @attraction=Attraction.where("web_user_id=?",current_user.id).all
-   @attraction.each do |attraction|
+   @attractions.each do |attraction|
     trans=AttractionTranslation.where("attraction_id=?",attraction.id).first
 %>
     <br/>
