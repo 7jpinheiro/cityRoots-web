@@ -6,5 +6,6 @@ class ServiceTranslation < ActiveRecord::Base
   validates :transport, length: {minimum: 3}
 
   belongs_to :service
+  belongs_to :language
 
 end

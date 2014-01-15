@@ -17,7 +17,7 @@ class ServicesController < ApplicationController
     @services = current_user.web_user.services if  current_user  && current_user.web_user
     respond_to do |format|
       format.html{}
-      format.json{render :json => Service.all.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
+      format.json{render :json => Service.all.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -27,7 +27,7 @@ class ServicesController < ApplicationController
     @service=Service.find(params[:id])
     respond_to do |format|
       format.html { @service }
-      format.json { render :json => @service.as_json( :include => [:service_translations,:photo_services,:city,:types]) }
+      format.json { render :json => @service.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 
@@ -53,13 +53,13 @@ class ServicesController < ApplicationController
 
       else
         errors
-        
+      end
     íf(current_user.role? :comercial_basic )
       if(num_serv<5)
 
       else
         errors
-
+      end
     @service = Service.new(service_params)
     respond_to do |format|
       if @service.save

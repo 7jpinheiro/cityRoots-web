@@ -42,6 +42,7 @@ class Service < ActiveRecord::Base
 	has_many :photo_services, dependent: :destroy
 	has_many :itinerary_services, dependent: :destroy
   has_many :types, :through=> :service_types
+  has_many :languages , :through => :event_translations
 
   accepts_nested_attributes_for :service_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :service_translations , :reject_if => :all_blank, :allow_destroy => true
