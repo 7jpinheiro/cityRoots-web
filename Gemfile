@@ -50,8 +50,9 @@ gem 'devise'
 gem 'cancan'
 
 gem 'annotate', ">=2.6.0"
-
 gem "jquery-ui-rails"
+# pagination
+gem "kaminari"
 
 gem 'json'
 
