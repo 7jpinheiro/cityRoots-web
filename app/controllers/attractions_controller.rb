@@ -1,5 +1,6 @@
 class AttractionsController < ApplicationController
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
+  
   before_filter do
     resource = controller_path.singularize.gsub('/', '_').to_sym
     method = "#{resource}_params"
@@ -38,7 +39,6 @@ class AttractionsController < ApplicationController
     @attraction_translation = @attraction.attraction_translations.build
     @attraction.attraction_types.build
   end
-
 
   # GET /attractions/1/edit
   def edit
