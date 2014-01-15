@@ -1,13 +1,20 @@
 <div class="page-header">
     <h1>Lista dos seus Serviços</h1>
 </div>
+
+<%= form_tag services_path, :method=>'get' do  |f|%>
+    <p>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_service_name_services_path%>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+<% end %>
+
 <%= csrf_meta_tag %>
 
 <br>
 <%= link_to 'Novo Serviço', new_service_path ,:class=>"btn btn-primary btn-square"%>
 <br>
 <%
-   @services=Service.where("web_user_id=?",current_user.id)
    @services.each do |service|
      serv=ServiceTranslation.where("service_id=?",service.id).first
 %>

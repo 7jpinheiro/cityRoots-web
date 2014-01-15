@@ -79,7 +79,9 @@ CityRootsWeb::Application.routes.draw do
     get :autocomplete_attraction_name, :on => :collection
   end
 
-  resources :services
+  resources :services do
+    get :autocomplete_service_name, :on => :collection
+  end
 
   resources :events do
     get :autocomplete_event_name, :on => :collection
