@@ -1,0 +1,132 @@
+
+<!-- NAV Bar-->
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand">
+        <%= image_tag "Index/logo_CR.png", :style=>"width: 18px;height: 18px;" %>
+        <%= link_to "CityRoots" , welcome_index_path , :style => "color:inherit;text-decoration:none;cursor:pointer;" %>
+      </span>
+    </div>
+    <nav class="collapse navbar-collapse bf-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+
+        <%
+           if user_signed_in?
+        %>
+        <%
+                if current_user.role? (:entidade)
+        %>
+              <li class="<%= is_active?(attractions_path) %>"> 
+                <%= link_to "Pontos de interesse" , attractions_path  %>
+              </li>
+              <li class="<%= is_active?(itineraries_path) %>"> 
+                <%= link_to "Rotas" , itineraries_path  %>
+              </li>
+              <li class="<%= is_active?(events_path) %>"> 
+                <%= link_to "Eventos" , events_path  %>
+              </li>
+        <%
+                end
+                if current_user.role? (:restauracao) 
+        %>
+              <li class="<%= is_active?(services_path) %>">                 
+                <%= link_to "Estabelecimentos" , services_path  %>
+              </li>
+        <%
+                end
+                if current_user.role? (:restauracao_gold) 
+        %>
+              <li class="<%= is_active?(services_path) %>">                 
+                <%= link_to "Estabelecimentos" , services_path  %>
+              </li>
+              <li class="<%= is_active?(events_path) %>"> 
+                <%= link_to "Eventos" , events_path  %>
+              </li>
+        <%
+              end
+            else
+        %>
+            <li class="<%= is_active?(welcome_index_path) %>"> 
+              <%= link_to "Home" , welcome_index_path  %>
+            </li>
+            <li class="<%= is_active?(web_index_path) %>"> 
+
+              <%= link_to "Web" , web_index_path %>
+            </li>
+            <li class="<%= is_active?(mobile_index_path) %>"> 
+
+              <%= link_to "Mobile", mobile_index_path  %>
+            </li>
+            <li class="<%= is_active?(galeria_path) %>"> 
+              <%= link_to "Galeria", galeria_path  %>
+            </li>
+            <%
+           end
+        %>
+        <li class="<%= is_active?(contact_path) %>"> 
+          <%= link_to "Contactos", contact_path %>
+        </li>
+      </ul>
+      <%
+         if user_signed_in?
+      %>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <%
+                 if current_user.username != nil
+              %><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %>  <b class="caret"></b></a><%
+               else
+            %><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
+               end%>
+              <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
+              <ul class="dropdown-menu dropdown-menu-square">
+                <li>
+                  <%= link_to profiles_index_path do
+                  %>
+                    <i class="fa fa-cogs"></i> Perfil
+                  <%
+                  end%>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to destroy_install_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete do%>
+                      <i class="fa fa-times-circle" style="margin-left: 8px;"></i> Logout
+                  <%end%>
+                </li>
+              </ul>
+            </li>
+          </ul>
+      <%
+         else
+      %>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+              <!-- background-color: #AFAFAF;border: 1px solid rgba(0, 0, 0, 0.58);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.63); -->
+              <ul class="dropdown-menu dropdown-menu-square" style="width:300px;">
+                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                    <li><%= f.email_field :email, :autofocus => true, :style=>"margin-left: 25px;margin-bottom:10px;width: 250px;", :class=>"form-control form-control-square", :placeholder=>"Email" %></li>
+                    <li><%= f.password_field :password , :style=>"margin-left: 25px;margin-bottom:10px;width: 250px;", :class=>"form-control form-control-square", :placeholder=>"Password" %></li>
+                    <% if devise_mapping.rememberable? -%>
+                        <li><%= f.check_box :remember_me , :style=>"margin-left: 25px;" %> <%= f.label :remember_me %></li>
+                    <% end -%>
+                    <li><%= f.submit "Login" , :style=>"margin-left: 25px;margin-right: 25px;width: 250px;", :class=>"btn btn-s btn-info btn-square" %></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><%= link_to new_user_registration_path do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
+                <li><a href="#" style="color: #3b5998;"><i class="fa fa-facebook-square fa-fw" style="margin-left: 5px;"></i> Login by Facebook</a></li>
+                <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
+
+              </ul>
+            </li>
+          </ul>
+      <%
+         end
+      %>
+    </nav>
+  </div>
+</header>

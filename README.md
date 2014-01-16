@@ -27,9 +27,12 @@ Funcionalidades:
 [X] - Mapas   
 [X] - Login com devise  
 [ ] - Grupo de users com o Cancan   
+[X] - Paginação
 
 
 
+A Fazer:
 
 
+-> verificar restauracao_gold se está direito (user.rb e ability.rb)
 

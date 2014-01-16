@@ -1,13 +1,15 @@
+<div class="page-header">
+    <h1>Bem vindo ao CityRoots</h1>
+</div>
+
 <div class="container">
   <div class="jumbotron">
-    <br>
-    <h2>Bem vindo ao CityRoots</h2>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),:class=>"form-horizontal") do |f| %>
         <%= devise_error_messages! %>
         <br>
         <div class="row">
           <div class="form-group">
-            <label for="username" class="col-sm-4 control-label">Username</label>
+            <label for="username" class="col-sm-4 control-label">Nome de utilizador</label>
             <div class="col-sm-8">
               <%= f.text_field :username, :autofocus => true , :class=>"form-control form-control-square" %>
             </div>

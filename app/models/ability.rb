@@ -3,6 +3,11 @@ class Ability
 
   def initialize(user)
     user ||= User.new # Guest user
+
+    if user.role?(:new_user)
+      can :create, WebUser
+    end
+    
     if user.role?(:entidade)
       can :read, :all
       can :create, :all
@@ -15,22 +20,30 @@ class Ability
       can :create, Attraction
       can :create, AttractionTranslation
       can :create, AttractionType
+
     end
 
     if user.role?(:restauracao)
-      can :read, :all
       can :manage, Service, :web_user_id => user.id
+    end
+
+    if user.role?(:restauracao_gold)
+      can :manage, Service, :web_user_id => user.id
+      can :manage, Event, :web_user_id => user.id
     end
 
     if user.role?(:mobile)
       can :read, :all
-      can :read, Attraction
-      can :read, Service
-      can :read, Event
+      can :create, CommentAttraction
+      can :create, CommentEvent
+      can :create, CommentItinerary
+      can :create, CommentService
+      can :create, RatingAttraction
+      can :create, RatingEvent
+      can :create, RatingItinerary
+      can :create, RatingService
     end
 
-    can :read, :all
-    can :manage, :all
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

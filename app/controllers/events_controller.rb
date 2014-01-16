@@ -14,13 +14,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     unless(params[:search].nil?)
-      @events = Event.search(params[:search],current_user)
+      @events = Event.search(params[:search],current_user).page(params[:page]).per(10)
     else
-      @events = current_user.web_user.events if  current_user  && current_user.web_user
+      @events = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Event.all.as_json({:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}})}
+      format.json{render :json => Event.page(params[:page]).per(1).as_json({:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}})}
     end
   end
   # GET /events/1
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: 'Evento criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @event }
       else
         format.html { render action: 'new' }
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Evento actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

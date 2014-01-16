@@ -28,7 +28,7 @@ class WebUsersController < ApplicationController
 
     respond_to do |format|
       if @web_user.save
-        format.html { redirect_to @web_user, notice: 'Web user was successfully created.' }
+        format.html { redirect_to @web_user, notice: 'Entida registada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @web_user }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class WebUsersController < ApplicationController
   def update
     respond_to do |format|
       if @web_user.update(web_user_params)
-        format.html { redirect_to @web_user, notice: 'Web user was successfully updated.' }
+        format.html { redirect_to @web_user, notice: 'Entidade actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

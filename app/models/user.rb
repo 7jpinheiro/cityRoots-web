@@ -46,16 +46,22 @@ class User < ActiveRecord::Base
   after_initialize :init_variables
 
   def init_variables
-    puts "--------------------- INIT ---------------------"
     @list_roles = Array.new
   end
 
   def create_list_roles
-
-    puts "create ---------------------" + @list_roles.inspect + "-----------------------------"
     if self.web_user
       @list_roles.push "restauracao" if self.web_user.web_user_type.name == "Restauração"
       @list_roles.push "entidade" if self.web_user.web_user_type.name == "Turismo/Câmara"
+      unless self.web_user.web_user_packs.nil? 
+        self.web_user.web_user_packs.each do |web_user_pack|
+          if Date.today < web_user_pack.validity && web_user_pack.active
+            @list_roles.push "restauracao_gold" 
+          end
+        end
+      end
+    else
+      @list_roles.push "new_user" if self.web_user.blank?
     end
     @list_roles.push "mobile" if self.mobile_user
   end
@@ -63,8 +69,6 @@ class User < ActiveRecord::Base
 
   def role?(arg)
     create_list_roles if @list_roles.blank?
-
-    puts "---------------------" + @list_roles.inspect + "-----------------------------"
     @list_roles.include? arg.to_s
   end
 end

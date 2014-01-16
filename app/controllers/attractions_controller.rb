@@ -8,17 +8,21 @@ class AttractionsController < ApplicationController
   end
 
   load_and_authorize_resource
+
+
   # GET /attractions
   # GET /attractions.json
   def index
     unless(params[:search].nil?)
-      @attractions = Attraction.search(params[:search],current_user)
+      @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
     else
-      @attractions= current_user.web_user.attractions if  current_user  && current_user.web_user
+      @attractions= current_user.web_user.attractions.page(params[:page]).per(10) if  current_user  && current_user.web_user
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Attraction.all.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
+      format.json{render :json => 
+        Attraction.page(params[:page]).per(1).to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}
+          ) }
     end
   end
 
@@ -54,7 +58,7 @@ class AttractionsController < ApplicationController
     @attraction = Attraction.new(attraction_params)
     respond_to do |format|
       if @attraction.save
-        format.html { redirect_to @attraction, notice: 'Attraction was successfully created.' }
+        format.html { redirect_to @attraction, notice: 'Ponto de Interesse criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @attraction }
       else
         format.html { render action: 'new' }
@@ -68,7 +72,7 @@ class AttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @attraction.update(attraction_params)
-        format.html { redirect_to @attraction, notice: 'Attraction was successfully updated.' }
+        format.html { redirect_to @attraction, notice: 'Ponto de Interesse actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

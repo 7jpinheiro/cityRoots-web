@@ -30,4 +30,13 @@ class RegistrationController < ApplicationController
             render :action => "new"
         end
     end
+
+    def after_sign_up_path_for(resource)
+        if current_user.role? (:new_user)
+            new_web_user_path
+        else
+            after_sign_in_path_for(resource)
+        end
+    end
+  end
 end

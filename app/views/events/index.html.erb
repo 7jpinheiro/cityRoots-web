@@ -16,7 +16,7 @@
 <br>
 <%
 @events.each do |event|
-    trans=EventTranslation.where("event_id=?",event.id).first
+    trans=event.event_translations.first
 %>
 <br/>
 <div class="col-md-12">
@@ -111,4 +111,5 @@
   </div>
 </div>
 <% end %>
+<%= paginate @events %>
 <br/>

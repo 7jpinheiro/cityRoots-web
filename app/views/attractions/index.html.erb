@@ -7,7 +7,7 @@
 <br>
 <%
    @attractions.each do |attraction|
-    trans=AttractionTranslation.where("attraction_id=?",attraction.id).first
+    trans=attraction.attraction_translations.first
 %>
     <br/>
     <div class="col-md-12">
@@ -99,4 +99,5 @@
       </div>
     </div>
 <% end %>
+<%= paginate @attractions %>
 <br/>

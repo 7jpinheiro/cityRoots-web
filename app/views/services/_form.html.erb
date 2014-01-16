@@ -159,15 +159,12 @@
       <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
       <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
       <br/>
-      <div class="row">
+      <div class="col-xs-5 col-sm-2">
         <div class="form-group">
-          <div class="col-sm-6">
-            <%= f.submit :class=>"btn btn-primary btn-square" %>
-          </div>
-          <br/>
-          <br/>
+            <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+            </br>
+            </br>
         </div>
       </div>
     </form>
-    <br/>
 <% end %>

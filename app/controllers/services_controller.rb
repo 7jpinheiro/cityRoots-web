@@ -15,13 +15,13 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
     unless(params[:search].nil?)
-      @services = Service.search(params[:search],current_user)
+      @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
     else
-      @services = current_user.web_user.services if  current_user  && current_user.web_user
+      @services = current_user.web_user.services.page(params[:page]).per(10) if  current_user  && current_user.web_user
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Service.all.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
+      format.json{render :json => Service.page(params[:page]).per(1).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 

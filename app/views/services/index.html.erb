@@ -1,22 +1,22 @@
 <div class="page-header">
-    <h1>Lista dos seus Serviços</h1>
+    <h1>Lista dos seus Estabelecimentos</h1>
 </div>
 
 <%= form_tag services_path, :method=>'get' do  |f|%>
     <p>
       <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_service_name_services_path%>
-      <%= submit_tag "Search", :name => nil %>
+      <%= submit_tag "Procurar", :name => nil %>
     </p>
 <% end %>
 
 <%= csrf_meta_tag %>
 
 <br>
-<%= link_to 'Novo Serviço', new_service_path ,:class=>"btn btn-primary btn-square"%>
+<%= link_to 'Registar novo Estabelecimento', new_service_path ,:class=>"btn btn-primary btn-square"%>
 <br>
 <%
    @services.each do |service|
-     serv=ServiceTranslation.where("service_id=?",service.id).first
+     serv=service.service_translations.first
 %>
     <br/>
     <div class="col-md-12">
@@ -89,4 +89,5 @@
       </div>
     </div>
 <% end %>
+<%= paginate @services %>
 <br/>

@@ -15,16 +15,3 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require_tree .
-
-// delete characters on users#edit and users#new
-function remove_fields(link) {
-    $(link).prev("input[type=hidden]").val("1");
-    $(link).closest("#character").hide();
-}
-
-// add character fields on users#edit and users#new
-function add_fields(link, association, content) {
-    var new_id = new Date().getTime();
-    var regexp = new RegExp("new_" + association, "g");
-    $(link).parent().before(content.replace(regexp, new_id));
-}

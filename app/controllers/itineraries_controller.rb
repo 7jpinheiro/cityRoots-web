@@ -15,14 +15,14 @@ class ItinerariesController < ApplicationController
   def index
     unless(params[:search].nil?)
       puts "entrou aqui"
-      @itineraries = Itinerary.search(params[:search],current_user)
+      @itineraries = Itinerary.search(params[:search],current_user).page(params[:page]).per(10)
     else
       puts "bananas"
-      @itineraries = current_user.itineraries if  current_user
+      @itineraries = current_user.itineraries.page(params[:page]).per(10) if  current_user
     end
     respond_to do |format|
       format.html{ }
-      format.json{render :json =>  Itinerary.all.as_json( :include => {
+      format.json{render :json =>  Itinerary.page(params[:page]).per(1).as_json( :include => {
           :itinerary_attractions=>{:include=>{:attraction=>{:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}}},
           :itinerary_events=>{:include=>{:event=>{:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}}}},
           :itinerary_services=>{:include=>{:service=>{:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}}}},
@@ -57,13 +57,12 @@ class ItinerariesController < ApplicationController
   # POST /itineraries
   # POST /itineraries.json
   def create
-    puts itinerary_params.inspect + "---------------------------"
     @itinerary = Itinerary.new(itinerary_params)
 
 
     respond_to do |format|
       if @itinerary.save
-        format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
+        format.html { redirect_to @itinerary, notice: 'Rota criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary }
       else
         format.html { render action: 'new' }
@@ -75,11 +74,9 @@ class ItinerariesController < ApplicationController
   # PATCH/PUT /itineraries/1
   # PATCH/PUT /itineraries/1.json
   def update
-    puts itinerary_params.inspect + "--------------------------- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-
     respond_to do |format|
       if @itinerary.update(itinerary_params)
-        format.html { redirect_to @itinerary, notice: 'Itinerary was successfully updated.' }
+        format.html { redirect_to @itinerary, notice: 'Rota actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
