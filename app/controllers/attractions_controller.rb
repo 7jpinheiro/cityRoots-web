@@ -21,7 +21,7 @@ class AttractionsController < ApplicationController
     respond_to do |format|
       format.html{}
       format.json{render :json => 
-        Attraction.page(params[:page]).per(1).to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}
+        Attraction.page(params[:page]).per(25).to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}
           ) }
     end
   end

@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Service.page(params[:page]).per(1).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
+      format.json{render :json => Service.page(params[:page]).per(25).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end
 

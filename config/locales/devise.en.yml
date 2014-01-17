@@ -40,6 +40,7 @@ en:
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "You updated your account successfully."
+      current_password: 'Blabla password'
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
@@ -55,5 +56,38 @@ en:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "1 erro impediu o %{resource} de ser actualizado:"
+        other: "%{count} erros impediram o %{resource} de ser actualizado:"
+  activerecord:
+      errors:
+        messages:
+          inclusion: não está incluso na lista
+          exclusion: não está disponível
+          invalid: não é válido
+          confirmation: não bate com a confirmação
+          accepted: precisa ser aceito
+          empty: não pode ser vazio
+          blank: não pode ser vazio
+          password_hint: "we need your current password to confirm your changes"
+          too_long: "é muito longo (não mais do que %{count} caracteres)"
+          too_short: "é muito curto (não menos do que %{count} caracteres)"
+          wrong_length: "não é do tamanho correto (precisa ter %{count} caracteres)"
+          taken: não está disponível
+          not_a_number: não é um número
+          updated_at: Atualizado em
+          date_cannot_be_greater_than_today: não pode ser maior que hoje
+          # Devise
+          expired: sua senha expirou, por favor, solicitar uma nova
+          not_found: não encontrado
+          already_confirmed: já foi confirmado
+          not_locked: não foi bloqueado
+          not_saved:
+            one: "Não foi possível gravar %{resource}: 1 erro"
+            other: "Não foi possível gravar %{resource}: %{count} erros."
+      models:
+        user: Utilizador
+      template:
+          header:
+            one: "Não foi possível gravar %{resource}: 1 erro"
+            other: "Não foi possível gravar %{resource}: %{count} erros."
+          body: "Por favor, verifique os seguintes campos:"

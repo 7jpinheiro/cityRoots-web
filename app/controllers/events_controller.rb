@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => Event.page(params[:page]).per(1).as_json({:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}})}
+      format.json{render :json => Event.page(params[:page]).per(25).as_json({:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}})}
     end
   end
   # GET /events/1

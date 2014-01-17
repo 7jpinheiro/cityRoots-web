@@ -14,15 +14,13 @@ class ItinerariesController < ApplicationController
   # GET /itineraries.json
   def index
     unless(params[:search].nil?)
-      puts "entrou aqui"
       @itineraries = Itinerary.search(params[:search],current_user).page(params[:page]).per(10)
     else
-      puts "bananas"
       @itineraries = current_user.itineraries.page(params[:page]).per(10) if  current_user
     end
     respond_to do |format|
       format.html{ }
-      format.json{render :json =>  Itinerary.page(params[:page]).per(1).as_json( :include => {
+      format.json{render :json =>  Itinerary.page(params[:page]).per(25).as_json( :include => {
           :itinerary_attractions=>{:include=>{:attraction=>{:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}}},
           :itinerary_events=>{:include=>{:event=>{:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}}}},
           :itinerary_services=>{:include=>{:service=>{:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}}}},
