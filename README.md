@@ -9,7 +9,7 @@ TODO List:
 [ ] - carousel nos show's com botao para add fotos e dps add no carousel tb  
 [ ] - Primeiro login reencaminhar para registo de entidade (new_web_user)  
 [ ] - Verificar se as mensagens estão todas em Portugues  
-[ ] - Perfil do Utilizador
+[ ] - Perfil do Utilizador  
 [ ] - Planos para comerciantes e add o botão comprar para ir para o pagamento  
 [ ] - Página de pagamentos por bonita  
 [ ] - Listagem de estabelecimentos deveria ser diferente  
