@@ -1,6 +1,14 @@
 <div class="page-header">
     <h1>Lista dos seus Pontos de Interesse</h1>
 </div>
+
+<%= form_tag attractions_path, :method=>'get' do  |f|%>
+    <p>
+      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_attraction_name_attractions_path%>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+<% end %>
+
 <%= csrf_meta_tags %>
 <br>
 <%= link_to 'Novo Ponto de Interesse', new_attraction_path, :class=>"btn btn-primary btn-square" %>
