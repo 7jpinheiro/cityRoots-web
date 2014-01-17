@@ -13,10 +13,10 @@
     <% end %>
     <form role="form" class="form-horizontal">
       <div class="row">
-        <div class="col-md-6">
+        <div class="well well-sm">
           <div class="row">
             <div class="form-group">
-              <%= f.label "Nome" ,:for=>"nome" , :class=>"col-md-3 control-label" %>
+              <%= f.label "Nome" ,:for=>"nome" , :class=>"col-md-5 control-label", :style=>"text-align:center;" %>
               <div class="col-md-6">
                 <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos" %>
               </div>
@@ -25,7 +25,7 @@
           <br/>
           <div class="row">
             <div class="form-group">
-              <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-3 control-label" %>
+              <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-5 control-label" , :style=>"text-align:center;"%>
               <div class="col-sm-6">
                 <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região" %>
               </div>
@@ -35,7 +35,7 @@
           <br/>
           <div class="row">
             <div class="form-group">
-              <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-3 control-label" %>
+              <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-5 control-label" , :style=>"text-align:center;"%>
               <div class="col-sm-6">
                 <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
               </div>
