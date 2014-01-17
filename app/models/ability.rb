@@ -5,10 +5,12 @@ class Ability
     user ||= User.new # Guest user
 
     if user.role?(:new_user)
+      puts "------------- NEW USER -----------------"
       can :create, WebUser
     end
     
     if user.role?(:entidade)
+      puts "------------- entidade -----------------"
       can :read, :all
       can :create, :all
       can :manage, Attraction, :web_user_id => user.id
@@ -24,10 +26,12 @@ class Ability
     end
 
     if user.role?(:restauracao)
+      puts "------------- restauracao -----------------"
       can :manage, Service, :web_user_id => user.id
     end
 
     if user.role?(:restauracao_gold)
+      puts "------------- restauracao_gold -----------------"
       can :manage, Service, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
     end

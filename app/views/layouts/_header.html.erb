@@ -18,7 +18,9 @@
            if user_signed_in?
         %>
         <%
+
                 if current_user.role? (:entidade)
+                  puts "------------- entidade -----------------"
         %>
               <li class="<%= is_active?(attractions_path) %>"> 
                 <%= link_to "Pontos de interesse" , attractions_path  %>
@@ -31,14 +33,22 @@
               </li>
         <%
                 end
-                if current_user.role? (:restauracao) 
+                if current_user.role? (:restauracao) && !(current_user.role?(:restauracao_gold))
+                  puts "------------- restauracao -----------------"
         %>
               <li class="<%= is_active?(services_path) %>">                 
                 <%= link_to "Estabelecimentos" , services_path  %>
               </li>
+              <li class="<%= is_active?(pacotes_path) %>">                 
+                <%= link_to "Planos" , pacotes_path  %>
+              </li>
         <%
                 end
+                if current_user.role? (:new_user) 
+                  puts "------------- new_user -----------------"
+                end
                 if current_user.role? (:restauracao_gold) 
+                  puts "------------- restauracao_gold -----------------"
         %>
               <li class="<%= is_active?(services_path) %>">                 
                 <%= link_to "Estabelecimentos" , services_path  %>

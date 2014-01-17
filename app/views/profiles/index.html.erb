@@ -5,7 +5,10 @@
    #lang=Language.where("id=?",user.language.name).first;
    #ling=lang.name;
 %>
-<h3>Bem vindo <%= user.username%></h3>
+
+<div class="page-header">
+    <h1>Bem vindo <%= user.username%></h1>
+</div>
 <br/>
 <div class="row">
   <div class="col-md-5">

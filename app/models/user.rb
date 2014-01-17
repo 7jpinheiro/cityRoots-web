@@ -60,7 +60,8 @@ class User < ActiveRecord::Base
           end
         end
       end
-    else
+    end
+    if self.web_user.nil?
       @list_roles.push "new_user" if self.web_user.blank?
     end
     @list_roles.push "mobile" if self.mobile_user
