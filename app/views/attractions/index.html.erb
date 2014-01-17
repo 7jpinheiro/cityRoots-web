@@ -5,6 +5,7 @@
 <br>
 <%= link_to 'Novo Ponto de Interesse', new_attraction_path, :class=>"btn btn-primary btn-square" %>
 <br>
+
 <%
    @attractions.each do |attraction|
     trans=attraction.attraction_translations.first

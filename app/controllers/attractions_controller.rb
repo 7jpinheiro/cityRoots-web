@@ -31,7 +31,6 @@ class AttractionsController < ApplicationController
   def show
     @attraction=Attraction.find(params[:id])
     @attraction_translation = @attraction.attraction_translations.first
-
     respond_to do |format|
       format.html { @attraction }
       format.json{render :json => @attraction.to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}})}
