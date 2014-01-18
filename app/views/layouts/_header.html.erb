@@ -18,6 +18,22 @@
            if user_signed_in?
         %>
         <%
+                if current_user.role? (:admin)
+        %>                
+              <li class="<%= is_active?(attractions_path) %>"> 
+                <%= link_to "Pontos de interesse" , attractions_path  %>
+              </li>
+              <li class="<%= is_active?(itineraries_path) %>"> 
+                <%= link_to "Rotas" , itineraries_path  %>
+              </li>
+              <li class="<%= is_active?(events_path) %>"> 
+                <%= link_to "Eventos" , events_path  %>
+              </li>
+              <li class="<%= is_active?(services_path) %>">                 
+                <%= link_to "Serviços" , services_path  %>
+              </li>
+        <%
+                end
                 if current_user.role? (:entidade)
                   puts "------------- entidade -----------------"
         %>
@@ -45,6 +61,11 @@
                 end
                 if current_user.role? (:new_user) 
                   puts "------------- new_user -----------------"
+        %>
+              <li class="<%= is_active?(new_web_user_path) %>">                 
+                <%= link_to "Registar Entidade" , new_web_user_path %>
+              </li>
+        <%
                 end
                 if current_user.role? (:restauracao_gold) 
                   puts "------------- restauracao_gold -----------------"

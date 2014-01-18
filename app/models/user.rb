@@ -50,8 +50,9 @@ class User < ActiveRecord::Base
   end
 
   def create_list_roles
-    if self.web_user
-      @list_roles.push "entidade" if self.web_user.web_user_type.name == "Turismo/Câmara"
+    if self.web_user && !self.id.nil?
+      @list_roles.push "entidade" if self.web_user.web_user_type.name == "Entidade"
+      @list_roles.push "admin" if self.web_user.web_user_type.name == "Admin"
       unless self.web_user.web_user_packs.nil? 
         self.web_user.web_user_packs.each do |web_user_pack|
           if Date.today < web_user_pack.validity && web_user_pack.active
@@ -59,14 +60,19 @@ class User < ActiveRecord::Base
           end
         end
       end
-      if self.web_user.web_user_type.name == "Restauração" &&  !(@list_roles.include? "restauracao_gold")
+      if self.web_user.web_user_type.name == "Comercio" &&  !(@list_roles.include? "restauracao_gold")
           @list_roles.push "restauracao" 
       end 
     end
-    if self.web_user.nil?
+
+    if self.web_user.nil? && !self.id.nil?
       @list_roles.push "new_user" if self.web_user.blank?
     end
-    @list_roles.push "mobile" if self.mobile_user
+    
+    if @list_roles.blank?
+      @list_roles.push "mobile"
+    end
+
   end
 
 
