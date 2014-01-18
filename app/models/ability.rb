@@ -28,6 +28,7 @@ class Ability
     if user.role?(:restauracao)
       puts "------------- restauracao -----------------"
       can :manage, Service, :web_user_id => user.id
+      can :create, Service, :web_user_id => user.id
     end
 
     if user.role?(:restauracao_gold)
