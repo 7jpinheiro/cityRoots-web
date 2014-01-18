@@ -2,10 +2,58 @@
   <h1>Contactos</h1>
 </div>
 <div class="well well-large clearfix">
-<div style="margin-bottom:20px">
-      <iframe width="100%" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=barcelos&amp;aq=&amp;sll=37.6,95.665&amp;sspn=9.867771,135.263672&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=New+York&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
-    </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+<script type="text/javascript">
 
+  function mapinit(){
+      var stockholm = new google.maps.LatLng(<%= 41.560988 %>, <%= -8.39216 %>);
+      var parliament = new google.maps.LatLng(<%= 41.560988 %>, <%= -8.39216 %>);
+      var marker;
+      var map;
+
+      function initialize() {
+          // Create an array of styles.
+          var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+          // Create a new StyledMapType object, passing it the array of styles,
+          // as well as the name to be displayed on the map type control.
+          var styledMap = new google.maps.StyledMapType(styles,
+                  {name: "Styled Map"});
+
+          var mapOptions = {
+              zoom: 11,
+              center: stockholm
+          };
+
+          map = new google.maps.Map(document.getElementById('map-canvas'),
+                  mapOptions);
+
+          var image="<%= image_url "maker.png"%>";
+
+          marker = new google.maps.Marker({
+              map:map,
+              animation: google.maps.Animation.DROP,
+              position: parliament,
+              icon: image
+          });
+          google.maps.event.addListener(marker, 'click', toggleBounce);
+          //Associate the styled map with the MapTypeId and set it to display.
+          map.mapTypes.set('map_style', styledMap);
+          map.setMapTypeId('map_style');
+      }
+
+      function toggleBounce() {
+
+          if (marker.getAnimation() != null) {
+              marker.setAnimation(null);
+          } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+  }
+</script>
 <div class="col-sm-6 ">
 <%= form_for @message, :url => contact_create_path, :html => {:class => "form"} do |form| %>
   <legend>Contacte-nos</legend>

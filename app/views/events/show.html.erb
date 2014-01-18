@@ -197,7 +197,34 @@
       </dl>
       <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6"><% if !@event.photo_attractions.blank? %>
+	  <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+	      <div class="carousel-inner">
+	       
+	        <% @event.photo_attractions.each_with_index do |p,i| %>
+	          <% if i==0 %>
+	            <div class="item active">
+	          <% else %>
+	            <div class="item">
+	          <% end %>
+	            <%= image_tag p.photo.url(:original,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+	            <div class="carousel-caption"></div>
+	          </div>
+	          <% end %>
+	      </div>
+	      <!-- Controls -->
+	      <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+	        <span class="glyphicon glyphicon-chevron-left"></span>
+	      </a>
+	      <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+	        <span class="glyphicon glyphicon-chevron-right"></span>
+	      </a>
+	    </div>
+	    <br/>
+	    <hr/>
+	    <br/>
+	    <% end %>
+	  </div>
       <ul class="thumbnails"></ul>
       <%= form_for @photo_event=PhotoEvent.new, :url => photo_events_path, html: { multipart: true } do |f| %>
           <% if @photo_event.errors.any? %>
