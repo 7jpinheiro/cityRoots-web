@@ -2,17 +2,18 @@
 <h1>Lista das suas Rotas</h1>
 </div>
 
-<%= form_tag itineraries_path, :method=>'get' do  |f|%>
-    <p>
-      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-<% end %>
-
 <%= csrf_meta_tag %>
-<br>
-<%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %>
-<br>
+
+<%= form_tag itineraries_path, :method=>'get' do  |f|%>
+    <table>
+      <tr>
+        <td class="col-sm-2"><%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %></td>
+        <td class="col-sm-2"></td>
+        <td class="col-sm-3"><%= text_field_tag :search, params[:search], class: "with_autocomplete form-control", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%></td>
+        <td class="col-sm-1"><%= submit_tag "Procurar", :name => nil, :class=>"btn btn-default" %></td>
+      </tr>
+    </table>
+<% end %>
 
 <%
    @itineraries.each do |itinerary|

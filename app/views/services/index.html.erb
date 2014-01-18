@@ -2,17 +2,19 @@
     <h1>Lista dos seus Estabelecimentos</h1>
 </div>
 
-<%= form_tag services_path, :method=>'get' do  |f|%>
-    <p>
-      <%= text_field_tag :search, params[:search], class: "with_autocomplete", 'data-autocompleteUrl' => autocomplete_service_name_services_path%>
-      <%= submit_tag "Procurar", :name => nil %>
-    </p>
-<% end %>
-
 <%= csrf_meta_tag %>
 
 <br>
-<%= link_to 'Registar novo Estabelecimento', new_service_path ,:class=>"btn btn-primary btn-square"%>
+<%= form_tag services_path, :method=>'get' do  |f|%>
+    <table>
+      <tr>
+        <td class="col-sm-2"><%= link_to 'Registar novo Estabelecimento', new_service_path ,:class=>"btn btn-primary btn-square"%></td>
+        <td class="col-sm-2"></td>
+        <td class="col-sm-3"><%= text_field_tag :search, params[:search], class: "with_autocomplete form-control", 'data-autocompleteUrl' => autocomplete_service_name_services_path%></td>
+        <td class="col-sm-1"><%= submit_tag "Procurar", :name => nil, :class=>"btn btn-default" %></td>
+      </tr>
+    </table>
+<% end %>
 <br>
 <%
    @services.each do |service|

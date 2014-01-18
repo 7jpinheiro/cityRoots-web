@@ -1,4 +1,4 @@
-<%= form_for(@service) do |f| %>
+<%= nested_form_for(@service) do |f| %>
     <% if @service.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -23,136 +23,179 @@
            cityid=@user.first.city_id
          end
       %>
-      <%= f.fields_for :service_translations do |e| %>
+      <div class="row">
+        <%= f.fields_for :service_translations do |e| %>
+        <span class="col-sm-6">
+        <div class="well well-sm">
           <div class="row">
-            <div class="form-group">
-              <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-1 control-label" %>
-              <div class="col-sm-6">
+            <br/>
+            <div class="form-group" style="margin-left: 20px;">
+              <%= e.label "Linguagem" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
+              <div class="col-sm-7">
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Linguagem", selected: @attraction_translation}, {class: "form-control"}) %>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="form-group" style="margin-left: 20px;">
+              <%= e.label "Nome" ,:for=>"name"  , :class=>"control-label col-sm-3" %>
+              <div class="col-sm-7">
                 <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Restaurante " %>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group">
-              <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-1 control-label" %>
-              <div class="col-sm-6">
+            <div class="form-group" style="margin-left: 20px;">
+              <%= e.label "Descrição" ,:for=>"description"  , :class=>"control-label col-sm-3" %>
+              <div class="col-sm-7">
                 <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group">
-              <%= e.label "Horário" ,:for=>"schedule" , :class=>"col-sm-1 control-label" %>
-              <div class="col-sm-6">
+            <div class="form-group" style="margin-left: 20px;">
+              <%= e.label "Horário" ,:for=>"schedule"  , :class=>"control-label col-sm-3"  %>
+              <div class="col-sm-7">
                 <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group">
-              <%= e.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
-              <div class="col-sm-6">
+            <div class="form-group" style="margin-left: 20px;">
+              <%= e.label "Transporte" ,:for=>"transport"  , :class=>"control-label col-sm-3"  %>
+              <div class="col-sm-7">
                 <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
               </div>
             </div>
           </div>
           <br/>
-          <%
-             lang=Language.where("id=?",current_user.language_id).first
-          %>
-          <%= e.text_field :language_id , :type=>"hidden" , :value=>lang.id%>
-      <% end %>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :site ,:id=>"site" , :class=>"form-control form-control-square", :placeholder=>"www.esquinadoze.pt" %>
-          </div>
         </div>
+      </span>
+        <% end %>
+        <p><%= f.link_to_add "Adicionar Lingua", :service_translations %></p>
       </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"reservas@esquinadoze.pt" %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"Esquina da Avenida Central" %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-3">
-            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
-          </div>
-          <div class="col-sm-3">
-            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <label class="col-sm-1 control-label">Ponto de referência</label>
-          <div class="col-sm-6">
-            <%= f.check_box :reference_point ,:id=>"accessibility" , :value=>0 %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Capacidade" ,:for=>"capacity" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :capacity ,:id=>"capacity" , :class=>"form-control form-control-square", :placeholder=>"Capacidade para 50 pessoas" %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Detalhes" ,:for=>"details" , :class=>"col-sm-1 control-label" %>
-          <div class="col-sm-6">
-            <%= f.text_field :details ,:id=>"details" , :class=>"form-control form-control-square", :placeholder=>"Detalhes extras..." %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group">
-          <label class="col-sm-1 control-label"><i class="fa fa-wheelchair"></i></label>
-          <div class="col-sm-6">
-            <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <%= f.fields_for :service_types do |type| %>
-          <div class="row">
-            <div class="form-group">
-              <%= type.label "Tipo de Serviço" ,:for=>"type_id" , :class=>"col-sm-1 control-label" %>
-              <div class="col-sm-6">
-                <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
-              </div>
+      <div class="well well-sm" style="position:relative;">
+        <div class="row">
+          <br/>
+          <div class="form-group">
+            <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label",:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :site ,:id=>"site" , :class=>"form-control form-control-square", :placeholder=>"www.esquinadoze.pt" %>
             </div>
           </div>
-          <br/>
-      <%
-         end
-      %>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-4 control-label",:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"reservas@esquinadoze.pt" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Morada" ,:for=>"address"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
+            <div class="col-sm-6">
+              <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"Esquina da Avenida Central" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-6">
+            <div id="map-canvas" style="width: 100%; height: 400px" onload="mapinit();"></div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Coordenadas Geograficas" ,:for=>"latitude"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
+            <div class="col-sm-3">
+              <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
+            </div>
+            <div class="col-sm-3">
+              <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" style="text-align: center;">Ponto de referência</label>
+            <div class="col-sm-6">
+              <%= f.check_box :reference_point ,:id=>"accessibility" , :value=>0 %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Capacidade" ,:for=>"capacity"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
+            <div class="col-sm-6">
+              <%= f.text_field :capacity ,:id=>"capacity" , :class=>"form-control form-control-square", :placeholder=>"Capacidade para 50 pessoas" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Origem de informação" ,:for=>"source"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
+            <div class="col-sm-6">
+              <%= f.text_field :source ,:id=>"source" , :class=>"form-control form-control-square", :placeholder=>"www.origemdeinformaçoes.pt" %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label "Detalhes" ,:for=>"details"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
+            <div class="col-sm-6">
+              <%= f.text_field :details ,:id=>"details" , :class=>"form-control form-control-square", :placeholder=>"Detalhes extras..." %>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" style="text-align: center;"><i class="fa fa-wheelchair"></i></label>
+            <div class="col-sm-6">
+              <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
+            </div>
+          </div>
+        </div>
+        <br/>
+      </div>
+      <div class="row">
+        <%= f.fields_for :service_types do |type| %>
+          <span class="col-sm-6">
+          <div class="well well-sm">
+            <div class="row">
+              <br/>
+              <div class="form-group">
+                <%= type.label "Tipo" ,:for=>"type_id" , :class=>"control-label col-sm-3" ,:style=>"text-align:center;" %>
+                <div class="col-sm-7">
+                  <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
+                </div>
+              </div>
+            </div>
+            <p>
+              <br/><span  style="margin-left: 20px; margin-bottom: 20px;"><%= type.link_to_remove "Remover Tipo" %></span>
+            </p>
+          </div>
+          </span>
+
+        <%
+           end
+        %>
+        <p><%= f.link_to_add "Adicionar Tipo", :service_types %></p>
+      </div>
       <!-- Value by sustem-->
       <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
       <%= f.text_field :city_id ,:id=>"city_id", :value=> cityid, :hidden=>"hidden" %>
@@ -161,10 +204,42 @@
       <br/>
       <div class="col-xs-5 col-sm-2">
         <div class="form-group">
-            <%= f.submit "Guardar", :class=>"btn btn-primary" %>
-            </br>
-            </br>
+          <%= f.submit "Guardar", :class=>"btn btn-primary" %>
+          </br>
+          </br>
         </div>
       </div>
     </form>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+    <script type="text/javascript">
+
+        var marker;
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
+            var mapOptions = {
+                zoom: 12,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                draggable:true,
+                map: map
+            });
+            google.maps.event.addListener(marker, 'dragend', function()
+            {
+                document.getElementById("longitude").value=marker.getPosition().lng();
+                document.getElementById("latitude").value=marker.getPosition().lat();
+            });
+
+        }
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <style>
+        #map-canvas { height: 100% }
+    </style>
+
 <% end %>

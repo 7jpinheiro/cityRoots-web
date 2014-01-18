@@ -7,7 +7,6 @@
   NestedFormEvents.prototype = {
 
     addFields: function(e) {
-      alert("entra 1");
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child
