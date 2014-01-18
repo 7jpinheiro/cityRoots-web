@@ -7,6 +7,7 @@
   NestedFormEvents.prototype = {
 
     addFields: function(e) {
+      alert("entra 1");
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child
@@ -26,6 +27,7 @@
         var parentIds   = context.match(/[0-9]+/g) || [];
 
         for(var i = 0; i < parentNames.length; i++) {
+          alert("entra 2");
           if(parentIds[i]) {
             content = content.replace(
               new RegExp('(_' + parentNames[i] + ')_.+?_', 'g'),

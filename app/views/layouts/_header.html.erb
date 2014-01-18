@@ -18,7 +18,6 @@
            if user_signed_in?
         %>
         <%
-
                 if current_user.role? (:entidade)
                   puts "------------- entidade -----------------"
         %>
@@ -33,7 +32,7 @@
               </li>
         <%
                 end
-                if current_user.role? (:restauracao) && !(current_user.role?(:restauracao_gold))
+                if current_user.role? (:restauracao)
                   puts "------------- restauracao -----------------"
         %>
               <li class="<%= is_active?(services_path) %>">                 

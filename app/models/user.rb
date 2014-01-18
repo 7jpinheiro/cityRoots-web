@@ -51,7 +51,6 @@ class User < ActiveRecord::Base
 
   def create_list_roles
     if self.web_user
-      @list_roles.push "restauracao" if self.web_user.web_user_type.name == "Restauração"
       @list_roles.push "entidade" if self.web_user.web_user_type.name == "Turismo/Câmara"
       unless self.web_user.web_user_packs.nil? 
         self.web_user.web_user_packs.each do |web_user_pack|
@@ -60,6 +59,9 @@ class User < ActiveRecord::Base
           end
         end
       end
+      if self.web_user.web_user_type.name == "Restauração" &&  !(@list_roles.include? "restauracao_gold")
+          @list_roles.push "restauracao" 
+      end 
     end
     if self.web_user.nil?
       @list_roles.push "new_user" if self.web_user.blank?

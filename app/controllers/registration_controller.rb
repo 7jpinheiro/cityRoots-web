@@ -1,4 +1,4 @@
-class RegistrationController < Devise::RegistrationsController
+class RegistrationController < ApplicationController
 
     def new
         @user = User.new

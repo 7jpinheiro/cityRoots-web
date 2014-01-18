@@ -1,33 +1,118 @@
-<%= form_for :payment, url:payment_create_path do |f| %>
-    <%# f.error_messages %>
-    <p>
-      <%= f.label :first_name, 'Primeiro Nome' %><br />
-      <%= f.text_field :first_name %>
-    </p>
-    <p>
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    </p>
-    <p>
-      <%= f.label :card_type %><br />
-      <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
-    </p>
-    <p>
-      <%= f.label :card_number %><br />
-      <%= f.text_field :card_number %>
-    </p>
-    <p>
-      <%= f.label :card_verification, "Card Verification Value (CVV)" %><br />
-      <%= f.text_field :card_verification %>
-    </p>
-    <p>
-      <%= f.label :card_expires_on %><br />
-      <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)%>
-    </p>
-    <p>
-      <%= f.label :value %><br />
-      <%= f.text_field :value %>
-    </p>
+<%= stylesheet_link_tag "payments" %>
 
-    <p><%= f.submit "Submit" %></p>
+<%= form_for :payment, url:payment_create_path do |f| %>
+  
+  <div class="page-header">
+    <h1>Subscrição do plano profissional</h1>
+  </div>
+
+  <div class="row">
+    <div class="well well-sm">
+        <div class="row">
+
+       <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5">
+          <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12" %>
+          <div class="col-sm-12">
+             <ul class="cards">
+
+                <div class="col-sm-3">
+                  <div class="radio">
+                    <label>
+                      <%= f.radio_button :card_type, 'visa'%> 
+                      <li class="visa"></li>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="radio">
+                    <label>
+                      <%= f.radio_button :card_type, 'master' %> 
+                      <li class="mastercard"></li>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="radio">
+                    <label>
+                      <%= f.radio_button :card_type, 'discover' %> 
+                      <li class="discover"></li>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="radio">
+                    <label>
+                      <%= f.radio_button :card_type, 'american_express'%> 
+                      <li class="america_express"></li>
+                    </label>
+                  </div>
+                </div>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5 ">
+          <%= f.label :first_name, 'Primeiro Nome',  :class=>"control-label col-sm-5" %>
+          <div class="col-sm-6">
+            <%= f.text_field :first_name, :class=>"form-control form-control-square" %>
+          </div>
+        </div>
+
+        <div class="col-sm-5">
+          <%= f.label :last_name, "Ultimo Nome",  :class=>"control-label col-sm-5"%>
+          <div class="col-sm-6">
+            <%= f.text_field :last_name, :class=>"form-control form-control-square" %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5">              
+          <%= f.label :card_number, "Número do cartão" , :class=>"control-label col-sm-5" %>
+          <div class="col-sm-6">
+            <%= f.text_field :card_number, :class=>"form-control form-control-square"  %>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5">
+          <%= f.label :card_verification, "Card Verification Value (CVV)",  :class=>"control-label col-sm-4" %>
+          <div class="col-sm-6">
+            <%= f.text_field :card_verification, :class=>"form-control form-control-square"  %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5">
+          <%= f.label :card_expires_on,  :class=>"control-label col-sm-4" %>
+          <div class="col-sm-6">
+            <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :class=>"form-control form-control-square" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-left: 20px; padding:20px">
+        <div class="col-sm-5">
+          <%= f.label :value,  :class=>"control-label col-sm-4" %>
+          <div class="col-sm-6">
+            <%= f.text_field :value, :class=>"form-control form-control-square"  %>
+          </div>
+        </div>
+      </div>
+</div>
+    </div>
+  </div>
+      
+  <%= f.submit "Submit" %>
 <% end %>
+
