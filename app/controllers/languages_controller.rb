@@ -1,15 +1,5 @@
 class LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
-
-  before_filter do
-    resource = controller_path.singularize.gsub('/', '_').to_sym
-    method = "#{resource}_params"
-    params[resource] &&= send(method) if respond_to?(method, true)
-  end
-
-  load_and_authorize_resource
-
-
   # GET /languages
   # GET /languages.json
   def index

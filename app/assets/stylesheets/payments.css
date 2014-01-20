@@ -1,0 +1,37 @@
+.cards li {
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+	background-image: url(/assets/card_logos.png);
+	background-position: 0 0;
+	float: left;
+
+	height: 32px;
+	margin-right: 8px;
+	text-indent: -9999px;
+	width: 51px;
+}
+.cards .visa_electron {
+background-position: 204px 0;
+}
+.cards .mastercard {
+background-position: 153px 0;
+}
+
+.cards .maestro {
+background-position: 102px 0;
+}
+
+.cards .discover {
+background-position: 51px 0;
+}
+.cards .america_express{
+	background-image: url(/assets/card_logos2.png);
+	background-position: 0 0;
+}
+.cards{
+	list-style: none;
+}
+
