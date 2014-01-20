@@ -54,6 +54,8 @@ gem "kaminari"
 
 gem 'json'
 
+gem 'devise-i18n'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
