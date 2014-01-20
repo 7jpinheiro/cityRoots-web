@@ -40,7 +40,8 @@ class Ability
 
     if user.role?(:restauracao)
       puts "------------- restauracao -----------------"
-      can :manage, payments
+      can :manage, Payment
+      can :create, Payment
       can :manage, Service, :web_user_id => user.id
       can :create, Service
     end

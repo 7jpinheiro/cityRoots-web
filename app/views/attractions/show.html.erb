@@ -1,37 +1,36 @@
 <%= javascript_include_tag "photo_attraction" %>
-
+<%= stylesheet_link_tag "welcome2" %>
 <%
-   trans=AttractionTranslation.where("attraction_id=?",@attraction.id).first
-
-%>
+  trans=AttractionTranslation.where("attraction_id=?",@attraction.id).first
+  
+  %>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
 <script type="text/javascript">
-
   function mapinit(){
       var stockholm = new google.maps.LatLng(<%= @attraction.latitude %>, <%= @attraction.longitude %>);
       var parliament = new google.maps.LatLng(<%= @attraction.latitude %>, <%= @attraction.longitude %>);
       var marker;
       var map;
-
+  
       function initialize() {
           // Create an array of styles.
           var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
-
+  
           // Create a new StyledMapType object, passing it the array of styles,
           // as well as the name to be displayed on the map type control.
           var styledMap = new google.maps.StyledMapType(styles,
                   {name: "Styled Map"});
-
+  
           var mapOptions = {
               zoom: 11,
               center: stockholm
           };
-
+  
           map = new google.maps.Map(document.getElementById('map-canvas'),
                   mapOptions);
-
+  
           var image="<%= image_url "maker.png"%>";
-
+  
           marker = new google.maps.Marker({
               map:map,
               animation: google.maps.Animation.DROP,
@@ -43,253 +42,255 @@
           map.mapTypes.set('map_style', styledMap);
           map.setMapTypeId('map_style');
       }
-
+  
       function toggleBounce() {
-
+  
           if (marker.getAnimation() != null) {
               marker.setAnimation(null);
           } else {
               marker.setAnimation(google.maps.Animation.BOUNCE);
           }
       }
-
+  
       google.maps.event.addDomListener(window, 'load', initialize);
   }
 </script>
 <style>
-    #map-canvas { height: 100% }
+  #map-canvas { height: 100% }
 </style>
-        
-   <% if !@attraction.photo_attractions.blank? %>
-    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-      <div style="position: absolute;z-index: 1000;margin-top: 145px;margin-left: 40%;font-size: 50px;background: rgba(0, 0, 0, 0.6);">
-       <h1 style="font-weight: 700; color:#fff">
-            <%= trans.name%>
-          </h1>
-        </div>
-        <div class="carousel-inner">
-         
-          <% @attraction.photo_attractions.each_with_index do |p,i| %>
-            <% if i==0 %>
-              <div class="item active">
-            <% else %>
-              <div class="item">
+<div class="container" >
+  <% if !@attraction.photo_attractions.blank? %>
+  <div class="row" style="padding: 8px;box-shadow: 0 0 5px 2px rgba(170,170,170,0.7);margin-bottom: 10px;position:absolute; background:#fff">
+
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" style="margin-bottom:10px; ">
+      <div style="position: absolute;z-index: 1000;margin-top: 75px;font-size: 50px;width: 80%;text-align: center;margin-left:10%">
+        <h1 style="font-weight: 700; color:#fff;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);font-size: 1.3em;">
+          <%= trans.name%>
+        </h1>
+      </div>
+      <div class="carousel-inner">
+        <% @attraction.photo_attractions.each_with_index do |p,i| %>
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
             <% end %>
-              <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:350px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <% end %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end %>
         </div>
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-          <span class="fa fa-chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
         </a>
         <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-          <span class="fa fa-chevron-right"></span>
+        <span class="fa fa-chevron-right"></span>
         </a>
       </div>
-      <br/>
-      <hr/>
-      <br/>
-      <% end %>
-<div class="well well-lg">
+    
+      <div class="col-sm-4">
+        <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
+        <% if @photo_attraction.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
+          <ul>
+            <% @photo_attraction.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <div class="actions">
+          <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
+          <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
+        </div>
+        <script>
+          $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicione uma Foto"});
+        </script>
+        <% end %>
+        <% # jquery upload template # %>
+        <script id="template-upload" type="text/x-tmpl">
+          <div class="upload">
+          {%=o.name%}
+              <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                   <span class="sr-only"></span>
+                  </div>
+              </div>
+          </div>
+        </script>
+      </div>
+      <div class="col-sm-4 text-center">
+        <%= link_to edit_attraction_path(@attraction), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
+        Editar
+        <%end%>
+      </div>
+      <div class="col-sm-4 text-right">
+        <%= link_to @attraction, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+        Remover
+        <% end %>
+      </div>
+    </div>
+    <% end %>
 
+</div>
 
-
-  <div class="row">
-    <div class="col-md-6">
-      <dl class="dl-horizontal">
-        <%
-           if @attraction.rating != 0
-        %>
+<div class="row" style="margin-top: 258px;    padding-top: 80px;    background: #f8f8f8;    z-index: inherit;    border-top: 1px solid #ecf0f1;" >
+    <div class="container" >
+    
+      <div class="col-md-6">
+        <div class="well row">
+          <dl class="dl-horizontal">
+            <%
+              if @attraction.rating != 0
+              %>
             <dt>Classificação</dt>
             <dd>
               <%
-                 val=@attraction.rating
-                 indice=0;
-                 while val >0
-              %><span class="fa fa-star"></span><%
-               val=val-1
-               indice=indice+1
-               end
-               while indice <5
-            %><span class="fa fa-star-o"></span><%
-               indice=indice+1
-               end
-            %>
+                val=@attraction.rating
+                indice=0;
+                while val >0
+                %><span class="fa fa-star"></span><%
+                val=val-1
+                indice=indice+1
+                end
+                while indice <5
+                %><span class="fa fa-star-o"></span><%
+                indice=indice+1
+                end
+                %>
             </dd>
-        <%
-           end
-           @tipos=@attraction.attraction_types.all
-           if @tipos.length!=0
-        %>
+            <%
+              end
+              @tipos=@attraction.attraction_types.all
+              if @tipos.length!=0
+              %>
             <dt>Tipo</dt>
             <dd>
               <%
-                 @tipos.each do |tipo|
-                   @type=Type.where("id=?",tipo.type_id)
-              %>
-                  <%= @type.first.name %><br/>
+                @tipos.each do |tipo|
+                  @type=Type.where("id=?",tipo.type_id)
+                %>
+              <%= @type.first.name %><br/>
               <%
-                 end
-              %>
+                end
+                %>
             </dd>
-        <%
-
-           end
-           if trans.description != nil
-        %>
+            <%
+              end
+              if trans.description != nil
+              %>
             <dt>Descrição</dt>
             <dd style="text-overflow: ellipsis; text-align: justify"><%= trans.description%></dd>
-        <%
-           end
-           if @attraction.address != nil
-        %>
+            <%
+              end
+              if @attraction.address != nil
+              %>
             <dt>Morada</dt>
             <dd><%= @attraction.address %></dd>
-        <%
-           end
-           if trans.schedule != nil
-        %>
+            <%
+              end
+              if trans.schedule != nil
+              %>
             <dt>Horário</dt>
             <dd><%= trans.schedule %></dd>
-        <%
-           end
-           if @attraction.site != nil
-        %>
+            <%
+              end
+              if @attraction.site != nil
+              %>
             <dt>Site</dt>
             <dd><%= @attraction.site %></dd>
-        <%
-           end
-           if @attraction.email != nil
-        %>
+            <%
+              end
+              if @attraction.email != nil
+              %>
             <dt>Email</dt>
             <dd><%= @attraction.email %></dd>
-        <%
-           end
-           if @attraction.phone != nil
-        %>
+            <%
+              end
+              if @attraction.phone != nil
+              %>
             <dt>Email</dt>
             <dd><%= @attraction.phone %></dd>
-        <%
-           end
-           if trans.transport != nil
-        %>
+            <%
+              end
+              if trans.transport != nil
+              %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
-        <%
-           end
-           if @attraction.source != nil
-        %>
+            <%
+              end
+              if @attraction.source != nil
+              %>
             <dt>Email</dt>
             <dd><%= @attraction.source %></dd>
-        <%
-           end
-           if @attraction.reference_point == true
-        %>
+            <%
+              end
+              if @attraction.reference_point == true
+              %>
             <dt>Ponto de Referência</dt>
             <dd>
               <i class="fa fa-check"></i>
             </dd>
             <%
-            end
-           if trans.price != nil
-        %>
+              end
+              if trans.price != nil
+              %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
-        <%
-           end
-        %>
-      </dl>
-      <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
-    </div>
-    <div class="col-sm-6">
-      <ul class="thumbnails"></ul>
-      <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
-          <% if @photo_attraction.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
-
-                <ul>
-                  <% @photo_attraction.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                </ul>
-              </div>
-          <% end %>
-          <div class="actions">
-            <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
-            <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
-          </div>
-          <script>
-              $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicione uma Foto"});
-          </script>
-      <% end %>
-      <% # jquery upload template # %>
-      <script id="template-upload" type="text/x-tmpl">
-            <div class="upload">
-            {%=o.name%}
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
-                     <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>
-        </script>
-      <br/>
-      <br/>
-      <div id="map-canvas" style="width: 100%; height: 400px" onload="mapinit();"></div>
-    </div>
-  </div>
-  <hr>
-  <%
-     @coments=CommentAttraction.where("attraction_id=?",@attraction.id).all
-     if @coments != nil
-  %>
-      <div class="row">
-        <h3>Comentários</h3>
-        <%
-           @coments.each do |co|%>
-            <div class="media-body bubble-body bubble-arrow-left">
-              <div class="bubble-inner">
-                <%
-                   if co.mobile_user_id != nil
-                     usermovel=User.where("id=?",co.mobile_user_id).first
-                     if usermovel.username != nil
-                       nome=usermovel.username
-                     else
-                       nome="Anonimo"
-                     end
-                   else
-                     nome="Anonimo"
-                   end
-                %>
-                <h4 class="media-heading bubble-heading"><%= nome %></h4>
-                <div class="bubble-content">
-                  <p><%= co.comment %></p><p>
-                </p></div>
-              </div>
-            </div>
-        <%
-           end
-        %>
+            <%
+              end
+              %>
+          </dl>
+        </div>
+        <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
       </div>
-  <%
-     end
-  %>
+      <div class="col-sm-6">
+        <div id="map-canvas" style="width: 100%; height: 400px" onload="mapinit();"></div>
+      </div>
+    </div>
+    <hr>
+    <%
+      @coments=CommentAttraction.where("attraction_id=?",@attraction.id).all
+      if @coments != nil
+      %>
+    <div class="row">
+      <h3>Comentários</h3>
+      <%
+        @coments.each do |co|%>
+      <div class="media-body bubble-body bubble-arrow-left">
+        <div class="bubble-inner">
+          <%
+            if co.mobile_user_id != nil
+              usermovel=User.where("id=?",co.mobile_user_id).first
+              if usermovel.username != nil
+                nome=usermovel.username
+              else
+                nome="Anonimo"
+              end
+            else
+              nome="Anonimo"
+            end
+            %>
+          <h4 class="media-heading bubble-heading"><%= nome %></h4>
+          <div class="bubble-content">
+            <p><%= co.comment %></p>
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <%
+        end
+        %>
+    </div>
+    <%
+      end
+      %>
+  </div>
 </div>
-
-    <% if @attraction.accessibility != 0 %>
-        <small><i class="fa fa-wheelchair"></i></small>
-    <% end %>
-     <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 10px'} do%>
-       <i class="fa fa-edit"></i> Editar
-  <%end%>
-
-  <%= link_to @attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-      <span class="fa fa-trash-o"></span>Remover
-  <% end %>
-
+</div>
 <script>
-    mapinit();
+  mapinit();
 </script>
