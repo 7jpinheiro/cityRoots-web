@@ -42,7 +42,7 @@
         </div>
         <div class="row">
           <div class="form-group">
-            <label for="password_confirmation" class="col-sm-4 control-label">Linguagem</label>
+            <label for="password_confirmation" class="col-sm-4 control-label">Idioma</label>
             <div class="col-sm-8">
               <%= f.collection_select(:language_id, Language.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
             </div>

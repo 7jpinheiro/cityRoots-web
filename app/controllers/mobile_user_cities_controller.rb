@@ -1,6 +1,15 @@
 class MobileUserCitiesController < ApplicationController
   before_action :set_mobile_user_city, only: [:show, :edit, :update, :destroy]
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
+  
   # GET /mobile_user_cities
   # GET /mobile_user_cities.json
   def index

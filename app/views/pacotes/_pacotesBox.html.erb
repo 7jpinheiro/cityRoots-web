@@ -1,16 +1,16 @@
-<div class="col-xs-12 col-md-3" >
-  <div class="panel panel-free">
+
+
+
+<div class="col-xs-12 col-md-3 col-md-offset-2">
+  <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title-free">
-        Básico</h3>
+      <h3 class="panel-title">Básico</h3>
     </div>
     <div class="panel-body">
       <div class="the-price" style="height:76px;">
-        <h1>
-          Grátis
-        </h1>
+        <h1>Grátis</h1>
       </div>
-      <table class="table">
+       <table class="table">
         <tr>
           <td>
             Criação do seu perfil
@@ -18,67 +18,30 @@
         </tr>
         <tr class="active">
           <td>
-            Georeferênciação do establecimento
+            Georeferênciação do estabelecimento
           </td>
         </tr>
         <tr>
           <td>
-            Foto da fachada do establecimento
+            Publicação de Fotos do estabelecimento
           </td>
         </tr>
       </table>
     </div>
     <div class="panel-footer">
-      <a href="#free" class="btn btn-primary" role="button">Ver mais</a>
+      <a href="#free" class="btn btn-primary" role="button">Detalhes</a>
     </div>
   </div>
 </div>
-<div class="col-xs-12 col-md-3 col-md-offset-1">
-  <div class="panel panel-primary">
-    <div class="cnrflash">
-      <div class="cnrflash-inner">
-                    <span class="cnrflash-label">Mais
-                        <br>
-                        Popular</span>
-      </div>
-    </div>
-    <div class="panel-heading">
-      <h3 class="panel-title">
 
-        Profissional</h3>
 
-    </div>
-    <div class="panel-body">
-      <div class="the-price" style="height:76px;">
-        <h1>
-          €25<small>/ano</small>
-        </h1>
-      </div>
-      <table class="table">
-        <tr>
-          <td>
-            Publicação de mais conteudo multimedia
-          </td>
-        </tr>
-        <tr class="active">
-          <td>
-            Publicação de produtos e serviços
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Publicação de promoções e eventos
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="panel-footer">
-      <a href="#freemium" class="btn btn-primary" role="button">Ver mais</a>
-    </div>
-  </div>
-</div>
-<div class="col-xs-12 col-md-3 col-md-offset-1">
+<div class="col-xs-12 col-md-3 col-md-offset-2">
   <div class="panel panel-profissional">
+        <div class="cnrflash">
+      <div class="cnrflash-inner">
+        <span class="cnrflash-label">1º Ano <br> Grátis</span>
+      </div>
+    </div>
     <div class="panel-heading">
       <h3 class="panel-title-profissional" >
         Premium</h3>
@@ -86,28 +49,29 @@
     <div class="panel-body">
       <div class="the-price" style="height:76px;">
         <h1>
-          €50<small>/ano</small></h1>
+          €29,99<small>/ano</small></h1>
       </div>
       <table class="table">
         <tr>
           <td>
-            Fazer publicidade
+            Publicidade de Eventos
           </td>
         </tr>
         <tr class="active">
           <td>
-            Dar destaque na aplicação Movel
+            Destaque na aplicação Mobile
           </td>
         </tr>
         <tr>
           <td>
-            Estatisticas
+            Registo de vários estabelecimentos
           </td>
         </tr>
       </table>
     </div>
     <div class="panel-footer">
-      <a href="#premium" class="btn btn-primary" role="button">Ver mais</a>
+       <%= link_to "Subscrever" , new_payment_path, class: "btn btn-warning", style: "background:#B68C34"  %>
+        <a href="#premium" class="btn btn-primary" role="button" style="margin-left:10px">Detalhes</a>
     </div>
   </div>
 </div>

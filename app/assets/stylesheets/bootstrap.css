@@ -2599,7 +2599,7 @@ input[type="button"].btn-block {
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-.glyphicon {
+.fa {
   position: relative;
   top: 1px;
   display: inline-block;
@@ -2611,31 +2611,31 @@ input[type="button"].btn-block {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.glyphicon:empty {
+.fa:empty {
   width: 1em;
 }
 
-.glyphicon-asterisk:before {
+.fa-asterisk:before {
   content: "\2a";
 }
 
-.glyphicon-plus:before {
+.fa-plus:before {
   content: "\2b";
 }
 
-.glyphicon-euro:before {
+.fa-euro:before {
   content: "\20ac";
 }
 
-.glyphicon-minus:before {
+.fa-minus:before {
   content: "\2212";
 }
 
-.glyphicon-cloud:before {
+.fa-cloud:before {
   content: "\2601";
 }
 
-.glyphicon-envelope:before {
+.fa-envelope:before {
   content: "\2709";
 }
 
@@ -6438,8 +6438,8 @@ button.close {
 
 .carousel-control .icon-prev,
 .carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-left,
-.carousel-control .glyphicon-chevron-right {
+.carousel-control .fa-chevron-left,
+.carousel-control .fa-chevron-right {
   position: absolute;
   top: 50%;
   z-index: 5;
@@ -6447,12 +6447,12 @@ button.close {
 }
 
 .carousel-control .icon-prev,
-.carousel-control .glyphicon-chevron-left {
+.carousel-control .fa-chevron-left {
   left: 50%;
 }
 
 .carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-right {
+.carousel-control .fa-chevron-right {
   right: 50%;
 }
 

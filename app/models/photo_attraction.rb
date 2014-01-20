@@ -22,8 +22,7 @@ class PhotoAttraction < ActiveRecord::Base
   	#validates :name, :presence => true, :length => { :minimum => 1, :maximum => 100 }
   	#validates :description, :presence => true, :length => { :maximum => 250 }
 
-    has_attached_file :photo, :styles => { :medium => "3000x3000#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/missing.png"
-    has_attached_file :photo, :styles => { :medium => "3000x3000#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/missing.png"
+    has_attached_file :photo, :styles => { :medium => "1200x350#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/missing.png"
 
 
 end

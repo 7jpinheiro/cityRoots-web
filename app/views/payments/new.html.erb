@@ -11,8 +11,8 @@
       <div class="row">
 
         <div class="col-sm-10 col-sm-offset-1">
-          <h2>O teu pedido</h2>
-            <table class="table ">
+          <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:25px">O teu pedido</h2>
+          <table class="table ">
                 <thead>
                   <tr style="background:#DDDDDD">
                     <th>Descrição</th>
@@ -24,7 +24,7 @@
                 <tbody>
                   <tr style="background:#fff">
                     <td>
-                      Pacote Premium<br/>
+                      <strong>Pacote Premium</strong><br/>
                       Para além de gerir os seus próprios conteúdos relativos a divulgação dos seus serviços, produtos, eventos e promoções, obtenha maior destaque e visibilidade na aplicação.
                     </td>
                     <td class="text-center">29,99€</td>
@@ -32,10 +32,18 @@
                     <td class="text-center">29,99€</td>
                   </tr>
                 </tbody>
+                <tbody>
+                  <tr style="background:#DDDDDD">
+                    <td></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><strong>Valor Total:</strong></td>
+                    <td class="text-center">29,99€</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
         <div class="col-sm-10 col-sm-offset-1">
-          <h2>Pagamento</h2>
+          <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:15px;">Pagamento</h2>
           <div class="form-group" style="margin-top: 20px; ">
             <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12" %>
             <ul class="cards">
@@ -83,12 +91,12 @@
           
           <div class="form-group" style="margin-top: 20px; ">
             <div class="col-sm-6">
-              <%= f.label :first_name, 'Primeiro Nome',  :class=>"control-label" %>
+              <%= f.label :first_name, 'Primeiro Nome',  :class=>"control-label text-center col-sm-12" %>
               <%= f.text_field :first_name, :class=>"form-control form-control-square" %>
             </div>
 
             <div class="col-sm-6">
-              <%= f.label :last_name, "Ultimo Nome",  :class=>"control-label"%>
+              <%= f.label :last_name, "Ultimo Nome",  :class=>"control-label text-center col-sm-12"%>
               <%= f.text_field :last_name, :class=>"form-control form-control-square" %>
             </div>
           </div>
@@ -97,7 +105,7 @@
         <div class="col-sm-10 col-sm-offset-1">
           <div class="form-group" style="margin-top: 20px">
               <div class="col-sm-12">        
-                <%= f.label :card_number, "Número do cartão" , :class=>"control-label" %>      
+                <%= f.label :card_number, "Número do cartão" , :class=>"control-label text-center col-sm-12" %>      
                 <%= f.text_field :card_number, :class=>"form-control form-control-square"  %>
               </div>
           </div>
@@ -105,15 +113,15 @@
 
         <div class="col-sm-10 col-sm-offset-1">
           <div class="form-group" style="margin-top:20px">
-            <div class="col-sm-5">
-              <%= f.label :card_verification, "CCV / CVV",  :class=>"control-label" %>
+            <div class="col-sm-6">
+              <%= f.label :card_verification, "CCV / CVV",  :class=>"control-label text-center col-sm-12" %>
               <%= f.text_field :card_verification, :class=>"form-control"  %>
             </div>
 
-            <div class="col-sm-7">
-              <%= f.label :card_expires_on,"Válido até" , :class=>"control-label" %>
+            <div class="col-sm-6">
+              <%= f.label :card_expires_on,"Válido até" , :class=>"control-label text-center col-sm-12" %>
               <span class="row">
-                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)},{:class=>"form-control", :style=>"width:120px; float:left; margin-right:20px"} %>
+                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)},{:class=>"form-control", :style=>"width:48%; float:left; margin-left:2%"} %>
               </span>
             </div>
           </div>

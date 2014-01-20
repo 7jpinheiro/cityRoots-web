@@ -50,8 +50,16 @@ class User < ActiveRecord::Base
   end
 
   def create_list_roles
+    @list_roles=Array.new
     if self.web_user && !self.id.nil?
-      @list_roles.push "entidade" if self.web_user.web_user_type.name == "Entidade"
+      puts "+++++++++++++++" +self.web_user.web_user_type.name  + "-----------"
+      if self.web_user.web_user_type.name == "Entidade"
+        if self.web_user.active 
+          @list_roles.push "entidade" 
+        else
+          @list_roles.push "entidade_nao_activa" 
+        end
+      end
       @list_roles.push "admin" if self.web_user.web_user_type.name == "Admin"
       unless self.web_user.web_user_packs.nil? 
         self.web_user.web_user_packs.each do |web_user_pack|
@@ -77,7 +85,8 @@ class User < ActiveRecord::Base
 
 
   def role?(arg)
-    create_list_roles if @list_roles.blank?
+    create_list_roles if @list_roles.blank? ||  @list_roles.include?("mobile")
+    puts "----------" + @list_roles.inspect + "++++++++++++"
     @list_roles.include? arg.to_s
   end
 end

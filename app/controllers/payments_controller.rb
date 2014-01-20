@@ -1,5 +1,12 @@
 class PaymentsController < ApplicationController
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
 
   def new
   end
@@ -18,6 +25,7 @@ class PaymentsController < ApplicationController
         userpack.pack_type_id = 1
         userpack.obs = "Pack simples"
         userpack.save
+        current_user.create_list_roles
         render :action => "success"
       else
         render :action => "failure"

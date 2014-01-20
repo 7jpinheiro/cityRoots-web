@@ -1,6 +1,14 @@
 class ItineraryServicesController < ApplicationController
   before_action :set_itinerary_service, only: [:show, :edit, :update, :destroy]
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /itinerary_services
   # GET /itinerary_services.json
   def index

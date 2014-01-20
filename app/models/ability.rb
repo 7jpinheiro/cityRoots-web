@@ -9,10 +9,13 @@ class Ability
       can :create, WebUser
     end
     
+
+    if user.role?(:entidade_nao_activa)
+
+    end
+
     if user.role?(:entidade)
       puts "------------- entidade -----------------"
-      can :read, :all
-      can :create, :all
       can :manage, Attraction, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
       can :manage, Service, :web_user_id => user.id
@@ -21,14 +24,25 @@ class Ability
       can :manage, AttractionType, :web_user_id => user.id
       can :create, Attraction
       can :create, AttractionTranslation
+      user.web_user.attractions.each do |att| 
+        att.photo_attractions.each do |photo|
+          can :manage, PhotoAttraction, :id => photo.id
+        end
+      end
+      can :manage, PhotoEvent, :user_id => user.id
+      can :manage, PhotoService, :user_id => user.id
       can :create, AttractionType
+      can :create, PhotoAttraction
+      can :create, PhotoService
+      can :create, PhotoEvent
 
     end
 
     if user.role?(:restauracao)
       puts "------------- restauracao -----------------"
+      can :manage, payments
       can :manage, Service, :web_user_id => user.id
-      can :create, Service, :web_user_id => user.id
+      can :create, Service
     end
 
     if user.role?(:restauracao_gold)

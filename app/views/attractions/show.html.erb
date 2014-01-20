@@ -59,24 +59,39 @@
 <style>
     #map-canvas { height: 100% }
 </style>
-<div class="page-header">
-  <h1>
-    <%= trans.name%>
-    <% if @attraction.accessibility != 0 %>
-        <small><i class="fa fa-wheelchair"></i></small>
-    <% end %>
-
-  </h1>
-  <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 10px'} do%>
-       <i class="fa fa-edit"></i> Editar
-  <%end%>
-
-  <%= link_to @attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-      <span class="fa fa-trash-o"></span>Remover
-  <% end %>
-
-</div>
-
+        
+   <% if !@attraction.photo_attractions.blank? %>
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+      <div style="position: absolute;z-index: 1000;margin-top: 145px;margin-left: 40%;font-size: 50px;background: rgba(0, 0, 0, 0.6);">
+       <h1 style="font-weight: 700; color:#fff">
+            <%= trans.name%>
+          </h1>
+        </div>
+        <div class="carousel-inner">
+         
+          <% @attraction.photo_attractions.each_with_index do |p,i| %>
+            <% if i==0 %>
+              <div class="item active">
+            <% else %>
+              <div class="item">
+            <% end %>
+              <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:350px; width: 100%;" } %>
+              <div class="carousel-caption"></div>
+            </div>
+            <% end %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+          <span class="fa fa-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+          <span class="fa fa-chevron-right"></span>
+        </a>
+      </div>
+      <br/>
+      <hr/>
+      <br/>
+      <% end %>
 <div class="well well-lg">
 
 
@@ -193,7 +208,7 @@
       <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
           <% if @photo_attraction.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+                <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
 
                 <ul>
                   <% @photo_attraction.errors.full_messages.each do |msg| %>
@@ -259,6 +274,18 @@
      end
   %>
 </div>
+
+    <% if @attraction.accessibility != 0 %>
+        <small><i class="fa fa-wheelchair"></i></small>
+    <% end %>
+     <%= link_to edit_attraction_path(@attraction), {:style => 'margin-right: 10px'} do%>
+       <i class="fa fa-edit"></i> Editar
+  <%end%>
+
+  <%= link_to @attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+      <span class="fa fa-trash-o"></span>Remover
+  <% end %>
+
 <script>
     mapinit();
 </script>

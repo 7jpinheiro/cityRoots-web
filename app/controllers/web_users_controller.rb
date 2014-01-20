@@ -1,6 +1,15 @@
 class WebUsersController < ApplicationController
   before_action :set_web_user, only: [:show, :edit, :update, :destroy]
 
+
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /web_users
   # GET /web_users.json
   def index
@@ -15,6 +24,7 @@ class WebUsersController < ApplicationController
   # GET /web_users/new
   def new
     @web_user = WebUser.new
+    current_user.create_list_roles
   end
 
   # GET /web_users/1/edit
