@@ -255,7 +255,11 @@
                 <%
                    if co.mobile_user_id != nil
                      usermovel=User.where("id=?",co.mobile_user_id).first
-                     nome=usermovel.username
+                     if usermovel.username != nil
+                       nome=usermovel.username
+                     else
+                       nome="Anonimo"
+                     end
                    else
                      nome="Anonimo"
                    end
