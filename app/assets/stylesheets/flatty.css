@@ -636,12 +636,14 @@ dd {
     float: left;
     width: 160px;
     overflow: hidden;
+    margin-top: 10px;
     clear: left;
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .dl-horizontal dd {
+    padding-top: 10px;
     margin-left: 180px;
   }
   .dl-horizontal dd:before,

@@ -1,4 +1,6 @@
-<%= nested_form_for @attraction do |f| %>
+<%= javascript_include_tag "jqBootstrapValidation" %>
+
+<%= nested_form_for @attraction,  :html => {:novalidate => 'novalidate'} do |f| %>
     <% if @attraction.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@attraction.errors.count, "error") %> prohibited this attraction from being saved:</h2>
@@ -9,64 +11,71 @@
           </ul>
         </div>
     <% end %>
+
     <div class="row">
       <%= f.fields_for :attraction_translations do |e| %>
         <span class="col-sm-6">
         <div class="well well-sm">
           <div class="row">
             <br/>
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Lingua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua", selected: @attraction_translation}, {class: "form-control"}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua", selected: @attraction_translation}, {class: "form-control", 'required'}) %>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Nome" ,:for=>"name" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Bom Jesus" %>
+                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Bom Jesus", :required => true,  'data-validation-required-message'=>"You must agree to the terms and conditions"%>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
 
           <div class="row">
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group"  style="margin-left: 20px;">
               <%= e.label "Descrição" ,:for=>"description" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Parte importante da cidade", :style=>"height:135px;" %>
+                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Parte importante da cidade", :style=>"height:135px;", :required => true %>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Horário" ,:for=>"schedule" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
+                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00", :required => true %>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Transporte" ,:for=>"transport" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
+                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" , :required => true%>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group" style="margin-left: 20px;">
+            <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Preço" ,:for=>"price" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
                 <div class="input-group">
-                  <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
+                  <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€", :required => true%>
                   <span class="input-group-addon">€</span>
+                  <p class="help-block"></p>
                 </div>
               </div>
             </div>
@@ -84,37 +93,41 @@
     %>
     <div class="well well-sm" style="position:relative;">
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;"%>
           <div class="col-sm-6">
-            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt" %>
+            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt", :required => true, 'data-validation-required-message' => "You must agree to the terms and conditions" %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
           <div class="col-sm-6">
-            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@bomjesus.pt" %>
+            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@bomjesus.pt", :required => true, :type => "email" %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Telefone" ,:for=>"phone" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
           <div class="col-sm-6">
-            <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control  form-control-square", :placeholder=>"253 234 234" %>
+            <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control  form-control-square", :placeholder=>"123 123 123", :required => true %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
           <div class="col-sm-6">
-            <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
+            <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;", :required => true%>
+              <p class="help-block"></p>
           </div>
         </div>
       </div>
@@ -127,13 +140,15 @@
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-4 control-label"  ,:style=>"text-align: center;"%>
           <div class="col-sm-3">
-            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
+            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" , :required => true%>
+            <p class="help-block"></p>
           </div>
           <div class="col-sm-3">
-            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
+            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226", :required => true%>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
@@ -239,4 +254,9 @@
     </style>
 <% end %>
 
+
+<script>
+  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+
+</script>
 

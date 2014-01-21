@@ -29,9 +29,10 @@
         <div class="col-lg-5 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">CityRoots <small>Feel each place...</small></h2>
+          <h2 class="section-heading">CityRoots <small>Sinta cada lugar...</small></h2>
 
-          <p class="lead">A aplicação CityRoots oferece aos turistas nacionais e internacionais que pretendam conhecer Portugal um acesso rápido e fácil às raízes das nossas cidades, com a informação do que melhor e mais característico elas têm para lhes oferecer.</p>
+          <p class="lead">A aplicação CityRoots oferece a todos os turistas que pretendam conhecer Portugal um acesso rápido e fácil às raízes das nossas cidades, com a informação do que melhor e mais característico elas têm para lhes oferecer.
+          </p> 
         </div>
         <div class="col-lg-5 col-lg-offset-2 col-sm-6">
           <%= image_tag "ipad.png",   class: "img-responsive"%>
@@ -42,7 +43,7 @@
     <!-- /.container -->
 
   </div>
-  <!-- /.content-section-a -->
+  <!-- /.content-section-b -->
 
   <div class="content-section-a">
 
@@ -52,8 +53,12 @@
         <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Publicite o seu negócio</h2>
-          <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by PSDCovers! <a target="_blank" href="http://www.psdcovers.com/">Visit their website</a> to download some of their awesome, free photoshop actions!</p>
+          <h2 class="section-heading">Divulgue o seu negócio e cresça connosco</h2>
+          <p class="lead">O CityRoots leva até si aos melhores pontos de interesse da cidade, os eventos que estão a decorrer e os melhores locais para se divertir.
+          <%= link_to  web_index_path do %> 
+            Mais informações <b class="right-caret"></b>
+          <% end %>
+          </p>
         </div>
         <div class="col-lg-5 col-sm-pull-6  col-sm-6">
           <%= image_tag "doge.png",   class: "img-responsive"%>
@@ -64,7 +69,7 @@
     <!-- /.container -->
 
   </div>
-  <!-- /.content-section-b -->
+  <!-- /.content-section-a -->
 
   <div class="content-section-b">
 
@@ -74,11 +79,44 @@
         <div class="col-lg-5 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Viaje conosco!</h2>
-          <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+          <h2 class="section-heading">Um guia turístico nas suas mãos</h2>
+          <p class="lead">O seu smartphone ou tablet podem ser o seu melhor guia turístico.Eleve a sua experiência de turismo a um outro nível com a aplicação CityRoots.
+          <%= link_to mobile_index_path do %>
+             Mais informações <b class="right-caret"></b>
+          <% end %>
+          </p>
         </div>
         <div class="col-lg-5 col-lg-offset-2 col-sm-6">
           <%= image_tag "phones.png",   class: "img-responsive"%>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+  </div>
+  <!-- /.content-section-b -->
+
+  <div class="content-section-a">
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+          <hr class="section-heading-spacer">
+          <div class="clearfix"></div>
+          <h2 class="section-heading">Parceiros</h2>
+          <p class="lead">Por valorizarmos a qualidade e a credibilidade das fontes de informação, procuramos estabelecer parcerias com câmaras municipais, postos de turismo e outras instituições culturais. Desta forma, disponibilizamos conteúdos confiáveis, completos e atualizados, promovendo e divulgando estas instituições.
+          </p>
+          <p class="lead">
+          Oferecemos uma plataforma valiosa para chegar a todos os que visitam a sua cidade.
+          <%= link_to web_index_path do %>
+             Mais informações <b class="right-caret"></b>
+          <% end %>
+          </P> 
+        </div>
+        <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+          <%= image_tag "doge.png",   class: "img-responsive"%>
         </div>
       </div>
 

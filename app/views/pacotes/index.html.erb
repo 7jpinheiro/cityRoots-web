@@ -24,7 +24,8 @@
             <hr class="section-heading-spacer"/>
             <div class="clearfix"></div>
             <h2 class="section-heading">Premium!</h2>
-            <p class="lead">Obtenha uma maior especificação de informação e descreva o seu estabelecimento, os seus serviços e/ou os seus produtos. Como uma imagem vale mais do que mil palavras, coloque conteúdos fotográficos na sua página de perfil de forma a atingir uma maior notoriedade. Não fique só pelo nome, crie uma página para cada um dos seus estabelecimentos. Supere os seus concorrentes e obtenha maior destaque e visibilidade na aplicação e nas pesquisas dos seus utilizadores. Divulgue os seus eventos e promoções na aplicação para chegar a um maior número de interessados.
+            <p class="lead">
+              Obtenha uma maior especificação de informação e descreva o seu estabelecimento, os seus serviços e/ou os seus produtos. Como uma imagem vale mais do que mil palavras, coloque conteúdos fotográficos na sua página de perfil de forma a atingir uma maior notoriedade. Não fique só pelo nome, crie uma página para cada um dos seus estabelecimentos. Supere os seus concorrentes e obtenha maior destaque e visibilidade na aplicação e nas pesquisas dos seus utilizadores. Divulgue os seus eventos e promoções na aplicação para chegar a um maior número de interessados.<p/><%= link_to "Subscrever" , new_payment_path, class: "btn btn-warning", style: "background:#B68C34"  %>
         </div>
         <div class="col-lg-5 col-lg-offset-2 col-sm-6">
           <div class="col-xs-8 col-md-8">
@@ -61,7 +62,7 @@
                 </table>
               </div>
               <div class="panel-footer">
-                <a href="#premium" class="btn btn-primary" role="button">Ver mais</a>
+                <%= link_to "Subscrever" , new_payment_path, class: "btn btn-warning", style: "background:#B68C34"  %>
               </div>
             </div>
           </div>
@@ -79,8 +80,11 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">Básico</h2>
-          <p class="lead">Aumente a sua notoriedade e a visibilidade dos seus produtos e serviços para todo o mundo através do CityRoots. Crie e faça a gestão da sua página de perfil com a informação básica relativa ao seu estabelecimento.
-          <p/><%= link_to "Subscrever" , new_payment_path, class: "btn btn-warning", style: "background:#B68C34"  %>
+          <p class="lead">Aumente a sua notoriedade e a visibilidade dos seus produtos e serviços para todo o mundo através do CityRoots. </br>
+            Crie e faça a gestão da sua página de perfil com a informação básica relativa ao seu estabelecimento.</br>
+            Comece já a desfrutar da nossa plataforma e dos beneficios que esta lhe vai trazer.</br></br>
+            <%= link_to "Registe-se já!" , new_user_registration_path %>
+          </p>
         </div>
         <div class="col-lg-5 col-sm-pull-6  col-sm-6">
           <div class="row">
@@ -112,7 +116,7 @@
                 </table>
               </div>
               <div class="panel-footer">
-                <%= link_to "Subscrever" , new_payment_path, class: "btn btn-warning", style: "background:#B68C34"  %>
+                <a href="#premium" class="btn btn-primary" role="button">Ver mais</a>
               </div>
             </div>
             </div>

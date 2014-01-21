@@ -7057,3 +7057,13 @@ td.visible-print {
     display: none !important;
   }
 }
+.right-caret {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #18bc9c;
+    display: inline-block;
+    height: 0;
+    vertical-align: middle;
+    width: 0;
+}
+::-webkit-validation-bubble-message { display: none; }
