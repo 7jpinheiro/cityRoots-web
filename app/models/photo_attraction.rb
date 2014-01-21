@@ -24,5 +24,4 @@ class PhotoAttraction < ActiveRecord::Base
 
     has_attached_file :photo, :styles => { :medium => "1200x350#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/missing.png"
 
-
 end

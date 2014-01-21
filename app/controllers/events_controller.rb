@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.all.page(params[:page]).per(10)
+      @events = Event.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @events = Event.search(params[:search],current_user).page(params[:page]).per(10)
@@ -35,6 +35,28 @@ class EventsController < ApplicationController
       format.html { @events }
       format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:photo_events,:city,:types])}
     end
+  end
+
+   #post
+  def excel
+    uploaded_io = params[:events][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genEvents  #{Rails.root}/#{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:error] = "Pontos de Interesse inseridos com sucesso!"
+
+    end
+    redirect_to(events_path)
   end
 
   # GET /events/new
