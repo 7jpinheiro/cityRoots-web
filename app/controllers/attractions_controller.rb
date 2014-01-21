@@ -13,14 +13,14 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    
+
     if (!current_user.nil?) && (current_user.role? (:admin))
       @attractions = Attraction.all.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
       else
-        @attractions = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
+        @attractions = current_user.web_user.attractions.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
     end
     respond_to do |format|
