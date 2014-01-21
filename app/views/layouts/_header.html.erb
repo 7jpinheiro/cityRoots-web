@@ -154,7 +154,7 @@
                 <% end %>
                 <li class="divider"></li>
                 <li><%= link_to new_user_registration_path do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
-                <li><a href="#" style="color: #3b5998;"><i class="fa fa-facebook-square fa-fw" style="margin-left: 5px;"></i> Login by Facebook</a></li>
+                <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
                 <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
 
               </ul>

@@ -68,7 +68,11 @@ gem 'devise-i18n'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#facebook login
+gem 'omniauth-facebook'
 
+#Locales
+gem 'rails-i18n', '~> 4.0.0'
 
 #gem activemerchant
 gem 'activemerchant'
