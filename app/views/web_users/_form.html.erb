@@ -13,7 +13,7 @@
     <form role="form" class="form-horizontal">
       <div class="row">
         <%= f.text_field :id ,:id=>"nome" ,:type=>"hidden" , :value=>current_user.id %>
-        <%= f.text_field :active ,:id=>"active" ,:type=>"hidden" , :value=>"1" %>
+        <%= f.text_field :active ,:id=>"active" ,:type=>"hidden" , :value=>"0" %>
         <div class="form-group">
           <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">

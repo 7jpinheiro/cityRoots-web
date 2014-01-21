@@ -1,6 +1,7 @@
 class ItineraryEventsController < ApplicationController
   before_action :set_itinerary_event, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /itinerary_events
   # GET /itinerary_events.json
   def index

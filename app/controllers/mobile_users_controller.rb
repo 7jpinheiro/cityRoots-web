@@ -1,6 +1,7 @@
 class MobileUsersController < ApplicationController
   before_action :set_mobile_user, only: [:show, :edit, :update, :destroy]
 
+ 
   # GET /mobile_users
   # GET /mobile_users.json
   def index

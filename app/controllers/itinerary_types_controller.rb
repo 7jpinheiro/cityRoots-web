@@ -1,6 +1,5 @@
 class ItineraryTypesController < ApplicationController
   before_action :set_itinerary_type, only: [:show, :edit, :update, :destroy]
-
   # GET /itinerary_types
   # GET /itinerary_types.json
   def index

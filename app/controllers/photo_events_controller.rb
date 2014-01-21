@@ -1,6 +1,7 @@
 class PhotoEventsController < ApplicationController
   before_action :set_photo_event, only: [:show, :edit, :update, :destroy]
 
+
   # GET /photo_events
   # GET /photo_events.json
   def index

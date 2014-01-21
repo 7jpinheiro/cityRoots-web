@@ -18,6 +18,7 @@ class PaymentsController < ApplicationController
         userpack.pack_type_id = 1
         userpack.obs = "Pack simples"
         userpack.save
+        current_user.create_list_roles
         render :action => "success"
       else
         render :action => "failure"

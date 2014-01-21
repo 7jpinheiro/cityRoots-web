@@ -1,6 +1,6 @@
 $ ->
   $('.with_autocomplete').autocomplete
-    minLength: 2
+    minLength: 1
     source: (request, response) ->
       $.ajax
         url: $('.with_autocomplete').data('autocompleteurl')

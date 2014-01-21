@@ -1,6 +1,14 @@
 class CommentServicesController < ApplicationController
   before_action :set_comment_service, only: [:show, :edit, :update, :destroy]
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /comment_services
   # GET /comment_services.json
   def index

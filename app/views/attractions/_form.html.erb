@@ -16,9 +16,9 @@
           <div class="row">
             <br/>
             <div class="form-group" style="margin-left: 20px;">
-              <%= e.label "Linguagem" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
+              <%= e.label "Lingua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Linguagem", selected: @attraction_translation}, {class: "form-control"}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua", selected: @attraction_translation}, {class: "form-control"}) %>
               </div>
             </div>
           </div>

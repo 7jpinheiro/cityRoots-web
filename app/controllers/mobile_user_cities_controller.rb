@@ -1,6 +1,8 @@
 class MobileUserCitiesController < ApplicationController
   before_action :set_mobile_user_city, only: [:show, :edit, :update, :destroy]
 
+
+  
   # GET /mobile_user_cities
   # GET /mobile_user_cities.json
   def index

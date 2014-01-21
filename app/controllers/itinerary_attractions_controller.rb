@@ -1,6 +1,7 @@
 class ItineraryAttractionsController < ApplicationController
   before_action :set_itinerary_attraction, only: [:show, :edit, :update, :destroy]
 
+
   # GET /itinerary_attractions
   # GET /itinerary_attractions.json
   def index

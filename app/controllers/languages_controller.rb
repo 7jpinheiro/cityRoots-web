@@ -1,6 +1,5 @@
 class LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
-
   # GET /languages
   # GET /languages.json
   def index

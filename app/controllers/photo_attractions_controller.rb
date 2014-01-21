@@ -1,6 +1,7 @@
 class PhotoAttractionsController < ApplicationController
   before_action :set_photo_attraction, only: [:show, :edit, :update, :destroy]
 
+
   # GET /photo_attractions
   # GET /photo_attractions.json
   def index

@@ -1,6 +1,7 @@
 class PackTypesController < ApplicationController
   before_action :set_pack_type, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /pack_types
   # GET /pack_types.json
   def index

@@ -1,6 +1,7 @@
 class EventTranslationsController < ApplicationController
   before_action :set_event_translation, only: [:show, :edit, :update, :destroy]
 
+
   # GET /event_translations
   # GET /event_translations.json
   def index
