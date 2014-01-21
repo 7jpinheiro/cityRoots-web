@@ -21,7 +21,7 @@
           <div class="form-group control-group">
             <label for="email" class="col-sm-4 control-label">Email</label>
             <div class="col-sm-8">
-              <%= f.text_field :email, :required => true , :autofocus => true , :type => "email", :class=>"form-control form-control-square", 'data-validation-email-message' => 'O email não é válido' %>
+              <%= f.text_field :email, :required => true , :autofocus => true , :type => "email", :class=>"form-control form-control-square" %>
                 <p class="help-block"></p>
             </div>
           </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="row">
           <div class="form-group control-group">
-            <label for="password_confirmation" class="col-sm-4 control-label">Idioma</label>
+            <label for="language_id" class="col-sm-4 control-label">Idioma</label>
             <div class="col-sm-8">
               <%= f.collection_select(:language_id, Language.all, :id, :name,{prompt: "Selecione um Idioma"}, {class: "form-control", :required => true} ) %>
               <p class="help-block"></p>

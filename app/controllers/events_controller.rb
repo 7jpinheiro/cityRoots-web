@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.all.page(params[:page]).per(10)
+      @events = Event.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @events = Event.search(params[:search],current_user).page(params[:page]).per(10)

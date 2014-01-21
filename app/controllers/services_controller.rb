@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
      if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.all.page(params[:page]).per(10)
+      @events = Service.all.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
