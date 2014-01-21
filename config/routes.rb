@@ -15,6 +15,8 @@ CityRootsWeb::Application.routes.draw do
   get "mobile/index"
   get "web/index"
   post "attractions/excel"
+  post "events/excel"
+  post "services/excel"
   get "galeria/index"
   get "pacotes/index"
   get "/payments/new", to:"payments#new", as:"new_payment"

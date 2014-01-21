@@ -29,6 +29,28 @@ class ServicesController < ApplicationController
     end
   end
 
+   #post
+  def excel
+    uploaded_io = params[:services][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genServices  #{Rails.root}/#{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:error] = "Pontos de Interesse inseridos com sucesso!"
+
+    end
+    redirect_to(services_path)
+  end
+
   # GET /services/1
   # GET /services/1.json
   def show

@@ -37,6 +37,28 @@ class EventsController < ApplicationController
     end
   end
 
+   #post
+  def excel
+    uploaded_io = params[:events][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genEvents  #{Rails.root}/#{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:error] = "Pontos de Interesse inseridos com sucesso!"
+
+    end
+    redirect_to(events_path)
+  end
+
   # GET /events/new
   def new
     add_crumb "Novo", ""
