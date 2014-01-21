@@ -1,4 +1,6 @@
 CityRootsWeb::Application.routes.draw do
+  resources :apis
+
   resources :attraction_translations
 
   resources :service_translations
@@ -18,6 +20,8 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
+  get "users/index"
+
 
   devise_for :installs
   devise_scope :user do
@@ -37,6 +41,8 @@ CityRootsWeb::Application.routes.draw do
   resources :languages
 
   resources :cities
+
+  resource  :apis
 
   resources :comment_itineraries
 
@@ -106,8 +112,12 @@ CityRootsWeb::Application.routes.draw do
   resources :countries
 
   resource :profiles
+<<<<<<< HEAD
+  devise_for :users
+=======
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+>>>>>>> 7b283ab5c328cbf09208fbb63fdafdfdadf0ea45
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

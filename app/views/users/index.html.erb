@@ -1,0 +1,34 @@
+<h1>Listagem dos utilizadores Users</h1>
+<br/>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to "Todas",users_index_path %></li>
+  <li><%= link_to "Entidades",users_index_path ,params.merge({:entidades => 1}) %></li>
+  <li><%= link_to "Comércio",users_index_path %></li>
+  <li><%= link_to "Mobile",users_index_path %></li>
+  <li><%= link_to "Pedidos",users_index_path %></li>
+</ul>
+<br/>
+<div class="row">
+  <% @users.each do |user| %>
+      <div class="col-md-3">
+        <div class="well well-sm">
+          <strong><%= user.username %></strong>
+          <small class="right">
+            <%
+                if user.typ != nil
+                    %><i class="fa fa-android"></i><%
+                else
+                    %><i class="fa fa-html5"></i><%
+                end
+            %>
+          </small>
+          <br/>
+          <%= link_to "#" do %><span class="label label-primary"><i class="fa fa-search"></i> Detalhes</span><% end %>
+          <%= link_to "#" do %><span class="label label-primary"><i class="fa fa-edit"></i> Editar</span><% end %>
+          <%= link_to "#" do %><span class="label label-danger"><i class="fa fa-trash-o"></i> Apagar</span><% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
