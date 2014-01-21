@@ -338,6 +338,7 @@ class ApisController < ApplicationController
         obj["description"]=iti.description
         tip=ItineraryType.where("id=?",iti.itinerary_type_id).first
         obj["type"]=tip.name
+        
         @pois=Array.new
         #
         #attraction
