@@ -54,6 +54,8 @@ gem "kaminari"
 
 gem 'json'
 
+gem 'devise-i18n'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
@@ -66,7 +68,11 @@ gem 'json'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#facebook login
+gem 'omniauth-facebook'
 
+#Locales
+gem 'rails-i18n', '~> 4.0.0'
 
 #gem activemerchant
 gem 'activemerchant'

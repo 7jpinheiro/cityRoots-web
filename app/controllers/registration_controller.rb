@@ -28,7 +28,14 @@ class RegistrationController < ApplicationController
             @country.save
 
         else
+<<<<<<< HEAD
+            render :action => "new"
+
+      end
+=======
             render "new"
         end
+>>>>>>> 7b283ab5c328cbf09208fbb63fdafdfdadf0ea45
     end
+
 end

@@ -9,14 +9,18 @@ class EventsController < ApplicationController
   end
 
   load_and_authorize_resource
-  
+
   # GET /events
   # GET /events.json
   def index
-    unless(params[:search].nil?)
-      @events = Event.search(params[:search],current_user).page(params[:page]).per(10)
+    if current_user.role? (:admin)
+      @events = Event.all.page(params[:page]).per(10)
     else
-      @events = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
+      unless(params[:search].nil?)
+        @events = Event.search(params[:search],current_user).page(params[:page]).per(10)
+      else
+        @events = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
+      end
     end
     respond_to do |format|
       format.html{}
@@ -95,51 +99,51 @@ class EventsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through. 
-    def event_params
-      params.require(:event).permit(
-          :id,
-          :site,
-          :email,
-          :address,
-          :phone,
-          :latitude,
-          :longitude,
-          :startdate,
-          :enddate,
-          :organization,
-          :source,
-          :rating,
-          :photo_events,
-          :accessibility,
-          :city_id,
-          :timestamp,
-          :active,
-          :web_user_id,
-          event_types_attributes:[
-              :id,
-              :event_id,
-              :type_id,
-              :_destroy
-          ],
-          event_translations_attributes: [
-              :id,
-              :name,
-              :schedule,
-              :price,
-              :language_id,
-              :program,
-              :description,
-              :transport,
-              :event_id,
-              :_destroy
-          ],
-          photo_events_attributes: [:id,:name,:photo_file_name,:photo_content_type,:photo_file_size,:photo_updated_at,:description,:image,:event_id, :_destroy])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(
+        :id,
+        :site,
+        :email,
+        :address,
+        :phone,
+        :latitude,
+        :longitude,
+        :startdate,
+        :enddate,
+        :organization,
+        :source,
+        :rating,
+        :photo_events,
+        :accessibility,
+        :city_id,
+        :timestamp,
+        :active,
+        :web_user_id,
+        event_types_attributes:[
+            :id,
+            :event_id,
+            :type_id,
+            :_destroy
+        ],
+        event_translations_attributes: [
+            :id,
+            :name,
+            :schedule,
+            :price,
+            :language_id,
+            :program,
+            :description,
+            :transport,
+            :event_id,
+            :_destroy
+        ],
+        photo_events_attributes: [:id,:name,:photo_file_name,:photo_content_type,:photo_file_size,:photo_updated_at,:description,:image,:event_id, :_destroy])
+  end
 
 end
