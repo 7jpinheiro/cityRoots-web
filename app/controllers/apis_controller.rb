@@ -155,6 +155,8 @@ class ApisController < ApplicationController
           event["latitude"]=eve.latitude
           event["longitude"]=eve.longitude
           event["source"]=eve.source
+          event["start"]=eve.startdate
+          event["end"]=eve.enddate
           event["organization"]=eve.organization
           event["timestamp"]=eve.timestamp
           event["isActive"]=eve.active
