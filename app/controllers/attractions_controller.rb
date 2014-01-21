@@ -13,9 +13,8 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-
     if (!current_user.nil?) && (current_user.role? (:admin))
-      @attractions = Attraction.all.page(params[:page]).per(10)
+      @attractions = Attraction.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
@@ -25,8 +24,30 @@ class AttractionsController < ApplicationController
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json =>@attractions.to_json({:include=>{:attraction_translations=>{:include=>{:language=>{}}},:city=>{:include=>:country},:photo_attractions=>{},:types=>{}}}) }
+      format.json{render :json =>Attraction.page(params[:page]).per(25).as_json({:include=>{:attraction_translations=>{:include=>{:language=>{}}},:city=>{:include=>:country},:photo_attractions=>{},:types=>{}}}) }
     end
+  end
+
+  #post
+  def excel
+    uploaded_io = params[:attractions][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genAttractions  #{Rails.root}/#{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:error] = "Pontos de Interesse inseridos com sucesso!"
+
+    end
+    redirect_to(attractions_path)
   end
 
   # GET /attractions/1

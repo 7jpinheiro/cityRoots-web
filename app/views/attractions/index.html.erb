@@ -15,7 +15,22 @@
       </tr>
     </table>
 <% end %>
+
 <br>
+
+
+<%= form_tag attractions_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+<div class="col-sm-3" style="margin-bottom:25px">
+  <%= file_field_tag "attractions[file]" %>
+</div>
+<div class="col-sm-6">
+  <%= submit_tag "Submeter ficheiro", :name => nil%>
+</div>
+<% end %>
+
+
+
+
 <%
    @attractions.each do |attraction|
     trans=attraction.attraction_translations.first
@@ -43,7 +58,7 @@
                 <%= link_to edit_attraction_path(attraction), {:style => 'margin-right: 5px'} do %>
                     <span class="fa fa-edit"> </span>Editar
                 <% end %>
-                <%= link_to attraction, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                <%= link_to attraction, method: :delete, data: { confirm: 'Tem a certeza?'}  do %>
                     <span class="fa fa-trash-o"></span>Remover
                 <% end %>
               </div>
