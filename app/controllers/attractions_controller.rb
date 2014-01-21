@@ -13,7 +13,8 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    if current_user.role? (:admin)
+    
+    if (!current_user.nil?) && (current_user.role? (:admin))
       @attractions = Attraction.all.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
