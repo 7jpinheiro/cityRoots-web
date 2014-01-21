@@ -10,12 +10,12 @@ class ApisController < ApplicationController
     if params[:att]!= nil
       if params[:lang]!=nil && params[:acc]!=nil
         @result=Array.new
-        @attractions=Attraction.where("accessibility=?",true).all
-        @attractions.each do |att|
+        @attracti=Attraction.where("accessibility=?",true).all
+        @attracti.each do |att|
           atrac=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=AttractionTranslation.where("language_id=?",lan.id).first
+            trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
             if trans != nil
               atrac["name"]=trans.name
               atrac["description"]=trans.description
@@ -60,12 +60,12 @@ class ApisController < ApplicationController
         end
       elsif params[:lang]!=nil
         @result=Array.new
-        @attractions=Attraction.all
-        @attractions.each do |att|
+        @attracti=Attraction.all
+        @attracti.each do |att|
           atrac=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=AttractionTranslation.where("language_id=?",lan.id).first
+            trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
             if trans != nil
               atrac["name"]=trans.name
               atrac["description"]=trans.description
@@ -104,6 +104,7 @@ class ApisController < ApplicationController
           atrac["isReferencePoint"]=att.reference_point
           atrac["comments"]=att.comment_attractions.all
           @result.push(atrac)
+          atrac=nil
         end
         respond_to do |format|
           format.json{ render :json => @result }
@@ -121,7 +122,7 @@ class ApisController < ApplicationController
           event=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=EventTranslation.where("language_id=?",lan.id).first
+            trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
             if trans != nil
               event["name"]=trans.name
               event["description"]=trans.description
@@ -174,7 +175,7 @@ class ApisController < ApplicationController
           event=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=EventTranslation.where("language_id=?",lan.id).first
+            trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
             if trans != nil
               event["name"]=trans.name
               event["description"]=trans.description
@@ -230,7 +231,7 @@ class ApisController < ApplicationController
           serv=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=ServiceTranslation.where("language_id=?",lan.id).first
+            trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
             if trans != nil
               serv["name"]=trans.name
               serv["description"]=trans.description
@@ -282,7 +283,7 @@ class ApisController < ApplicationController
           serv=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
-            trans=ServiceTranslation.where("language_id=?",lan.id).first
+            trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
             if trans != nil
               serv["name"]=trans.name
               serv["description"]=trans.description
