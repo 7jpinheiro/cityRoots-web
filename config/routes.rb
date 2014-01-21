@@ -112,12 +112,9 @@ CityRootsWeb::Application.routes.draw do
   resources :countries
 
   resource :profiles
-<<<<<<< HEAD
-  devise_for :users
-=======
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
->>>>>>> 7b283ab5c328cbf09208fbb63fdafdfdadf0ea45
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
