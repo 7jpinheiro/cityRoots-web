@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
      if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.all.page(params[:page]).per(10)
+       @services = Service.all.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
@@ -23,7 +23,7 @@ class ServicesController < ApplicationController
         @services = current_user.web_user.services.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
       respond_to do |format|
-        format.html{}
+        format.html{@services.page(params[:page]).per(10)}
         format.json{render :json => Service.page(params[:page]).per(25).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
       end
     end

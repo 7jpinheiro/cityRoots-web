@@ -49,8 +49,11 @@ class ApisController < ApplicationController
           atrac["timestamp"]=att.timestamp
           atrac["isActive"]=att.active
           atrac["hasAccessibility"]=att.accessibility
-          atrac["type"]=att.types.all
-          atrac["rating"]=att.rating
+          @tmp=Array.new
+          att.types.each do |t|
+            @tmp.push(t.name)
+          end
+          atrac["type"]=@tmp          atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
           atrac["comments"]=att.comment_attractions.all
           @result.push(atrac)
@@ -99,7 +102,11 @@ class ApisController < ApplicationController
           atrac["timestamp"]=att.timestamp
           atrac["isActive"]=att.active
           atrac["hasAccessibility"]=att.accessibility
-          atrac["type"]=att.types.all
+          @tmp=Array.new
+          att.types.each do |t|
+            @tmp.push(t.name)
+          end
+          atrac["type"]=@tmp
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
           atrac["comments"]=att.comment_attractions.all
@@ -161,7 +168,11 @@ class ApisController < ApplicationController
           event["timestamp"]=eve.timestamp
           event["isActive"]=eve.active
           event["hasAccessibility"]=eve.accessibility
-          event["type"]=eve.types.all
+          @tmp=Array.new
+          eve.types.each do |t|
+            @tmp.push(t.name)
+          end
+          event["type"]=@tmp
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
           event["comments"]=eve.comment_events.all
@@ -214,7 +225,11 @@ class ApisController < ApplicationController
           event["timestamp"]=eve.timestamp
           event["isActive"]=eve.active
           event["hasAccessibility"]=eve.accessibility
-          event["type"]=eve.types.all
+          @tmp=Array.new
+          eve.types.each do |t|
+            @tmp.push(t.name)
+          end
+          event["type"]=@tmp
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
           event["comments"]=eve.comment_events.all
@@ -270,6 +285,11 @@ class ApisController < ApplicationController
           serv["isActive"]=ser.active
           serv["hasAccessibility"]=ser.accessibility
           serv["type"]=ser.types.all
+          @tmp=Array.new
+          ser.types.each do |t|
+            @tmp.push(t.name)
+          end
+          serv["type"]=@tmp
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
           serv["comments"]=ser.comment_services.all
@@ -321,7 +341,11 @@ class ApisController < ApplicationController
           serv["timestamp"]=ser.timestamp
           serv["isActive"]=ser.active
           serv["hasAccessibility"]=ser.accessibility
-          serv["type"]=ser.types.all
+          @tmp=Array.new
+          ser.types.each do |t|
+            @tmp.push(t.name)
+          end
+          serv["type"]=@tmp
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
           serv["comments"]=ser.comment_services.all
