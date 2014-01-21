@@ -1,4 +1,6 @@
-<%= form_for(@web_user) do |f| %>
+<%= javascript_include_tag "jqBootstrapValidation" %>
+
+<%= form_for @web_user, :html => {:novalidate => 'novalidate'} do  |f| %>
   <% if @web_user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@web_user.errors.count, "error") %> prohibited this web_user from being saved:</h2>
@@ -14,46 +16,51 @@
       <div class="row">
         <%= f.text_field :id ,:id=>"nome" ,:type=>"hidden" , :value=>current_user.id %>
         <%= f.text_field :active ,:id=>"active" ,:type=>"hidden" , :value=>"0" %>
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.text_field :name ,:id=>"nome" , :class=>"form-control form-control-square", :placeholder=>"Nome da sua empresa" %>
+            <%= f.text_field :name ,:id=>"nome" ,:autofocus => true, :class=>"form-control form-control-square", :placeholder=>"Nome da sua empresa",:required => true %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Nif." ,:for=>"nif" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.text_field :nif ,:id=>"nif" , :class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte" %>
+            <%= f.text_field :nif ,:id=>"nif" , :autofocus => true, :minlength =>"9",:maxlength =>"9" ,:type => "number",:class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte", :required => true  %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"A sua Morada" %>
+            <%= f.text_field :address ,:id=>"address" ,:autofocus => true, :class=>"form-control form-control-square", :placeholder=>"A sua Morada",:required => true %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Tipo" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+            <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group">
+        <div class="form-group control-group">
           <%= f.label "Cidade" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
+            <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
+            <p class="help-block"></p>
           </div>
         </div>
       </div>
@@ -61,3 +68,8 @@
       <div><%= f.submit "Guardar" , :class=>"btn btn-primary" , :style=>"width:100px;" %></div>
     </form>
 <% end %>
+
+
+<script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
