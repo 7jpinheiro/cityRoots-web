@@ -1,4 +1,6 @@
 CityRootsWeb::Application.routes.draw do
+  resources :apis
+
   resources :attraction_translations
 
   resources :service_translations
@@ -18,6 +20,8 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
+  get "users/index"
+
 
   devise_for :installs
 
@@ -34,6 +38,8 @@ CityRootsWeb::Application.routes.draw do
   resources :languages
 
   resources :cities
+
+  resource  :apis
 
   resources :comment_itineraries
 
@@ -103,7 +109,6 @@ CityRootsWeb::Application.routes.draw do
   resources :countries
 
   resource :profiles
-
   devise_for :users
   
   # The priority is based upon order of creation: first created -> highest priority.

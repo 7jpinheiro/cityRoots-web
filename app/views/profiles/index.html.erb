@@ -63,11 +63,56 @@
           <table>
             <tr>
               <%
+                 if current_user.role? (:admin)
+                    n_events=Event.all.length
+                    n_attra=Attraction.all.length
+                    n_rotas=Itinerary.all.length
+                    n_servicos=Service.all.length
+                    n_users=User.all.length
+                    %>
+                    <td>
+                    <%= link_to attractions_path do %>Pontos de interrese
+                        </td>
+                        <td><span class="badge badge-danger badge-square"><%= n_attra%></span><% end %>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <%= link_to events_path do %>Eventos
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_events%></span><% end %>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        <%= link_to itineraries_path do %>Rotas
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        <%= link_to services_path do %>Serviços
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        </td>
+                        </tr>
+                      <tr>
+                      <tr>
+                      <td>
+                        <%= link_to users_index_path do %>Users
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_users%></span><% end %>
+                        </td>
+                        </tr>
+                      <tr>
+                  <%
+                 end
                  if current_user.role? (:entidade)
                    if n_attra>0
               %>
                       <td>
-                        <%= link_to new_attraction_path do %>Pontos de interrese
+                        <%= link_to attractions_path do %>Pontos de interrese
                             </td>
                             <td><span class="badge badge-danger badge-square"><%= n_attra%></span><% end %>
                         </td>
@@ -88,7 +133,7 @@
                      if n_evets>0
                   %>
                       <td>
-                        <%= link_to new_event_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
+                        <%= link_to events_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
                       </td>
                       </tr>
                       <tr>
@@ -103,7 +148,7 @@
                      if n_rotas>0
                   %>
                       <td>
-                        <%= link_to new_itinerary_path do %>Rotas<span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
+                        <%= link_to itineraries_path do %>Rotas<span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
                       </td>
                   <%
                      else
@@ -116,7 +161,7 @@
                        if n_evets>0
                   %>
                       <td>
-                        <%= link_to new_event_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
+                        <%= link_to events_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
                       </td>
                       </tr>
                       <tr>
@@ -131,7 +176,7 @@
                        if n_servicos>0
                   %>
                       <td>
-                        <%= link_to new_service_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        <%= link_to services_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
                       </td>
                   <%
                      else
@@ -146,7 +191,7 @@
                      if n_servicos>0
                   %>
                       <td>
-                        <%= link_to new_service_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        <%= link_to services_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
                       </td>
                   <%
                      else
@@ -165,6 +210,9 @@
     </div>
   </div>
 </div>
+<%
+if current_user.role? (:restauracao)
+ %>
 <div class="row">
   <div class="col-md-12">
     <div class="well well-sm">
@@ -187,3 +235,33 @@
     </div>
   </div>
 </div>
+<%
+end
+if current_user.role? (:restauracao_gold)
+%>
+    %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-sm">
+          <p>
+            <strong>Os suas subscrições</strong>
+          <p class="text-muted">
+            Estas subscrições têm o objectivo emplucionar o seu negócio.
+          </p>
+          </p>
+          <table class="table table-bordered">
+            <tr>
+              <th class="col-md-4">Tipo</th>
+              <th class="col-md-4">Data compra</th>
+              <th class="col-md-4">Data de Expiração</th>
+            </tr>
+          </table>
+          <p>
+            <%= link_to "Ver mais subscrições", pacotes_path , :class => "btn btn-primary btn-square"%>
+          </p>
+        </div>
+      </div>
+    </div>
+<%
+   end
+%>

@@ -1,6 +1,6 @@
 class AttractionsController < ApplicationController
   before_action :set_attraction, only: [:show, :edit, :update, :destroy]
-  
+
   before_filter do
     resource = controller_path.singularize.gsub('/', '_').to_sym
     method = "#{resource}_params"
@@ -13,16 +13,18 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    unless(params[:search].nil?)
-      @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
+    if current_user.role? (:admin)
+      @attractions = Attraction.all.page(params[:page]).per(10)
     else
-      @attractions= current_user.web_user.attractions.page(params[:page]).per(10) if  current_user  && current_user.web_user
+      unless(params[:search].nil?)
+        @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
+      else
+        @attractions = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
+      end
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json => 
-        Attraction.page(params[:page]).per(25).to_json({:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}
-          ) }
+      format.json{render :json =>@attractions.to_json({:include=>{:attraction_translations=>{:include=>{:language=>{}}},:city=>{:include=>:country},:photo_attractions=>{},:types=>{}}}) }
     end
   end
 
@@ -99,40 +101,40 @@ class AttractionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attraction
-      @attraction = Attraction.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_attraction
+    @attraction = Attraction.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def attraction_params
-      params.require(:attraction).permit(
-          :site,
-          :email,
-          :address,
-          :phone,
-          :latitude,
-          :longitude,
-          :source,
-          :reference_point,
-          :active,
-          :timestamp,
-          :accessibility,
-          :city_id,
-          :web_user_id,
-          attraction_translations_attributes: [
-              :id,
-              :name,
-              :schedule,
-              :price,
-              :language_id,
-              :description,
-              :transport,
-              :attraction_id
-          ],
-          attraction_types_attributes: [:id,:attraction_id,:type_id,:_destroy],
-          photo_attractions_attributes: :photo
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def attraction_params
+    params.require(:attraction).permit(
+        :site,
+        :email,
+        :address,
+        :phone,
+        :latitude,
+        :longitude,
+        :source,
+        :reference_point,
+        :active,
+        :timestamp,
+        :accessibility,
+        :city_id,
+        :web_user_id,
+        attraction_translations_attributes: [
+            :id,
+            :name,
+            :schedule,
+            :price,
+            :language_id,
+            :description,
+            :transport,
+            :attraction_id
+        ],
+        attraction_types_attributes: [:id,:attraction_id,:type_id,:_destroy],
+        photo_attractions_attributes: :photo
+    )
+  end
 
 end

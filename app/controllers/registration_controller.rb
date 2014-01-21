@@ -28,6 +28,8 @@ class RegistrationController < ApplicationController
             @country.save
         else
             render :action => "new"
-        end
+
+      end
     end
+
 end
