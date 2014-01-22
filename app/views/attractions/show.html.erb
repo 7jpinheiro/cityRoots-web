@@ -1,7 +1,7 @@
 <%= javascript_include_tag "photo_attraction" %>
 <%= stylesheet_link_tag "welcome2" %>
 <%
-  trans=AttractionTranslation.where("attraction_id=?",@attraction.id).first
+  trans=@attraction.attraction_translations.first
   
   %>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
@@ -140,9 +140,8 @@
             <dd>
               <%
                 @tipos.each do |tipo|
-                  @type=Type.where("id=?",tipo.type_id)
                 %>
-              <%= @type.first.name %><br/>
+              <%= tipo.type.name %><br/>
               <%
                 end
                 %>
@@ -218,48 +217,48 @@
       </div>
       <div class="col-sm-6">
          <div class="row"  style="margin-top:15px">
-         <div class="col-sm-4">
-            <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
-            <% if @photo_attraction.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
-              <ul>
-                <% @photo_attraction.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
+            <div class="col-sm-4">
+                <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
+                <% if @photo_attraction.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
+                  <ul>
+                    <% @photo_attraction.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
                 <% end %>
-              </ul>
-            </div>
-            <% end %>
-            <div class="actions">
-              <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
-              <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
-            </div>
-            <script>
-              $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicionar Foto"});
-            </script>
-            <% end %>
-            <% # jquery upload template # %>
-            <script id="template-upload" type="text/x-tmpl">
-              <div class="upload">
-              {%=o.name%}
-                  <div class="progress">
-                      <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
-                       <span class="sr-only"></span>
+                <div class="actions">
+                  <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
+                  <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
+                </div>
+                <script>
+                  $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicionar Foto"});
+                </script>
+                <% end %>
+                <% # jquery upload template # %>
+                <script id="template-upload" type="text/x-tmpl">
+                  <div class="upload">
+                  {%=o.name%}
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                           <span class="sr-only"></span>
+                          </div>
                       </div>
                   </div>
-              </div>
-            </script>
-        </div>
-      <div class="col-sm-4 text-center">
-        <%= link_to edit_attraction_path(@attraction), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
-        Editar
-        <%end%>
-      </div>
-      <div class="col-sm-4 text-right">
-        <%= link_to @attraction, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
-        Remover
-        <% end %>
-      </div>
+                </script>
+            </div>
+            <div class="col-sm-4 text-center">
+              <%= link_to edit_attraction_path(@attraction), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
+              Editar
+              <%end%>
+            </div>
+            <div class="col-sm-4 text-right">
+              <%= link_to @attraction, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+              Remover
+              <% end %>
+            </div>
     </div>
         <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px" onload="mapinit();"></div>
       </div>
@@ -267,7 +266,9 @@
 
     <hr>
     <%
-      @coments=CommentAttraction.where("attraction_id=?",@attraction.id).all
+
+      @coments=@attraction.comment_attractions
+      
       unless @coments.blank?
       %>
     <div class="col-sm-12">
@@ -278,7 +279,7 @@
         <div class="bubble-inner">
           <%
             if co.mobile_user_id != nil
-              usermovel=User.where("id=?",co.mobile_user_id).first
+              usermovel= co.mobile_user.user
               if usermovel.username != nil
                 nome=usermovel.username
               else

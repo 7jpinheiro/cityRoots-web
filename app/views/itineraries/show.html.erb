@@ -18,22 +18,22 @@
           <%
              end
              if @itinerary.itinerary_type_id != nil
-               tipopoint=ItineraryType.where(["id = ?", @itinerary.itinerary_type_id ]).first
+               tipopoint= @itinerary.itinerary_type
                tipo=tipopoint.name;
           %>
                 <dt>Tipo</dt>
                 <dd><%= tipo %></dd>
           <%
              end
-             @itinerary_att=ItineraryAttraction.where("itinerary_id=?",@itinerary.id).all
+             @itinerary_att=@itinerary.itinerary_attractions
              if @itinerary_att.length != 0
           %>
                <dt>Prontos de Interesse</dt>
                <dd></dd>
                <%
                   @itinerary_att.each  do |p|
-                    att=AttractionTranslation.where("attraction_id=?",p.attraction_id).first
-                    att2=Attraction.where("id=?",p.attraction_id).first
+                    att=p.attraction.attraction_translations.first
+                    att2=p.attraction
                     target1="#att#{att.attraction_id}"
                     target2="att#{att.attraction_id}"
                %>
@@ -94,15 +94,15 @@
                <%
                   end
              end
-             @itinerary_servi=ItineraryService.where("itinerary_id=?",@itinerary.id).all
+             @itinerary_servi=@itinerary.itinerary_services
              if @itinerary_servi.length != 0
           %>
                 <dt>Serviços</dt>
                 <dd></dd>
                 <%
                    @itinerary_servi.each  do |p|
-                       ser=ServiceTranslation.where("service_id=?",p.service_id).first
-                       ser2=Service.where("id=?",p.service_id).first
+                       ser=p.service.service_translations.first
+                       ser2=p.service
                        target1="#att#{ser.service_id}"
                        target2="att#{ser.service_id}"
                 %>
@@ -157,15 +157,15 @@
                        <%
                    end
              end
-             @itinerary_even=ItineraryEvent.where("itinerary_id=?",@itinerary.id).all
+             @itinerary_even=@itinerary.itinerary_events
              if @itinerary_even.length != 0
                        %>
                <dt>Eventos</dt>
                <dd></dd>
                <%
                   @itinerary_even.each  do |p|
-                    eve=EventTranslation.where("event_id=?",p.event_id).first
-                    eve2=Event.where("id=?",p.event_id).first
+                    eve=p.event.event_translations.first
+                    eve2=p.event
                     target1="#att#{eve.event_id}"
                     target2="att#{eve.event_id}"
                %>

@@ -14,6 +14,11 @@
 #
 
 class EventTranslation < ActiveRecord::Base
+  validates :schedule, presence: false
+  validates :transport, presence: false
+  validates :program, presence: false
+  validates :price, presence: false
+
   belongs_to :event
   belongs_to :language
 end

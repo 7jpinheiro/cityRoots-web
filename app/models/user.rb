@@ -35,10 +35,11 @@ class User < ActiveRecord::Base
 	validates :city_id , presence: false
 	validates :language_id , presence: true
 	belongs_to :city
+  belongs_to :country
 	belongs_to :language
-  has_one :web_user, :foreign_key => "id"
-  has_many :itineraries
-  has_one :mobile_user, :foreign_key => "id"
+  has_one :web_user, :foreign_key => "id", dependent: :destroy
+  has_many :itineraries, dependent: :destroy
+  has_one :mobile_user, :foreign_key => "id", dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

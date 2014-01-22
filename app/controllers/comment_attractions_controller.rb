@@ -37,7 +37,7 @@ class CommentAttractionsController < ApplicationController
 
     respond_to do |format|
       if @comment_attraction.save
-        format.html { redirect_to @comment_attraction, notice: 'Comment attraction was successfully created.' }
+        format.html { redirect_to @comment_attraction, notice: 'Comentário de ponto de interesse criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_attraction }
       else
         format.html { render action: 'new' }
@@ -51,7 +51,7 @@ class CommentAttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @comment_attraction.update(comment_attraction_params)
-        format.html { redirect_to @comment_attraction, notice: 'Comment attraction was successfully updated.' }
+        format.html { redirect_to @comment_attraction, notice: 'Comentário de ponto de interesse actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

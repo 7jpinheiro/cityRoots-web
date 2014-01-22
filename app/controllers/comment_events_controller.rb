@@ -37,7 +37,7 @@ class CommentEventsController < ApplicationController
 
     respond_to do |format|
       if @comment_event.save
-        format.html { redirect_to @comment_event, notice: 'Comment event was successfully created.' }
+        format.html { redirect_to @comment_event, notice: 'Comentário de evento criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_event }
       else
         format.html { render action: 'new' }
@@ -51,7 +51,7 @@ class CommentEventsController < ApplicationController
   def update
     respond_to do |format|
       if @comment_event.update(comment_event_params)
-        format.html { redirect_to @comment_event, notice: 'Comment event was successfully updated.' }
+        format.html { redirect_to @comment_event, notice: 'Comentário de evento actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

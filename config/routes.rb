@@ -23,10 +23,21 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
-  get "users/index"
 
 
-  devise_for :installs
+
+  get "users",  to:"users#index", as:"users_index"
+  get "users/:id/activar",  to:"users#activar", as:"users_activar"
+  get "users/:id",to:"users#show", as:"users_show"
+  get "users/:id/edit",to:"users#edit", as:"users_edit"
+  put "users/:id",to:"users#update", as:"users_update"
+  delete "users/:id",to:"users#destroy", as:"users_destroy"
+
+
+
+devise_for :installs
+
+  
   devise_scope :user do
     get 'sign_out', :to => 'devise/sessions#destroy'
   end

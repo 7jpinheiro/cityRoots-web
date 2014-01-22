@@ -28,7 +28,7 @@ class RatingServicesController < ApplicationController
 
     respond_to do |format|
       if @rating_service.save
-        format.html { redirect_to @rating_service, notice: 'Rating service was successfully created.' }
+        format.html { redirect_to @rating_service, notice: 'Serviço de classificação criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @rating_service }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class RatingServicesController < ApplicationController
   def update
     respond_to do |format|
       if @rating_service.update(rating_service_params)
-        format.html { redirect_to @rating_service, notice: 'Rating service was successfully updated.' }
+        format.html { redirect_to @rating_service, notice: 'Serviço de classificação actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

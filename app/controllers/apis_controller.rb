@@ -15,6 +15,7 @@ class ApisController < ApplicationController
           atrac=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
+            atrac["id"]=att.id
             trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
             if trans != nil
               atrac["name"]=trans.name
@@ -61,7 +62,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
-          atrac["comments"]=att.comment_attractions.all
+          @tmp_com=Array.new
+          att.comment_attractions.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          atrac["comments"]=@tmp_com
           @result.push(atrac)
         end
         respond_to do |format|
@@ -72,6 +82,7 @@ class ApisController < ApplicationController
         @attracti=Attraction.all
         @attracti.each do |att|
           atrac=Hash.new
+          atrac["id"]=att.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
@@ -120,7 +131,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
-          atrac["comments"]=att.comment_attractions.all
+          @tmp_com=Array.new
+          att.comment_attractions.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          atrac["comments"]=@tmp_com
           @result.push(atrac)
           atrac=nil
         end
@@ -138,6 +158,7 @@ class ApisController < ApplicationController
         @events=Event.where("accessibility=?",true).all
         @events.each do |eve|
           event=Hash.new
+          event["id"]=eve.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
@@ -191,7 +212,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
-          event["comments"]=eve.comment_events.all
+          @tmp_com=Array.new
+          eve.comment_events.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          event["comments"]=@tmp_com
           @result.push(event)
         end
         respond_to do |format|
@@ -202,6 +232,7 @@ class ApisController < ApplicationController
         @events=Event.all
         @events.each do |eve|
           event=Hash.new
+          event["id"]=eve.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
@@ -253,7 +284,17 @@ class ApisController < ApplicationController
           event["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
-          event["comments"]=eve.comment_events.all
+          @tmp_com=Array.new
+          eve.comment_events.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          event["comments"]=@tmp_com
+
           @result.push(event)
         end
         respond_to do |format|
@@ -267,6 +308,7 @@ class ApisController < ApplicationController
         @servic=Service.where("accessibility=?",true).all
         @servic.each do |ser|
           serv=Hash.new
+          serv["id"]=ser.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
@@ -318,7 +360,16 @@ class ApisController < ApplicationController
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
-          serv["comments"]=ser.comment_services.all
+          @tmp_com=Array.new
+          ser.comment_services.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          serv["comments"]=@tmp_com
           @result.push(serv)
         end
         respond_to do |format|
@@ -329,6 +380,7 @@ class ApisController < ApplicationController
         @servic=Service.all
         @servic.each do |ser|
           serv=Hash.new
+          serv["id"]=ser.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
@@ -401,6 +453,7 @@ class ApisController < ApplicationController
       @iti=Itinerary.all
       @iti.each do |iti|
         obj=Hash.new
+        obj["id"]=iti.id
         obj["name"]=iti.name
         obj["description"]=iti.description
         tip=ItineraryType.where("id=?",iti.itinerary_type_id).first
@@ -422,6 +475,7 @@ class ApisController < ApplicationController
             end
             tra=AttractionTranslation.where("language_id=? and attraction_id=?",t_id,at.attraction_id).first
             att=Attraction.where("id=?",at.attraction_id).first
+            point["id"]=at.attraction_id
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -474,6 +528,8 @@ class ApisController < ApplicationController
             end
             tra=EventTranslation.where("language_id=?",t_id).where("event_id=?",evt.event_id).first
             evtn=Event.where("id=?",evt.event_id).first
+            point["id"]=evt.event_id
+            point["poi_type"]=1
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -512,7 +568,7 @@ class ApisController < ApplicationController
           end
         end
         #
-        #Services
+        #services
         #
         @servi=iti.itinerary_services
         if @servi.length > 0
@@ -526,6 +582,8 @@ class ApisController < ApplicationController
             end
             tra=ServiceTranslation.where("language_id=?",t_id).where("service_id=?",ser.service_id).first
             serv=Service.where("id=?",ser.service_id).first
+            point["id"]=ser.service_id
+            point["poi_type"]=2
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -570,6 +628,59 @@ class ApisController < ApplicationController
         format.json{ render :json => @result }
       end
     end
+    if params[:co]!=nil && params[:attr]
+      @com=CommentAttraction.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Attraction.where("id=?",params[:id]).first
+      @com.attraction=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:even]
+      @com=CommentEvent.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Event.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:serv]
+      @com=CommentService.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Service.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:itin]
+      @com=CommentItinerary.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Itinerary.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
   end
 
   # GET /apis/1
@@ -593,7 +704,7 @@ class ApisController < ApplicationController
 
     respond_to do |format|
       if @api.save
-        format.html { redirect_to @api, notice: 'Api was successfully created.' }
+        format.html { redirect_to @api, notice: 'Api criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @api }
       else
         format.html { render action: 'new' }
@@ -607,7 +718,7 @@ class ApisController < ApplicationController
   def update
     respond_to do |format|
       if @api.update(api_params)
-        format.html { redirect_to @api, notice: 'Api was successfully updated.' }
+        format.html { redirect_to @api, notice: 'Api actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

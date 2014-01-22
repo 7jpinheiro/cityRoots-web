@@ -13,10 +13,10 @@
 #
 
 class WebUser < ActiveRecord::Base
-	has_many :services
-	has_many :events
-	has_many :attractions
-	has_many :web_user_packs
+	has_many :services, dependent: :destroy
+	has_many :events, dependent: :destroy
+	has_many :attractions, dependent: :destroy
+	has_many :web_user_packs, dependent: :destroy
   belongs_to :city
   belongs_to :web_user_type
   belongs_to :user, :foreign_key => "id"

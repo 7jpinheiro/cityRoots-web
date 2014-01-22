@@ -1,7 +1,11 @@
 <%= javascript_include_tag "autocomplete" %>
 
 <div class="page-header">
-    <h1>Lista dos seus Estabelecimentos</h1>
+ <% if ( current_user.role? (:entidade)) || ( current_user.role? (:admin)) %>
+      <h1>Lista dos seus Serviços</h1>
+  <% else %>
+      <h1>Lista dos seus Estabelecimentos</h1>
+  <% end %> 
 </div>
 
 <%= csrf_meta_tag %>
@@ -10,7 +14,13 @@
 <%= form_tag services_path, :method=>'get' do  |f|%>
     <table>
       <tr>
-        <td class="col-sm-2"><%= link_to 'Registar novo Estabelecimento', new_service_path ,:class=>"btn btn-primary btn-square"%></td>
+        <td class="col-sm-2">
+          <% if ( current_user.role? (:entidade)) || ( current_user.role? (:admin)) %>
+          <%= link_to 'Novo Serviço', new_service_path ,:class=>"btn btn-primary btn-square"%>
+          <% else %>
+          <%= link_to 'Novo Estabelecimento', new_service_path ,:class=>"btn btn-primary btn-square"%>
+          <% end %>
+        </td>
         <td class="col-sm-2"></td>
         <td class="col-sm-3"><%= text_field_tag :search, params[:search], class: "with_autocomplete form-control", 'data-autocompleteUrl' => autocomplete_service_name_services_path%></td>
         <td class="col-sm-1"><%= submit_tag "Procurar", :name => nil, :class=>"btn btn-default" %></td>
@@ -37,8 +47,13 @@
       <div class="well well-sm">
         <div class="row">
           <div class="col-xs-3 col-md-3 text-center">
+            <%  unless service.photo_services.first.nil? %>
+                <%= image_tag service.photo_services.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
+            <% else %>
+            <%= image_tag "no_image.jpg" , :style =>"max-width:100%; max-height:100%" %>
+            <% end %>
 
-            <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
+            
           </div>
           <div class="col-xs-9 col-md-9 section-box">
             <div class="row">

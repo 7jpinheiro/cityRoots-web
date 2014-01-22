@@ -26,7 +26,7 @@ class ItineraryTypesController < ApplicationController
     @itinerary_type = ItineraryType.new(itinerary_type_params)
     respond_to do |format|
       if @itinerary_type.save
-        format.html { redirect_to @itinerary_type, notice: 'Itinerary type was successfully created.' }
+        format.html { redirect_to @itinerary_type, notice: 'Tipo de itinerário criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_type }
       else
         format.html { render action: 'new' }
@@ -40,7 +40,7 @@ class ItineraryTypesController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_type.update(itinerary_type_params)
-        format.html { redirect_to @itinerary_type, notice: 'Itinerary type was successfully updated.' }
+        format.html { redirect_to @itinerary_type, notice: 'Tipo de itinerário actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

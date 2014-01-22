@@ -28,7 +28,7 @@ class WebUserTypesController < ApplicationController
 
     respond_to do |format|
       if @web_user_type.save
-        format.html { redirect_to @web_user_type, notice: 'Web user type was successfully created.' }
+        format.html { redirect_to @web_user_type, notice: 'Tipo de utilizadores web criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @web_user_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class WebUserTypesController < ApplicationController
   def update
     respond_to do |format|
       if @web_user_type.update(web_user_type_params)
-        format.html { redirect_to @web_user_type, notice: 'Web user type was successfully updated.' }
+        format.html { redirect_to @web_user_type, notice: 'Tipo de utilizadores web actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
