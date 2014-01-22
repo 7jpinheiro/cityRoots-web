@@ -20,12 +20,12 @@
 #
 
 class Attraction < ActiveRecord::Base
-  validates :site, length: {minimum: 2}
-  validates :email, length: {minimum: 3}
-  validates :phone, presence: :true
-  validates :address, presence:true,length: {minimum: 5}
-  validates :latitude, presence:true
-  validates :longitude, presence:true
+#  validates :site
+#  validates :email, length: {minimum: 3}
+#  validates :phone, presence: :true
+#  validates :address, presence:true,length: {minimum: 5}
+#  validates :latitude, presence:true
+#  validates :longitude, presence:true
 
   belongs_to :web_user
   belongs_to :city

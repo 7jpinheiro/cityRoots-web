@@ -14,16 +14,28 @@ CityRootsWeb::Application.routes.draw do
   get "profiles/index"
   get "mobile/index"
   get "web/index"
+  post "attractions/excel"
+  post "events/excel"
+  post "services/excel"
   get "galeria/index"
   get "pacotes/index"
   get "/payments/new", to:"payments#new", as:"new_payment"
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
-  get "users/index"
 
 
-  devise_for :installs
+
+  get "admin_users",  to:"admin_users#index", as:"admin_users_index"
+  get "admin_users/:id/activar",  to:"admin_users#activar", as:"admin_users_activar"
+  get "admin_users/:id",to:"admin_users#show", as:"admin_users_show"
+  get "admin_users/:id/edit",to:"admin_users#edit", as:"admin_users_edit"
+  put "admin_users/:id",to:"admin_users#update", as:"admin_users_update"
+  delete "admin_users/:id",to:"admin_users#destroy", as:"admin_users_destroy"
+
+
+
+devise_for :installs
   devise_scope :user do
     get 'sign_out', :to => 'devise/sessions#destroy'
   end

@@ -28,7 +28,7 @@ class WebUserPacksController < ApplicationController
 
     respond_to do |format|
       if @web_user_pack.save
-        format.html { redirect_to @web_user_pack, notice: 'Web user pack was successfully created.' }
+        format.html { redirect_to @web_user_pack, notice: 'Pacote de utilizadores web criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @web_user_pack }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class WebUserPacksController < ApplicationController
   def update
     respond_to do |format|
       if @web_user_pack.update(web_user_pack_params)
-        format.html { redirect_to @web_user_pack, notice: 'Web user pack was successfully updated.' }
+        format.html { redirect_to @web_user_pack, notice: 'Pacote de utilizadores web actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

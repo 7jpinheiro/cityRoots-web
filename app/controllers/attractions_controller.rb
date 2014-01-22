@@ -13,9 +13,8 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-
     if (!current_user.nil?) && (current_user.role? (:admin))
-      @attractions = Attraction.all.page(params[:page]).per(10)
+      @attractions = Attraction.page(params[:page]).per(10)
     else
       unless(params[:search].nil?)
         @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
@@ -25,8 +24,30 @@ class AttractionsController < ApplicationController
     end
     respond_to do |format|
       format.html{}
-      format.json{render :json =>@attractions.to_json({:include=>{:attraction_translations=>{:include=>{:language=>{}}},:city=>{:include=>:country},:photo_attractions=>{},:types=>{}}}) }
+      format.json{render :json =>Attraction.page(params[:page]).per(25).as_json({:include=>{:attraction_translations=>{:include=>{:language=>{}}},:city=>{:include=>:country},:photo_attractions=>{},:types=>{}}}) }
     end
+  end
+
+  #post
+  def excel
+    uploaded_io = params[:attractions][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genAttractions  #{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:notice] = "Pontos de Interesse inseridos com sucesso!"
+
+    end
+    redirect_to(attractions_path)
   end
 
   # GET /attractions/1
@@ -57,13 +78,14 @@ class AttractionsController < ApplicationController
   # POST /attractions
   # POST /attractions.json
   def create
+    puts "create %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55"
     @attraction = Attraction.new(attraction_params)
     respond_to do |format|
       if @attraction.save
         format.html { redirect_to @attraction, notice: 'Ponto de Interesse criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @attraction }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', notice: 'Erro ao criar Ponto de Interesse.'  }
         format.json { render json: @attraction.errors, status: :unprocessable_entity }
       end
     end

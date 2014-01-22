@@ -22,15 +22,15 @@
 #
 
 class Event < ActiveRecord::Base
-  validates :site, presence: false
-  validates :email, presence: true , length: {minimum: 2}
-  validates :address, presence: true, length: {minimum: 5}
-  validates :latitude, presence:false
-  validates :longitude, presence:false
-  validates :startdate, presence:true
-  validates :enddate, presence:true
-  validates :organization , presence: false
-  validates :rating, presence: false
+#  validates :site, presence: false
+#  validates :email, presence: true , length: {minimum: 2}
+#  validates :address, presence: true, length: {minimum: 5}
+#  validates :latitude, presence:false
+#  validates :longitude, presence:false
+#  validates :startdate, presence:true
+#  validates :enddate, presence:true
+#  validates :organization , presence: false
+#  validates :rating, presence: false
 
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy

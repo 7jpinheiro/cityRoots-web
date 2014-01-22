@@ -19,4 +19,5 @@ class WebUserPack < ActiveRecord::Base
     has_many :services, dependent: :destroy
     belongs_to :web_users_type
     belongs_to :web_user
+    belongs_to :pack_type
 end

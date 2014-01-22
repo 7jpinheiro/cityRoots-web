@@ -23,13 +23,13 @@
 
 class Service < ActiveRecord::Base
 
-  validates :site, length: {minimum: 2}
-  validates :email, length: {minimum: 3}
-  validates :address, presence:true,length: {minimum: 5}
-  validates :latitude, presence:false
-  validates :longitude, presence:false
-  validates :capacity, presence:true
-  validates :details, presence:true
+#  validates :site, length: {minimum: 2}
+#  validates :email, length: {minimum: 3}
+#  validates :address, presence:true,length: {minimum: 5}
+#  validates :latitude, presence:false
+#  validates :longitude, presence:false
+#  validates :capacity, presence:true
+#  validates :details, presence:true
 
   belongs_to :web_user
   belongs_to :city

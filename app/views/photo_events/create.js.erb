@@ -1,6 +1,5 @@
-<% puts @photo_event.inspect + "---------------------"
 if @photo_event.new_record? %>
-alert('Failed');
+alert('Erro a gravar a foto.');
 <% else %>
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();

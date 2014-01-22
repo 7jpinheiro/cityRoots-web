@@ -43,7 +43,7 @@ class PhotoAttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @photo_attraction.update(photo_attraction_params)
-        format.html { redirect_to @photo_attraction, notice: 'Photo attraction was successfully updated.' }
+        format.html { redirect_to @photo_attraction, notice: 'Foto de atração actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

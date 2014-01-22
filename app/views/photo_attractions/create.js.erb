@@ -1,12 +1,10 @@
-
-<% puts @photo_attraction.inspect + "---------------------"
 if @photo_attraction.new_record? %>
-alert('Failed');
+alert('Erro a gravar a foto.');
 <% else %>
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();
 }
-if ($('ul.thumbnails') !== undefined) {
-    $('ul.thumbnails').append("<%=j render partial: 'photo_attractions/upload', locals: { photo_attraction: @photo_attraction } %>");
+if ($('carousel-inner') !== undefined) {
+    $('carousel-inner').append("<%=j render partial: 'photo_attractions/upload', locals: { photo_attraction: @photo_attraction } %>");
 }
 <% end %>

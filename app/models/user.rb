@@ -29,15 +29,17 @@
 
 
 class User < ActiveRecord::Base
-	validates :email , presence: true
+	validates :email , presence: true, uniqueness: { message: "Este email já se encontra registado" }
 	validates :encrypted_password , presence: true
+  validates :username, uniqueness: { message: "Este username já se encontra registado, escolha outro" }
 	validates :city_id , presence: false
 	validates :language_id , presence: true
 	belongs_to :city
+  belongs_to :country
 	belongs_to :language
-  has_one :web_user, :foreign_key => "id"
-  has_many :itineraries
-  has_one :mobile_user, :foreign_key => "id"
+  has_one :web_user, :foreign_key => "id", dependent: :destroy
+  has_many :itineraries, dependent: :destroy
+  has_one :mobile_user, :foreign_key => "id", dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -69,7 +71,7 @@ class User < ActiveRecord::Base
           end
         end
       end
-      if self.web_user.web_user_type.name == "Comercio" &&  !(@list_roles.include? "restauracao_gold")
+      if self.web_user.web_user_type.name == "Comércio" &&  !(@list_roles.include? "restauracao_gold")
           @list_roles.push "restauracao" 
       end 
     end
