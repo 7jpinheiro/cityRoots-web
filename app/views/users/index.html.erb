@@ -2,14 +2,14 @@
 <br/>
 <%= csrf_meta_tag %>
 
-<!-- Nav tabs -->
+<!-- Nav tabs 
 <ul class="nav nav-tabs">
   <li class="active"><%= link_to "Todas",users_index_path %></li>
   <li><%= link_to "Entidades",users_index_path ,params.merge({:filter => "entidade"}) %></li>
   <li><%= link_to "Comércio",users_index_path %></li>
   <li><%= link_to "Mobile",users_index_path %></li>
   <li><%= link_to "Pedidos",users_index_path %></li>
-</ul>
+</ul>-->
 <br/>
 <div class="row">
   <% @users.each do |user| %>
