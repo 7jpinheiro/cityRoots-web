@@ -1,8 +1,9 @@
 <%= javascript_include_tag "photo_services" %>
+<%= stylesheet_link_tag "welcome2" %>
 
 
 <%
-   servi=ServiceTranslation.where("service_id=?",@service.id).first
+   servi=@service.service_translations.first
 
 %>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
@@ -57,21 +58,53 @@
 
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-<div class="well well-lg">
-  <h1>
-    <%= servi.name%>
-    <%
-    if @service.accessibility !=0
-        %><small><i class="fa fa-wheelchair"></i></small><%
-    end
-    %>
-  </h1>
-  <br/>
-  <%= link_to edit_service_path(@service) do
-  %><i class="fa fa-edit"></i> Editar<%
-   end
-%>
-  <hr/>
+
+
+<div class="container" >
+  <% if !@service.photo_services.blank? %>
+  <div class="row" style="margin-top:15px">
+
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" style="margin-bottom:10px; ">
+      <div style="position: absolute;z-index: 1000;margin-top: 75px;font-size: 50px;width: 80%;text-align: center;margin-left:10%">
+        <h1 style="font-weight: 700; color:#fff;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);font-size: 1.3em;">
+          <%= servi.name%>
+        </h1>
+      </div>
+      <div class="carousel-inner">
+        <% @service.photo_services.each_with_index do |p,i| %>
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
+            <% end %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+        </a>
+      </div>
+    
+     
+    </div>
+    <% else %>
+      <div class="page-header">
+        <h1><%= servi.name%></h1>
+      </div>
+    <% end %>
+
+</div>
+
+
+<div class="container" >
+<div class="row" style="margin-top: 15px;  background: #f8f8f8; margin-bottom:20px" >
+
   <div class="row">
     <div class="col-md-6">
       <dl class="dl-horizontal">
@@ -103,9 +136,8 @@
             <dd>
               <%
                  @servic.each do |tipo|
-                   @servi=Type.where("id=?",tipo.type_id)
               %>
-                  <%= @servi.first.name %><br/>
+                  <%= tipo.type.name %><br/>
               <%
                  end
               %>
@@ -116,7 +148,7 @@
            if servi.description != nil
         %>
             <dt>Descrição</dt>
-            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.description%></dd>
+            <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.description%></dd>
         <%
            end
            if servi.schedule != nil
@@ -174,49 +206,61 @@
       <span style="border-top: none;"><%= link_to 'Voltar', services_path ,:class=>"btn btn-default btn-square"%></span>
     </div>
     <div class="col-sm-6">
-      <ul class="thumbnails"></ul>
-      <%= form_for @photo_service=PhotoService.new, :url => photo_services_path, html: { multipart: true } do |f| %>
-          <% if @photo_service.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@photo_service.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+      <div class="row"  style="margin-top:15px">
+        <div class="col-sm-4">
+          <%= form_for @photo_service=PhotoService.new, :url => photo_services_path, html: { multipart: true } do |f| %>
+              <% if @photo_service.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@photo_service.errors.count, "error") %> Prohibited this upload from being saved:</h2>
 
-                <ul>
-                  <% @photo_service.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                </ul>
+                    <ul>
+                      <% @photo_service.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+              <div class="actions">
+
+                <%= f.file_field :photo, multiple: true, name: 'photo_service[photo]', :class=>"filestyle" %>
+                <%= f.hidden_field :service_id,  :value => @service.id %>
               </div>
+              <script>
+                  $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicione uma Foto"});
+              </script>
           <% end %>
-          <div class="actions">
-            <%= f.label :photo %>
-            <br/>
-            <%= f.file_field :photo, multiple: true, name: 'photo_service[photo]', :class=>"filestyle" %>
-            <%= f.hidden_field :service_id,  :value => @service.id %>
-          </div>
-          <script>
-              $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicione uma Foto"});
-          </script>
-      <% end %>
-      <% # jquery upload template # %>
-      <script id="template-upload" type="text/x-tmpl">
-            <div class="upload">
-            {%=o.name%}
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
-                     <span class="sr-only"></span>
+          <% # jquery upload template # %>
+          <script id="template-upload" type="text/x-tmpl">
+                <div class="upload">
+                {%=o.name%}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                         <span class="sr-only"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </script>
-      <br/>
-      <br/>
-      <div id="map-canvas" style="width: 100%; height: 400px"></div>
+          </script>
+        </div>
+        <div class="col-sm-4 text-center">
+          <%= link_to edit_service_path(@service), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
+          Editar
+          <%end%>
+        </div>
+        <div class="col-sm-4 text-right">
+          <%= link_to @service, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+          Remover
+          <% end %>
+        </div>
+    </div>
+
+
+      <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px"></div>
     </div>
   </div>
   <hr>
   <%
-     @coments=CommentService.where("service_id=?",@service.id).all
-     if @coments != nil
+     @coments= @service.comment_services
+     unless @coments.blank?
   %>
       <div class="row">
         <h3>Comentários</h3>
@@ -226,7 +270,7 @@
               <div class="bubble-inner">
                 <%
                    if co.mobile_user_id != nil
-                     usermovel=User.where("id=?",co.mobile_user_id).first
+                     usermovel=co.mobile_user.user
                      nome=usermovel.username
                    else
                      nome="Anonimo"
@@ -246,4 +290,4 @@
      end
   %>
 </div>
-
+</div>

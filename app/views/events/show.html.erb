@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag "welcome2" %>
 
 <%
-   trans=EventTranslation.where("event_id=?",@event.id).first
+   trans=@event.event_translations.first
 
 %>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
@@ -135,9 +135,8 @@
               <dd>
               <%
                  @tipos.each do |tipo|
-                   @type=Type.where("id=?",tipo.type_id)
               %>
-                  <%= @type.first.name %><br/>
+                  <%= tipo.type.name %><br/>
             <%
                end
             %>
@@ -284,7 +283,7 @@
     <hr>
   <hr>
   <%
-     @coments=CommentEvent.where("event_id=?",@event.id).all
+     @coments=@event.comment_events
      unless @coments.blank?
 	 %>
       <div class="col-sm-12">
@@ -295,7 +294,7 @@
               <div class="bubble-inner">
                 <%
                    if co.mobile_user_id != nil
-                     usermovel=User.where("id=?",co.mobile_user_id).first
+                     usermovel=co.mobile_user.user
                      if usermovel.username != nil
                 nome=usermovel.username
               else

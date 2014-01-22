@@ -58,7 +58,7 @@ class ServicesController < ApplicationController
   def show
     @service=Service.find(params[:id])
     respond_to do |format|
-      format.html { @service }
+      format.html { render :layout => 'layout_welc' }
       format.json { render :json => @service.as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
     end
   end

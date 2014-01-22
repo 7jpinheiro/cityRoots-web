@@ -70,9 +70,8 @@
                 <b>Tipo</b>
               <%
                 @tipos.each do |tipo|
-                    @type=Type.where("id=?",tipo.type_id)
                %>
-                <%= @type.first.name %><span> </span>
+                <%= tipo.type.name %><span> </span>
               <%
                  end
                  %>
@@ -114,7 +113,7 @@
               %>
               <span class="separator">|</span>
               <%
-              commes=CommentEvent.where("event_id=?",event.id).all
+              commes=event.comment_events
               size=commes.length
               %>
               <span class="fa fa-comment"></span>(<%= size %> Comments)

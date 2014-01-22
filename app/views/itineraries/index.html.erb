@@ -59,7 +59,7 @@
               <div class="row rating-desc">
                 <div class="col-md-12">
                   <%
-                     @ratings=RatingItinerary.where("itinerary_id=?",itinerary.id).all
+                     @ratings=itinerary.rating_itineraries
                      ratin=0
                      if @ratings != nil
                        index=0
@@ -84,7 +84,7 @@
                 %>
                   <span class="separator">|</span>
                   <%
-                     commes=CommentItinerary.where("itinerary_id=?",itinerary.id).all
+                     commes=itinerary.comment_itineraries
                      size=commes.length
                   %>
                   <span class="fa fa-comment"></span>(<%= size %> Comments)

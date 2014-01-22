@@ -65,8 +65,9 @@
                 <div class="input-group">
                   <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€", :required => true,:autofocus => true %>
                   <span class="input-group-addon">€</span>
-                  <p class="help-block"></p>
+                  
                 </div>
+                <p class="help-block"></p>
               </div>
             </div>
           </div>
@@ -204,7 +205,7 @@
     <div class="row">
       <div class="form-group">
         <div class="col-sm-6">
-          <%= f.submit :class=>"btn btn-primary btn-square" %>
+          <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
         </div>
         <br/>
         <br/>
