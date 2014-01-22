@@ -1,0 +1,220 @@
+<br/>
+<div class="row">
+  <table class="col-sm-6">
+    <tr>
+      <td class="col-sm-1">
+        <%= image_tag "user.png" , :style =>"height:15%;width: 60%" %>
+      </td>
+      <td class="col-sm-2">
+        <h1><%= @admin_user.username%></h1>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="well well-sm">
+      <p style="text-align: center;">
+        <strong style="text-align: center;"> Informações</strong>
+      <p/>
+
+      <dl class="dl-horizontal" style="align-content: center;">
+        <dt>Nome de utilizador</dt>
+        <dd><%= @admin_user.username%></dd>
+        <dt>Email</dt>
+        <dd><%= @admin_user.email%></dd>
+        <dt>Idioma</dt>
+        <dd><%= @admin_user.language.name%></dd>
+        <dt>País</dt>
+        <dd><%= @admin_user.country.name%></dd>
+      </dl>
+      
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="well well-sm" style="height: 176px;">
+      <strong>Dados do utilizador</strong>
+      <%
+         if @admin_user.web_user.nil?
+      %>
+          <p class="text text-warning">Não completou o registo</p>
+      <%
+         else
+           n_evets=Event.find_all_by_web_user_id(@admin_user.id).length
+           n_attra=Attraction.find_all_by_web_user_id(@admin_user.id).length
+           n_rotas=Itinerary.find_all_by_user_id(@admin_user.id).length
+           n_servicos=Service.find_all_by_web_user_id(@admin_user.id).length
+           web=WebUser.where("id=?",@admin_user.id).first
+           type=web.web_user_type
+      %>
+          <table>
+            <tr>
+              <%
+                 if @admin_user.role? (:admin)
+                    n_events=Event.all.length
+                    n_attra=Attraction.all.length
+                    n_rotas=Itinerary.all.length
+                    n_servicos=Service.all.length
+                    n_users=User.all.length
+                    %>
+                    <td>
+                    Pontos de interrese
+                        </td>
+                        <td><span class="badge badge-danger badge-square"><%= n_attra%></span>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Eventos
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_events%></span>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        Rotas
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_rotas%></span>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        Serviços
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_servicos%></span>
+                        </td>
+                        </tr>
+                      <tr>
+                      <tr>
+                      <td>
+                        Users
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_users%></span>
+                        </td>
+                        </tr>
+                      <tr>
+                  <%
+                 end
+                 if @admin_user.role? (:entidade)
+              %>
+                      <td>
+                        Pontos de interrese
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_attra%></span>
+                        </td>
+                        </tr>
+                        <tr>
+                  
+                      <td>
+                        Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span>
+                      </td>
+                      </tr>
+                      <tr>                
+                      <td>
+                       Rotas<span class="badge badge-danger badge-square"><%= n_rotas%></span>
+                      </td>
+                  <%
+                     
+                     end
+                     if @admin_user.role? (:restauracao_gold)
+                  %>
+                      <td>
+                        Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                        Estabelecimentos <span class="badge badge-danger badge-square"><%= n_servicos%></span>
+                      </td>
+                  <%
+                     end
+                     if @admin_user.role? (:restauracao)
+                   
+                  %>
+                      <td>
+                        Estabelecimentos <span class="badge badge-danger badge-square"><%= n_servicos%></span>
+                      </td>
+               
+                  <%
+                     
+                     end
+                  %>
+              </tr>
+              </table>
+      <%  end
+      %>
+    </div>
+  </div>
+</div>
+<% if @admin_user.role? (:restauracao) %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="well well-sm">
+      <p>
+        <h3><strong>Os seus planos</strong></h3>
+      <p class="text-muted">
+        Obtenha o plano perfeito para o seu negócio.
+      </p>
+      </p>
+      <table class="table table-bordered">
+        <tr>
+          <th class="col-md-4">Tipo</th>
+          <th class="col-md-4">Data compra</th>
+          <th class="col-md-4">Data de Expiração</th>
+        </tr>
+        <tr>
+          <td class="col-md-4">Básico</th>
+          <td class="col-md-4"><%= @admin_user.current_sign_in_at %></th>
+          <td class="col-md-4">Não expira</th>
+        </tr>
+      </table>
+      <p>
+        <%= link_to "Ver mais subscrições", pacotes_path , :class => "btn btn-primary btn-square" %>
+      </p>
+    </div>
+  </div>
+</div>
+<%
+end
+if @admin_user.role? (:restauracao_gold)
+%>
+    %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-sm">
+          <p>
+            <h3><strong>Os planos</strong></h3>
+          <p class="text-muted">
+            
+          </p>
+          </p>
+          <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+          <table class="table table">
+            <tr style="background:#DDDDDD">
+              <th >Tipo</th>
+              <th >Data compra</th>
+              <th >Data de Expiração</th>
+              <th >Preço</th>
+            </tr>
+            <% @admin_user.web_user.web_user_packs.each do |packs| %>
+            <tr style="background:#fff">
+              <td ><%= packs.pack_type.name %></td>
+              <td ><%= packs.subscriptiondate %></td>
+              <td ><%= packs.validity %></td>
+              <td ><%= packs.pack_type.price %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+<%
+   end
+%>

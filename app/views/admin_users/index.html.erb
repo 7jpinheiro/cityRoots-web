@@ -1,0 +1,49 @@
+<h1>Listagem dos utilizadores Users</h1>
+<br/>
+<%= csrf_meta_tag %>
+
+<!-- Nav tabs 
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to "Todas",admin_users_index_path %></li>
+  <li><%= link_to "Entidades",admin_users_index_path ,params.merge({:filter => "entidade"}) %></li>
+  <li><%= link_to "Comércio",admin_users_index_path %></li>
+  <li><%= link_to "Mobile",admin_users_index_path %></li>
+  <li><%= link_to "Pedidos",admin_users_index_path %></li>
+</ul>-->
+<br/>
+<div class="row">
+  <% @admin_users.each do |user| %>
+      <div class="col-md-4">
+        <div class="well well-sm">
+          <strong><%= user.username %></strong>
+          <small class="right" style="text-align: right;">
+            <%
+                if user.typ != nil
+                    %><i class="fa fa-android fa-2x"></i><%
+                else
+                    %><i class="fa fa-desktop fa-2x"></i><%
+                end
+            %>
+          </small>
+          <br/>
+        </br>
+          <%= link_to admin_users_show_path(user), :class=>"btn btn-primary btn-sm" do %>
+            <i class="fa fa-search"></i> Detalhes
+          <% end %>
+          
+
+          <%= link_to admin_users_destroy_path(user), method: :delete, data: { confirm: 'Tem a certeza?'}, :class=>"btn btn-danger btn-sm" do %>
+            <i class="fa fa-trash-o"></i> Apagar
+          <% end %>
+          <% if (user.web_user) && !(user.web_user.active) && (user.web_user.web_user_type.name == "Entidade")%>
+          <%= link_to admin_users_activar_path(user), :class=>"btn btn-warning btn-sm" do %>
+            <i class="fa fa-trash-o"></i> Activar
+          <% end 
+            end
+          %>
+
+        </div>
+      </div>
+  <% end %>
+</div>
+
