@@ -36,7 +36,7 @@ class CommentServicesController < ApplicationController
 
     respond_to do |format|
       if @comment_service.save
-        format.html { redirect_to @comment_service, notice: 'Comment service was successfully created.' }
+        format.html { redirect_to @comment_service, notice: 'Serviço de comentários criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_service }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class CommentServicesController < ApplicationController
   def update
     respond_to do |format|
       if @comment_service.update(comment_service_params)
-        format.html { redirect_to @comment_service, notice: 'Comment service was successfully updated.' }
+        format.html { redirect_to @comment_service, notice: 'Serviço de comentários actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
