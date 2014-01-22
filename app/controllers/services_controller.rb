@@ -95,7 +95,7 @@ class ServicesController < ApplicationController
     @service = Service.new(service_params)
     respond_to do |format|
       if @service.save
-        format.html { redirect_to @service, notice: 'Service was successfully created.' }
+        format.html { redirect_to @service, notice: 'Serviço criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @service }
       else
         format.html { render action: 'new' }
@@ -120,7 +120,7 @@ class ServicesController < ApplicationController
   def update
     respond_to do |format|
       if @service.update(service_params)
-        format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+        format.html { redirect_to @service, notice: 'Serviço actualizado com sucesso' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
