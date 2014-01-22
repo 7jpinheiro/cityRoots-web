@@ -15,6 +15,7 @@ class ApisController < ApplicationController
           atrac=Hash.new
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
+            atrac["id"]=att.id
             trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
             if trans != nil
               atrac["name"]=trans.name
@@ -61,7 +62,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
-          atrac["comments"]=att.comment_attractions.all
+          @tmp_com=Array.new
+          att.comment_attractions.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          atrac["comments"]=@tmp_com
           @result.push(atrac)
         end
         respond_to do |format|
@@ -72,6 +82,7 @@ class ApisController < ApplicationController
         @attracti=Attraction.all
         @attracti.each do |att|
           atrac=Hash.new
+          atrac["id"]=att.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=AttractionTranslation.where("language_id=?",lan.id).where("attraction_id=?",att.id).first
@@ -120,7 +131,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
-          atrac["comments"]=att.comment_attractions.all
+          @tmp_com=Array.new
+          att.comment_attractions.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          atrac["comments"]=@tmp_com
           @result.push(atrac)
           atrac=nil
         end
@@ -191,7 +211,16 @@ class ApisController < ApplicationController
           atrac["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
-          event["comments"]=eve.comment_events.all
+          @tmp_com=Array.new
+          eve.comment_events.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          event["comments"]=@tmp_com
           @result.push(event)
         end
         respond_to do |format|
@@ -253,7 +282,17 @@ class ApisController < ApplicationController
           event["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
-          event["comments"]=eve.comment_events.all
+          @tmp_com=Array.new
+          eve.comment_events.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          event["comments"]=@tmp_com
+
           @result.push(event)
         end
         respond_to do |format|
@@ -318,7 +357,16 @@ class ApisController < ApplicationController
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
-          serv["comments"]=ser.comment_services.all
+          @tmp_com=Array.new
+          ser.comment_services.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          serv["comments"]=@tmp_com
           @result.push(serv)
         end
         respond_to do |format|
@@ -512,7 +560,7 @@ class ApisController < ApplicationController
           end
         end
         #
-        #Services
+        #services
         #
         @servi=iti.itinerary_services
         if @servi.length > 0

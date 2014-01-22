@@ -3,7 +3,7 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><%= link_to "Todas",users_index_path %></li>
-  <li><%= link_to "Entidades",users_index_path ,params.merge({:entidades => 1}) %></li>
+  <li><%= link_to "Entidades",users_index_path ,params.merge({:filter => "entidade"}) %></li>
   <li><%= link_to "Comércio",users_index_path %></li>
   <li><%= link_to "Mobile",users_index_path %></li>
   <li><%= link_to "Pedidos",users_index_path %></li>
@@ -19,7 +19,7 @@
                 if user.typ != nil
                     %><i class="fa fa-android fa-2x"></i><%
                 else
-                    %><i class="fa fa-html5 fa-2x"></i><%
+                    %><i class="fa fa-desktop fa-2x"></i><%
                 end
             %>
           </small>
