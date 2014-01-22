@@ -32,6 +32,9 @@
               <li class="<%= is_active?(services_path) %>">                 
                 <%= link_to "Serviços" , services_path  %>
               </li>
+              <li class="<%= is_active?(users_index_path) %>">                 
+                <%= link_to "Utilizadores" , users_index_path  %>
+              </li>
         <%
                 end
                 if current_user.role? (:entidade)

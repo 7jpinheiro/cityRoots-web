@@ -1,10 +1,3 @@
-<%
-   user=User.where("id=?",current_user.id).first;
-   pais=Country.where("id=?",user.country_id).first;
-   paisid=pais.name;
-   #lang=Language.where("id=?",user.language.name).first;
-   #ling=lang.name;
-%>
 <br/>
 <div class="row">
   <table class="col-sm-6">
@@ -13,7 +6,7 @@
         <%= image_tag "user.png" , :style =>"height:15%;width: 60%" %>
       </td>
       <td class="col-sm-2">
-        <h1><%= user.username%></h1>
+        <h1><%= @user.username%></h1>
       </td>
     </tr>
   </table>
@@ -28,13 +21,13 @@
 
       <dl class="dl-horizontal" style="align-content: center;">
         <dt>Nome de utilizador</dt>
-        <dd><%= user.username%></dd>
+        <dd><%= @user.username%></dd>
         <dt>Email</dt>
-        <dd><%= user.email%></dd>
+        <dd><%= @user.email%></dd>
         <dt>Idioma</dt>
-        <dd><%= user.language.name%></dd>
+        <dd><%= @user.language.name%></dd>
         <dt>País</dt>
-        <dd><%= user.country.name%></dd>
+        <dd><%= @user.country.name%></dd>
       </dl>
       <%= link_to edit_user_registration_path, :class=>"link" do
       %><i class="fa fa-edit"></i> Editar informação pessoal<%
@@ -46,23 +39,23 @@
     <div class="well well-sm" style="height: 176px;">
       <strong>Gestão de conteudos da sua entidade</strong>
       <%
-         if current_user.web_user.nil?
+         if @user.web_user.nil?
       %>
           <p class="text text-warning">Para poder adicionar conteudo a sua conta tem que completar o registo. </p>
           <%= link_to "Completar Registo", new_web_user_path ,:class=>"btn btn-primary btn-square" %>
       <%
          else
-           n_evets=Event.find_all_by_web_user_id(current_user.id).length
-           n_attra=Attraction.find_all_by_web_user_id(current_user.id).length
-           n_rotas=Itinerary.find_all_by_user_id(current_user.id).length
-           n_servicos=Service.find_all_by_web_user_id(current_user.id).length
-           web=WebUser.where("id=?",current_user.id).first
+           n_evets=Event.find_all_by_web_user_id(@user.id).length
+           n_attra=Attraction.find_all_by_web_user_id(@user.id).length
+           n_rotas=Itinerary.find_all_by_user_id(@user.id).length
+           n_servicos=Service.find_all_by_web_user_id(@user.id).length
+           web=WebUser.where("id=?",@user.id).first
            type=web.web_user_type
       %>
           <table>
             <tr>
               <%
-                 if current_user.role? (:admin)
+                 if @user.role? (:admin)
                     n_events=Event.all.length
                     n_attra=Attraction.all.length
                     n_rotas=Itinerary.all.length
@@ -107,7 +100,7 @@
                       <tr>
                   <%
                  end
-                 if current_user.role? (:entidade)
+                 if @user.role? (:entidade)
                    if n_attra>0
               %>
                       <td>
@@ -156,7 +149,7 @@
                   <%
                      end
                      end
-                     if current_user.role? (:restauracao_gold)
+                     if @user.role? (:restauracao_gold)
                        if n_evets>0
                   %>
                       <td>
@@ -186,7 +179,7 @@
 
                      end
                      end
-                     if current_user.role? (:restauracao)
+                     if @user.role? (:restauracao)
                      if n_servicos>0
                   %>
                       <td>
@@ -209,7 +202,7 @@
   </div>
 </div>
 <%
-if current_user.role? (:restauracao)
+if @user.role? (:restauracao)
  %>
 <div class="row">
   <div class="col-md-12">
@@ -228,7 +221,7 @@ if current_user.role? (:restauracao)
         </tr>
         <tr>
           <td class="col-md-4">Básico</th>
-          <td class="col-md-4"><%= current_user.current_sign_in_at %></th>
+          <td class="col-md-4"><%= @user.current_sign_in_at %></th>
           <td class="col-md-4">Não expira</th>
         </tr>
       </table>
@@ -240,7 +233,7 @@ if current_user.role? (:restauracao)
 </div>
 <%
 end
-if current_user.role? (:restauracao_gold)
+if @user.role? (:restauracao_gold)
 %>
     %>
     <div class="row">
@@ -261,7 +254,7 @@ if current_user.role? (:restauracao_gold)
               <th >Data de Expiração</th>
               <th >Preço</th>
             </tr>
-            <% current_user.web_user.web_user_packs.each do |packs| %>
+            <% @user.web_user.web_user_packs.each do |packs| %>
             <tr style="background:#fff">
               <td ><%= packs.pack_type.name %></td>
               <td ><%= packs.subscriptiondate %></td>
