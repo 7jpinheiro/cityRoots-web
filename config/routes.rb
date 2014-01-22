@@ -26,18 +26,16 @@ CityRootsWeb::Application.routes.draw do
 
 
 
-  get "users",  to:"users#index", as:"users_index"
-  get "users/:id/activar",  to:"users#activar", as:"users_activar"
-  get "users/:id",to:"users#show", as:"users_show"
-  get "users/:id/edit",to:"users#edit", as:"users_edit"
-  put "users/:id",to:"users#update", as:"users_update"
-  delete "users/:id",to:"users#destroy", as:"users_destroy"
+  get "admin_users",  to:"admin_users#index", as:"admin_users_index"
+  get "admin_users/:id/activar",  to:"admin_users#activar", as:"admin_users_activar"
+  get "admin_users/:id",to:"admin_users#show", as:"admin_users_show"
+  get "admin_users/:id/edit",to:"admin_users#edit", as:"admin_users_edit"
+  put "admin_users/:id",to:"admin_users#update", as:"admin_users_update"
+  delete "admin_users/:id",to:"admin_users#destroy", as:"admin_users_destroy"
 
 
 
 devise_for :installs
-
-  
   devise_scope :user do
     get 'sign_out', :to => 'devise/sessions#destroy'
   end
