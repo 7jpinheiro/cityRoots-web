@@ -158,6 +158,7 @@ class ApisController < ApplicationController
         @events=Event.where("accessibility=?",true).all
         @events.each do |eve|
           event=Hash.new
+          event["id"]=eve.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
@@ -231,6 +232,7 @@ class ApisController < ApplicationController
         @events=Event.all
         @events.each do |eve|
           event=Hash.new
+          event["id"]=eve.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=EventTranslation.where("language_id=?",lan.id).where("event_id=?",eve.id).first
@@ -306,6 +308,7 @@ class ApisController < ApplicationController
         @servic=Service.where("accessibility=?",true).all
         @servic.each do |ser|
           serv=Hash.new
+          serv["id"]=ser.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
@@ -377,6 +380,7 @@ class ApisController < ApplicationController
         @servic=Service.all
         @servic.each do |ser|
           serv=Hash.new
+          serv["id"]=ser.id
           lan=Language.where("abv=?",params[:lang]).first
           if lan!= nil
             trans=ServiceTranslation.where("language_id=?",lan.id).where("service_id=?",ser.id).first
@@ -449,6 +453,7 @@ class ApisController < ApplicationController
       @iti=Itinerary.all
       @iti.each do |iti|
         obj=Hash.new
+        obj["id"]=iti.id
         obj["name"]=iti.name
         obj["description"]=iti.description
         tip=ItineraryType.where("id=?",iti.itinerary_type_id).first
@@ -470,6 +475,7 @@ class ApisController < ApplicationController
             end
             tra=AttractionTranslation.where("language_id=? and attraction_id=?",t_id,at.attraction_id).first
             att=Attraction.where("id=?",at.attraction_id).first
+            point["id"]=at.attraction_id
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -522,6 +528,8 @@ class ApisController < ApplicationController
             end
             tra=EventTranslation.where("language_id=?",t_id).where("event_id=?",evt.event_id).first
             evtn=Event.where("id=?",evt.event_id).first
+            point["id"]=evt.event_id
+            point["poi_type"]=1
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -574,6 +582,8 @@ class ApisController < ApplicationController
             end
             tra=ServiceTranslation.where("language_id=?",t_id).where("service_id=?",ser.service_id).first
             serv=Service.where("id=?",ser.service_id).first
+            point["id"]=ser.service_id
+            point["poi_type"]=2
             point["name"]=tra.name
             point["description"]=tra.description
             point["schedule"]=tra.schedule
@@ -616,6 +626,59 @@ class ApisController < ApplicationController
       end
       respond_to do |format|
         format.json{ render :json => @result }
+      end
+    end
+    if params[:co]!=nil && params[:attr]
+      @com=CommentAttraction.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Attraction.where("id=?",params[:id]).first
+      @com.attraction=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:even]
+      @com=CommentEvent.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Event.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:serv]
+      @com=CommentService.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Service.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    if params[:co]!=nil && params[:itin]
+      @com=CommentItinerary.new
+      @com.comment=params[:comentario]
+      @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      obj=Itinerary.where("id=?",params[:id]).first
+      @com.event=obj
+      @use=User.where("username=?",params[:user]).first
+      @com.mobile_user=@use.mobile_user
+      @com.save()
+      respond_to do |format|
+        format.json {  render :json => Hash.new("success"=>"true") }
       end
     end
   end
