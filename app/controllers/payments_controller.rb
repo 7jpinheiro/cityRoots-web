@@ -19,9 +19,11 @@ class PaymentsController < ApplicationController
         userpack.obs = "Pack simples"
         userpack.save
         current_user.create_list_roles
-        render :action => "success"
+        flash.now.notice = "Comece já a desfrutar das novas funcionalidades."  
+        render profiles_index_path
       else
-        render :action => "failure"
+        flash.now.alert = "Ocorreu um problema a efectuar o pagamento"  
+        render payment_create_path
       end
   end
 
