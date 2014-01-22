@@ -1,17 +1,7 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
 
-<%= nested_form_for @attraction, :html => {:novalidate => 'novalidate'} do |f| %>
-    <% if @attraction.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@attraction.errors.count, "error") %> prohibited this attraction from being saved:</h2>
-          <ul>
-            <% @attraction.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
 
+<%= nested_form_for @attraction, :html => {:novalidate => 'novalidate'} do |f| %>
     <div class="row">
       <%= f.fields_for :attraction_translations do |e| %>
         <span class="col-sm-6">
@@ -21,7 +11,7 @@
             <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Lingua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Língua", selected: @attraction_translation}, {class: "form-control"}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua", selected: @attraction_translation}, {class: "form-control",  :required => true  }) %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -96,7 +86,7 @@
         <div class="form-group control-group">
           <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;"%>
           <div class="col-sm-6">
-            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt", :required => true, 'data-validation-required-message' => "You must agree to the terms and conditions" %>
+            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt", :required => true %>
             <p class="help-block"></p>
           </div>
         </div>
@@ -140,7 +130,7 @@
       </div>
       <br/>
       <div class="row">
-        <div class="form-group control-group">
+        <div class="form-group  control-group ">
           <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-4 control-label"  ,:style=>"text-align: center;"%>
           <div class="col-sm-3">
             <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" , :required => true%>

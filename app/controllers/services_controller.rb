@@ -15,7 +15,11 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
      if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.all.page(params[:page]).per(10)
+<<<<<<< HEAD
+       @services = Service.all.page(params[:page]).per(10)
+=======
+      @events = Service.all.page(params[:page]).per(10)
+>>>>>>> ffa8134acb7c23fdf8c8882195b923f7ff98421a
     else
       unless(params[:search].nil?)
         @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
@@ -23,10 +27,32 @@ class ServicesController < ApplicationController
         @services = current_user.web_user.services.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
       respond_to do |format|
-        format.html{}
+        format.html{@services.page(params[:page]).per(10)}
         format.json{render :json => Service.page(params[:page]).per(25).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
       end
     end
+  end
+
+   #post
+  def excel
+    uploaded_io = params[:services][:file]
+    path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    id= current_user.id
+    puts path.inspect + "---------------%%%%%%%%%%"
+    @result = system("perl #{Rails.root}/lib/genServices  #{path} -u #{id}")
+    
+    puts @result.inspect + "---------------%%%%%%%%%%"
+    params=nil
+    if !@result
+           flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
+    else
+           flash[:notice] = "Serviços inseridos com sucesso!"
+
+    end
+    redirect_to(services_path)
   end
 
   # GET /services/1

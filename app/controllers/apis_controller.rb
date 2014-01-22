@@ -49,7 +49,16 @@ class ApisController < ApplicationController
           atrac["timestamp"]=att.timestamp
           atrac["isActive"]=att.active
           atrac["hasAccessibility"]=att.accessibility
-          atrac["type"]=att.types.all
+          @tmp=Array.new
+          att.types.each do |t|
+            @tmp.push(t.name)
+          end
+          atrac["type"]=@tmp
+          @tmp_photo=Array.new
+          att.photo_attractions.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
           atrac["comments"]=att.comment_attractions.all
@@ -99,7 +108,16 @@ class ApisController < ApplicationController
           atrac["timestamp"]=att.timestamp
           atrac["isActive"]=att.active
           atrac["hasAccessibility"]=att.accessibility
-          atrac["type"]=att.types.all
+          @tmp=Array.new
+          att.types.each do |t|
+            @tmp.push(t.name)
+          end
+          atrac["type"]=@tmp
+          @tmp_photo=Array.new
+          att.photo_attractions.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
           atrac["isReferencePoint"]=att.reference_point
           atrac["comments"]=att.comment_attractions.all
@@ -161,7 +179,16 @@ class ApisController < ApplicationController
           event["timestamp"]=eve.timestamp
           event["isActive"]=eve.active
           event["hasAccessibility"]=eve.accessibility
-          event["type"]=eve.types.all
+          @tmp=Array.new
+          eve.types.each do |t|
+            @tmp.push(t.name)
+          end
+          event["type"]=@tmp
+          @tmp_photo=Array.new
+          att.photo_attractions.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          atrac["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
           event["comments"]=eve.comment_events.all
@@ -214,7 +241,16 @@ class ApisController < ApplicationController
           event["timestamp"]=eve.timestamp
           event["isActive"]=eve.active
           event["hasAccessibility"]=eve.accessibility
-          event["type"]=eve.types.all
+          @tmp=Array.new
+          eve.types.each do |t|
+            @tmp.push(t.name)
+          end
+          event["type"]=@tmp
+          @tmp_photo=Array.new
+          eve.photo_events.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          event["photos"]=@tmp_photo
           event["rating"]=eve.rating
           #event["isReferencePoint"]=eve.reference_point
           event["comments"]=eve.comment_events.all
@@ -270,6 +306,16 @@ class ApisController < ApplicationController
           serv["isActive"]=ser.active
           serv["hasAccessibility"]=ser.accessibility
           serv["type"]=ser.types.all
+          @tmp=Array.new
+          ser.types.each do |t|
+            @tmp.push(t.name)
+          end
+          serv["type"]=@tmp
+          @tmp_photo=Array.new
+          ser.photo_services.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
           serv["comments"]=ser.comment_services.all
@@ -321,7 +367,16 @@ class ApisController < ApplicationController
           serv["timestamp"]=ser.timestamp
           serv["isActive"]=ser.active
           serv["hasAccessibility"]=ser.accessibility
-          serv["type"]=ser.types.all
+          @tmp=Array.new
+          ser.types.each do |t|
+            @tmp.push(t.name)
+          end
+          serv["type"]=@tmp
+          @tmp_photo=Array.new
+          ser.photo_services.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
           serv["comments"]=ser.comment_services.all
