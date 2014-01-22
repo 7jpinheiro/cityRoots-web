@@ -37,14 +37,14 @@ class AttractionsController < ApplicationController
     end
     id= current_user.id
     puts path.inspect + "---------------%%%%%%%%%%"
-    @result = system("perl #{Rails.root}/lib/genAttractions  #{Rails.root}/#{path} -u #{id}")
+    @result = system("perl #{Rails.root}/lib/genAttractions  #{path} -u #{id}")
     
     puts @result.inspect + "---------------%%%%%%%%%%"
     params=nil
     if !@result
            flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
     else
-           flash[:error] = "Pontos de Interesse inseridos com sucesso!"
+           flash[:success] = "Pontos de Interesse inseridos com sucesso!"
 
     end
     redirect_to(attractions_path)
