@@ -15,11 +15,9 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
      if (!current_user.nil?) && (current_user.role? (:admin))
-<<<<<<< HEAD
+
        @services = Service.all.page(params[:page]).per(10)
-=======
-      @events = Service.all.page(params[:page]).per(10)
->>>>>>> ffa8134acb7c23fdf8c8882195b923f7ff98421a
+
     else
       unless(params[:search].nil?)
         @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
@@ -42,7 +40,7 @@ class ServicesController < ApplicationController
     end
     id= current_user.id
     puts path.inspect + "---------------%%%%%%%%%%"
-    @result = system("perl #{Rails.root}/lib/genServices  #{Rails.root}/#{path} -u #{id}")
+    @result = system("perl #{Rails.root}/lib/genServices  #{path} -u #{id}")
     
     puts @result.inspect + "---------------%%%%%%%%%%"
     params=nil
