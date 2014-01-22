@@ -113,10 +113,9 @@
         %>
             <dt>Classificação</dt>
             <dd>
-              val=@service.rating
               <%
                  indice=0;
-                 while val >0
+                 while @service.rating >0
               %><span class="fa fa-star"></span><%
                val=val-1
                indice=indice+1

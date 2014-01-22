@@ -134,11 +134,12 @@
         <div class="form-group  control-group ">
           <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-4 control-label"  ,:style=>"text-align: center;"%>
           <div class="col-sm-3">
-            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" ,:type=>"number", :autofocus => true %>
+            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" , :autofocus => true %>
             <p class="help-block"></p>
           </div>
           <div class="col-sm-3">
-            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226", :type=>"number",:autofocus => true %>
+            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226", :autofocus => true %>
+
             <p class="help-block"></p>
           </div>
         </div>
