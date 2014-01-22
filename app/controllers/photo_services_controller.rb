@@ -42,7 +42,7 @@ class PhotoServicesController < ApplicationController
   def update
     respond_to do |format|
       if @photo_service.update(photo_service_params)
-        format.html { redirect_to @photo_service, notice: 'Photo service was successfully updated.' }
+        format.html { redirect_to @photo_service, notice: 'Serviço de fotos actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
