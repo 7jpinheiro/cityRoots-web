@@ -29,7 +29,7 @@ class ItineraryEventsController < ApplicationController
 
     respond_to do |format|
       if @itinerary_event.save
-        format.html { redirect_to @itinerary_event, notice: 'Itinerary event was successfully created.' }
+        format.html { redirect_to @itinerary_event, notice: 'Itinerário de eventos criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_event }
       else
         format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class ItineraryEventsController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_event.update(itinerary_event_params)
-        format.html { redirect_to @itinerary_event, notice: 'Itinerary event was successfully updated.' }
+        format.html { redirect_to @itinerary_event, notice: 'Itinerário de eventos actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
