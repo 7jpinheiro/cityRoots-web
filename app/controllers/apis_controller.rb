@@ -379,7 +379,16 @@ class ApisController < ApplicationController
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
           serv["isReferencePoint"]=ser.reference_point
-          serv["comments"]=ser.comment_services.all
+          @tmp_com=Array.new
+          ser.comment_services.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          serv["comments"]=@tmp_com
           @result.push(serv)
         end
         respond_to do |format|
@@ -418,11 +427,35 @@ class ApisController < ApplicationController
             point["schedule"]=tra.schedule
             point["transport"]=tra.transport
             point["site"]=att.site
+            point["email"]=att.email
             point["address"]=att.address
             point["phone"]=att.phone
             point["latitude"]=att.latitude
             point["longitude"]=att.longitude
-
+            point["isActive"]=att.active
+            point["timestamp"]=att.timestamp
+            point["hasAccessibily"]=att.accessibility
+            point["rating"]=att.rating
+            @tmp=Array.new
+            att.types.each do |t|
+              @tmp.push(t.name)
+            end
+            point["type"]=@tmp
+            @tmp_photo=Array.new
+            att.photo_attractions.all.each do |p|
+              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            end
+            point["photos"]=@tmp_photo
+            @tmp_com=Array.new
+            att.comment_attractions.all.each do |c|
+              com=Hash.new
+              com["comment"]=c.comment
+              com["date"]=c.evaluationdate
+              use=User.where("id=?",c.mobile_user_id).first
+              com["username"]=use.username
+              @tmp_com.push(com)
+            end
+            point["comments"]=@tmp_com
             @pois.push(point)
           end
         end
@@ -446,11 +479,35 @@ class ApisController < ApplicationController
             point["schedule"]=tra.schedule
             point["transport"]=tra.transport
             point["site"]=evtn.site
+            point["email"]=evtn.email
             point["address"]=evtn.address
             point["phone"]=evtn.phone
             point["latitude"]=evtn.latitude
             point["longitude"]=evtn.longitude
-
+            point["isActive"]=evtn.active
+            point["timestamp"]=evtn.timestamp
+            point["hasAccessibily"]=evtn.accessibility
+            point["rating"]=evtn.rating
+            @tmp=Array.new
+            evtn.types.each do |t|
+              @tmp.push(t.name)
+            end
+            point["type"]=@tmp
+            @tmp_photo=Array.new
+            evtn.photo_events.all.each do |p|
+              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            end
+            point["photos"]=@tmp_photo
+            @tmp_com=Array.new
+            evtn.comment_events.all.each do |c|
+              com=Hash.new
+              com["comment"]=c.comment
+              com["date"]=c.evaluationdate
+              use=User.where("id=?",c.mobile_user_id).first
+              com["username"]=use.username
+              @tmp_com.push(com)
+            end
+            point["comments"]=@tmp_com
             @pois.push(point)
           end
         end
@@ -474,10 +531,35 @@ class ApisController < ApplicationController
             point["schedule"]=tra.schedule
             point["transport"]=tra.transport
             point["site"]=serv.site
+            point["email"]=serv.email
             point["address"]=serv.address
             point["phone"]=serv.phone
             point["latitude"]=serv.latitude
             point["longitude"]=serv.longitude
+            point["isActive"]=serv.active
+            point["timestamp"]=serv.timestamp
+            point["hasAccessibily"]=serv.accessibility
+            point["rating"]=serv.rating
+            @tmp=Array.new
+            serv.types.each do |t|
+              @tmp.push(t.name)
+            end
+            point["type"]=@tmp
+            @tmp_photo=Array.new
+            serv.photo_services.all.each do |p|
+              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            end
+            point["photos"]=@tmp_photo
+            @tmp_com=Array.new
+            serv.comment_services.all.each do |c|
+              com=Hash.new
+              com["comment"]=c.comment
+              com["date"]=c.evaluationdate
+              use=User.where("id=?",c.mobile_user_id).first
+              com["username"]=use.username
+              @tmp_com.push(com)
+            end
+            point["comments"]=@tmp_com
             @pois.push(point)
           end
         end

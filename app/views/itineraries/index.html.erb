@@ -9,7 +9,7 @@
 <%= form_tag itineraries_path, :method=>'get' do  |f|%>
     <table>
       <tr>
-        <td class="col-sm-2"><%= link_to 'Novo Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %></td>
+        <td class="col-sm-2"><%= link_to 'Nova Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %></td>
         <td class="col-sm-2"></td>
         <td class="col-sm-3"><%= text_field_tag :search, params[:search], class: "with_autocomplete form-control", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%></td>
         <td class="col-sm-1"><%= submit_tag "Procurar", :name => nil, :class=>"btn btn-default" %></td>
@@ -25,8 +25,8 @@
       <div class="well well-sm">
         <div class="row">
           <div class="col-xs-4 col-md-3 text-center">
-            <%  unless itinerary.photo_itineraries.first.nil? %>
-                <%= image_tag attraction.photo_itineraries.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
+            <%  unless (itinerary.attractions.first.nil?) || (itinerary.attractions.first.photo_attractions.first.nil?) %>
+                <%= image_tag itinerary.attractions.first.photo_attractions.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
             <% end %>
           </div>
           <div class="col-xs-8 col-md-9 section-box">

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if current_user.role? (:new_user)
-       flash[:notice] = "Ainda não escolheu um tipo de entidade, registe-se já!"
+       flash[:notice] = "Complete já o seu registo!"
         new_web_user_path(resource)
     elsif current_user.role?(:entidade_nao_activa)
            flash[:notice] = "A sua conta encontra-se desactivada, contacte-nos para resolver esse problema."

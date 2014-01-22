@@ -38,7 +38,7 @@ class WebUsersController < ApplicationController
 
     respond_to do |format|
       if @web_user.save
-        format.html { redirect_to @web_user, notice: 'Entida registada com sucesso.' }
+        format.html { redirect_to profiles_index_path , notice: 'Completou com sucesso o seu registo.' }
         format.json { render action: 'show', status: :created, location: @web_user }
       else
         format.html { render action: 'new' }
