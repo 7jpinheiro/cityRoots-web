@@ -146,7 +146,7 @@
           <div class="form-group control-group">
             <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
             <div class="col-sm-6">
-              <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;",:required => true,:autofocus => true%>
+              <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;",:minlength=>"5",:required => true,:autofocus => true%>
               <p class="help-block"></p>
             </div>
           </div>
