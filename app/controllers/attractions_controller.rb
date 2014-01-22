@@ -78,13 +78,14 @@ class AttractionsController < ApplicationController
   # POST /attractions
   # POST /attractions.json
   def create
+    puts "create %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55"
     @attraction = Attraction.new(attraction_params)
     respond_to do |format|
       if @attraction.save
         format.html { redirect_to @attraction, notice: 'Ponto de Interesse criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @attraction }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', notice: 'Erro ao criar Ponto de Interesse.'  }
         format.json { render json: @attraction.errors, status: :unprocessable_entity }
       end
     end

@@ -54,7 +54,7 @@
             <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Descrição" ,:for=>"description"  , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;", :required => true,:autofocus => true %>
+                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;",:autofocus => true %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Horário" ,:for=>"schedule"  , :class=>"control-label col-sm-3"  %>
               <div class="col-sm-7">
-                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00", :required => true,:autofocus => true %>
+                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00",:autofocus => true %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="form-group control-group" style="margin-left: 20px;">
               <%= e.label "Transporte" ,:for=>"transport"  , :class=>"control-label col-sm-3"  %>
               <div class="col-sm-7">
-                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte", :required => true,:autofocus => true %>
+                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte",:autofocus => true %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -197,7 +197,7 @@
               <div class="form-group control-group">
                 <%= type.label "Tipo" ,:for=>"type_id" , :class=>"control-label col-sm-3" ,:style=>"text-align:center;" %>
                 <div class="col-sm-7">
-                  <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square", :required =>"true"} ) %>
+                  <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
                   <p class="help-block"></p>
                 </div>
               </div>
