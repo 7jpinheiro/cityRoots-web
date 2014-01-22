@@ -641,7 +641,7 @@ class ApisController < ApplicationController
 
     respond_to do |format|
       if @api.save
-        format.html { redirect_to @api, notice: 'Api was successfully created.' }
+        format.html { redirect_to @api, notice: 'Api criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @api }
       else
         format.html { render action: 'new' }
@@ -655,7 +655,7 @@ class ApisController < ApplicationController
   def update
     respond_to do |format|
       if @api.update(api_params)
-        format.html { redirect_to @api, notice: 'Api was successfully updated.' }
+        format.html { redirect_to @api, notice: 'Api actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

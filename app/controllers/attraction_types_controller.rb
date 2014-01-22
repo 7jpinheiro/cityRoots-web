@@ -28,7 +28,7 @@ class AttractionTypesController < ApplicationController
 
     respond_to do |format|
       if @attraction_type.save
-        format.html { redirect_to @attraction_type, notice: 'Attraction type was successfully created.' }
+        format.html { redirect_to @attraction_type, notice: 'Tipo de atração criado.' }
         format.json { render action: 'show', status: :created, location: @attraction_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AttractionTypesController < ApplicationController
   def update
     respond_to do |format|
       if @attraction_type.update(attraction_type_params)
-        format.html { redirect_to @attraction_type, notice: 'Attraction type was successfully updated.' }
+        format.html { redirect_to @attraction_type, notice: 'Tipo de atração actualizado.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

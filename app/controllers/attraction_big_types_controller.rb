@@ -28,7 +28,7 @@ class AttractionBigTypesController < ApplicationController
 
     respond_to do |format|
       if @attraction_big_type.save
-        format.html { redirect_to @attraction_big_type, notice: 'Attraction big type was successfully created.' }
+        format.html { redirect_to @attraction_big_type, notice: 'Super tipo de atração criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @attraction_big_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AttractionBigTypesController < ApplicationController
   def update
     respond_to do |format|
       if @attraction_big_type.update(attraction_big_type_params)
-        format.html { redirect_to @attraction_big_type, notice: 'Attraction big type was successfully updated.' }
+        format.html { redirect_to @attraction_big_type, notice: 'Super tipo de atração actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
