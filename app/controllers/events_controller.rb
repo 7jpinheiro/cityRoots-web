@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def show
     @events=Event.find(params[:id])
     respond_to do |format|
-      format.html { @events }
+      format.html {  render :layout => 'layout_welc'}
       format.json { render :json => @events.as_json(:include => [:event_translations, :comment_events,:photo_events,:city,:types])}
     end
   end

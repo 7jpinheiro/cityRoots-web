@@ -33,9 +33,9 @@
           <div class="row">
             <br/>
             <div class="form-group control-group" style="margin-left: 20px;">
-              <%= e.label "Lingua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
+              <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua", selected: @event_translation}, {class: "form-control",:required => true}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Língua", selected: @event_translation}, {class: "form-control",:required => true}) %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -146,7 +146,7 @@
           <div class="form-group control-group">
             <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
             <div class="col-sm-6">
-              <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;",:required => true,:autofocus => true%>
+              <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;",:minlength=>"5",:required => true,:autofocus => true%>
               <p class="help-block"></p>
             </div>
           </div>
@@ -260,7 +260,7 @@
         <div class="row">
           <div class="form-group control-group">
             <div class="col-sm-6">
-              <%= f.submit :class=>"btn btn-primary btn-square" %>
+              <%= f.submit "Criar evento", :class=>"btn btn-primary btn-square" %>
             </div>
             <br/>
             <br/>
