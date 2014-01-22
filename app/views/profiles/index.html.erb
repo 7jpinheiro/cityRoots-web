@@ -27,11 +27,11 @@
       <p/>
 
       <dl class="dl-horizontal" style="align-content: center;">
-        <dt>Username</dt>
+        <dt>Nome de utilizador</dt>
         <dd><%= user.username%></dd>
         <dt>Email</dt>
         <dd><%= user.email%></dd>
-        <dt>Linguagem</dt>
+        <dt>Idioma</dt>
         <dd><%= user.language.name%></dd>
         <dt>País</dt>
         <dd><%= paisid%></dd>
@@ -46,11 +46,10 @@
     <div class="well well-sm" style="height: 176px;">
       <strong>Gestão de conteudos da sua entidade</strong>
       <%
-         webuser=WebUser.where("id=?",current_user.id).first;
-         if webuser == nil
+         if current_user.web_user.nil?
       %>
-          <p class="text text-warning">Para poder adicionar eventos tem de adicionar conteudo a sua conta. </p>
-          <%= link_to "Adicionar conteudo", new_web_user_path ,:class=>"btn btn-primary btn-square" %>
+          <p class="text text-warning">Para poder adicionar conteudo a sua conta tem que completar o registo. </p>
+          <%= link_to "Completar Registo", new_web_user_path ,:class=>"btn btn-primary btn-square" %>
       <%
          else
            n_evets=Event.find_all_by_web_user_id(current_user.id).length
@@ -176,13 +175,13 @@
                        if n_servicos>0
                   %>
                       <td>
-                        <%= link_to services_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        <%= link_to services_path do %>Estabelecimentos<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
                       </td>
                   <%
                      else
 
                   %>
-                      <td> <%= link_to new_service_path do %>Adicione novos Serviços<% end %></td>
+                      <td> <%= link_to new_service_path do %>Adicione novos Estabelecimentos<% end %></td>
                   <%
 
                      end
@@ -191,13 +190,13 @@
                      if n_servicos>0
                   %>
                       <td>
-                        <%= link_to services_path do %>Serviços<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        <%= link_to services_path do %>Estabelecimentos<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
                       </td>
                   <%
                      else
 
                   %>
-                      <td> <%= link_to new_service_path do %>Adicione novos Serviços<% end %></td>
+                      <td> <%= link_to new_service_path do %>Adicione novos Estabelecimentos<% end %></td>
                   <%
                      end
                      end
@@ -216,9 +215,9 @@ if current_user.role? (:restauracao)
   <div class="col-md-12">
     <div class="well well-sm">
       <p>
-        <strong>Os suas subscrições</strong>
+        <h3><strong>Os seus planos</strong></h3>
       <p class="text-muted">
-        Estas subscrições têm o objectivo emplucionar o seu negócio.
+        Obtenha o plano perfeito para o seu negócio.
       </p>
       </p>
       <table class="table table-bordered">
@@ -226,6 +225,11 @@ if current_user.role? (:restauracao)
           <th class="col-md-4">Tipo</th>
           <th class="col-md-4">Data compra</th>
           <th class="col-md-4">Data de Expiração</th>
+        </tr>
+        <tr>
+          <td class="col-md-4">Básico</th>
+          <td class="col-md-4"><%= current_user.current_sign_in_at %></th>
+          <td class="col-md-4">Não expira</th>
         </tr>
       </table>
       <p>
@@ -243,20 +247,33 @@ if current_user.role? (:restauracao_gold)
       <div class="col-md-12">
         <div class="well well-sm">
           <p>
-            <strong>Os suas subscrições</strong>
+            <h3><strong>Os seus planos</strong></h3>
           <p class="text-muted">
-            Estas subscrições têm o objectivo emplucionar o seu negócio.
+            Obtenha o plano perfeito para o seu negócio.
           </p>
           </p>
-          <table class="table table-bordered">
-            <tr>
-              <th class="col-md-4">Tipo</th>
-              <th class="col-md-4">Data compra</th>
-              <th class="col-md-4">Data de Expiração</th>
+          <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+          <table class="table table">
+            <tr style="background:#DDDDDD">
+              <th >Tipo</th>
+              <th >Data compra</th>
+              <th >Data de Expiração</th>
+              <th >Preço</th>
             </tr>
+            <% current_user.web_user.web_user_packs.each do |packs| %>
+            <tr style="background:#fff">
+              <td ><%= packs.pack_type.name %></td>
+              <td ><%= packs.subscriptiondate %></td>
+              <td ><%= packs.validity %></td>
+              <td ><%= packs.pack_type.price %></td>
+            </tr>
+            <% end %>
           </table>
+        </div>
+      </div>
           <p>
-            <%= link_to "Ver mais subscrições", pacotes_path , :class => "btn btn-primary btn-square"%>
+            <%= link_to "Ver planos", pacotes_path , :class => "btn btn-primary btn-square"%>
           </p>
         </div>
       </div>

@@ -80,9 +80,6 @@
               end
             else
         %>
-            <li class="<%= is_active?(welcome_index_path) %>"> 
-              <%= link_to "Home" , welcome_index_path  %>
-            </li>
             <li class="<%= is_active?(web_index_path) %>"> 
 
               <%= link_to "Divulgar Negócio" , web_index_path %>
@@ -90,9 +87,6 @@
             <li class="<%= is_active?(mobile_index_path) %>"> 
 
               <%= link_to "Mobile", mobile_index_path  %>
-            </li>
-            <li class="<%= is_active?(galeria_path) %>"> 
-              <%= link_to "Galeria", galeria_path  %>
             </li>
             <%
            end
@@ -153,10 +147,12 @@
                     <li><%= f.submit "Login" , :style=>"margin-left: 25px;margin-right: 25px;width: 250px;", :class=>"btn btn-s btn-info btn-square" %></li>
                 <% end %>
                 <li class="divider"></li>
-                <li><%= link_to new_user_registration_path do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
-                <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-                <li><a href="#" style="color: #d34836;"><i class="fa fa-google-plus-square fa-fw" style="margin-left: 5px;"></i> Login by Google +</a></li>
-
+                <li><%= link_to new_user_registration_path, style: "color: #000;" do %><i class="fa fa-pencil-square-o" style="margin-left: 8px;"></i> Registar <%end%></li>
+                
+                <li><%= link_to user_omniauth_authorize_path(:facebook), style: "color: blue;" do %>
+                  <i class="fa fa-facebook" style="margin-left: 8px;"></i> Facebook <%end%>
+                </li>
+                
               </ul>
             </li>
           </ul>
