@@ -11,8 +11,8 @@
 
 class Itinerary < ActiveRecord::Base
 
-  validates :name, presence:true
-  validates :description, presence:true
+#  validates :name, presence:true
+#  validates :description, presence:true
 
   belongs_to :itinerary_type
   belongs_to :user

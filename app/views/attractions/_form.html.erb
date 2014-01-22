@@ -1,7 +1,7 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
 
 
-<%= nested_form_for @attraction, :html => {:novalidate => 'novalidate'} do |f| %>
+<%= nested_form_for @attraction do |f| %>
     <div class="row">
       <%= f.fields_for :attraction_translations do |e| %>
         <span class="col-sm-6">
@@ -139,6 +139,7 @@
           </div>
           <div class="col-sm-3">
             <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226", :autofocus => true %>
+
             <p class="help-block"></p>
           </div>
         </div>
