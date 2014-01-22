@@ -28,7 +28,7 @@ class ServiceTypesController < ApplicationController
 
     respond_to do |format|
       if @service_type.save
-        format.html { redirect_to @service_type, notice: 'Service type was successfully created.' }
+        format.html { redirect_to @service_type, notice: 'Tipo de serviços criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @service_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ServiceTypesController < ApplicationController
   def update
     respond_to do |format|
       if @service_type.update(service_type_params)
-        format.html { redirect_to @service_type, notice: 'Service type was successfully updated.' }
+        format.html { redirect_to @service_type, notice: 'Tipo de serviços actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

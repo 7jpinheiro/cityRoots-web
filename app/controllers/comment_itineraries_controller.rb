@@ -36,7 +36,7 @@ class CommentItinerariesController < ApplicationController
 
     respond_to do |format|
       if @comment_itinerary.save
-        format.html { redirect_to @comment_itinerary, notice: 'Comment itinerary was successfully created.' }
+        format.html { redirect_to @comment_itinerary, notice: 'Comentário de itinerário criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_itinerary }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class CommentItinerariesController < ApplicationController
   def update
     respond_to do |format|
       if @comment_itinerary.update(comment_itinerary_params)
-        format.html { redirect_to @comment_itinerary, notice: 'Comment itinerary was successfully updated.' }
+        format.html { redirect_to @comment_itinerary, notice: 'Comentário de itinerário actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

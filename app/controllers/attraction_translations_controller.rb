@@ -28,7 +28,7 @@ class AttractionTranslationsController < ApplicationController
 
     respond_to do |format|
       if @attraction_translation.save
-        format.html { redirect_to @attraction_translation, notice: 'Attraction translation was successfully created.' }
+        format.html { redirect_to @attraction_translation, notice: 'Tradução de atração criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @attraction_translation }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AttractionTranslationsController < ApplicationController
   def update
     respond_to do |format|
       if @attraction_translation.update(attraction_translation_params)
-        format.html { redirect_to @attraction_translation, notice: 'Attraction translation was successfully updated.' }
+        format.html { redirect_to @attraction_translation, notice: 'Tradução de atração actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

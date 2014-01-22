@@ -28,7 +28,7 @@ class ServiceTranslationsController < ApplicationController
 
     respond_to do |format|
       if @service_translation.save
-        format.html { redirect_to @service_translation, notice: 'Service translation was successfully created.' }
+        format.html { redirect_to @service_translation, notice: 'Serviço de traduções criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @service_translation }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ServiceTranslationsController < ApplicationController
   def update
     respond_to do |format|
       if @service_translation.update(service_translation_params)
-        format.html { redirect_to @service_translation, notice: 'Service translation was successfully updated.' }
+        format.html { redirect_to @service_translation, notice: 'Serviço de traduções actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
