@@ -8,6 +8,6 @@
 #
 
 class ServiceType < ActiveRecord::Base
-  belongs_to :service, dependent: :destroy
-  belongs_to :type , dependent: :destroy
+  belongs_to :service
+  belongs_to :type
 end
