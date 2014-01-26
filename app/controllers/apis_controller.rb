@@ -4,10 +4,233 @@ class ApisController < ApplicationController
   # GET /apis
   # GET /apis.json
   def index
+
+    if params[:id]!=nil && params[:att]!= nil
+        atrac=Hash.new
+        att=Attraction.where("id=?",params[:id]).first
+        atrac["id"]=params[:id]
+        if params[:lang]!=nil
+          t_id=Language.where("abv=?",params[:lang]).first
+        else
+          t_id=1
+        end
+        trans=AttractionTranslation.where("language_id=?",t_id).where("attraction_id=?",att.id).first
+        if trans != nil
+          atrac["name"]=trans.name
+          atrac["description"]=trans.description
+          atrac["schedule"]=trans.schedule
+          atrac["transport"]=trans.transport
+          atrac["price"]=trans.price
+        end
+
+        if att.site!=nil
+          atrac["site"]=att.site
+        else
+          atrac["site"]=""
+        end
+        if att.email!=nil
+          atrac["email"]=att.email
+        else
+          atrac["email"]=""
+        end
+        if att.address!=nil
+          atrac["address"]=att.address
+        else
+          atrac["address"]=""
+        end
+        if att.phone!=nil
+          atrac["phone"]=att.phone
+        else
+          atrac["phone"]=""
+        end
+        atrac["latitude"]=att.latitude
+        atrac["longitude"]=att.longitude
+        atrac["timestamp"]=att.timestamp
+        atrac["isActive"]=att.active
+        atrac["hasAccessibility"]=att.accessibility
+        @tmp=Array.new
+        att.types.each do |t|
+          @tmp.push(t.name)
+        end
+        atrac["type"]=@tmp
+        @tmp_photo=Array.new
+        att.photo_attractions.all.each do |p|
+          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        end
+        atrac["photos"]=@tmp_photo
+        atrac["rating"]=att.rating
+        atrac["isReferencePoint"]=att.reference_point
+        @tmp_com=Array.new
+        att.comment_attractions.all.each do |c|
+          com=Hash.new
+          com["comment"]=c.comment
+          com["date"]=c.evaluationdate
+          use=User.where("id=?",c.mobile_user_id).first
+          com["username"]=use.username
+          @tmp_com.push(com)
+        end
+        atrac["comments"]=@tmp_com
+        respond_to do |format|
+          format.json{ render :json => atrac }
+        end
+    end
+    if params[:id]!=nil && params[:evt]!= nil
+        event=Hash.new
+        eve=Event.where("id=?",params[:id]).first
+        event["id"]=params[:id]
+        if params[:lang]!=nil
+          t_id=Language.where("abv=?",params[:lang]).first
+        else
+          t_id=1
+        end
+        trans=EventTranslation.where("language_id=?",t_id).where("event_id=?",eve.id).first
+        if trans != nil
+          event["name"]=trans.name
+          event["description"]=trans.description
+          event["schedule"]=trans.schedule
+          event["transport"]=trans.transport
+          event["price"]=trans.price
+          event["program"]=trans.program
+        end
+
+        if eve.site!=nil
+          event["site"]=eve.site
+        else
+          event["site"]=""
+        end
+        if eve.email!=nil
+          event["email"]=eve.email
+        else
+          event["email"]=""
+        end
+        if eve.address!=nil
+          event["address"]=eve.address
+        else
+          event["address"]=""
+        end
+        if eve.phone!=nil
+          event["phone"]=eve.phone
+        else
+          event["phone"]=""
+        end
+        event["latitude"]=eve.latitude
+        event["longitude"]=eve.longitude
+        event["source"]=eve.source
+        event["start"]=eve.startdate
+        event["end"]=eve.enddate
+        event["organization"]=eve.organization
+        event["timestamp"]=eve.timestamp
+        event["isActive"]=eve.active
+        event["hasAccessibility"]=eve.accessibility
+        @tmp=Array.new
+        eve.types.each do |t|
+          @tmp.push(t.name)
+        end
+        event["type"]=@tmp
+        @tmp_photo=Array.new
+        eve.photo_events.all.each do |p|
+          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        end
+        event["photos"]=@tmp_photo
+        event["rating"]=eve.rating
+        #event["isReferencePoint"]=eve.reference_point
+        @tmp_com=Array.new
+        eve.comment_events.all.each do |c|
+          com=Hash.new
+          com["comment"]=c.comment
+          com["date"]=c.evaluationdate
+          use=User.where("id=?",c.mobile_user_id).first
+          com["username"]=use.username
+          @tmp_com.push(com)
+        end
+        event["comments"]=@tmp_com
+        respond_to do |format|
+          format.json{ render :json => event }
+        end
+
+    end
+
+    if params[:id]!=nil && params[:ser]!= nil
+        serv=Hash.new
+        ser=Service.where("id=?",params[:id]).first
+        if ser == nil
+          respond_to do |format|
+            format.json{  nil }
+          end
+        end
+        serv["id"]=params[:id]
+        if params[:lang]!=nil
+          t_id=Language.where("abv=?",params[:lang]).first
+        else
+          t_id=1
+        end
+        trans=ServiceTranslation.where("language_id=?",t_id).where("service_id=?",ser.id).first
+        if trans != nil
+          serv["name"]=trans.name
+          serv["description"]=trans.description
+          serv["schedule"]=trans.schedule
+          serv["transport"]=trans.transport
+        end
+        if ser.site!=nil
+          serv["site"]=ser.site
+        else
+          serv["site"]=""
+        end
+        if ser.email!=nil
+          serv["email"]=ser.email
+        else
+          serv["email"]=""
+        end
+        if ser.address!=nil
+          serv["address"]=ser.address
+        else
+          serv["address"]=""
+        end
+        if ser.phone!=nil
+          serv["phone"]=ser.phone
+        else
+          serv["phone"]=""
+        end
+        serv["latitude"]=ser.latitude
+        serv["longitude"]=ser.longitude
+        serv["source"]=ser.source
+        serv["capacity"]=ser.capacity
+        serv["details"]=ser.details
+        serv["timestamp"]=ser.timestamp
+        serv["isActive"]=ser.active
+        serv["hasAccessibility"]=ser.accessibility
+        serv["type"]=ser.types.all
+        @tmp=Array.new
+        ser.types.each do |t|
+          @tmp.push(t.name)
+        end
+        serv["type"]=@tmp
+        @tmp_photo=Array.new
+        ser.photo_services.all.each do |p|
+          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        end
+        serv["photos"]=@tmp_photo
+        serv["rating"]=ser.rating
+        serv["isReferencePoint"]=ser.reference_point
+        @tmp_com=Array.new
+        ser.comment_services.all.each do |c|
+          com=Hash.new
+          com["comment"]=c.comment
+          com["date"]=c.evaluationdate
+          use=User.where("id=?",c.mobile_user_id).first
+          com["username"]=use.username
+          @tmp_com.push(com)
+        end
+        serv["comments"]=@tmp_com
+        respond_to do |format|
+          format.json{ render :json => serv }
+        end
+    end
+
     #
     #Attractions
     #
-    if params[:att]!= nil
+    if params[:att]!= nil && params[:id]==nil
       if params[:lang]!=nil && params[:acc]!=nil
         @result=Array.new
         @attracti=Attraction.where("accessibility=?",true).all
@@ -152,7 +375,7 @@ class ApisController < ApplicationController
     #
     #Events
     #
-    if params[:evt]!= nil
+    if params[:evt]!= nil && params[:id]==nil
       if params[:lang]!=nil && params[:acc]!=nil
         @result=Array.new
         @events=Event.where("accessibility=?",true).all
@@ -302,7 +525,7 @@ class ApisController < ApplicationController
         end
       end
     end
-    if params[:ser]!= nil
+    if params[:ser]!= nil && params[:id]==nil
       if params[:lang]!=nil && params[:acc]!=nil
         @result=Array.new
         @servic=Service.where("accessibility=?",true).all
@@ -448,7 +671,7 @@ class ApisController < ApplicationController
         end
       end
     end
-    if params[:iti]!= nil
+    if params[:iti]!= nil && params[:id]==nil
       @result=Array.new
       @iti=Itinerary.all
       @iti.each do |iti|
@@ -458,7 +681,7 @@ class ApisController < ApplicationController
         obj["description"]=iti.description
         tip=ItineraryType.where("id=?",iti.itinerary_type_id).first
         obj["type"]=tip.name
-        
+
         @pois=Array.new
         #
         #attraction
@@ -679,6 +902,120 @@ class ApisController < ApplicationController
       @com.save()
       respond_to do |format|
         format.json {  render :json => Hash.new("success"=>"true") }
+      end
+    end
+    #
+    #Anuncios
+    #
+    if params[:anun]!=nil
+      if params[:lang]!=nil
+        t_id=Language.where("abv=?",params[:lang]).first
+      else
+        t_id=1
+      end
+      @result=Array.new
+      WebUser.where("web_user_type_id=?",2).all.each do |use|
+        Event.where("web_user_id=?",use.id).all.each do |anun|
+          event=Hash.new
+          event["id"]=anun.id
+
+          trans=EventTranslation.where("language_id=?",t_id).where("event_id=?",anun.id).first
+          if trans != nil
+            event["name"]=trans.name
+            event["description"]=trans.description
+            event["schedule"]=trans.schedule
+            event["transport"]=trans.transport
+            event["price"]=trans.price
+            event["program"]=trans.program
+          end
+
+          if anun.site!=nil
+            event["site"]=anun.site
+          else
+            event["site"]=""
+          end
+          if anun.email!=nil
+            event["email"]=anun.email
+          else
+            event["email"]=""
+          end
+          if anun.address!=nil
+            event["address"]=anun.address
+          else
+            event["address"]=""
+          end
+          if anun.phone!=nil
+            event["phone"]=anun.phone
+          else
+            event["phone"]=""
+          end
+          event["latitude"]=anun.latitude
+          event["longitude"]=anun.longitude
+          event["source"]=anun.source
+          event["organization"]=anun.organization
+          event["timestamp"]=anun.timestamp
+          event["isActive"]=anun.active
+          event["hasAccessibility"]=anun.accessibility
+          @tmp=Array.new
+          anun.types.each do |t|
+            @tmp.push(t.name)
+          end
+          event["type"]=@tmp
+          @tmp_photo=Array.new
+          anun.photo_events.all.each do |p|
+            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          end
+          event["photos"]=@tmp_photo
+          event["rating"]=anun.rating
+          #event["isReferencePoint"]=eve.reference_point
+          @tmp_com=Array.new
+          anun.comment_events.all.each do |c|
+            com=Hash.new
+            com["comment"]=c.comment
+            com["date"]=c.evaluationdate
+            use=User.where("id=?",c.mobile_user_id).first
+            com["username"]=use.username
+            @tmp_com.push(com)
+          end
+          event["comments"]=@tmp_com
+          @result.push(event)
+        end
+      end
+      respond_to do |format|
+        format.json {  render :json => @result }
+      end
+    end
+    if params[:registar]!= nil
+      @user=User.new
+      @user.email=params[:email]
+      @user.username=params[:username]
+      @user.password=params[:password]
+      @user.password_confirmation=params[:password_confirmation]
+      @user.language_id = 1
+      @user.country_id = 188
+      @mobile_user = MobileUser.new
+      @mobile_user.firstname=params[:firstname]
+      @mobile_user.surname=params[:surname]
+      @mobile_user.gender=params[:gender]
+      @mobile_user.active=true
+      @mobile_user.dateofbirth=params[:dateofbirth]
+
+      @user.valid?
+      @mobile_user.valid?
+
+      if @user.errors.blank?
+        @user.save
+        @mobile_user.id = @user.id
+        @mobile_user.save
+        hash=Hash.new
+        hash["id"]=@user.id
+        respond_to do |format|
+          format.json {  render :json => hash }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => nil }
+        end
       end
     end
   end
