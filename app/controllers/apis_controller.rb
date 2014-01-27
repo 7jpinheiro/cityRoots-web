@@ -991,7 +991,7 @@ class ApisController < ApplicationController
       @user.email=params[:email]
       @user.username=params[:username]
       @user.password=params[:password]
-      @user.password_confirmation=params[:password_confirmation]
+      @user.password_confirmation=params[:password]
       @user.language_id = 1
       @user.country_id = 188
       @mobile_user = MobileUser.new
