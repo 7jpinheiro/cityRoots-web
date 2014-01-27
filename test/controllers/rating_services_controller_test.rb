@@ -21,7 +21,7 @@ class RatingServicesControllerTest < ActionController::TestCase
       post :create, rating_service: { evaluationdate: @rating_service.evaluationdate, mobile_user_id: @rating_service.mobile_user_id, rating: @rating_service.rating, service_id: @rating_service.service_id }
     end
 
-    assert_redirected_to rating_service_path(assigns(:rating_service))
+    assert_redirected_to service_rating_service_path(assigns(:rating_service))
   end
 
   test "should show rating_service" do
@@ -36,7 +36,7 @@ class RatingServicesControllerTest < ActionController::TestCase
 
   test "should update rating_service" do
     patch :update, id: @rating_service, rating_service: { evaluationdate: @rating_service.evaluationdate, mobile_user_id: @rating_service.mobile_user_id, rating: @rating_service.rating, service_id: @rating_service.service_id }
-    assert_redirected_to rating_service_path(assigns(:rating_service))
+    assert_redirected_to service_rating_service_path(assigns(:rating_service))
   end
 
   test "should destroy rating_service" do
