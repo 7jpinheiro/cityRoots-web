@@ -44,6 +44,6 @@ class CommentEventsControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_event
     end
 
-    assert_redirected_to comment_events_path
+    assert_redirected_to event_comment_events_path
   end
 end
