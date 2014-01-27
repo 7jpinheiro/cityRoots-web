@@ -21,7 +21,7 @@ class RatingEventsControllerTest < ActionController::TestCase
       post :create, rating_event: { evaluationdate: @rating_event.evaluationdate, event_id: @rating_event.event_id, mobile_user_id: @rating_event.mobile_user_id, rating: @rating_event.rating }
     end
 
-    assert_redirected_to rating_event_path(assigns(:rating_event))
+    assert_redirected_to event_rating_event_path(assigns(:rating_event))
   end
 
   test "should show rating_event" do
@@ -36,7 +36,7 @@ class RatingEventsControllerTest < ActionController::TestCase
 
   test "should update rating_event" do
     patch :update, id: @rating_event, rating_event: { evaluationdate: @rating_event.evaluationdate, event_id: @rating_event.event_id, mobile_user_id: @rating_event.mobile_user_id, rating: @rating_event.rating }
-    assert_redirected_to rating_event_path(assigns(:rating_event))
+    assert_redirected_to event_rating_event_path(assigns(:rating_event))
   end
 
   test "should destroy rating_event" do
