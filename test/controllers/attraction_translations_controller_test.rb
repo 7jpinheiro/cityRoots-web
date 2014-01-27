@@ -44,6 +44,6 @@ class AttractionTranslationsControllerTest < ActionController::TestCase
       delete :destroy, id: @attraction_translation
     end
 
-    assert_redirected_to attraction_translations_path
+    assert_redirected_to attraction_attraction_translations_path
   end
 end
