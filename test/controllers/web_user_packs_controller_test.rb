@@ -44,6 +44,6 @@ class WebUserPacksControllerTest < ActionController::TestCase
       delete :destroy, id: @web_user_pack
     end
 
-    assert_redirected_to web_user_packs_path
+    assert_redirected_to web_user_web_user_packs_path
   end
 end
