@@ -21,7 +21,7 @@ class AttractionBigTypesControllerTest < ActionController::TestCase
       post :create, attraction_big_type: { description: @attraction_big_type.description, name: @attraction_big_type.name }
     end
 
-    assert_redirected_to attraction_big_type_path(assigns(:attraction_big_type))
+    assert_redirected_to attraction_attraction_big_type_path(assigns(:attraction_big_type))
   end
 
   test "should show attraction_big_type" do
@@ -36,7 +36,7 @@ class AttractionBigTypesControllerTest < ActionController::TestCase
 
   test "should update attraction_big_type" do
     patch :update, id: @attraction_big_type, attraction_big_type: { description: @attraction_big_type.description, name: @attraction_big_type.name }
-    assert_redirected_to attraction_big_type_path(assigns(:attraction_big_type))
+    assert_redirected_to attraction_attraction_big_type_path(assigns(:attraction_big_type))
   end
 
   test "should destroy attraction_big_type" do
