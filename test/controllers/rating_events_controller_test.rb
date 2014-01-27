@@ -44,6 +44,6 @@ class RatingEventsControllerTest < ActionController::TestCase
       delete :destroy, id: @rating_event
     end
 
-    assert_redirected_to rating_events_path
+    assert_redirected_to event_rating_events_path
   end
 end
