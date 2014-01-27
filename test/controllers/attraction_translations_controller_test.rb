@@ -21,7 +21,7 @@ class AttractionTranslationsControllerTest < ActionController::TestCase
       post :create, attraction_translation: { description: @attraction_translation.description, language: @attraction_translation.language, name: @attraction_translation.name, schedule: @attraction_translation.schedule, transport: @attraction_translation.transport }
     end
 
-    assert_redirected_to attraction_translation_path(assigns(:attraction_translation))
+    assert_redirected_to attraction_attraction_translation_path(assigns(:attraction_translation))
   end
 
   test "should show attraction_translation" do
@@ -36,7 +36,7 @@ class AttractionTranslationsControllerTest < ActionController::TestCase
 
   test "should update attraction_translation" do
     patch :update, id: @attraction_translation, attraction_translation: { description: @attraction_translation.description, language: @attraction_translation.language, name: @attraction_translation.name, schedule: @attraction_translation.schedule, transport: @attraction_translation.transport }
-    assert_redirected_to attraction_translation_path(assigns(:attraction_translation))
+    assert_redirected_to attraction_attraction_translation_path(assigns(:attraction_translation))
   end
 
   test "should destroy attraction_translation" do
