@@ -57,6 +57,12 @@
 </script>
 <style>
   #map-canvas { height: 100% }
+    dt{
+    padding-bottom: 5px;
+  }
+  dd{
+    padding-bottom: 15px;
+  }
 </style>
 
 
@@ -108,10 +114,10 @@
 </div>
 
 <div class="container" >
-<div class="row" style="margin-top: 15px;  background: #f8f8f8; margin-bottom:20px" >
-      <div class="col-md-6">
-        <div class="well row">
-          <dl class="dl-horizontal">
+<div class="row" style="margin-top: 15px; margin-bottom:20px">
+      <div class="col-md-6" style="margin-top: 15px;  ">
+          <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
+          <dl >
             <%
               if @attraction.rating != 0
               %>
@@ -212,8 +218,7 @@
               end
               %>
           </dl>
-        </div>
-        <span style="border-top: none;"><%= link_to 'Voltar', attractions_path ,:class=>"btn btn-default btn-square"%></span>
+     <!--  <span style="border-top: none;"><%= link_to 'Voltar', attractions_path ,:class=>"btn btn-default btn-square"%></span>-->
       </div>
       <div class="col-sm-6">
          <div class="row"  style="margin-top:15px">

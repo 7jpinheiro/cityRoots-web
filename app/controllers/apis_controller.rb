@@ -1,5 +1,6 @@
 class ApisController < ApplicationController
   before_action :set_api, only: [:show, :edit, :update, :destroy]
+  before_filter :restrict_access
 
   # GET /apis
   # GET /apis.json
@@ -742,7 +743,11 @@ class ApisController < ApplicationController
   def set_api
     @api = Api.find(params[:id])
   end
-
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      ApiKey.exists?(access_token: token)
+    end
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def api_params
     params[:api]

@@ -1,15 +1,87 @@
+<%= stylesheet_link_tag "welcome2" %>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
 <script>
   var locations=[];
 </script>
-<div class="page-header">
-  <h1><%= @itinerary.name %></h1>
+<style>
+  #map-canvas { height: 100% }
+  dt{
+    padding-bottom: 5px;
+  }
+  dd{
+    padding-bottom: 15px;
+  }
+</style>
+
+<div class="container" >
+  <div class="row" style="margin-top:15px">
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" style="margin-bottom:10px; ">
+      <div style="position: absolute;z-index: 1000;margin-top: 75px;font-size: 50px;width: 80%;text-align: center;margin-left:10%">
+        <h1 style="font-weight: 700; color:#fff;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);font-size: 1.3em;">
+          <%=  @itinerary.name%>
+        </h1>
+      </div>
+      <div class="carousel-inner">
+        <% @itinerary.itinerary_attractions.each do |photo_att|
+          photo_att.attraction.photo_attractions.each_with_index do |p,i|
+         %>
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
+            <% end %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end 
+             end %>
+          <% @itinerary.itinerary_events.each do |photo_event|
+            photo_event.event.photo_events.each_with_index do |p,i| 
+          %>
+
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
+            <% end %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end
+             end  %>
+          <% @itinerary.itinerary_services.each do |photo_service|
+            photo_service.service.photo_services.each_with_index do |p,i| 
+          %>
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
+            <% end %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end end %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+        </a>
+      </div>
+    
+     
+    </div>
 </div>
+
+
 <div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
+    <div class="row" style="margin-top: 15px; margin-bottom:20px">
       <div class="col-md-6">
-         <dl class="dl-horizontal">
+        <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
+         <dl>
           <%
              if @itinerary.description != nil
           %>
@@ -28,8 +100,10 @@
              @itinerary_att=@itinerary.itinerary_attractions
              if @itinerary_att.length != 0
           %>
-               <dt>Prontos de Interesse</dt>
-               <dd></dd>
+          <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  Prontos de Interesse
+                </a>
                <%
                   @itinerary_att.each  do |p|
                     att=p.attraction.attraction_translations.first
@@ -41,12 +115,11 @@
                      var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>];
                      locations.push(att);
                    </script>
-                   <dt class="text-muted" style="width: 200px;"><small><%= att.name%> </small> </dt>
-                   <dd>
-                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
-                      Ver mais
-                    </span>
-                   </dd>
+          
+                  <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>">
+                   <%= att.name%> 
+                  </a> 
+                 </div>
                    <!-- Modal -->
                    <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                      <div class="modal-dialog">
@@ -97,8 +170,10 @@
              @itinerary_servi=@itinerary.itinerary_services
              if @itinerary_servi.length != 0
           %>
-                <dt>Serviços</dt>
-                <dd></dd>
+            <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  Serviços
+                </a>
                 <%
                    @itinerary_servi.each  do |p|
                        ser=p.service.service_translations.first
@@ -110,12 +185,8 @@
                      var ser=["<%= ser.name %>",<%= ser2.latitude %>,<%= ser2.longitude %>,<%= p.order %>];
                      locations.push(ser);
                  </script>
-                   <dt class="text-muted" style="width: 200px;"><small><%= ser.name%> </small> </dt>
-                   <dd>
-                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
-                      Ver mais
-                    </span>
-                   </dd>
+                  <a href="#" class="list-group-item active text-center" data-toggle="modal" data-target="<%= target1 %>"><%= ser.name%></a>
+                </div>
                    <!-- Modal -->
                    <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                      <div class="modal-dialog">
@@ -160,9 +231,11 @@
              @itinerary_even=@itinerary.itinerary_events
              if @itinerary_even.length != 0
                        %>
-               <dt>Eventos</dt>
-               <dd></dd>
-               <%
+              <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  Eventos
+                </a>
+                <%
                   @itinerary_even.each  do |p|
                     eve=p.event.event_translations.first
                     eve2=p.event
@@ -173,12 +246,8 @@
                      var even=["<%= eve.name %>",<%= eve2.latitude %>,<%= eve2.longitude %>,<%= p.order %>];
                      locations.push(even);
                  </script>
-                 <dt class="text-muted" style="width: 200px;"><small><%= eve.name%> </small> </dt>
-                 <dd>
-                    <span class="label label-primary label-square" data-toggle="modal" data-target="<%= target1 %>">
-                      Ver mais
-                    </span>
-                 </dd>
+                 <a href="#" class="list-group-item" data-toggle="modal" data-target="<%= target1 %>">  <%= eve.name%> </a>
+              </div>               
                  <!-- Modal -->
                  <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                    <div class="modal-dialog">
@@ -236,16 +305,22 @@
         </dl>
       </div>
       <div class="col-md-6">
-        <div id="map-canvas" style="width: 100%; height: 400px"></div>
+        <div class="row"  style="margin-top:15px;">
+          <div class="col-sm-6 text-center">
+            <%= link_to edit_itinerary_path(@itinerary), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
+            Editar
+            <%end%>
+          </div>
+          <div class="col-sm-6 text-center">
+            <%= link_to @itinerary, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+            Remover
+            <% end %>
+          </div>
+      </div>
+        <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px"></div>
       </div>
     </div>
     <br>
-    <table class="table">
-      <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', itineraries_path ,:class => "btn btn-default btn-square"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_itinerary_path(@itinerary),:class => "btn btn-primary btn-square" %></td>
-      </tr>
-    </table>
   </div>
 </div>
 <script type="text/javascript">

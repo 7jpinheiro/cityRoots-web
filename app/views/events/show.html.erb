@@ -59,6 +59,12 @@
 
 <style>
   #map-canvas { height: 100% }
+  dt{
+    padding-bottom: 5px;
+  }
+  dd{
+    padding-bottom: 15px;
+  }
 </style>
 
 <div class="container" >
@@ -104,13 +110,15 @@
 
 
 <div class="container" >
-<div class="row" style="margin-top: 15px;  background: #f8f8f8; margin-bottom:20px" >
-    <div class="col-md-6">
-      <dl class="dl-horizontal">
+<div class="row" style="margin-top: 15px; margin-bottom:20px" >
+
+    <div class="col-md-6" >
+      <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
+      <dl>
         <%
            if @event.rating != 0
         %>
-            <dt>Classificação</dt>
+            <dt>Classificação:</dt>
             <dd>
               <%
                  val=@event.rating
@@ -126,39 +134,33 @@
                end
             %>
             </dd>
-			<%
-			   end
-			   @tipos=@event.event_types.all
-			   if @tipos.length!=0
-			%>
-              <dt>Tipo</dt>
-              <dd>
-              <%
-                 @tipos.each do |tipo|
-              %>
-                  <%= tipo.type.name %><br/>
-            <%
-               end
-            %>
-              </dd>
-            <%
-
-            end
+      <%
+         end
+         @tipos=@event.event_types.all
+         if @tipos.length!=0
+      %>
+        <dt>Tipo: </dt>
+        <dd>
+        <% @tipos.each do |tipo| %>
+          <%= tipo.type.name %><br/>
+        <% end %>
+        </dd>
+        <% end
         if trans.description != nil
         %>
-        <dt>Descrição</dt>
+        <dt>Descrição:</dt>
         <dd style="text-overflow: ellipsis;text-align: justify"><%= trans.description%></dd>
         <%
            end
            if @event.address != nil
         %>
-            <dt>Morada</dt>
+            <dt>Morada:</dt>
             <dd><%= @event.address %></dd>
         <%
            end
            if trans.schedule != nil
         %>
-            <dt>Horário</dt>
+            <dt>Horário:</dt>
             <dd><%= trans.schedule %></dd>
         <%
            end
@@ -225,7 +227,7 @@
            end
         %>
       </dl>
-      <span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
+      
     </div>
 
     <div class="col-sm-6">
@@ -274,55 +276,41 @@
             <% end %>
           </div>
       </div>
-      <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px"></div>
+      <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px" onload="mapinit();"></div>
     </div>
-        <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px" onload="mapinit();"></div>
-      </div>
 
-
-    <hr>
-  <hr>
   <%
      @coments=@event.comment_events
      unless @coments.blank?
-	 %>
+   %>
       <div class="col-sm-12">
         <h3>Comentários</h3>
-        <%
-           @coments.each do |co|%>
-            <div class="media-body bubble-body bubble-arrow-left">
-              <div class="bubble-inner">
-                <%
-                   if co.mobile_user_id != nil
-                     usermovel=co.mobile_user.user
-                     if usermovel.username != nil
-                nome=usermovel.username
-              else
-                nome="Anónimo"
-              end
-            else
-              nome="Anónimo"
-            end
-                %>
-          <h4 class="media-heading bubble-heading"><%= nome %></h4>
-          <div class="bubble-content">
-            <p><%= co.comment %></p>
-            <p>
-            </p>
+        <% @coments.each do |co|%>
+          <div class="media-body bubble-body bubble-arrow-left">
+            <div class="bubble-inner">
+              <% if (!co.mobile_user_id.nil?)  && (!co.mobile_user.user.username.nil?)
+                    nome=co.mobile_user.user.username
+                  else
+                    nome="Anónimo"
+                  end %>
+              <h4 class="media-heading bubble-heading"><%= nome %></h4>
+              <div class="bubble-content">
+                <p><%= co.comment %></p><p></p>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
-      <%
-        end
-        %>
-    </div>
-    <%
-      end
-      %>
+    <% end %>
   </div>
-</div>
 
-</div>
+<!--<span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
+</br>
+</br>
+</div> --!>
+
+
+
 <script>
   mapinit();
 </script>
