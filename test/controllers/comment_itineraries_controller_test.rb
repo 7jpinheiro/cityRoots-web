@@ -44,6 +44,6 @@ class CommentItinerariesControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_itinerary
     end
 
-    assert_redirected_to comment_itineraries_path
+    assert_redirected_to itinerary_comment_itineraries_path
   end
 end
