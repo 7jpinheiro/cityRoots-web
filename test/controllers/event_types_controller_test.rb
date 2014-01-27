@@ -21,7 +21,7 @@ class EventTypesControllerTest < ActionController::TestCase
       post :create, event_type: { description: @event_type.description, name: @event_type.name }
     end
 
-    assert_redirected_to event_type_path(assigns(:event_type))
+    assert_redirected_to event_event_type_path(assigns(:event_type))
   end
 
   test "should show event_type" do
@@ -36,7 +36,7 @@ class EventTypesControllerTest < ActionController::TestCase
 
   test "should update event_type" do
     patch :update, id: @event_type, event_type: { description: @event_type.description, name: @event_type.name }
-    assert_redirected_to event_type_path(assigns(:event_type))
+    assert_redirected_to event_event_type_path(assigns(:event_type))
   end
 
   test "should destroy event_type" do
