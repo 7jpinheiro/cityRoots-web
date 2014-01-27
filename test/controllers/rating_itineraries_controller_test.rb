@@ -44,6 +44,6 @@ class RatingItinerariesControllerTest < ActionController::TestCase
       delete :destroy, id: @rating_itinerary
     end
 
-    assert_redirected_to rating_itineraries_path
+    assert_redirected_to itinerary_rating_itineraries_path
   end
 end
