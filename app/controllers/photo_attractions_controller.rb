@@ -1,6 +1,9 @@
 class PhotoAttractionsController < ApplicationController
   before_action :set_photo_attraction, only: [:show, :edit, :update, :destroy]
 
+  load_and_authorize_resource :attraction
+  load_and_authorize_resource :photo_attraction, :through => :attraction,  :shallow => true
+
 
   # GET /photo_attractions
   # GET /photo_attractions.json
