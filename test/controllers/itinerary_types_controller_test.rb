@@ -44,6 +44,6 @@ class ItineraryTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @itinerary_type
     end
 
-    assert_redirected_to itinerary_types_path
+    assert_redirected_to itinerary_itinerary_types_path
   end
 end
