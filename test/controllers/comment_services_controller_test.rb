@@ -21,7 +21,7 @@ class CommentServicesControllerTest < ActionController::TestCase
       post :create, comment_service: { comment: @comment_service.comment, evalutiondate: @comment_service.evalutiondate, mobile_user_id: @comment_service.mobile_user_id, service_id: @comment_service.service_id }
     end
 
-    assert_redirected_to comment_service_path(assigns(:comment_service))
+    assert_redirected_to service_comment_service_path(assigns(:comment_service))
   end
 
   test "should show comment_service" do
@@ -36,7 +36,7 @@ class CommentServicesControllerTest < ActionController::TestCase
 
   test "should update comment_service" do
     patch :update, id: @comment_service, comment_service: { comment: @comment_service.comment, evalutiondate: @comment_service.evalutiondate, mobile_user_id: @comment_service.mobile_user_id, service_id: @comment_service.service_id }
-    assert_redirected_to comment_service_path(assigns(:comment_service))
+    assert_redirected_to service_comment_service_path(assigns(:comment_service))
   end
 
   test "should destroy comment_service" do
