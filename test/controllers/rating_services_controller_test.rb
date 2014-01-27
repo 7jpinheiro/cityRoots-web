@@ -44,6 +44,6 @@ class RatingServicesControllerTest < ActionController::TestCase
       delete :destroy, id: @rating_service
     end
 
-    assert_redirected_to rating_services_path
+    assert_redirected_to service_rating_services_path
   end
 end
