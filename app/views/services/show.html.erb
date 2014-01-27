@@ -210,7 +210,7 @@
     <div class="col-sm-6">
       <div class="row"  style="margin-top:15px">
         <div class="col-sm-4">
-          <%= form_for @photo_service=PhotoService.new, :url => photo_services_path, html: { multipart: true } do |f| %>
+          <%= form_for @photo_service=PhotoService.new, :url => service_photo_services_path, html: { multipart: true } do |f| %>
               <% if @photo_service.errors.any? %>
                   <div id="error_explanation">
                     <h2><%= pluralize(@photo_service.errors.count, "error") %> Prohibited this upload from being saved:</h2>
