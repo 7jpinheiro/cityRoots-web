@@ -21,7 +21,7 @@ class RatingItinerariesControllerTest < ActionController::TestCase
       post :create, rating_itinerary: { evaluationdate: @rating_itinerary.evaluationdate, itinerary_id: @rating_itinerary.itinerary_id, mobile_user_id: @rating_itinerary.mobile_user_id, rating: @rating_itinerary.rating }
     end
 
-    assert_redirected_to rating_itinerary_path(assigns(:rating_itinerary))
+    assert_redirected_to itinerary_rating_itinerary_path(assigns(:rating_itinerary))
   end
 
   test "should show rating_itinerary" do
@@ -36,7 +36,7 @@ class RatingItinerariesControllerTest < ActionController::TestCase
 
   test "should update rating_itinerary" do
     patch :update, id: @rating_itinerary, rating_itinerary: { evaluationdate: @rating_itinerary.evaluationdate, itinerary_id: @rating_itinerary.itinerary_id, mobile_user_id: @rating_itinerary.mobile_user_id, rating: @rating_itinerary.rating }
-    assert_redirected_to rating_itinerary_path(assigns(:rating_itinerary))
+    assert_redirected_to itinerary_rating_itinerary_path(assigns(:rating_itinerary))
   end
 
   test "should destroy rating_itinerary" do
