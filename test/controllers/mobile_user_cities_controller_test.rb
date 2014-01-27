@@ -44,6 +44,6 @@ class MobileUserCitiesControllerTest < ActionController::TestCase
       delete :destroy, id: @mobile_user_city
     end
 
-    assert_redirected_to mobile_user_cities_path
+    assert_redirected_to mobile_user_mobile_user_cities_path
   end
 end
