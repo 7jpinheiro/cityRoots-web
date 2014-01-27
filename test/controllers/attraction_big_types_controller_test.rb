@@ -44,6 +44,6 @@ class AttractionBigTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @attraction_big_type
     end
 
-    assert_redirected_to attraction_big_types_path
+    assert_redirected_to attraction_attraction_big_types_path
   end
 end
