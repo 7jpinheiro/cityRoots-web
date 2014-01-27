@@ -44,6 +44,6 @@ class ServiceTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @service_type
     end
 
-    assert_redirected_to service_types_path
+    assert_redirected_to service_service_types_path
   end
 end
