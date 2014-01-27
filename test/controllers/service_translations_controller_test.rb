@@ -44,6 +44,6 @@ class ServiceTranslationsControllerTest < ActionController::TestCase
       delete :destroy, id: @service_translation
     end
 
-    assert_redirected_to service_translations_path
+    assert_redirected_to service_service_translations_path
   end
 end
