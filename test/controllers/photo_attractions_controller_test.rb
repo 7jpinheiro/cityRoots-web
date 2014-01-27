@@ -21,7 +21,7 @@ class PhotoAttractionsControllerTest < ActionController::TestCase
       post :create, photo_attraction: { description: @photo_attraction.description, extension: @photo_attraction.extension, name: @photo_attraction.name, url: @photo_attraction.url }
     end
 
-    assert_redirected_to photo_attraction_path(assigns(:photo_attraction))
+    assert_redirected_to attraction_photo_attraction_path(assigns(:photo_attraction))
   end
 
   test "should show photo_attraction" do
@@ -36,7 +36,7 @@ class PhotoAttractionsControllerTest < ActionController::TestCase
 
   test "should update photo_attraction" do
     patch :update, id: @photo_attraction, photo_attraction: { description: @photo_attraction.description, extension: @photo_attraction.extension, name: @photo_attraction.name, url: @photo_attraction.url }
-    assert_redirected_to photo_attraction_path(assigns(:photo_attraction))
+    assert_redirected_to attraction_photo_attraction_path(assigns(:photo_attraction))
   end
 
   test "should destroy photo_attraction" do
