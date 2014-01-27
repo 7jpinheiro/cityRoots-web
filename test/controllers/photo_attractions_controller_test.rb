@@ -44,6 +44,6 @@ class PhotoAttractionsControllerTest < ActionController::TestCase
       delete :destroy, id: @photo_attraction
     end
 
-    assert_redirected_to photo_attractions_path
+    assert_redirected_to attraction_photo_attractions_path
   end
 end

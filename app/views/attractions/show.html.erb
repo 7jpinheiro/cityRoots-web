@@ -223,7 +223,7 @@
       <div class="col-sm-6">
          <div class="row"  style="margin-top:15px">
             <div class="col-sm-4">
-                <%= form_for @photo_attraction=PhotoAttraction.new, :url => photo_attractions_path, html: { multipart: true } do |f| %>
+                <%= form_for @photo_attraction=PhotoAttraction.new, :url => attraction_photo_attractions_path, html: { multipart: true } do |f| %>
                 <% if @photo_attraction.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
