@@ -44,6 +44,6 @@ class CommentAttractionsControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_attraction
     end
 
-    assert_redirected_to comment_attractions_path
+    assert_redirected_to attraction_comment_attractions_path
   end
 end
