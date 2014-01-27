@@ -44,6 +44,6 @@ class WebUserTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @web_user_type
     end
 
-    assert_redirected_to web_user_types_path
+    assert_redirected_to web_user_web_user_types_path
   end
 end
