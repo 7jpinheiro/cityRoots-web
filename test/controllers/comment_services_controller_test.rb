@@ -44,6 +44,6 @@ class CommentServicesControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_service
     end
 
-    assert_redirected_to comment_services_path
+    assert_redirected_to service_comment_services_path
   end
 end
