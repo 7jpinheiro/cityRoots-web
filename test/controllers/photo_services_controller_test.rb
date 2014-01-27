@@ -21,7 +21,7 @@ class PhotoServicesControllerTest < ActionController::TestCase
       post :create, photo_service: { description: @photo_service.description, extension: @photo_service.extension, name: @photo_service.name, url: @photo_service.url }
     end
 
-    assert_redirected_to photo_service_path(assigns(:photo_service))
+    assert_redirected_to service_photo_service_path(assigns(:photo_service))
   end
 
   test "should show photo_service" do
@@ -36,7 +36,7 @@ class PhotoServicesControllerTest < ActionController::TestCase
 
   test "should update photo_service" do
     patch :update, id: @photo_service, photo_service: { description: @photo_service.description, extension: @photo_service.extension, name: @photo_service.name, url: @photo_service.url }
-    assert_redirected_to photo_service_path(assigns(:photo_service))
+    assert_redirected_to service_photo_service_path(assigns(:photo_service))
   end
 
   test "should destroy photo_service" do
