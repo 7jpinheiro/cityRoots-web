@@ -1019,6 +1019,21 @@ class ApisController < ApplicationController
         end
       end
     end
+
+    if params[:login]!= nil
+      user=User.where("username=?",params[:username]).where("password=?",params[:password]).first
+      if user!=nil
+        hash=Hash.new
+        hash["id"]=user.id
+        respond_to do |format|
+          format.json {  render :json => hash }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => nil }
+        end
+      end
+    end
   end
 
   # GET /apis/1
