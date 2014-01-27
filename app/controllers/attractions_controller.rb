@@ -10,6 +10,14 @@ class AttractionsController < ApplicationController
   load_and_authorize_resource
 
 
+  def gallery
+    @photo_attractions= Attraction.all
+    respond_to do |format|
+      format.html { render :layout => 'layout_welc'}
+      format.json{}
+    end
+  end
+
   # GET /attractions
   # GET /attractions.json
   def index

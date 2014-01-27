@@ -13,6 +13,7 @@
 #
 
 class WebUser < ActiveRecord::Base
+	validates :nif, uniqueness: true
 	has_many :services, dependent: :destroy
 	has_many :events, dependent: :destroy
 	has_many :attractions, dependent: :destroy

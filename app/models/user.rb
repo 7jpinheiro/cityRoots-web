@@ -29,7 +29,7 @@
 
 
 class User < ActiveRecord::Base
-	validates :email , presence: true, uniqueness: { message: "Este email já se encontra registado" }
+	validates :email , presence: true, uniqueness: true
 	validates :encrypted_password , presence: true
   validates :username, uniqueness: { message: "Este username já se encontra registado, escolha outro" }
 	validates :city_id , presence: false
