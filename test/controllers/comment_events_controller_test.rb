@@ -21,7 +21,7 @@ class CommentEventsControllerTest < ActionController::TestCase
       post :create, comment_event: { comment: @comment_event.comment, evalutiondate: @comment_event.evalutiondate, event_id: @comment_event.event_id, mobile_user_id: @comment_event.mobile_user_id }
     end
 
-    assert_redirected_to comment_event_path(assigns(:comment_event))
+    assert_redirected_to event_comment_event_path(assigns(:comment_event))
   end
 
   test "should show comment_event" do
@@ -36,7 +36,7 @@ class CommentEventsControllerTest < ActionController::TestCase
 
   test "should update comment_event" do
     patch :update, id: @comment_event, comment_event: { comment: @comment_event.comment, evalutiondate: @comment_event.evalutiondate, event_id: @comment_event.event_id, mobile_user_id: @comment_event.mobile_user_id }
-    assert_redirected_to comment_event_path(assigns(:comment_event))
+    assert_redirected_to event_comment_event_path(assigns(:comment_event))
   end
 
   test "should destroy comment_event" do
