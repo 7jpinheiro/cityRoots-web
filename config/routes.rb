@@ -24,7 +24,7 @@ CityRootsWeb::Application.routes.draw do
   get "payments/sucess"
   get "payments/failure"
 
-
+  get "attractions/:id/gallery",  to:"attractions#gallery", as:"attractions_gallery"
 
   get "admin_users",  to:"admin_users#index", as:"admin_users_index"
   get "admin_users/:id/activar",  to:"admin_users#activar", as:"admin_users_activar"
@@ -99,6 +99,7 @@ devise_for :installs
   end
 
   resources :attractions do
+  
     get :autocomplete_attraction_name, :on => :collection
   end
 
@@ -108,7 +109,6 @@ devise_for :installs
 
   resources :events do
     get :autocomplete_event_name, :on => :collection
-    resource :event_translations, :only => [:new, :create,:destroy,:update]
   end
 
   resources :galeria
