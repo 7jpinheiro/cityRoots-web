@@ -44,6 +44,6 @@ class EventTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @event_type
     end
 
-    assert_redirected_to event_types_path
+    assert_redirected_to event_event_types_path
   end
 end
