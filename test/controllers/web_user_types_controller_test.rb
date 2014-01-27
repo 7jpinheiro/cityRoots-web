@@ -21,7 +21,7 @@ class WebUserTypesControllerTest < ActionController::TestCase
       post :create, web_user_type: { description: @web_user_type.description, name: @web_user_type.name }
     end
 
-    assert_redirected_to web_user_type_path(assigns(:web_user_type))
+    assert_redirected_to web_user_web_user_type_path(assigns(:web_user_type))
   end
 
   test "should show web_user_type" do
@@ -36,7 +36,7 @@ class WebUserTypesControllerTest < ActionController::TestCase
 
   test "should update web_user_type" do
     patch :update, id: @web_user_type, web_user_type: { description: @web_user_type.description, name: @web_user_type.name }
-    assert_redirected_to web_user_type_path(assigns(:web_user_type))
+    assert_redirected_to web_user_web_user_type_path(assigns(:web_user_type))
   end
 
   test "should destroy web_user_type" do
