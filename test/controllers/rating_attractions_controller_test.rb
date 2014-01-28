@@ -21,7 +21,7 @@ class RatingAttractionsControllerTest < ActionController::TestCase
       post :create, rating_attraction: { attraction_id: @rating_attraction.attraction_id, evaluationdate: @rating_attraction.evaluationdate, mobile_user_id: @rating_attraction.mobile_user_id, rating: @rating_attraction.rating }
     end
 
-    assert_redirected_to rating_attraction_path(assigns(:rating_attraction))
+    assert_redirected_to attraction_rating_attraction_path(assigns(:rating_attraction))
   end
 
   test "should show rating_attraction" do
@@ -36,7 +36,7 @@ class RatingAttractionsControllerTest < ActionController::TestCase
 
   test "should update rating_attraction" do
     patch :update, id: @rating_attraction, rating_attraction: { attraction_id: @rating_attraction.attraction_id, evaluationdate: @rating_attraction.evaluationdate, mobile_user_id: @rating_attraction.mobile_user_id, rating: @rating_attraction.rating }
-    assert_redirected_to rating_attraction_path(assigns(:rating_attraction))
+    assert_redirected_to attraction_rating_attraction_path(assigns(:rating_attraction))
   end
 
   test "should destroy rating_attraction" do
@@ -44,6 +44,6 @@ class RatingAttractionsControllerTest < ActionController::TestCase
       delete :destroy, id: @rating_attraction
     end
 
-    assert_redirected_to rating_attractions_path
+    assert_redirected_to attraction_rating_attractions_path
   end
 end

@@ -21,7 +21,7 @@ class CommentItinerariesControllerTest < ActionController::TestCase
       post :create, comment_itinerary: { comment: @comment_itinerary.comment, evalutiondate: @comment_itinerary.evalutiondate, itinerary_id: @comment_itinerary.itinerary_id, mobile_user_id: @comment_itinerary.mobile_user_id }
     end
 
-    assert_redirected_to comment_itinerary_path(assigns(:comment_itinerary))
+    assert_redirected_to itinerary_comment_itinerary_path(assigns(:comment_itinerary))
   end
 
   test "should show comment_itinerary" do
@@ -36,7 +36,7 @@ class CommentItinerariesControllerTest < ActionController::TestCase
 
   test "should update comment_itinerary" do
     patch :update, id: @comment_itinerary, comment_itinerary: { comment: @comment_itinerary.comment, evalutiondate: @comment_itinerary.evalutiondate, itinerary_id: @comment_itinerary.itinerary_id, mobile_user_id: @comment_itinerary.mobile_user_id }
-    assert_redirected_to comment_itinerary_path(assigns(:comment_itinerary))
+    assert_redirected_to itinerary_comment_itinerary_path(assigns(:comment_itinerary))
   end
 
   test "should destroy comment_itinerary" do
@@ -44,6 +44,6 @@ class CommentItinerariesControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_itinerary
     end
 
-    assert_redirected_to comment_itineraries_path
+    assert_redirected_to itinerary_comment_itineraries_path
   end
 end

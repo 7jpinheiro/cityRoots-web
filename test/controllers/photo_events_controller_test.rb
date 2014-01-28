@@ -21,7 +21,7 @@ class PhotoEventsControllerTest < ActionController::TestCase
       post :create, photo_event: { description: @photo_event.description, extension: @photo_event.extension, name: @photo_event.name, url: @photo_event.url }
     end
 
-    assert_redirected_to photo_event_path(assigns(:photo_event))
+    assert_redirected_to event_photo_event_path(assigns(:photo_event))
   end
 
   test "should show photo_event" do
@@ -36,7 +36,7 @@ class PhotoEventsControllerTest < ActionController::TestCase
 
   test "should update photo_event" do
     patch :update, id: @photo_event, photo_event: { description: @photo_event.description, extension: @photo_event.extension, name: @photo_event.name, url: @photo_event.url }
-    assert_redirected_to photo_event_path(assigns(:photo_event))
+    assert_redirected_to event_photo_event_path(assigns(:photo_event))
   end
 
   test "should destroy photo_event" do
@@ -44,6 +44,6 @@ class PhotoEventsControllerTest < ActionController::TestCase
       delete :destroy, id: @photo_event
     end
 
-    assert_redirected_to photo_events_path
+    assert_redirected_to event_photo_events_path
   end
 end

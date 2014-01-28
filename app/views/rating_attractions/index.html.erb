@@ -21,7 +21,7 @@
         <td><%= rating_attraction.mobile_user_id %></td>
         <td><%= rating_attraction.attraction_id %></td>
         <td><%= link_to 'Show', rating_attraction %></td>
-        <td><%= link_to 'Edit', edit_rating_attraction_path(rating_attraction) %></td>
+        <td><%= link_to 'Edit', edit_attraction_rating_attraction_path(rating_attraction) %></td>
         <td><%= link_to 'Destroy', rating_attraction, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Rating attraction', new_rating_attraction_path %>
+<%= link_to 'New Rating attraction', new_attraction_rating_attraction_path %>

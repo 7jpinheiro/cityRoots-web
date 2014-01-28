@@ -31,50 +31,50 @@
         <div class="well well-sm">
           <div class="row">
             <br/>
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Lingua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Nome" ,:for=>"name"  , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Restaurante ", :required => true,:autofocus => true %>
+                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Restaurante ", :required => true %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Descrição" ,:for=>"description"  , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;",:autofocus => true %>
+                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Horário" ,:for=>"schedule"  , :class=>"control-label col-sm-3"  %>
               <div class="col-sm-7">
-                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00",:autofocus => true %>
+                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Transporte" ,:for=>"transport"  , :class=>"control-label col-sm-3"  %>
               <div class="col-sm-7">
-                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte",:autofocus => true %>
+                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -89,7 +89,7 @@
       <div class="well well-sm" style="position:relative;">
         <div class="row">
           <br/>
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label",:style=>"text-align:center;" %>
             <div class="col-sm-6">
               <%= f.text_field :site ,:id=>"site" , :class=>"form-control form-control-square", :placeholder=>"www.esquinadoze.pt" %>
@@ -99,7 +99,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-4 control-label",:style=>"text-align:center;" %>
             <div class="col-sm-6">
               <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"reservas@esquinadoze.pt",:type =>"email" %>
@@ -109,10 +109,10 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Morada" ,:for=>"address"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <div class="col-sm-6">
-              <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"Esquina da Avenida Central", :required => true,:autofocus => true %>
+              <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"Esquina da Avenida Central", :required => true %>
               <p class="help-block"></p>
             </div>
           </div>
@@ -126,7 +126,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Coordenadas Geograficas" ,:for=>"latitude"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <div class="col-sm-3">
               <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217"%>
@@ -140,7 +140,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <label class="col-sm-4 control-label" style="text-align: center;">Ponto de referência</label>
             <div class="col-sm-6">
               <%= f.check_box :reference_point ,:id=>"accessibility" , :value=>0 %>
@@ -149,7 +149,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Capacidade" ,:for=>"capacity"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <p class="help-block"></p>
             <div class="col-sm-6">
@@ -160,7 +160,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Origem de informação" ,:for=>"source"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <div class="col-sm-6">
               <%= f.text_field :source ,:id=>"source" , :class=>"form-control form-control-square", :placeholder=>"www.origemdeinformaçoes.pt" %>
@@ -170,7 +170,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <%= f.label "Detalhes" ,:for=>"details"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <div class="col-sm-6">
               <%= f.text_field :details ,:id=>"details" , :class=>"form-control form-control-square", :placeholder=>"Detalhes extras..." %>
@@ -180,7 +180,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="form-group control-group">
+          <div class="form-group ">
             <label class="col-sm-4 control-label" style="text-align: center;"><i class="fa fa-wheelchair"></i></label>
             <div class="col-sm-6">
               <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0 %>
@@ -195,7 +195,7 @@
           <div class="well well-sm">
             <div class="row">
               <br/>
-              <div class="form-group control-group">
+              <div class="form-group ">
                 <%= type.label "Tipo" ,:for=>"type_id" , :class=>"control-label col-sm-3" ,:style=>"text-align:center;" %>
                 <div class="col-sm-7">
                   <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square"} ) %>
@@ -221,7 +221,7 @@
       <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
       <br/>
       <div class="col-xs-5 col-sm-2">
-        <div class="form-group control-group">
+        <div class="form-group ">
           <%= f.submit "Guardar", :class=>"btn btn-primary" %>
           </br>
           </br>

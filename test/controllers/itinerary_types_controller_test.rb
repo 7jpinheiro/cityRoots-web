@@ -21,7 +21,7 @@ class ItineraryTypesControllerTest < ActionController::TestCase
       post :create, itinerary_type: { description: @itinerary_type.description, name: @itinerary_type.name }
     end
 
-    assert_redirected_to itinerary_type_path(assigns(:itinerary_type))
+    assert_redirected_to itinerary_itinerary_type_path(assigns(:itinerary_type))
   end
 
   test "should show itinerary_type" do
@@ -36,7 +36,7 @@ class ItineraryTypesControllerTest < ActionController::TestCase
 
   test "should update itinerary_type" do
     patch :update, id: @itinerary_type, itinerary_type: { description: @itinerary_type.description, name: @itinerary_type.name }
-    assert_redirected_to itinerary_type_path(assigns(:itinerary_type))
+    assert_redirected_to itinerary_itinerary_type_path(assigns(:itinerary_type))
   end
 
   test "should destroy itinerary_type" do
@@ -44,6 +44,6 @@ class ItineraryTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @itinerary_type
     end
 
-    assert_redirected_to itinerary_types_path
+    assert_redirected_to itinerary_itinerary_types_path
   end
 end

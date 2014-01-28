@@ -1,4 +1,6 @@
 <%= stylesheet_link_tag "welcome2" %>
+<%= javascript_include_tag "photo_attraction" %>
+
 <%= csrf_meta_tag %>
 
 <div class="container">
@@ -8,15 +10,48 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Galeria de imagens</h1>
             </div>
+            <div class="thumbnails row">
             <% @attraction.photo_attractions.each  do |p| %>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <%= image_tag p.photo.url(:small,false) , { style: "width: 100%;" } %>
-                <%= link_to '<i class="fa fa-trash-o"></i>',  p, method: :delete, data: { confirm: 'Tem a certeza?' } %>
-                <i class="fa fa-trash-o"> Remover</i>
+            <div class="col-lg-3 col-md-4 col-xs-6 ">
 
+              <%= link_to [@attraction,p], {:style=>"position: absolute;margin-left: 80%; font-size:1.5em; color:#cc0000; text-shadow:2px 2px 4px rgba(0, 0, 0, 0.9)", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+                <i class="fa fa-times"> </i>
+              <% end %>
+              <%= image_tag p.photo.url(:small,false) , { style: "width: 100%;" } %>
             </div>
             <% end -%>
-
+          </div>
+        </br>
+            <%= form_for @photo_attraction=PhotoAttraction.new, :url => [@attraction,@photo_attraction], html: { multipart: true } do |f| %>
+                <% if @photo_attraction.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
+                  <ul>
+                    <% @photo_attraction.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <% end %>
+                <div class="actions">
+                  <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
+                  <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
+                </div>
+                <script>
+                  $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicionar Foto"});
+                </script>
+                <% end %>
+                <% # jquery upload template # %>
+                <script id="template-upload" type="text/x-tmpl">
+                  <div class="upload">
+                  {%=o.name%}
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                           <span class="sr-only"></span>
+                          </div>
+                      </div>
+                  </div>
+                </script>
         </div>
 
 </br>

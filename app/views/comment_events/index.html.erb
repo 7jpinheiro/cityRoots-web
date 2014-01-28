@@ -21,7 +21,7 @@
         <td><%= comment_event.mobile_user_id %></td>
         <td><%= comment_event.event_id %></td>
         <td><%= link_to 'Show', comment_event %></td>
-        <td><%= link_to 'Edit', edit_comment_event_path(comment_event) %></td>
+        <td><%= link_to 'Edit', edit_event_comment_event_path(comment_event) %></td>
         <td><%= link_to 'Destroy', comment_event, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Comment event', new_comment_event_path %>
+<%= link_to 'New Comment event', new_event_comment_event_path %>

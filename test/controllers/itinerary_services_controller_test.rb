@@ -21,7 +21,7 @@ class ItineraryServicesControllerTest < ActionController::TestCase
       post :create, itinerary_service: { itinerary_id: @itinerary_service.itinerary_id, service_id: @itinerary_service.service_id }
     end
 
-    assert_redirected_to itinerary_service_path(assigns(:itinerary_service))
+    assert_redirected_to itinerary_itinerary_service_path(assigns(:itinerary_service))
   end
 
   test "should show itinerary_service" do
@@ -36,7 +36,7 @@ class ItineraryServicesControllerTest < ActionController::TestCase
 
   test "should update itinerary_service" do
     patch :update, id: @itinerary_service, itinerary_service: { itinerary_id: @itinerary_service.itinerary_id, service_id: @itinerary_service.service_id }
-    assert_redirected_to itinerary_service_path(assigns(:itinerary_service))
+    assert_redirected_to itinerary_itinerary_service_path(assigns(:itinerary_service))
   end
 
   test "should destroy itinerary_service" do
@@ -44,6 +44,6 @@ class ItineraryServicesControllerTest < ActionController::TestCase
       delete :destroy, id: @itinerary_service
     end
 
-    assert_redirected_to itinerary_services_path
+    assert_redirected_to itinerary_itinerary_services_path
   end
 end

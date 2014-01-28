@@ -1,5 +1,6 @@
 class PhotoServicesController < ApplicationController
   before_action :set_photo_service, only: [:show, :edit, :update, :destroy]
+  before_action :set_service
 
   # GET /photo_services
   # GET /photo_services.json
@@ -56,7 +57,7 @@ class PhotoServicesController < ApplicationController
   def destroy
     @photo_service.destroy
     respond_to do |format|
-      format.html { redirect_to photo_services_url }
+      format.html { redirect_to services_gallery_path(@service)  }
       format.json { head :no_content }
     end
   end
@@ -66,7 +67,9 @@ class PhotoServicesController < ApplicationController
     def set_photo_service
       @photo_service = PhotoService.find(params[:id])
     end
-
+    def set_service
+      @service = Service.find params[:service_id]
+    end 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_service_params
       params.require(:photo_service).permit( :description, :photo, :service_id)

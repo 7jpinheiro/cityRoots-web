@@ -21,7 +21,7 @@ class MobileUserCitiesControllerTest < ActionController::TestCase
       post :create, mobile_user_city: { city_id: @mobile_user_city.city_id, mobile_user_id: @mobile_user_city.mobile_user_id }
     end
 
-    assert_redirected_to mobile_user_city_path(assigns(:mobile_user_city))
+    assert_redirected_to mobile_user_mobile_user_city_path(assigns(:mobile_user_city))
   end
 
   test "should show mobile_user_city" do
@@ -36,7 +36,7 @@ class MobileUserCitiesControllerTest < ActionController::TestCase
 
   test "should update mobile_user_city" do
     patch :update, id: @mobile_user_city, mobile_user_city: { city_id: @mobile_user_city.city_id, mobile_user_id: @mobile_user_city.mobile_user_id }
-    assert_redirected_to mobile_user_city_path(assigns(:mobile_user_city))
+    assert_redirected_to mobile_user_mobile_user_city_path(assigns(:mobile_user_city))
   end
 
   test "should destroy mobile_user_city" do
@@ -44,6 +44,6 @@ class MobileUserCitiesControllerTest < ActionController::TestCase
       delete :destroy, id: @mobile_user_city
     end
 
-    assert_redirected_to mobile_user_cities_path
+    assert_redirected_to mobile_user_mobile_user_cities_path
   end
 end

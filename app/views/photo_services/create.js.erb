@@ -4,7 +4,7 @@ alert('Erro a gravar a foto.');
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();
 }
-if ($('ul.thumbnails') !== undefined) {
-    $('ul.thumbnails').append("<%=j render partial: 'photo_services/upload', locals: { photo_service: @photo_service } %>");
+if ($('div.thumbnails') !== undefined) {
+    $('div.thumbnails').append("<%=j render partial: 'photo_services/upload', locals: { photo_service: @photo_service, service: @service } %>");
 }
 <% end %>

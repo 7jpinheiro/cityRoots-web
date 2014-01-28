@@ -21,7 +21,7 @@ class ServiceTypesControllerTest < ActionController::TestCase
       post :create, service_type: { description: @service_type.description, name: @service_type.name }
     end
 
-    assert_redirected_to service_type_path(assigns(:service_type))
+    assert_redirected_to service_service_type_path(assigns(:service_type))
   end
 
   test "should show service_type" do
@@ -36,7 +36,7 @@ class ServiceTypesControllerTest < ActionController::TestCase
 
   test "should update service_type" do
     patch :update, id: @service_type, service_type: { description: @service_type.description, name: @service_type.name }
-    assert_redirected_to service_type_path(assigns(:service_type))
+    assert_redirected_to service_service_type_path(assigns(:service_type))
   end
 
   test "should destroy service_type" do
@@ -44,6 +44,6 @@ class ServiceTypesControllerTest < ActionController::TestCase
       delete :destroy, id: @service_type
     end
 
-    assert_redirected_to service_types_path
+    assert_redirected_to service_service_types_path
   end
 end

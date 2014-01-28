@@ -1,14 +1,14 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
 
 
-<%= nested_form_for @attraction do |f| %>
+<%= nested_form_for @attraction, :html => {:novalidate => 'novalidate'} do |f| %>
     <div class="row">
       <%= f.fields_for :attraction_translations do |e| %>
         <span class="col-sm-6">
         <div class="well well-sm">
           <div class="row">
             <br/>
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
                 <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",  :required => true,:autofocus => true   }) %>
@@ -18,10 +18,10 @@
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Nome" ,:for=>"name" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Bom Jesus", :required => true,:autofocus => true  %>
+                <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Bom Jesus", :required => true%>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -29,41 +29,41 @@
           <br/>
 
           <div class="row">
-            <div class="form-group control-group"  style="margin-left: 20px;">
+            <div class="form-group "  style="margin-left: 20px;">
               <%= e.label "Descrição" ,:for=>"description" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Parte importante da cidade", :style=>"height:135px;", :autofocus => true  %>
+                <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Parte importante da cidade", :style=>"height:135px;" %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group" style="margin-left: 20px;">
               <%= e.label "Horário" ,:for=>"schedule" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00", :autofocus => true  %>
+                <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group" style="margin-left: 20px;">
               <%= e.label "Transporte" ,:for=>"transport" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Formas de transporte" ,:autofocus => true %>
+                <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Formas de transporte"  %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group" style="margin-left: 20px;">
+            <div class="form-group" style="margin-left: 20px;">
               <%= e.label "Preço" ,:for=>"price" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
                 <div class="input-group">
-                  <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€", :autofocus => true %>
+                  <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
                   <span class="input-group-addon">€</span>
                   
                 </div>
@@ -84,40 +84,40 @@
     %>
     <div class="well well-sm" style="position:relative;">
       <div class="row">
-        <div class="form-group control-group">
+        <div class="form-group">
           <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;"%>
-          <div class="col-sm-6">
-            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt",:autofocus => true  %>
+          <div class="col-sm-6 controls">
+            <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.bomjesus.pt"%>
             <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group control-group">
+        <div class="form-group">
           <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
-          <div class="col-sm-6">
-            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@bomjesus.pt",:autofocus => true , :type => "email" %>
+          <div class="col-sm-6 controls">
+            <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@bomjesus.pt", :type => "email" %>
             <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group control-group">
+        <div class="form-group">
           <%= f.label "Telefone" ,:for=>"phone" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
           <div class="col-sm-6">
-            <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control  form-control-square", :placeholder=>"123 123 123", :autofocus => true  %>
+            <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control  form-control-square", :placeholder=>"123 123 123", :required => true%>
             <p class="help-block"></p>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
-        <div class="form-group control-group">
+        <div class="form-group">
           <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
           <div class="col-sm-6">
-            <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;", :required => true,:autofocus => true %>
+            <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;", :required => true %>
               <p class="help-block"></p>
           </div>
         </div>
@@ -131,14 +131,14 @@
       </div>
       <br/>
       <div class="row">
-        <div class="form-group  control-group ">
+        <div class="form-group">
           <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-4 control-label"  ,:style=>"text-align: center;"%>
           <div class="col-sm-3">
-            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" , :autofocus => true %>
+            <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217" %>
             <p class="help-block"></p>
           </div>
           <div class="col-sm-3">
-            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226", :autofocus => true %>
+            <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226"%>
 
             <p class="help-block"></p>
           </div>
@@ -149,7 +149,7 @@
         <div class="form-group">
           <%= f.label "Origem dos dados" ,:for=>"source" , :class=>"col-sm-4 control-label"  ,:style=>"text-align: center;"%>
           <div class="col-sm-6">
-            <%= f.text_field :source ,:id=>"source" , :class=>"form-control  form-control-square", :placeholder=>"www.origemdosdados.pt",:autofocus => true %>
+            <%= f.text_field :source ,:id=>"source" , :class=>"form-control  form-control-square", :placeholder=>"www.origemdosdados.pt"%>
             <p class="help-block"></p>
           </div>
         </div>

@@ -21,7 +21,7 @@ class CommentAttractionsControllerTest < ActionController::TestCase
       post :create, comment_attraction: { attraction_id: @comment_attraction.attraction_id, comment: @comment_attraction.comment, evalutiondate: @comment_attraction.evalutiondate, mobile_user_id: @comment_attraction.mobile_user_id }
     end
 
-    assert_redirected_to comment_attraction_path(assigns(:comment_attraction))
+    assert_redirected_to attraction_comment_attraction_path(assigns(:comment_attraction))
   end
 
   test "should show comment_attraction" do
@@ -36,7 +36,7 @@ class CommentAttractionsControllerTest < ActionController::TestCase
 
   test "should update comment_attraction" do
     patch :update, id: @comment_attraction, comment_attraction: { attraction_id: @comment_attraction.attraction_id, comment: @comment_attraction.comment, evalutiondate: @comment_attraction.evalutiondate, mobile_user_id: @comment_attraction.mobile_user_id }
-    assert_redirected_to comment_attraction_path(assigns(:comment_attraction))
+    assert_redirected_to attraction_comment_attraction_path(assigns(:comment_attraction))
   end
 
   test "should destroy comment_attraction" do
@@ -44,6 +44,6 @@ class CommentAttractionsControllerTest < ActionController::TestCase
       delete :destroy, id: @comment_attraction
     end
 
-    assert_redirected_to comment_attractions_path
+    assert_redirected_to attraction_comment_attractions_path
   end
 end

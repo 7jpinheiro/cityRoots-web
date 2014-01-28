@@ -21,7 +21,7 @@
         <td><%= comment_attraction.mobile_user_id %></td>
         <td><%= comment_attraction.attraction_id %></td>
         <td><%= link_to 'Show', comment_attraction %></td>
-        <td><%= link_to 'Edit', edit_comment_attraction_path(comment_attraction) %></td>
+        <td><%= link_to 'Edit', edit_attraction_comment_attraction_path(comment_attraction) %></td>
         <td><%= link_to 'Destroy', comment_attraction, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Comment attraction', new_comment_attraction_path %>
+<%= link_to 'New Comment attraction', new_attraction_comment_attraction_path %>

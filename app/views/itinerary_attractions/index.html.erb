@@ -17,7 +17,7 @@
         <td><%= itinerary_attraction.itinerary_id %></td>
         <td><%= itinerary_attraction.attraction_id %></td>
         <td><%= link_to 'Show', itinerary_attraction %></td>
-        <td><%= link_to 'Edit', edit_itinerary_attraction_path(itinerary_attraction) %></td>
+        <td><%= link_to 'Edit', edit_itinerary_itinerary_attraction_path(itinerary_attraction) %></td>
         <td><%= link_to 'Destroy', itinerary_attraction, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Itinerary attraction', new_itinerary_attraction_path %>
+<%= link_to 'New Itinerary attraction', new_itinerary_itinerary_attraction_path %>

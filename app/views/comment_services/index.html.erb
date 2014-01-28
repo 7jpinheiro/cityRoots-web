@@ -21,7 +21,7 @@
         <td><%= comment_service.mobile_user_id %></td>
         <td><%= comment_service.service_id %></td>
         <td><%= link_to 'Show', comment_service %></td>
-        <td><%= link_to 'Edit', edit_comment_service_path(comment_service) %></td>
+        <td><%= link_to 'Edit', edit_service_comment_service_path(comment_service) %></td>
         <td><%= link_to 'Destroy', comment_service, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Comment service', new_comment_service_path %>
+<%= link_to 'New Comment service', new_service_comment_service_path %>

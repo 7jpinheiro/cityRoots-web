@@ -21,7 +21,7 @@ class WebUserPacksControllerTest < ActionController::TestCase
       post :create, web_user_pack: { active: @web_user_pack.active, obs: @web_user_pack.obs, pack_type_id: @web_user_pack.pack_type_id, subscriptiondate: @web_user_pack.subscriptiondate, validity: @web_user_pack.validity, web_user_id: @web_user_pack.web_user_id }
     end
 
-    assert_redirected_to web_user_pack_path(assigns(:web_user_pack))
+    assert_redirected_to web_user_web_user_pack_path(assigns(:web_user_pack))
   end
 
   test "should show web_user_pack" do
@@ -36,7 +36,7 @@ class WebUserPacksControllerTest < ActionController::TestCase
 
   test "should update web_user_pack" do
     patch :update, id: @web_user_pack, web_user_pack: { active: @web_user_pack.active, obs: @web_user_pack.obs, pack_type_id: @web_user_pack.pack_type_id, subscriptiondate: @web_user_pack.subscriptiondate, validity: @web_user_pack.validity, web_user_id: @web_user_pack.web_user_id }
-    assert_redirected_to web_user_pack_path(assigns(:web_user_pack))
+    assert_redirected_to web_user_web_user_pack_path(assigns(:web_user_pack))
   end
 
   test "should destroy web_user_pack" do
@@ -44,6 +44,6 @@ class WebUserPacksControllerTest < ActionController::TestCase
       delete :destroy, id: @web_user_pack
     end
 
-    assert_redirected_to web_user_packs_path
+    assert_redirected_to web_user_web_user_packs_path
   end
 end

@@ -21,7 +21,7 @@ class EventTranslationsControllerTest < ActionController::TestCase
       post :create, event_translation: { description: @event_translation.description, language: @event_translation.language, name: @event_translation.name, schedule: @event_translation.schedule, transport: @event_translation.transport }
     end
 
-    assert_redirected_to event_translation_path(assigns(:event_translation))
+    assert_redirected_to event_event_translation_path(assigns(:event_translation))
   end
 
   test "should show event_translation" do
@@ -36,7 +36,7 @@ class EventTranslationsControllerTest < ActionController::TestCase
 
   test "should update event_translation" do
     patch :update, id: @event_translation, event_translation: { description: @event_translation.description, language: @event_translation.language, name: @event_translation.name, schedule: @event_translation.schedule, transport: @event_translation.transport }
-    assert_redirected_to event_translation_path(assigns(:event_translation))
+    assert_redirected_to event_event_translation_path(assigns(:event_translation))
   end
 
   test "should destroy event_translation" do

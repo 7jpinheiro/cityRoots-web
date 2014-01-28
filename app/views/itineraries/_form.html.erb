@@ -17,7 +17,7 @@
       <div class="row">
         <div class="well well-sm">
           <div class="row">
-            <div class="form-group control-group">
+            <div class="form-group ">
               <%= f.label "Nome" ,:for=>"nome" , :class=>"col-md-5 control-label", :style=>"text-align:center;" %>
               <div class="col-md-6">
                 <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Rota dos vinhos", :required => true,:autofocus => true %>
@@ -27,10 +27,10 @@
           </div>
           <br/>
           <div class="row">
-            <div class="form-group control-group">
+            <div class="form-group ">
               <%= f.label "Descrição" ,:for=>"description" , :class=>"col-sm-5 control-label" , :style=>"text-align:center;"%>
               <div class="col-sm-6">
-                <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região",:required => true,:autofocus => true %>
+                <%= f.text_field :description ,:id=>"description" , :class=>"form-control", :placeholder=>"Uma rota dedicada ao vinhos da nossa região",:required => true %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -38,10 +38,10 @@
           <br/>
           <br/>
           <div class="row">
-            <div class="form-group control-group">
+            <div class="form-group ">
               <%= f.label "Tipo de Rota" ,:for=>"itinerary_type" , :class=>"col-sm-5 control-label" , :style=>"text-align:center;"%>
               <div class="col-sm-6">
-                <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true,:autofocus => true} ) %>
+                <%= f.collection_select(:itinerary_type_id, ItineraryType.all, :id, :name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -60,15 +60,15 @@
 
           <%= f.fields_for :itinerary_attractions do |builder| %>
               <div class="well">
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="order">Ordem</label><br/>
                     <%= builder.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true,:autofocus => true}) %>
+                    <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder.link_to_remove "Remover Ponto" %>
@@ -82,15 +82,15 @@
           <br>
           <%= f.fields_for :itinerary_events do |builder1| %>
               <div class="well">
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="order">Ordem</label><br/>
                     <%= builder1.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true,:autofocus => true}) %>
+                    <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder1.link_to_remove "Remover Ponto" %>
@@ -106,15 +106,15 @@
           <%= f.fields_for :itinerary_services do |builder2| %>
               <div class="well">
 
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="order">Ordem</label><br/>
                     <%= builder2.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
-                  <div class="form-group control-group">
+                  <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true,:autofocus => true}) %>
+                    <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder2.link_to_remove "Remover Ponto" %>

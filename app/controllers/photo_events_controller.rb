@@ -1,6 +1,6 @@
 class PhotoEventsController < ApplicationController
   before_action :set_photo_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_event
 
   # GET /photo_events
   # GET /photo_events.json
@@ -57,7 +57,7 @@ class PhotoEventsController < ApplicationController
   def destroy
     @photo_event.destroy
     respond_to do |format|
-      format.html { redirect_to photo_events_url }
+      format.html { redirect_to events_gallery_path(@event)  }
       format.json { head :no_content }
     end
   end
@@ -67,6 +67,9 @@ class PhotoEventsController < ApplicationController
     def set_photo_event
       @photo_event = PhotoEvent.find(params[:id])
     end
+    def set_event
+      @event = Event.find params[:event_id]
+    end 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_event_params

@@ -21,7 +21,7 @@
         <td><%= rating_service.mobile_user_id %></td>
         <td><%= rating_service.service_id %></td>
         <td><%= link_to 'Show', rating_service %></td>
-        <td><%= link_to 'Edit', edit_rating_service_path(rating_service) %></td>
+        <td><%= link_to 'Edit', edit_service_rating_service_path(rating_service) %></td>
         <td><%= link_to 'Destroy', rating_service, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Rating service', new_rating_service_path %>
+<%= link_to 'New Rating service', new_service_rating_service_path %>

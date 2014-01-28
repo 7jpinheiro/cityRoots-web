@@ -17,7 +17,7 @@
         <td><%= itinerary_service.itinerary_id %></td>
         <td><%= itinerary_service.service_id %></td>
         <td><%= link_to 'Show', itinerary_service %></td>
-        <td><%= link_to 'Edit', edit_itinerary_service_path(itinerary_service) %></td>
+        <td><%= link_to 'Edit', edit_itinerary_itinerary_service_path(itinerary_service) %></td>
         <td><%= link_to 'Destroy', itinerary_service, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Itinerary service', new_itinerary_service_path %>
+<%= link_to 'New Itinerary service', new_itinerary_itinerary_service_path %>

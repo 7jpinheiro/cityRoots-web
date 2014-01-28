@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "welcome2" %>
-<%= javascript_include_tag "photo_attraction" %>
+<%= javascript_include_tag "photo_events" %>
 
 <%= csrf_meta_tag %>
 
@@ -11,10 +11,10 @@
                 <h1 class="page-header">Galeria de imagens</h1>
             </div>
             <div class="thumbnails row">
-            <% @attraction.photo_attractions.each  do |p| %>
+            <% @event.photo_events.each  do |p| %>
             <div class="col-lg-3 col-md-4 col-xs-6 ">
 
-              <%= link_to p, {:style=>"position: absolute;margin-left: 80%; font-size:1.5em; color:#cc0000; text-shadow:2px 2px 4px rgba(0, 0, 0, 0.9)", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+              <%= link_to [@event,p], {:style=>"position: absolute;margin-left: 80%; font-size:1.5em; color:#cc0000; text-shadow:2px 2px 4px rgba(0, 0, 0, 0.9)", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
                 <i class="fa fa-times"> </i>
               <% end %>
               <%= image_tag p.photo.url(:small,false) , { style: "width: 100%;" } %>
@@ -22,20 +22,20 @@
             <% end -%>
           </div>
         </br>
-            <%= form_for @photo_attraction=PhotoAttraction.new, :url => attraction_photo_attractions_path, html: { multipart: true } do |f| %>
-                <% if @photo_attraction.errors.any? %>
+            <%= form_for @photo_event=PhotoEvent.new, :url => [@event, @photo_event], html: { multipart: true } do |f| %>
+                <% if @photo_event.errors.any? %>
                 <div id="error_explanation">
-                  <h2><%= pluralize(@photo_attraction.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
+                  <h2><%= pluralize(@photo_event.errors.count, "error") %> Não foi possivel guardar a foto:</h2>
                   <ul>
-                    <% @photo_attraction.errors.full_messages.each do |msg| %>
+                    <% @photo_event.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                     <% end %>
                   </ul>
                 </div>
                 <% end %>
                 <div class="actions">
-                  <%= f.file_field :photo, multiple: true, name: 'photo_attraction[photo]',:class=>"filestyle" %>
-                  <%= f.hidden_field :attraction_id,  :value => @attraction.id %>
+                  <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]',:class=>"filestyle" %>
+                  <%= f.hidden_field :event_id,  :value => @event.id %>
                 </div>
                 <script>
                   $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicionar Foto"});

@@ -21,7 +21,7 @@ class ItineraryAttractionsControllerTest < ActionController::TestCase
       post :create, itinerary_attraction: { attraction_id: @itinerary_attraction.attraction_id, itinerary_id: @itinerary_attraction.itinerary_id }
     end
 
-    assert_redirected_to itinerary_attraction_path(assigns(:itinerary_attraction))
+    assert_redirected_to itinerary_itinerary_attraction_path(assigns(:itinerary_attraction))
   end
 
   test "should show itinerary_attraction" do
@@ -36,7 +36,7 @@ class ItineraryAttractionsControllerTest < ActionController::TestCase
 
   test "should update itinerary_attraction" do
     patch :update, id: @itinerary_attraction, itinerary_attraction: { attraction_id: @itinerary_attraction.attraction_id, itinerary_id: @itinerary_attraction.itinerary_id }
-    assert_redirected_to itinerary_attraction_path(assigns(:itinerary_attraction))
+    assert_redirected_to itinerary_itinerary_attraction_path(assigns(:itinerary_attraction))
   end
 
   test "should destroy itinerary_attraction" do
@@ -44,6 +44,6 @@ class ItineraryAttractionsControllerTest < ActionController::TestCase
       delete :destroy, id: @itinerary_attraction
     end
 
-    assert_redirected_to itinerary_attractions_path
+    assert_redirected_to itinerary_itinerary_attractions_path
   end
 end

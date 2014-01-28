@@ -21,7 +21,7 @@ class ServiceTranslationsControllerTest < ActionController::TestCase
       post :create, service_translation: { description: @service_translation.description, language: @service_translation.language, name: @service_translation.name, schedule: @service_translation.schedule, transport: @service_translation.transport }
     end
 
-    assert_redirected_to service_translation_path(assigns(:service_translation))
+    assert_redirected_to service_service_translation_path(assigns(:service_translation))
   end
 
   test "should show service_translation" do
@@ -36,7 +36,7 @@ class ServiceTranslationsControllerTest < ActionController::TestCase
 
   test "should update service_translation" do
     patch :update, id: @service_translation, service_translation: { description: @service_translation.description, language: @service_translation.language, name: @service_translation.name, schedule: @service_translation.schedule, transport: @service_translation.transport }
-    assert_redirected_to service_translation_path(assigns(:service_translation))
+    assert_redirected_to service_service_translation_path(assigns(:service_translation))
   end
 
   test "should destroy service_translation" do
@@ -44,6 +44,6 @@ class ServiceTranslationsControllerTest < ActionController::TestCase
       delete :destroy, id: @service_translation
     end
 
-    assert_redirected_to service_translations_path
+    assert_redirected_to service_service_translations_path
   end
 end
