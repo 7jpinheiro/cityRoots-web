@@ -5,6 +5,6 @@ if ($('div.upload') !== undefined) {
     $('div.upload').remove();
 }
 if ($('div.thumbnails') !== undefined) {
-    $('div.thumbnails').append("<%=j render partial: 'photo_attractions/upload', locals: { photo_attraction: @photo_attraction } %>");
+    $('div.thumbnails').append("<%=j render partial: 'photo_attractions/upload', locals: { photo_attraction: @photo_attraction, attraction: @attraction} %>");
 }
 <% end %>

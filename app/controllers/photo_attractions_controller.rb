@@ -1,8 +1,15 @@
 class PhotoAttractionsController < ApplicationController
   before_action :set_photo_attraction, only: [:show, :edit, :update, :destroy]
+  before_action :set_attraction
+  #load_and_authorize_resource :attraction
+  #load_and_authorize_resource :photo_attraction, :through => :attraction
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
 
-  load_and_authorize_resource :attraction
-  load_and_authorize_resource :photo_attraction, :through => :attraction,  :shallow => true
+  load_and_authorize_resource
 
 
   # GET /photo_attractions
@@ -60,7 +67,7 @@ class PhotoAttractionsController < ApplicationController
   def destroy
     @photo_attraction.destroy
     respond_to do |format|
-      format.html { redirect_to photo_attractions_url }
+      format.html { redirect_to attractions_gallery_path(@attraction) }
       format.json { head :no_content }
     end
   end
@@ -70,7 +77,9 @@ class PhotoAttractionsController < ApplicationController
     def set_photo_attraction
       @photo_attraction = PhotoAttraction.find(params[:id])
     end
-
+    def set_attraction
+      @attraction = Attraction.find params[:attraction_id]
+    end 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_attraction_params
       params.require(:photo_attraction).permit(:description, :attraction_id, :photo)

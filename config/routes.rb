@@ -9,22 +9,22 @@ CityRootsWeb::Application.routes.draw do
   resources :welcome
   resources :web
   resources :mobile
-  resources :countries
+  resources :countries, :only => [:create,:destroy]
   resource :profiles
   
   resources :web_users do
-    resources :web_user_types
+    resources :web_user_types, :only => [:create,:destroy]
     resources :web_user_packs
   end
 
   resources :mobile_users do 
-    resources :mobile_user_cities
+    resources :mobile_user_cities, :only => [:create,:destroy]
   end
 
 
-  resources :languages
+  resources :languages, :only => [:new,:destroy]
 
-  resources :cities
+  resources :cities, :only => [:new,:destroy]
 
   resource  :apis
 
@@ -37,40 +37,40 @@ CityRootsWeb::Application.routes.draw do
 
 
   resources :itineraries do
-    resources :rating_itineraries
-    resources :itinerary_types
-    resources :itinerary_attractions
-    resources :itinerary_events
-    resources :itinerary_services
-    resources :comment_itineraries
+    resources :rating_itineraries, :only => [:create,:destroy]
+    resources :itinerary_types, :only => [:create,:destroy]
+    resources :itinerary_attractions, :only => [:create,:destroy]
+    resources :itinerary_events, :only => [:create,:destroy]
+    resources :itinerary_services, :only => [:create,:destroy]
+    resources :comment_itineraries, :only => [:create,:destroy]
     get :autocomplete_itinerary_name, :on => :collection
   end
 
   resources :attractions do
-    resources :attraction_translations
-    resources :rating_attractions
-    resources :attraction_big_types
-    resources :attraction_types
-    resources :comment_attractions  
-    resources :photo_attractions
+    resources :attraction_translations, :only => [:create,:destroy]
+    resources :rating_attractions, :only => [:create,:destroy]
+    resources :attraction_big_types, :only => [:create,:destroy]
+    resources :attraction_types, :only => [:create,:destroy]
+    resources :comment_attractions, :only => [:create,:destroy]
+    resources :photo_attractions, :only => [:create,:destroy]
     get :autocomplete_attraction_name, :on => :collection
   end
 
   resources :services do
-    resources :service_translations
-    resources :rating_services
-    resources :service_types
-    resources :comment_services
-    resources :photo_services
+    resources :service_translations, :only => [:create,:destroy]
+    resources :rating_services, :only => [:create,:destroy]
+    resources :service_types, :only => [:create,:destroy]
+    resources :comment_services, :only => [:create,:destroy]
+    resources :photo_services, :only => [:create,:destroy]
     get :autocomplete_service_name, :on => :collection
   end
 
   resources :events do
-    resources :event_translations , :only => :destroy
-    resources :rating_events
-    resources :event_types
-    resources :comment_events
-    resources :photo_events
+    resources :event_translations , :only => [:create,:destroy]
+    resources :rating_events, :only => [:create,:destroy]
+    resources :event_types, :only => [:create,:destroy]
+    resources :comment_events, :only => [:create,:destroy]
+    resources :photo_events, :only => [:create,:destroy]
     get :autocomplete_event_name, :on => :collection
   end
 
@@ -89,6 +89,9 @@ CityRootsWeb::Application.routes.draw do
   get "payments/failure"
 
   get "attractions/:id/gallery",  to:"attractions#gallery", as:"attractions_gallery"
+  get "events/:id/gallery",  to:"events#gallery", as:"events_gallery"
+  get "services/:id/gallery",  to:"services#gallery", as:"services_gallery"
+
 
   get "admin_users",  to:"admin_users#index", as:"admin_users_index"
   get "admin_users/:id/activar",  to:"admin_users#activar", as:"admin_users_activar"

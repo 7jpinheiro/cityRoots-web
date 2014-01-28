@@ -37,6 +37,15 @@ class EventsController < ApplicationController
     end
   end
 
+ def gallery
+    @photo_events= Event.all
+    respond_to do |format|
+      format.html { render :layout => 'layout_welc'}
+      format.json{}
+    end
+  end
+
+
    #post
   def excel
     uploaded_io = params[:events][:file]

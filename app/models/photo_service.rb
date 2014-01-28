@@ -15,5 +15,5 @@
 class PhotoService < ActiveRecord::Base
   validates :service_id, presence:true
 	belongs_to :service
-  has_attached_file :photo, :styles => { :medium => "1200x350#", :small => "200x200>", :thumb => "50x50#" }, default_url: "/images/missing.png"
+    has_attached_file :photo, :styles => { :medium => "1200x350#", :small => "300x300#", :thumb => "50x50#" }, default_url: "/images/missing.png"
 end

@@ -1,10 +1,10 @@
-if @photo_event.new_record? %>
+<% if @photo_event.new_record? %>
 alert('Erro a gravar a foto.');
 <% else %>
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();
 }
-if ($('ul.thumbnails') !== undefined) {
-    $('ul.thumbnails').append("<%=j render partial: 'photo_events/upload', locals: { photo_event: @photo_event } %>");
+if ($('div.thumbnails') !== undefined) {
+    $('div.thumbnails').append("<%=j render partial: 'photo_events/upload', locals: { photo_event: @photo_event, event: @event } %>");
 }
 <% end %>

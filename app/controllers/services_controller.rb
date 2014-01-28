@@ -31,6 +31,14 @@ class ServicesController < ApplicationController
     end
   end
 
+   def gallery
+    @photo_services= Service.all
+    respond_to do |format|
+      format.html { render :layout => 'layout_welc'}
+      format.json{}
+    end
+  end
+
    #post
   def excel
     uploaded_io = params[:services][:file]
