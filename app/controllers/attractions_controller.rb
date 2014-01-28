@@ -124,7 +124,7 @@ class AttractionsController < ApplicationController
   end
 
   def autocomplete_attraction_name
-    attractions = AttractionTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    attractions = AttractionTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
     result = attractions.collect do |t|
       { value: t.name }
     end

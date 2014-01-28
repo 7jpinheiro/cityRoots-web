@@ -116,7 +116,7 @@ class ServicesController < ApplicationController
   end
 
   def autocomplete_service_name
-    services = ServiceTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    services = ServiceTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
     result = services.collect do |t|
       { value: t.name }
     end

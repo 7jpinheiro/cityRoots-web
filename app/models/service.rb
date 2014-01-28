@@ -48,7 +48,7 @@ class Service < ActiveRecord::Base
 
   def self.search(search,user)
     if search
-      Service.joins(:service_translations).where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+      Service.joins(:service_translations).where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%").distinct
     else
       self.all
     end

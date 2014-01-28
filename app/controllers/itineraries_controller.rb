@@ -48,7 +48,7 @@ class ItinerariesController < ApplicationController
 
   end
   def autocomplete_itinerary_name
-    itineraries = Itinerary.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    itineraries = Itinerary.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
     result = itineraries.collect do |t|
       { value: t.name }
     end

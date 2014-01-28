@@ -120,7 +120,7 @@ class EventsController < ApplicationController
   end
 
   def autocomplete_event_name
-    events = EventTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+    events = EventTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
     result = events.collect do |t|
       { value: t.name }
     end

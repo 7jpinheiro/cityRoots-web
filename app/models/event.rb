@@ -49,7 +49,7 @@ class Event < ActiveRecord::Base
 
   def self.search(search,user)
     if search
-      Event.joins(:event_translations).where("events.web_user_id=? and LOWER(event_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+      Event.joins(:event_translations).where("events.web_user_id=? and LOWER(event_translations.name) LIKE LOWER(?)", user.id,"%#{search}%").distinct
     else
       self.all
     end
