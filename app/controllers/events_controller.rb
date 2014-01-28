@@ -13,11 +13,15 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    if (!current_user.nil?) && (current_user.role? (:admin))
-      @events = Event.page(params[:page]).per(10)
+    if (!params[:search].nil?)
+      if (current_user.role? (:admin))
+        @events =  Event.joins(:event_translations).where("event_translations.language_id=1 and LOWER(event_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
+      else
+        @events =  Event.joins(:event_translations).where("event_translations.language_id=1 and LOWER(event_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
+      end
     else
-      unless(params[:search].nil?)
-        @events = Event.search(params[:search],current_user).page(params[:page]).per(10)
+      if (!current_user.nil?) && (current_user.role? (:admin))
+        @events = Event.page(params[:page]).per(10)
       else
         @events = current_user.web_user.events.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
@@ -120,7 +124,13 @@ class EventsController < ApplicationController
   end
 
   def autocomplete_event_name
-    events = EventTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
+
+    if (!current_user.nil?) && (current_user.role? (:admin))
+      events = EventTranslation.where("language_id=1 and LOWER(name) LIKE LOWER(?)","#{params[:name]}%")
+    else
+      
+      events = EventTranslation.joins('LEFT OUTER JOIN events ON "event_translations"."event_id" = "events"."id"').where("event_translations.language_id=1 and events.web_user_id=? and LOWER(event_translations.name) LIKE LOWER(?)", current_user.id,"#{params[:name]}%")
+    end
     result = events.collect do |t|
       { value: t.name }
     end

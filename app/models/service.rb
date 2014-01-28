@@ -46,12 +46,5 @@ class Service < ActiveRecord::Base
   accepts_nested_attributes_for :service_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :service_translations , :reject_if => :all_blank, :allow_destroy => true
 
-  def self.search(search,user)
-    if search
-      Service.joins(:service_translations).where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%").distinct
-    else
-      self.all
-    end
-  end
 
 end

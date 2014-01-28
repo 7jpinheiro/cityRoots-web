@@ -21,11 +21,15 @@ class AttractionsController < ApplicationController
   # GET /attractions
   # GET /attractions.json
   def index
-    if (!current_user.nil?) && (current_user.role? (:admin))
-      @attractions = Attraction.page(params[:page]).per(10)
-    else
-      unless(params[:search].nil?)
-        @attractions = Attraction.search(params[:search],current_user).page(params[:page]).per(10)
+    if (!params[:search].nil?)
+      if (current_user.role? (:admin))
+        @attractions = Attraction.joins(:attraction_translations).where("attraction_translations.language_id=1 and LOWER(attraction_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
+      else
+        @attractions = Attraction.joins(:attraction_translations).where("attraction_translations.language_id=1 and attractions.web_user_id=? and LOWER(attraction_translations.name) LIKE LOWER(?)", current_user.id,"%#{params[:search]}%").page(params[:page]).per(10)
+      end
+    else 
+      if (!current_user.nil?) && (current_user.role? (:admin))
+        @attractions = Attraction.page(params[:page]).per(10)
       else
         @attractions = current_user.web_user.attractions.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
@@ -44,10 +48,7 @@ class AttractionsController < ApplicationController
       file.write(uploaded_io.read)
     end
     id= current_user.id
-    puts path.inspect + "---------------%%%%%%%%%%"
     @result = system("perl #{Rails.root}/lib/genAttractions  #{path} -u #{id}")
-    
-    puts @result.inspect + "---------------%%%%%%%%%%"
     params=nil
     if !@result
            flash[:error] = "Ocorreu um erro ao processar o seu ficheiro, verifique se o ficheiro contem a formatação correta."
@@ -86,7 +87,6 @@ class AttractionsController < ApplicationController
   # POST /attractions
   # POST /attractions.json
   def create
-    puts "create %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55"
     @attraction = Attraction.new(attraction_params)
     respond_to do |format|
       if @attraction.save
@@ -124,7 +124,14 @@ class AttractionsController < ApplicationController
   end
 
   def autocomplete_attraction_name
-    attractions = AttractionTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
+    if (!current_user.nil?) && (current_user.role? (:admin))
+      attractions = AttractionTranslation.where("language_id=1 and LOWER(name) LIKE LOWER(?)","#{params[:name]}%")
+    else
+
+# SELECT "attraction_translations".* FROM "attraction_translations" INNER JOIN "attractions" ON "attraction_translations"."attraction_id" = "attractions"."id" WHERE (attraction_translations.language_id=1 and attractions.web_user_id=10 and LOWER(attraction_translations.name) LIKE LOWER('%Museu%')) LIMIT 10 OFFSET 0
+      
+      attractions = AttractionTranslation.joins('LEFT OUTER JOIN attractions ON "attraction_translations"."attraction_id" = "attractions"."id"').where("attraction_translations.language_id=1 and attractions.web_user_id=? and LOWER(attraction_translations.name) LIKE LOWER(?)", current_user.id,"#{params[:name]}%")
+    end
     result = attractions.collect do |t|
       { value: t.name }
     end

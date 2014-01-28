@@ -13,25 +13,21 @@ class ItinerariesController < ApplicationController
   # GET /itineraries
   # GET /itineraries.json
   def index
-    if current_user != nil
-      if current_user.role?(:admin)
-        @itineraries=Itinerary.all.page(params[:page]).per(10)
+     if (!params[:search].nil?)
+      if (current_user.role? (:admin))
+        @itineraries = Itinerary.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
       else
-        unless(params[:search].nil?)
-          @itineraries = Itinerary.search(params[:search],current_user).page(params[:page]).per(10)
-        else
-          @itineraries = current_user.itineraries.page(params[:page]).per(10) if  current_user
-        end
+        @itineraries = Itinerary.where("user_id=? and LOWER(name) LIKE LOWER(?)",current_user.id, "%#{params[:search]}%").page(params[:page]).per(10)
       end
     else
-      unless(params[:search].nil?)
-        @itineraries = Itinerary.search(params[:search],current_user).page(params[:page]).per(10)
+      if (current_user.role? (:admin))
+        @itineraries=Itinerary.all.page(params[:page]).per(10)
       else
         @itineraries = current_user.itineraries.page(params[:page]).per(10) if  current_user
       end
     end
     respond_to do |format|
-      format.html{ @itineraries.page(params[:page]).per(10) }
+      format.html{ @itineraries }
       format.json{render :json =>  Itinerary.page(params[:page]).per(25).as_json( :include => {
           :itinerary_attractions=>{:include=>{:attraction=>{:include=>{:attraction_translations=>{:include=>:language},:city=>{:include=>:country},:photo_attractions=>{},:types=>{},:comment_attractions=>{:include=>:mobile_user}}}}},
           :itinerary_events=>{:include=>{:event=>{:include=>{:event_translations=>{:include=>:language},:city=>{:include=>:country},:photo_events=>{},:types=>{},:comment_events=>{:include=>:mobile_user}}}}},
@@ -48,7 +44,11 @@ class ItinerariesController < ApplicationController
 
   end
   def autocomplete_itinerary_name
-    itineraries = Itinerary.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
+     if (!current_user.nil?) && (current_user.role? (:admin))
+      itineraries = Itinerary.select([:name]).where("name LIKE ?", "#{params[:name]}%")
+    else
+      itineraries = Itinerary.select([:name]).where("user_id=? and name LIKE ?", current_user.id, "#{params[:name]}%")
+    end
     result = itineraries.collect do |t|
       { value: t.name }
     end

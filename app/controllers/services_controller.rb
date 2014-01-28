@@ -10,24 +10,25 @@ class ServicesController < ApplicationController
 
   load_and_authorize_resource 
 
-
   # GET /services
   # GET /services.json
   def index
-     if (!current_user.nil?) && (current_user.role? (:admin))
-
-       @services = Service.all.page(params[:page]).per(10)
-
+    if (!params[:search].nil?)
+      if (current_user.role? (:admin))
+        @services = Service.joins(:service_translations).where("service_translations.language_id=1 and LOWER(service_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
+      else
+        @services = Service.joins(:service_translations).where("service_translations.language_id=1 services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", current_user.id,"%#{params[:search]}%").page(params[:page]).per(10)
+      end
     else
-      unless(params[:search].nil?)
-        @services = Service.search(params[:search],current_user).page(params[:page]).per(10)
+      if (current_user.role? (:admin))
+        @services = Service.page(params[:page]).per(10)
       else
         @services = current_user.web_user.services.page(params[:page]).per(10) if  current_user  && current_user.web_user
       end
-      respond_to do |format|
-        format.html{@services.page(params[:page]).per(10)}
-        format.json{render :json => Service.page(params[:page]).per(25).as_json({:include=>{:service_translations=>{:include=>:language},:city=>{:include=>:country},:photo_services=>{},:types=>{},:comment_services=>{:include=>:mobile_user}}})}
-      end
+    end
+    respond_to do |format|
+      format.html{}
+      format.json{}
     end
   end
 
@@ -116,7 +117,11 @@ class ServicesController < ApplicationController
   end
 
   def autocomplete_service_name
-    services = ServiceTranslation.select([:name]).where("name LIKE ?", "%#{params[:name]}%").distinct
+    if (!current_user.nil?) && (current_user.role? (:admin))
+      services = ServiceTranslation.select([:name]).where("language_id=1 and name LIKE ?", "#{params[:name]}%")
+    else
+      services = ServiceTranslation.joins('LEFT OUTER JOIN services ON "service_translations"."service_id" = "services"."id"').where("service_translations.language_id=1 and services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", current_user.id,"#{params[:name]}%")
+    end
     result = services.collect do |t|
       { value: t.name }
     end
