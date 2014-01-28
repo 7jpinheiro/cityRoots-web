@@ -28,7 +28,7 @@ class RatingAttractionsController < ApplicationController
 
     respond_to do |format|
       if @rating_attraction.save
-        format.html { redirect_to @rating_attraction, notice: 'Rating attraction was successfully created.' }
+        format.html { redirect_to @rating_attraction, notice: 'Serviço de classificação para atrações criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @rating_attraction }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class RatingAttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @rating_attraction.update(rating_attraction_params)
-        format.html { redirect_to @rating_attraction, notice: 'Rating attraction was successfully updated.' }
+        format.html { redirect_to @rating_attraction, notice: 'Serviço de classificação para atrações actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

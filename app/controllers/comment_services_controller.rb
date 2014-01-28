@@ -1,6 +1,14 @@
 class CommentServicesController < ApplicationController
   before_action :set_comment_service, only: [:show, :edit, :update, :destroy]
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /comment_services
   # GET /comment_services.json
   def index
@@ -28,7 +36,7 @@ class CommentServicesController < ApplicationController
 
     respond_to do |format|
       if @comment_service.save
-        format.html { redirect_to @comment_service, notice: 'Comment service was successfully created.' }
+        format.html { redirect_to @comment_service, notice: 'Serviço de comentários criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_service }
       else
         format.html { render action: 'new' }
@@ -42,7 +50,7 @@ class CommentServicesController < ApplicationController
   def update
     respond_to do |format|
       if @comment_service.update(comment_service_params)
-        format.html { redirect_to @comment_service, notice: 'Comment service was successfully updated.' }
+        format.html { redirect_to @comment_service, notice: 'Serviço de comentários actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

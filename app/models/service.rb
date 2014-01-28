@@ -3,39 +3,55 @@
 # Table name: services
 #
 #  id              :integer          not null, primary key
-#  name            :string(100)      not null
-#  description     :text
-#  schedule        :string(255)
-#  site            :string(100)
-#  email           :string(100)
+#  site            :string(255)
+#  email           :string(255)
 #  address         :string(255)
+#  phone           :string(30)
 #  latitude        :float
 #  longitude       :float
-#  transport       :string(100)
-#  active          :boolean          not null
+#  source          :text
+#  active          :boolean          default(TRUE), not null
 #  timestamp       :integer          not null
 #  reference_point :boolean          not null
 #  capacity        :integer
 #  details         :string(255)
-#  service_type_id :integer          not null
+#  rating          :float            default(0.0), not null
+#  accessibility   :boolean          default(FALSE), not null
 #  web_user_id     :integer          not null
 #  city_id         :integer          not null
 #
 
 class Service < ActiveRecord::Base
-  validates :name, presence:true ,length: {minimum: 2}
-  validates :description, presence:true, length: {minimum: 2}
-  validates :email, length: {minimum: 3}
-  validates :site, length: {minimum: 2}
-  validates :address, presence:true,length: {minimum: 5}
-  validates :price, length: {minimum: 2}
-  validates :latitude, presence:true
-  validates :longitude, presence:true
-	has_many :rating_services, dependent: :destroy
+
+#  validates :site, length: {minimum: 2}
+#  validates :email, length: {minimum: 3}
+#  validates :address, presence:true,length: {minimum: 5}
+#  validates :latitude, presence:false
+#  validates :longitude, presence:false
+#  validates :capacity, presence:true
+#  validates :details, presence:true
+
+  belongs_to :web_user
+  belongs_to :city
+
+  has_many :service_types, dependent: :destroy
+  has_many :service_translations , dependent: :destroy
+  has_many :rating_services, dependent: :destroy
 	has_many :comment_services, dependent: :destroy
 	has_many :photo_services, dependent: :destroy
-	has_many :itenerary_services, dependent: :destroy
-	belongs_to :service_type
-	belongs_to :web_user
-	belongs_to :city
+	has_many :itinerary_services, dependent: :destroy
+  has_many :types, :through=> :service_types
+  has_many :languages , :through => :event_translations
+
+  accepts_nested_attributes_for :service_types , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :service_translations , :reject_if => :all_blank, :allow_destroy => true
+
+  def self.search(search,user)
+    if search
+      Service.joins(:service_translations).where("services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+    else
+      self.all
+    end
+  end
+
 end

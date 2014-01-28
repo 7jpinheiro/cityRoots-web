@@ -1,6 +1,14 @@
 class CommentItinerariesController < ApplicationController
   before_action :set_comment_itinerary, only: [:show, :edit, :update, :destroy]
 
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /comment_itineraries
   # GET /comment_itineraries.json
   def index
@@ -28,7 +36,7 @@ class CommentItinerariesController < ApplicationController
 
     respond_to do |format|
       if @comment_itinerary.save
-        format.html { redirect_to @comment_itinerary, notice: 'Comment itinerary was successfully created.' }
+        format.html { redirect_to @comment_itinerary, notice: 'Comentário de itinerário criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_itinerary }
       else
         format.html { render action: 'new' }
@@ -42,7 +50,7 @@ class CommentItinerariesController < ApplicationController
   def update
     respond_to do |format|
       if @comment_itinerary.update(comment_itinerary_params)
-        format.html { redirect_to @comment_itinerary, notice: 'Comment itinerary was successfully updated.' }
+        format.html { redirect_to @comment_itinerary, notice: 'Comentário de itinerário actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +77,6 @@ class CommentItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_itinerary_params
-      params.require(:comment_itinerary).permit(:comment, :evaluationdate, :mobile_user_id, :itinerary_id)
+      params.require(:comment_itinerary).permit(:id,:comment, :evaluationdate, :mobile_user_id, :itinerary_id)
     end
 end

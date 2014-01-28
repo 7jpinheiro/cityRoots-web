@@ -5,31 +5,23 @@ Repositório da plataforma web do grupo Roteiro Turístico da UCE15(2013/2014) d
 
 TODO List:
 
-Páginas:
-
-[X] - Página de listagem de Pontos de interesse  
-[X] - Página de listagem de Eventos  
-[X] - Página de listagem de Rotas  
-[ ] - Página de listagem de Serviços  
-[ ] - Página de show de um Ponto de interesse  
-[ ] - Página de show de um Evento  
-[ ] - Página de show de um Rota  
-[ ] - Página de show de um Serviço  
-[X] - Página de criação/edição de um Ponto de interesse  
-[X] - Página de criação/edição de um Evento  
-[X] - Página de criação/edição de um Rota  
-[ ] - Página de criação/edição de um Serviço  
-
-Funcionalidades:
-
-[X] - Imagens com paperclip e jQuery File Upload  
-[ ] - Aninhamento dos modulos   
-[X] - Mapas   
-[X] - Login com devise  
-[ ] - Grupo de users com o Cancan   
+[ ] - Fotos nas listagens  
+[ ] - carousel nos show's com botao para add fotos e dps add no carousel tb   (Catarina a fazer)  
+[ ] - Primeiro login reencaminhar para registo de entidade (new_web_user)   (Pinheiro a fazer)  
+[ ] - Verificar se as mensagens estão todas em Portugues  
+[ ] - Perfil do Utilizador  (Fonseca)
+[X] - Planos para comerciantes e add o botão comprar para ir para o pagamento  (Catarina)  
+[X] - Página de pagamentos por bonita   
+[ ] - Listagem de estabelecimentos deveria ser diferente  
+[X] - Mapa contactos directcionada para o DI   (----)  
+[ ] - Testar permissões dos diferentes tipos de user  
+[ ] - Linguagem em PT para usar o devise.pt.yml e o pt.yml  (Pinheiro)  
+[ ] - import de ficheiro excel com dados  (Brito)  
 
 
 
+Area de Admin
 
-
+[ ] - Listagem de users  
+[ ] - Activar users do tipo entidade  
 

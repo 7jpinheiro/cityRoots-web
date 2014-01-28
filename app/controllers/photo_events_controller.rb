@@ -1,6 +1,7 @@
 class PhotoEventsController < ApplicationController
   before_action :set_photo_event, only: [:show, :edit, :update, :destroy]
 
+
   # GET /photo_events
   # GET /photo_events.json
   def index
@@ -14,7 +15,6 @@ class PhotoEventsController < ApplicationController
 
   # GET /photo_events/new
   def new
-    puts "$$$$$$$$$$$$$$ ENTRA NO NEW PHOTO EVENTS $$$$$$$$$$$$$$"
     @photo_event = PhotoEvent.new
   end
 
@@ -25,17 +25,25 @@ class PhotoEventsController < ApplicationController
   # POST /photo_events
   # POST /photo_events.json
   def create
-    puts "$$$$$$$$$$$$$$ ENTRA NO CREATE PHOTO EVENTS $$$$$$$$$$$$$$"
     @photo_event = PhotoEvent.create photo_event_params
+
+  #  respond_to do |format|
+  #    if @photo_event.save
+  #      format.html { redirect_to @photo_event, notice: 'Photo event was successfully created.' }
+  #      format.json { render action: 'show', status: :created, location: @photo_event }
+  #    else
+  #      format.html { render action: 'new' }
+  #      format.json { render json: @photo_event.errors, status: :unprocessable_entity }
+  #    end
+  #  end
   end
 
   # PATCH/PUT /photo_events/1
   # PATCH/PUT /photo_events/1.json
   def update
-    puts "$$$$$$$$$$$$$$ ENTRA NO UPDATE PHOTO EVENTS $$$$$$$$$$$$$$"
     respond_to do |format|
       if @photo_event.update(photo_event_params)
-        format.html { redirect_to @photo_event, notice: 'Photo event was successfully updated.' }
+        format.html { redirect_to @photo_event, notice: 'Foto de evento actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,6 +70,6 @@ class PhotoEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_event_params
-      params.require(:photo_event).permit(:name, :description, :photo, :event_id)
+      params.require(:photo_event).permit(:description, :photo, :event_id)
     end
 end

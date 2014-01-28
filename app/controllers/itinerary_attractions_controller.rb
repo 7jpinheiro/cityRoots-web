@@ -1,6 +1,7 @@
 class ItineraryAttractionsController < ApplicationController
   before_action :set_itinerary_attraction, only: [:show, :edit, :update, :destroy]
 
+
   # GET /itinerary_attractions
   # GET /itinerary_attractions.json
   def index
@@ -28,7 +29,7 @@ class ItineraryAttractionsController < ApplicationController
 
     respond_to do |format|
       if @itinerary_attraction.save
-        format.html { redirect_to @itinerary_attraction, notice: 'Itinerary attraction was successfully created.' }
+        format.html { redirect_to @itinerary_attraction, notice: 'Itinerário de atracção criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_attraction }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class ItineraryAttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_attraction.update(itinerary_attraction_params)
-        format.html { redirect_to @itinerary_attraction, notice: 'Itinerary attraction was successfully updated.' }
+        format.html { redirect_to @itinerary_attraction, notice: 'Itinerário de atracção actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +70,6 @@ class ItineraryAttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_attraction_params
-      params.require(:itinerary_attraction).permit(:itinerary_id, :attraction_id)
+      params.require(:itinerary_attraction).permit(:id,:order,:itinerary_id, :attraction_id)
     end
 end

@@ -1,187 +1,61 @@
-      <html lang="en"><head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta name="description" content="">
-          <meta name="author" content="">
-          <title>CityRoots</title>
-          <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
-          <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>CityRoots</title>
+  <%= include_gon %>
+  <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <!-- Bootstrap core CSS -->
+  <%= stylesheet_link_tag "jquery.ui.autocomplete" ,"bootstrap", "flatty", "screen" %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <%= javascript_include_tag "application" , "bootstrap-filestyle.min", "nested_form", "modal", "bootstrap.js" %>
 
-        <!-- Bootstrap core CSS -->
-          <%= stylesheet_link_tag "bootstrap.min", "font-awesome.min", "bootflat", "bootflat-extensions","bootflat-square", "layout" %>
-          <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-          <!--[if lt IE 9]>
-            <%= javascript_include_tag "html5shiv", "respond.min" %>
-          <![endif]-->
-        </head>
+  
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <%= javascript_include_tag "html5shiv", "respond.min" %>
+  <![endif]-->
+</head>
 
-        <body>
+<body>
+  <%= render 'layouts/header' %>
 
-          <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-            <div class="">
-              <div class="navbar-header col-sm-2">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <%= link_to welcome_index_path, :class => "navbar-brand" do%>
-                    <%= image_tag "Index/logo_CR.png" , :style =>"height:30px;width:30px;"%> CityRoots
-                <% end %>
-              </div>
-              <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                  <li class="<%= is_active?(welcome_index_path) %>">
-                      <%= link_to "Home", welcome_index_path %>
-                  </li>
-                  <li class="<%= is_active?(pacotes_path) %>">
-                      <%= link_to "Pacotes", pacotes_path %>
-                  </li>
-                  <li class="<%= is_active?(galeria_path) %>">
-                      <%= link_to "Galeria", galeria_path %>
-                  </li>
-                  <li class="<%= is_active?(contact_path) %>">
-                      <%= link_to "Contactos", contact_path %>
-                  </li>
-                  <li><a href="#about">Parceiros</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <% if user_signed_in?
-                        if current_user.username != nil
-                  %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %>  <b class="caret"></b></a><%
-                        else
-                          %><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.email %>  <b class="caret"></b></a><%
-                        end
-                  %>
-                      <ul class="dropdown-menu">
-                       
-                        <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
-                        <li><a href="#"><i class="fa fa-cog"></i> Preferências</a></li>
-                        <li class="divider"></li>
-                        <%= link_to destroy_user_session_path(:authenticity_token => form_authenticity_token()) , :method => :delete do%>
-                          <i class=" fa fa-off"></i> Logout
-                        <% end %>
-                      </ul>
-                    </li>
-                  <% else %>
-                    <li><%= link_to "Login", user_session_path, :class=>"first"  %></li>
-                    <li><%= link_to "Registo", new_user_registration_path %></li>
-                  <% end %>
-                </ul>
-              </div>
-            </div><!-- /.container -->
-          </div><!-- /.navbar -->
-
-          
+  <div class="container fill" style=" min-height:100%; padding-top:60px">
+      <div class="bs-docs-section">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
       </div>
+  </div>
 
-      <div class="row row-offcanvas row-offcanvas-right">
-            <div class="col-xs-12 col-sm-12" style="height:100%">
-              <div class="col-xs-6 col-sm-1 sidebar-offcanvas" id="sidebar" role="navigation">
-                <div class="list-group sidebar">
-                    <li class="<%= is_active?(attractions_path) %>">
-                      <%= link_to attractions_path, :class=>"list-group-item" do %>
-                          <i class=" fa fa-tower"></i> Pontos
-                      <% end %>
-                    </li>
-                    <li class="<%= is_active?(itineraries_path) %>">
-                      <%= link_to itineraries_path, :class=>"list-group-item" do %>
-                          <i class=" fa fa-globe"></i> Rotas
-                      <% end %>
-                    </li>
-                    <li class="<%= is_active?(events_path) %>">
-                      <%= link_to events_path, :class=>"list-group-item"  do %>
-                        <i class=" fa fa-music"></i>Eventos
-                      <% end %>
-                    </li>
-                    <li class="<%= is_active?(services_path) %>">
-                      <%= link_to services_path, :class=>"list-group-item"  do %>
-                        <i class=" fa fa-home"></i>Serviços
-                      <%end%>
-                    </li>
-                    <li class="<%= is_active?(services_path) %>">
-                      <%= link_to services_path, :class=>"list-group-item " do %>
-                        <i class=" fa fa-bar-chart-o"></i>Estatistica
-                      <%end%>
-                    </li>
-                </div>
-              </div><!--/span-->
-              <div class="col-xs-12 col-sm-11 col-sm-offset-1" id="body-page">
-                <div class="row">
-                <div class="center_body">                
-                  <%= yield %>
-                </div>
-                </div> 
-              </div><!--/span-->
-
-
-            </div><!--/row-->
-
-          </div><!--/.container-->
-          <hr/>
-<!--          
-      <footer>
-        <div class="container" >    
-          <div class="row">
-          <div class="col-lg-12">
-            <div class="col-md-3">
-              <ul class="list-unstyled">
-                <li>GitHub<li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact & support</a></li>
-                <li><a href="#">Enterprise</a></li>
-                <li><a href="#">Site status</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <ul class="list-unstyled">
-                <li>Applications<li>
-                <li><a href="#">Product for Mac</a></li>
-                <li><a href="#">Product for Windows</a></li>
-                <li><a href="#">Product mobile apps</a></li>              
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <ul class="list-unstyled">
-                <li>Services<li>
-                <li><a href="#">Web analytics</a></li>
-                <li><a href="#">Presentations</a></li>
-                <li><a href="#">Code snippets</a></li>
-                <li><a href="#">Job board</a></li>              
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <ul class="list-unstyled">
-                <li>Documentation<li>
-                <li><a href="#">Product Help</a></li>
-                <li><a href="#">Developer API</a></li>
-                <li><a href="#">Product Markdown</a></li>
-                <li><a href="#">Product Pages</a></li>              
-              </ul>
-            </div>  
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="col-md-8">
-              <a href="#">Terms of Service</a>    
-              <a href="#">Privacy</a>    
-              <a href="#">Security</a>
-            </div>
-            <div class="col-md-4">
-              <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
-            </div>
-          </div>
-        </div>
-        </footer> -->
-          <!-- Bootstrap core JavaScript
-          ================================================== -->
-          <!-- Placed at the end of the document so the pages load faster -->
-          <%= javascript_include_tag  "application" , "bootstrap.min", "offcanvas" %>
-      	</body>
-
-
-      </html>
+  <%= render 'layouts/footer' %>
+  
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script>
+      window.twttr = (function (d,s,id) {
+          var t, js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+          js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+          return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+  </script>
+  <script>
+      var _gauges = _gauges || [];
+      (function() {
+          var t   = document.createElement('script');
+          t.async = true;
+          t.id    = 'gauges-tracker';
+          t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
+          t.src = '//secure.gaug.es/track.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(t, s);
+      })();
+  </script>
+  </body>
+</html>

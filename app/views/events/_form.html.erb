@@ -1,170 +1,307 @@
-<%= form_for @event do |f| %>
-        <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= javascript_include_tag "jqBootstrapValidation" %>
 
-      <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <form role="form" class="form-horizontal">
+<script src="http://blueimp.github.io/jQuery-File-Upload/css/jquery.fileupload.css"></script>
+<%= nested_form_for(@event,:html=>{:multipart=>true,:novalidate => 'novalidate'}) do |f| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-    <div style="position:relative;">
-              <%= f.fields_for :photo_events, :html => {:multipart => true}  do |builder| %>
-                <%= builder.label :photo, "Upload Image:" %>
-                <%= builder.file_field :photo, multiple: true %>
-                <%= builder.hidden_field :event_id,  :value => 11 %>
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Nome" ,:for=>"nome" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :name ,:id=>"nome" , :class=>"form-control", :placeholder=>"Festa de S.João" %>
+    <form role="form" class="form-horizontal">
+      <%
+         @user=WebUser.where("id=?",current_user.id).all
+         if @user.length==0
+      %>
+          <script type="text/javascript">
+              window.location.href="<%= new_web_user_path %>"  // put your correct path in a string here
+          </script>
+      <%
+         else
+           cityid=@user.first.city_id
+         end
+      %>
+      <div class="row">
+      <%= f.fields_for :event_translations do |e| %>
+        <span class="col-sm-6">
+        <div class="well well-sm">
+          <div class="row">
+            <br/>
+            <div class="form-group control-group" style="margin-left: 20px;">
+              <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
+              <div class="col-sm-7">
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true}) %>
+
+                <p class="help-block"></p>
+              </div>
+            </div>
+          </div>
+          <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Nome" ,:for=>"name" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <%= e.text_field :name ,:id=>"name" , :class=>"form-control form-control-square", :placeholder=>"Festa de S.João",:required => true,:autofocus => true %>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Descrição" ,:for=>"description" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <%= e.text_area :description ,:id=>"description" , :class=>"form-control form-control-square", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;",:autofocus => true %>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Horário" ,:for=>"schedule" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <%= e.text_field :schedule ,:id=>"schedule" , :class=>"form-control form-control-square", :placeholder=>"Segunda a Sexta das 10:00 as 21:00",:autofocus => true %>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Transporte" ,:for=>"transport" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte",:autofocus => true %>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Preço" ,:for=>"price" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€",:autofocus => true%>
+                    <p class="help-block"></p>
+                    <span class="input-group-addon">€</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group control-group" style="margin-left: 20px;">
+                <%= e.label "Programação" ,:for=>"program" , :class=>"col-sm-3 control-label" %>
+                <div class="col-sm-7">
+                  <%= e.text_field :program ,:id=>"program" , :class=>"form-control form-control-square" , :placeholder=>"15 horas Abertura oficial",:autofocus => true%>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+          <br/><span  style="margin-left: 20px; margin-bottom: 20px;"><%= e.link_to_remove "Remover Lingua" %></span>
+          <br/>
+          <br/>
         </div>
+      </span>
+        <% end %>
+        <p><%= f.link_to_add "Adicionar Lingua", :event_translations %></p>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Descrição" ,:for=>"descricao" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_area :description ,:id=>"descricao" , :class=>"form-control", :placeholder=>"Festa muito popular em Braga", :style=>"height:135px;" %>
+      <div class="well well-sm">
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;"%>
+            <div class="col-sm-6">
+              <%= f.text_field :site ,:id=>"site" , :class=>"form-control from-control-square", :placeholder=>"www.festasaojoao.pt",:autofocus => true %>
+              <p class="help-block"></p>
+            </div>
+          </div>
         </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-4 control-label"  ,:style=>"text-align:center;"%>
+            <div class="col-sm-6">
+              <%= f.text_field :email ,:id=>"email" , :class=>"form-control form-control-square", :placeholder=>"email@festasaojoao.pt",:type =>"email",:autofocus => true %>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Telefone" ,:for=>"phone" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control form-control-square", :placeholder=>"253 323 532",:autofocus => true, :minlength =>"9",:maxlength =>"9"   %>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_area :address ,:id=>"morada" , :class=>"form-control  form-control-square", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;",:minlength=>"5",:required => true,:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-6">
+            <div id="map-canvas" style="width: 100%; height: 400px" onload="mapinit();"></div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
+            <div class="col-sm-3">
+              <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control form-control-square", :placeholder=>"41.32217",:type => "number",:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+            <div class="col-sm-3">
+              <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control form-control-square", :placeholder=>"-8.493226",:type => "number",:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Data de inicio" ,:for=>"startdate" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control form-control-square" , :type=> "date",:required => true,:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Data de fim" ,:for=>"enddate" , :class=>"col-sm-4 control-label" ,:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control form-control-square" , :type=> "date",:required => true,:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Origem dos dados" ,:for=>"source" , :class=>"col-sm-4 control-label",:style=>"text-align:center;" %>
+            <div class="col-sm-6">
+              <%= f.text_field :source ,:id=>"source" , :class=>"form-control  form-control-square", :placeholder=>"www.origemdosdados.pt",:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <%= f.label "Organização" ,:for=>"organization" , :class=>"col-sm-4 control-label"  ,:style=>"text-align:center;"%>
+            <div class="col-sm-6">
+              <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control form-control-square" , :placeholder=>"Camara de Braga",:autofocus => true%>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <label class="col-sm-4 control-label" style="text-align: center;"><i class="fa fa-wheelchair"></i></label>
+            <div class="col-sm-6">
+              <%= f.check_box :accessibility ,:id=>"accessibility" , :value=>0,:autofocus => true %>
+              <p class="help-block"></p>
+            </div>
+          </div>
+        </div>
+        <br/>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Horário" ,:for=>"horario" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :schedule ,:id=>"horario" , :class=>"form-control", :placeholder=>"Segunda a Sexta das 10:00 as 21:00" %>
-        </div>
+      <div class="row">
+        <%= f.fields_for :event_types do |type| %>
+          <span class="col-sm-6">
+          <div class="well well-sm">
+            <div class="row">
+              <br/>
+              <div class="form-group control-group">
+                <%= type.label "Tipo" ,:for=>"type_id" , :class=>"control-label col-sm-3" ,:style=>"text-align:center;" %>
+                <div class="col-sm-7">
+                  <%= type.collection_select( :type_id, Type.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control form-control-square",:autofocus => true} ) %>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+            </div>
+            <p>
+              <br/><span  style="margin-left: 20px; margin-bottom: 20px;"><%= type.link_to_remove "Remover Tipo" %></span>
+            </p>
+          </div>
+          </span>
+
+        <%
+           end
+        %>
+        <p><%= f.link_to_add "Adicionar Tipo", :event_types %></p>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Site" ,:for=>"site" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :site ,:id=>"site" , :class=>"form-control", :placeholder=>"www.festasaojoao.pt" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Email" ,:for=>"email" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :email ,:id=>"email" , :class=>"form-control", :placeholder=>"email@festasaojoao.pt" %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Morada" ,:for=>"morada" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_area :address ,:id=>"morada" , :class=>"form-control", :placeholder=>"Avenida Centrar, 4834-352" , :style=>"height:135px;"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Coordenadas Geograficas" ,:for=>"latitude" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-3">
-          <%= f.text_field :latitude ,:id=>"latitude" , :class=>"form-control", :placeholder=>"41.32217"%>
-        </div>
-        <div class="col-sm-3">
-          <%= f.text_field :longitude ,:id=>"longitude" , :class=>"form-control", :placeholder=>"-8.493226"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Transporte" ,:for=>"transport" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :transport ,:id=>"transport" , :class=>"form-control", :placeholder=>"Autocarros a partir das 15:00"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Data de inicio" ,:for=>"startdate" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :startdate ,:id=>"startdate" , :class=>"form-control" , :type=> "date"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Data de fim" ,:for=>"enddate" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-           <%= f.text_field :enddate ,:id=>"enddate" , :class=>"form-control" , :type=> "date"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Organização" ,:for=>"organization" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :organization ,:id=>"organization" , :class=>"form-control" , :placeholder=>"Camara de Braga"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Preço" ,:for=>"price" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <div class="input-group">
-            <%= f.text_field :price ,:id=>"price" , :class=>"form-control" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
-            <span class="input-group-addon">€</span>
+
+        <br/>
+        <!-- Value by sustem-->
+        <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
+        <%= f.text_field :city_id ,:id=>"city_id", :value=>cityid , :hidden=>"hidden" %>
+        <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
+        <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>current_user.id , :hidden=>"hidden" %>
+        <br/>
+        <div class="row">
+          <div class="form-group control-group">
+            <div class="col-sm-6">
+              <%= f.submit "Guardar", :class=>"btn btn-primary btn-square" %>
+            </div>
+            <br/>
+            <br/>
           </div>
         </div>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Programação" ,:for=>"program" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :program ,:id=>"program" , :class=>"form-control" , :placeholder=>"15 horas Abertura oficial"%>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label "Tipo de Evento" ,:for=>"event_type" , :class=>"col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.collection_select( :event_type_id, EventType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control"} ) %>
-        </div>
-      </div>
-    </div>
-    <br/>
-    <!-- Value by sustem-->
-    <%= time = Time.now.to_i; f.text_field :timestamp , :value=>time , :hidden=>"hidden" %>
-    <%= f.text_field :city_id ,:id=>"city_id", :value=>1 , :hidden=>"hidden" %>
-    <%= f.text_field :active ,:id=>"active", :value=>1 , :hidden=>"hidden" %>
-    <%= f.text_field :web_user_id ,:id=>"web_user_id", :value=>1 , :hidden=>"hidden" %>
-    <br/>
-    <div class="row">
-      <div class="form-group">
-        <div class="col-sm-6">
-          <%= f.submit :class=>"btn btn-primary" %>
-        </div>
-        <br/>
-        <br/>
-      </div>
-    </div>
-  </form>
+    </form>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+    <script type="text/javascript">
+
+        var marker;
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
+            var mapOptions = {
+                zoom: 12,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                draggable:true,
+                map: map
+            });
+            google.maps.event.addListener(marker, 'dragend', function()
+            {
+                document.getElementById("longitude").value=marker.getPosition().lng();
+                document.getElementById("latitude").value=marker.getPosition().lat();
+            });
+
+        }
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <style>
+        #map-canvas { height: 100% }
+    </style>
 <% end %>
+
+<script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>

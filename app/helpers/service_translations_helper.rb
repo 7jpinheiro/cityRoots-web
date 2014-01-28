@@ -1,0 +1,2 @@
+module ServiceTranslationsHelper
+end

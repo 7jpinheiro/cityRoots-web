@@ -1,0 +1,10 @@
+if @photo_attraction.new_record? %>
+alert('Erro a gravar a foto.');
+<% else %>
+if ($('div.upload') !== undefined) {
+    $('div.upload').remove();
+}
+if ($('carousel-inner') !== undefined) {
+    $('carousel-inner').append("<%=j render partial: 'photo_attractions/upload', locals: { photo_attraction: @photo_attraction } %>");
+}
+<% end %>

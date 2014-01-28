@@ -1,6 +1,7 @@
 class ItineraryEventsController < ApplicationController
   before_action :set_itinerary_event, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /itinerary_events
   # GET /itinerary_events.json
   def index
@@ -28,7 +29,7 @@ class ItineraryEventsController < ApplicationController
 
     respond_to do |format|
       if @itinerary_event.save
-        format.html { redirect_to @itinerary_event, notice: 'Itinerary event was successfully created.' }
+        format.html { redirect_to @itinerary_event, notice: 'Itinerário de eventos criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_event }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class ItineraryEventsController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_event.update(itinerary_event_params)
-        format.html { redirect_to @itinerary_event, notice: 'Itinerary event was successfully updated.' }
+        format.html { redirect_to @itinerary_event, notice: 'Itinerário de eventos actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +70,6 @@ class ItineraryEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_event_params
-      params.require(:itinerary_event).permit(:itinerary_id, :event_id)
+      params.require(:itinerary_event).permit(:id,:order,:itinerary_id, :event_id)
     end
 end

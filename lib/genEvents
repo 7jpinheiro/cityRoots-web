@@ -1,0 +1,277 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use open ":encoding(Latin1)" ,IN => ":crlf" , OUT => ":bytes";
+
+use Text::Iconv;
+use XML::Quote;
+my $converter = Text::Iconv->new("utf-8","latin1");
+
+
+use Spreadsheet::XLSX;
+use DateTime::Format::Excel;
+use DBI;
+use Data::Dumper;
+use Term::ANSIColor;
+use Getopt::Long;
+
+my $user_id = undef;
+
+GetOptions ("u=i" => \$user_id);
+
+print STDERR color 'red';
+die "No user was suplied" if (not defined $user_id);
+print STDERR color 'reset';
+
+my $file = shift;
+my $excel = Spreadsheet::XLSX -> new ($file);
+my $data = {};
+my $queries = {};
+my $city;
+
+my $dbh = DBI->connect("DBI:Pg:dbname=cityroots;host=localhost;port=5432",'postgres',123456);
+my $sth;
+
+
+sub getCity($) {
+
+    my $name = shift;
+
+    $sth = $dbh->prepare("select id from cities where name=?");
+    $sth->bind_param(1,$name);
+    $sth->execute();
+
+    my $res = $sth->fetchrow_hashref();
+
+    $sth->finish();
+    return $res->{'id'} if $res->{'id'};
+
+    return -1;
+
+
+}
+
+sub removeCRLF ($) {
+
+    my $str = shift;
+
+    if($str) {
+        $str =~ s/&#10;/\n/g;
+    }
+
+    return $str;
+
+}
+
+
+
+sub genEvents {
+
+
+    foreach my $key (keys $data) {
+
+        if(ref($data->{$key}) eq "HASH" and $data->{$key}->{type} eq "event") {
+
+            my $eventSt = "insert into events (site,email,address,phone,latitude,longitude,source,timestamp,startdate,enddate,organization,accessibility,city_id,web_user_id) values (?,?,?,?,?,?,?,cast(extract(epoch from current_timestamp) as integer),?,?,?,?,?,?)";
+
+            my $eventTransSt = "insert into event_translations (name,price,schedule,description,transport,program,event_id,language_id) values (?,?,?,?,?,?,?,?)";
+
+            my $langSt = "select id from languages where abv=?";
+
+            my $existsSt = "select id from event_translations where name=?";
+            $sth = $dbh->prepare($existsSt);
+            $sth->bind_param(1,$key);
+            $sth->execute();
+            my $res = $sth->fetchrow_hashref();
+            if($res->{'id'}) {
+                print "$key already exists \n";
+                $sth->finish();
+                next;
+            }
+
+            $sth = $dbh->prepare($eventSt);
+
+            $sth->bind_param(1,$data->{$key}->{url});
+            $sth->bind_param(2,$data->{$key}->{email});
+            $sth->bind_param(3,$data->{$key}->{address});
+            $sth->bind_param(4,$data->{$key}->{phone});
+            $sth->bind_param(5,$data->{$key}->{lat});
+            $sth->bind_param(6,$data->{$key}->{long});
+            $sth->bind_param(7,$data->{$key}->{source});
+            $sth->bind_param(8,$data->{$key}->{startDate});
+            $sth->bind_param(9,$data->{$key}->{endDate});
+            $sth->bind_param(10,$key); #organization
+            $sth->bind_param(11,"false");
+            $sth->bind_param(12,$city); #city_id
+            $sth->bind_param(13,$user_id); #web_user_id
+
+            $sth->execute();
+
+            my $newid = $dbh->last_insert_id(undef,undef,"events",undef);
+
+
+
+
+            foreach my $type (@{$data->{$key}->{pType}}) {
+                if($type) {
+                    $sth = $dbh->prepare("select id from types where name=?");
+                    $sth->bind_param(1,$type);
+                    $sth->execute();
+
+                    my $res = $sth->fetchrow_hashref();
+
+                    if(!$res->{'id'}) {
+                        print STDERR color 'red';
+                        print STDERR "Type $type doesn't exist\n";
+                        print STDERR color 'reset';
+                        next;
+                    }
+
+                    $sth = $dbh->prepare("insert into event_types (type_id,event_id) values (?,?)" );
+                    $sth->bind_param(1,$res->{'id'});
+                    $sth->bind_param(2,$newid);
+
+                    $sth->execute();
+                }
+            }
+
+
+            foreach my $lang ("pt","en","es","de","fr") {
+
+                $sth = $dbh->prepare($langSt);
+                $sth->bind_param(1,uc $lang);
+                $sth->execute();
+                $res = $sth->fetchrow_hashref();
+
+                my $lang_id = $res->{'id'};
+
+
+                $sth = $dbh->prepare($eventTransSt);
+
+                $sth->bind_param(1,$key);
+                $sth->bind_param(2,$data->{$key}->{"price_$lang"});
+                $sth->bind_param(3,$data->{$key}->{"hours_$lang"});
+                $sth->bind_param(4,$data->{$key}->{"desc_$lang"});
+                $sth->bind_param(5,undef); #transport
+                $sth->bind_param(6,$data->{$key}->{"programme_$lang"});
+                $sth->bind_param(7,$newid);
+                $sth->bind_param(8,$lang_id); #language_id
+
+                $sth->execute();
+            }
+
+
+            print "Event: $key inserted \n";
+
+
+        }
+
+    }
+
+}
+
+
+sub getDate {
+
+    my $date = DateTime::Format::Excel->parse_datetime(shift);
+    $date =~ s/(\d+)-(\d+)-(\d+)(.*)/$1-$2-$3/g;
+    return $date;
+
+}
+
+
+
+foreach my $sheet (@{$excel -> {Worksheet}}) {
+
+    $sheet->{MaxRow} ||= $sheet->{MinRow};
+
+    foreach my $row (1 .. $sheet->{MaxRow}) {
+
+        $sheet -> {MaxCol} ||= $sheet -> {MinCol};
+
+        $data->{city} = $sheet->{Cells}[0][1]->{Val};
+
+        my $cell = $sheet->{Cells}[$row][2];
+        my $types;
+        my $arr = [];
+        if($cell) {
+
+            if(my $types = $sheet->{Cells}[$row][0]->{Val}) {
+                foreach my $type (split /,/ , $sheet->{Cells}[$row][0]->{Val}) {
+                    $type =~ s/\s*(.*)\s*$/$1/;
+                    unshift $arr,$type;
+                }
+            }
+
+            $data->{$cell->{Val}}->{pType}       = $arr;
+            $data->{$cell->{Val}}->{type}        = removeCRLF( xml_dequote( $sheet->{Cells}[$row][1]->{Val} ));
+
+            $data->{$cell->{Val}}->{desc_pt}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][3]->{Val} ));
+            $data->{$cell->{Val}}->{hours_pt}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][4]->{Val} ));
+            $data->{$cell->{Val}}->{price_pt}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][5]->{Val} ));
+
+            $data->{$cell->{Val}}->{desc_en}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][6]->{Val} ));
+            $data->{$cell->{Val}}->{hours_en}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][7]->{Val} ));
+            $data->{$cell->{Val}}->{price_en}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][8]->{Val} ));
+
+
+
+            $data->{$cell->{Val}}->{desc_fr}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][9]->{Val} ));
+            $data->{$cell->{Val}}->{hours_fr}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][10]->{Val} ));
+            $data->{$cell->{Val}}->{price_fr}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][11]->{Val} ));
+
+
+            $data->{$cell->{Val}}->{desc_es}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][12]->{Val} ));
+            $data->{$cell->{Val}}->{hours_es}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][13]->{Val} ));
+            $data->{$cell->{Val}}->{price_es}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][14]->{Val} ));
+
+
+            $data->{$cell->{Val}}->{desc_de}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][15]->{Val} ));
+            $data->{$cell->{Val}}->{hours_de}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][16]->{Val} ));
+            $data->{$cell->{Val}}->{price_de}    = removeCRLF( xml_dequote( $sheet->{Cells}[$row][17]->{Val} ));
+
+
+            $data->{$cell->{Val}}->{phone}       = removeCRLF( xml_dequote( $sheet->{Cells}[$row][18]->{Val} ));
+            $data->{$cell->{Val}}->{email}       = removeCRLF( xml_dequote( $sheet->{Cells}[$row][19]->{Val} ));
+            $data->{$cell->{Val}}->{url}         = removeCRLF( xml_dequote( $sheet->{Cells}[$row][20]->{Val} ));
+            $data->{$cell->{Val}}->{source}      = removeCRLF( xml_dequote( $sheet->{Cells}[$row][21]->{Val} ));
+            $data->{$cell->{Val}}->{lat}         = removeCRLF( xml_dequote( $sheet->{Cells}[$row][22]->{Val} ));
+            $data->{$cell->{Val}}->{long}        = removeCRLF( xml_dequote( $sheet->{Cells}[$row][23]->{Val} ));
+            $data->{$cell->{Val}}->{address}     = removeCRLF( xml_dequote( $sheet->{Cells}[$row][24]->{Val} ));
+            $data->{$cell->{Val}}->{programme}   = removeCRLF( xml_dequote( $sheet->{Cells}[$row][25]->{Val} ));
+
+            my $sdate = $sheet->{Cells}[$row][36]->{Val};
+            my $edate = $sheet->{Cells}[$row][37]->{Val};
+            if (defined $edate and defined $sdate) {
+                $data->{$cell->{Val}}->{startDate}   = getDate($sdate);
+                $data->{$cell->{Val}}->{endDate}     = getDate($edate);
+            }
+        }
+    }
+
+}
+
+
+
+$city = getCity($data->{city});
+print STDERR color 'red';
+die "City $data->{city} doesn't exist" if $city eq -1;
+print STDERR color 'reset';
+
+
+genEvents();
+
+$dbh->disconnect;
+
+print Dumper $data;
+
+
+1;
+
+
+
+__END__
+
+

@@ -1,6 +1,15 @@
 class WebUsersController < ApplicationController
   before_action :set_web_user, only: [:show, :edit, :update, :destroy]
 
+
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
   # GET /web_users
   # GET /web_users.json
   def index
@@ -15,6 +24,7 @@ class WebUsersController < ApplicationController
   # GET /web_users/new
   def new
     @web_user = WebUser.new
+    current_user.create_list_roles
   end
 
   # GET /web_users/1/edit
@@ -28,7 +38,7 @@ class WebUsersController < ApplicationController
 
     respond_to do |format|
       if @web_user.save
-        format.html { redirect_to @web_user, notice: 'Web user was successfully created.' }
+        format.html { redirect_to profiles_index_path , notice: 'Completou com sucesso o seu registo.' }
         format.json { render action: 'show', status: :created, location: @web_user }
       else
         format.html { render action: 'new' }
@@ -42,7 +52,7 @@ class WebUsersController < ApplicationController
   def update
     respond_to do |format|
       if @web_user.update(web_user_params)
-        format.html { redirect_to @web_user, notice: 'Web user was successfully updated.' }
+        format.html { redirect_to @web_user, notice: 'Entidade actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +79,6 @@ class WebUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def web_user_params
-      params.require(:web_user).permit(:name, :enterprisename, :obs, :nif, :address, :active, :web_user_type_id, :city_id)
+      params.require(:web_user).permit(:name, :id, :nif, :address, :active, :web_user_type_id, :city_id)
     end
 end

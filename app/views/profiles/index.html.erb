@@ -1,0 +1,283 @@
+<%
+   user=User.where("id=?",current_user.id).first;
+   pais=Country.where("id=?",user.country_id).first;
+   paisid=pais.name;
+   #lang=Language.where("id=?",user.language.name).first;
+   #ling=lang.name;
+%>
+<br/>
+<div class="row">
+  <table class="col-sm-6">
+    <tr>
+      <td class="col-sm-1">
+        <%= image_tag "user.png" , :style =>"height:15%;width: 60%" %>
+      </td>
+      <td class="col-sm-2">
+        <h1><%= user.username%></h1>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="well well-sm">
+      <p style="text-align: center;">
+        <strong style="text-align: center;"> As suas informações</strong>
+      <p/>
+
+      <dl class="dl-horizontal" style="align-content: center;">
+        <dt>Nome de utilizador</dt>
+        <dd><%= user.username%></dd>
+        <dt>Email</dt>
+        <dd><%= user.email%></dd>
+        <dt>Idioma</dt>
+        <dd><%= user.language.name%></dd>
+        <dt>País</dt>
+        <dd><%= user.country.name%></dd>
+      </dl>
+      <%= link_to edit_user_registration_path, :class=>"link" do
+      %><i class="fa fa-edit"></i> Editar informação pessoal<%
+       end
+    %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="well well-sm" style="height: 176px;">
+      <strong>Gestão de conteudos da sua entidade</strong>
+      <%
+         if current_user.web_user.nil?
+      %>
+          <p class="text text-warning">Para poder adicionar conteudo a sua conta tem que completar o registo. </p>
+          <%= link_to "Completar Registo", new_web_user_path ,:class=>"btn btn-primary btn-square" %>
+      <%
+         else
+           n_evets=Event.find_all_by_web_user_id(current_user.id).length
+           n_attra=Attraction.find_all_by_web_user_id(current_user.id).length
+           n_rotas=Itinerary.find_all_by_user_id(current_user.id).length
+           n_servicos=Service.find_all_by_web_user_id(current_user.id).length
+           web=WebUser.where("id=?",current_user.id).first
+           type=web.web_user_type
+      %>
+          <table>
+            <tr>
+              <%
+                 if current_user.role? (:admin)
+                    n_events=Event.all.length
+                    n_attra=Attraction.all.length
+                    n_rotas=Itinerary.all.length
+                    n_servicos=Service.all.length
+                    n_users=User.all.length
+                    %>
+                    <td>
+                    <%= link_to attractions_path do %>Pontos de interrese
+                        </td>
+                        <td><span class="badge badge-danger badge-square"><%= n_attra%></span><% end %>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <%= link_to events_path do %>Eventos
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_events%></span><% end %>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        <%= link_to itineraries_path do %>Rotas
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
+                        </td>
+                        </tr>
+                    <tr>
+                      <td>
+                        <%= link_to services_path do %>Serviços
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                        </td>
+                        </tr>
+                      <tr>
+                      <tr>
+                      <td>
+                        <%= link_to users_index_path do %>Users
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_users%></span><% end %>
+                        </td>
+                        </tr>
+                      <tr>
+                  <%
+                 end
+                 if current_user.role? (:entidade)
+                   if n_attra>0
+              %>
+                      <td>
+                        <%= link_to attractions_path do %>Pontos de interrese
+                            </td>
+                            <td><span class="badge badge-danger badge-square"><%= n_attra%></span><% end %>
+                        </td>
+                        </tr>
+                        <tr>
+                  <%
+                     else
+                  %>
+                      <td>
+                        <%= link_to new_attraction_path do %>Adicione novos Pontos de interrese<% end %>
+                      </td>
+                      </tr>
+                      <tr>
+                  <%
+                     end
+                  %>
+                  <%
+                     if n_evets>0
+                  %>
+                      <td>
+                        <%= link_to events_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
+                      </td>
+                      </tr>
+                      <tr>
+                  <%
+                     else
+                  %>
+                      <td><%= link_to new_event_path do %>Adicione novos Eventos<% end %></td>
+                      </tr>
+                      <tr>
+                  <%
+                     end
+                     if n_rotas>0
+                  %>
+                      <td>
+                        <%= link_to itineraries_path do %>Rotas<span class="badge badge-danger badge-square"><%= n_rotas%></span><% end %>
+                      </td>
+                  <%
+                     else
+                  %>
+                      <td><%= link_to new_itinerary_path do %>Adicione novas Rotas<% end %></td>
+                  <%
+                     end
+                     end
+                     if current_user.role? (:restauracao_gold)
+                       if n_evets>0
+                  %>
+                      <td>
+                        <%= link_to events_path do %>Eventos<span class="badge badge-danger badge-square"><%= n_evets%></span><% end %>
+                      </td>
+                      </tr>
+                      <tr>
+                  <%
+                     else
+                  %>
+                      <td><%= link_to new_event_path do %>Adicione novos Eventos<% end %></td>
+                      </tr>
+                      <tr>
+                  <%
+                     end
+                       if n_servicos>0
+                  %>
+                      <td>
+                        <%= link_to services_path do %>Estabelecimentos<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                      </td>
+                  <%
+                     else
+
+                  %>
+                      <td> <%= link_to new_service_path do %>Adicione novos Estabelecimentos<% end %></td>
+                  <%
+
+                     end
+                     end
+                     if current_user.role? (:restauracao)
+                     if n_servicos>0
+                  %>
+                      <td>
+                        <%= link_to services_path do %>Estabelecimentos<span class="badge badge-danger badge-square"><%= n_servicos%></span><% end %>
+                      </td>
+                  <%
+                     else
+
+                  %>
+                      <td> <%= link_to new_service_path do %>Adicione novos Estabelecimentos<% end %></td>
+                  <%
+                     end
+                     end
+                  %>
+              </tr>
+              </table>
+      <%  end
+      %>
+    </div>
+  </div>
+</div>
+<%
+if current_user.role? (:restauracao)
+ %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="well well-sm">
+      <p>
+        <h3><strong>Os seus planos</strong></h3>
+      <p class="text-muted">
+        Obtenha o plano perfeito para o seu negócio.
+      </p>
+      </p>
+      <table class="table table-bordered">
+        <tr>
+          <th class="col-md-4">Tipo</th>
+          <th class="col-md-4">Data compra</th>
+          <th class="col-md-4">Data de Expiração</th>
+        </tr>
+        <tr>
+          <td class="col-md-4">Básico</th>
+          <td class="col-md-4"><%= current_user.current_sign_in_at %></th>
+          <td class="col-md-4">Não expira</th>
+        </tr>
+      </table>
+      <p>
+        <%= link_to "Ver mais subscrições", pacotes_path , :class => "btn btn-primary btn-square"%>
+      </p>
+    </div>
+  </div>
+</div>
+<%
+end
+if current_user.role? (:restauracao_gold)
+%>
+    %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-sm">
+          <p>
+            <h3><strong>Os seus planos</strong></h3>
+          <p class="text-muted">
+            Obtenha o plano perfeito para o seu negócio.
+          </p>
+          </p>
+          <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+          <table class="table table">
+            <tr style="background:#DDDDDD">
+              <th >Tipo</th>
+              <th >Data compra</th>
+              <th >Data de Expiração</th>
+              <th >Preço</th>
+            </tr>
+            <% current_user.web_user.web_user_packs.each do |packs| %>
+            <tr style="background:#fff">
+              <td ><%= packs.pack_type.name %></td>
+              <td ><%= packs.subscriptiondate %></td>
+              <td ><%= packs.validity %></td>
+              <td ><%= packs.pack_type.price %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+          <p>
+            <%= link_to "Ver planos", pacotes_path , :class => "btn btn-primary btn-square"%>
+          </p>
+        </div>
+      </div>
+    </div>
+<%
+   end
+%>

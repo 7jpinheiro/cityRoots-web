@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: attraction_translations
+#
+#  id            :integer          not null, primary key
+#  name          :string(100)      not null
+#  price         :text
+#  schedule      :text
+#  description   :text
+#  transport     :string(100)
+#  attraction_id :integer          not null
+#  language_id   :integer          not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  schedule: MyString
+  language: MyString
+  description: MyString
+  transport: MyString
+
+two:
+  name: MyString
+  schedule: MyString
+  language: MyString
+  description: MyString
+  transport: MyString

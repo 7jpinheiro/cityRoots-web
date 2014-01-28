@@ -28,7 +28,7 @@ class ItineraryServicesController < ApplicationController
 
     respond_to do |format|
       if @itinerary_service.save
-        format.html { redirect_to @itinerary_service, notice: 'Itinerary service was successfully created.' }
+        format.html { redirect_to @itinerary_service, notice: 'Itinerário de serviços criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_service }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ItineraryServicesController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_service.update(itinerary_service_params)
-        format.html { redirect_to @itinerary_service, notice: 'Itinerary service was successfully updated.' }
+        format.html { redirect_to @itinerary_service, notice: 'Itinerário de serviços actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +69,6 @@ class ItineraryServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_service_params
-      params.require(:itinerary_service).permit(:itinerary_id, :service_id)
+      params.require(:itinerary_service).permit(:id,:order,:itinerary_id, :service_id)
     end
 end

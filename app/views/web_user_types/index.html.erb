@@ -1,0 +1,29 @@
+<h1>Listing web_user_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_user_types.each do |web_user_type| %>
+      <tr>
+        <td><%= web_user_type.name %></td>
+        <td><%= web_user_type.description %></td>
+        <td><%= link_to 'Show', web_user_type %></td>
+        <td><%= link_to 'Edit', edit_web_user_type_path(web_user_type) %></td>
+        <td><%= link_to 'Destroy', web_user_type, method: :delete, data: { confirm: 'Tem a certeza?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Web user type', new_web_user_type_path %>

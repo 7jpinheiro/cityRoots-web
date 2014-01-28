@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_translation.name %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @event_translation.schedule %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @event_translation.language %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event_translation.description %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @event_translation.transport %>
+</p>
+
+<%= link_to 'Edit', edit_event_translation_path(@event_translation) %> |
+<%= link_to 'Back', event_translations_path %>

@@ -1,6 +1,7 @@
 class PackTypesController < ApplicationController
   before_action :set_pack_type, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /pack_types
   # GET /pack_types.json
   def index
@@ -28,7 +29,7 @@ class PackTypesController < ApplicationController
 
     respond_to do |format|
       if @pack_type.save
-        format.html { redirect_to @pack_type, notice: 'Pack type was successfully created.' }
+        format.html { redirect_to @pack_type, notice: 'Tipo de pacote criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @pack_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class PackTypesController < ApplicationController
   def update
     respond_to do |format|
       if @pack_type.update(pack_type_params)
-        format.html { redirect_to @pack_type, notice: 'Pack type was successfully updated.' }
+        format.html { redirect_to @pack_type, notice: 'Tipo de pacote actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

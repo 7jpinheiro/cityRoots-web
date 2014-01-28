@@ -1,7 +1,16 @@
 class CommentEventsController < ApplicationController
   before_action :set_comment_event, only: [:show, :edit, :update, :destroy]
 
-  # GET /comment_events
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  load_and_authorize_resource
+
+  
+   # GET /comment_events
   # GET /comment_events.json
   def index
     @comment_events = CommentEvent.all
@@ -28,7 +37,7 @@ class CommentEventsController < ApplicationController
 
     respond_to do |format|
       if @comment_event.save
-        format.html { redirect_to @comment_event, notice: 'Comment event was successfully created.' }
+        format.html { redirect_to @comment_event, notice: 'Comentário de evento criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comment_event }
       else
         format.html { render action: 'new' }
@@ -42,7 +51,7 @@ class CommentEventsController < ApplicationController
   def update
     respond_to do |format|
       if @comment_event.update(comment_event_params)
-        format.html { redirect_to @comment_event, notice: 'Comment event was successfully updated.' }
+        format.html { redirect_to @comment_event, notice: 'Comentário de evento actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

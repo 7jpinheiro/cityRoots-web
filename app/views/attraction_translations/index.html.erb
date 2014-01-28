@@ -1,0 +1,35 @@
+<h1>Listing attraction_translations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Schedule</th>
+      <th>Language</th>
+      <th>Description</th>
+      <th>Transport</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attraction_translations.each do |attraction_translation| %>
+      <tr>
+        <td><%= attraction_translation.name %></td>
+        <td><%= attraction_translation.schedule %></td>
+        <td><%= attraction_translation.language %></td>
+        <td><%= attraction_translation.description %></td>
+        <td><%= attraction_translation.transport %></td>
+        <td><%= link_to 'Show', attraction_translation %></td>
+        <td><%= link_to 'Edit', edit_attraction_translation_path(attraction_translation) %></td>
+        <td><%= link_to 'Destroy', attraction_translation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attraction translation', new_attraction_translation_path %>

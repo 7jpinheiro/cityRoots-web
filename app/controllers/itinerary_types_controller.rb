@@ -1,6 +1,5 @@
 class ItineraryTypesController < ApplicationController
   before_action :set_itinerary_type, only: [:show, :edit, :update, :destroy]
-
   # GET /itinerary_types
   # GET /itinerary_types.json
   def index
@@ -25,10 +24,9 @@ class ItineraryTypesController < ApplicationController
   # POST /itinerary_types.json
   def create
     @itinerary_type = ItineraryType.new(itinerary_type_params)
-
     respond_to do |format|
       if @itinerary_type.save
-        format.html { redirect_to @itinerary_type, notice: 'Itinerary type was successfully created.' }
+        format.html { redirect_to @itinerary_type, notice: 'Tipo de itinerário criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @itinerary_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +40,7 @@ class ItineraryTypesController < ApplicationController
   def update
     respond_to do |format|
       if @itinerary_type.update(itinerary_type_params)
-        format.html { redirect_to @itinerary_type, notice: 'Itinerary type was successfully updated.' }
+        format.html { redirect_to @itinerary_type, notice: 'Tipo de itinerário actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +67,6 @@ class ItineraryTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinerary_type_params
-      params.require(:itinerary_type).permit(:name, :description)
+      params.require(:itinerary_type).permit(:id,:name, :description)
     end
 end

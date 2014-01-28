@@ -2,10 +2,11 @@
 #
 # Table name: cities
 #
-#  id         :integer          not null, primary key
-#  name       :string(100)      not null
-#  abv        :string(10)       not null
-#  country_id :integer          not null
+#  id          :integer          not null, primary key
+#  name        :string(100)      not null
+#  abv         :string(10)       not null
+#  description :text
+#  country_id  :integer          not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

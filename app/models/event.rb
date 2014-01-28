@@ -3,44 +3,56 @@
 # Table name: events
 #
 #  id            :integer          not null, primary key
-#  name          :string(100)      not null
-#  description   :text
-#  schedule      :string(255)
-#  site          :string(100)
-#  email         :string(100)
+#  site          :string(255)
+#  email         :string(255)
 #  address       :string(255)
+#  phone         :string(30)
 #  latitude      :float
 #  longitude     :float
-#  transport     :string(100)
-#  active        :boolean          not null
+#  source        :text
+#  active        :boolean          default(TRUE), not null
 #  timestamp     :integer          not null
-#  startdate     :date             not null
-#  enddate       :date             not null
+#  startdate     :date
+#  enddate       :date
 #  organization  :string(100)
-#  price         :string(255)      not null
-#  program       :string(500)
-#  event_type_id :integer          not null
+#  rating        :float            default(0.0), not null
+#  accessibility :boolean          default(FALSE), not null
 #  city_id       :integer          not null
 #  web_user_id   :integer          not null
 #
 
 class Event < ActiveRecord::Base
-  validates :name, presence:true ,length: {minimum: 2}
-  validates :description, presence:true, length: {minimum: 5}
-  validates :email, presence: true , length: {minimum: 2}
-  validates :site, presence: false
-  validates :address, presence: true, length: {minimum: 5}
-  validates :price , presence: false
-  validates :latitude, presence:false
-  validates :longitude, presence:false
-  validates :startdate, presence:true
-  validates :enddate, presence:true
+#  validates :site, presence: false
+#  validates :email, presence: true , length: {minimum: 2}
+#  validates :address, presence: true, length: {minimum: 5}
+#  validates :latitude, presence:false
+#  validates :longitude, presence:false
+#  validates :startdate, presence:true
+#  validates :enddate, presence:true
+#  validates :organization , presence: false
+#  validates :rating, presence: false
+
   has_many :rating_events, dependent: :destroy
 	has_many :comment_events, dependent: :destroy
 	has_many :photo_events, dependent: :destroy
-	has_many :itenerary_events, dependent: :destroy
-	belongs_to :event_type
+	has_many :itinerary_events, dependent: :destroy
+  has_many :event_translations, dependent: :destroy
+	has_many :event_types , dependent: :destroy
+  has_many :types , :through => :event_types
+  has_many :languages , :through => :event_translations
 	belongs_to :web_user
 	belongs_to :city
-  accepts_nested_attributes_for :photo_events
+  accepts_nested_attributes_for :event_types , :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :event_translations , :reject_if => :all_blank, :allow_destroy => true
+  #accepts_nested_attributes_for :photo_events , :allow_destroy => true
+
+
+  def self.search(search,user)
+    if search
+      Event.joins(:event_translations).where("events.web_user_id=? and LOWER(event_translations.name) LIKE LOWER(?)", user.id,"%#{search}%")
+    else
+      self.all
+    end
+  end
+
 end

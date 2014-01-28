@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service_translation.name %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @service_translation.schedule %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @service_translation.language %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @service_translation.description %>
+</p>
+
+<p>
+  <strong>Transport:</strong>
+  <%= @service_translation.transport %>
+</p>
+
+<%= link_to 'Edit', edit_service_translation_path(@service_translation) %> |
+<%= link_to 'Back', service_translations_path %>

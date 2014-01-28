@@ -1,0 +1,10 @@
+<% if @photo_service.new_record? %>
+alert('Erro a gravar a foto.');
+<% else %>
+if ($('div.upload') !== undefined) {
+    $('div.upload').remove();
+}
+if ($('ul.thumbnails') !== undefined) {
+    $('ul.thumbnails').append("<%=j render partial: 'photo_services/upload', locals: { photo_service: @photo_service } %>");
+}
+<% end %>

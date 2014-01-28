@@ -28,7 +28,7 @@ class RatingItinerariesController < ApplicationController
 
     respond_to do |format|
       if @rating_itinerary.save
-        format.html { redirect_to @rating_itinerary, notice: 'Rating itinerary was successfully created.' }
+        format.html { redirect_to @rating_itinerary, notice: 'Serviço de classificação para itinerários criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @rating_itinerary }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class RatingItinerariesController < ApplicationController
   def update
     respond_to do |format|
       if @rating_itinerary.update(rating_itinerary_params)
-        format.html { redirect_to @rating_itinerary, notice: 'Rating itinerary was successfully updated.' }
+        format.html { redirect_to @rating_itinerary, notice: 'Serviço de classificação para itinerários actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +69,6 @@ class RatingItinerariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_itinerary_params
-      params.require(:rating_itinerary).permit(:rating, :evaluationdate, :mobile_user_id, :itinerary_id)
+      params.require(:rating_itinerary).permit(:id,:rating, :evaluationdate, :mobile_user_id, :itinerary_id)
     end
 end

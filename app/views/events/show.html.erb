@@ -1,177 +1,316 @@
-<div class="page-header">
-  <h1><%= @event.name %></h1>
-</div>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table">
-          <%
-             if @event.address != nil
-          %>
-          <div class="col-sm-3"> <strong>Morada</strong></div>
-          <div class="col-sm-5"><%= @event.address %></div>
-          <%
-             end
-             if @event.schedule != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Horário</th>
-                <td style="border-top: none;"><%= @event.schedule %></td>
-              </tr>
-          <%
-             end
-             if @event.site != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Site</th>
-                <td style="border-top: none;"><%= @event.site %></td>
-              </tr>
-          <%
-             end
-             if @event.email != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Email</th>
-                <td style="border-top: none;"><%= @event.email %></td>
-              </tr>
-          <%
-             end
-             if @event.transport != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Transporte</th>
-                <td style="border-top: none;"><%= @event.transport %></td>
-              </tr>
-          <%
-             end
-             if @event.startdate != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Data</th>
-                <td style="border-top: none;"><%= @event.startdate %> até <%= @event.enddate %></td>
-              </tr>
-          <%
-             end
-             if @event.price != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Preço</th>
-                <td style="border-top: none;"><%= @event.price %></td>
-              </tr>
-          <%
-             end
-             if @event.organization != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Orgização</th>
-                <td style="border-top: none;"><%= @event.organization %></td>
-              </tr>
-          <%
-             end
-             if @event.event_type_id != nil
-               id=@event.event_type_id
-               event_tipo=EventType.where(["id = ?", id ]).first
-               evento=event_tipo.name;
-          %>
-              <tr>
-                <th style="border-top: none;">Tipo</th>
-                <td style="border-top: none;"><%= evento %></td>
-              </tr>
-          <%
-             end
-             if @event.program != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Programação</th>
-                <td style="border-top: none;text-align:justify;"><%= @event.program %></td>
-              </tr>
-          <%
-             end
-             if @event.description != nil
-          %>
-              <tr>
-                <th style="border-top: none;">Descrição</th>
-                <td style="border-top: none;text-align:justify;"><%= @event.description %></td>
-              </tr>
-          <%
-             end
-          %>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <%= image_tag "Attractions/Bom_Jesus1.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus2.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus3.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-              <%= image_tag "Attractions/Bom_Jesus4.jpg" , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
-              <div class="carousel-caption"></div>
-            </div>
-          </div>
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-        <ul class="thumbnails"></ul>
-        <%= form_for @photo_event=PhotoEvent.new, :url => photo_events_path, html: { multipart: true } do |f| %>
-            <% if @photo_event.errors.any? %>
-                <div id="error_explanation">
-                  <h2><%= pluralize(@photo_event.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+<%= javascript_include_tag "photo_events" %>
+<%= stylesheet_link_tag "welcome2" %>
 
-                  <ul>
-                    <% @photo_event.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                    <% end %>
-                  </ul>
-                </div>
+<%
+   trans=@event.event_translations.first
+
+%>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WbKcg0_KTnKKamashIIIG5xz46DY2N4&sensor=false"></script>
+<script type="text/javascript">
+  function mapinit(){
+      var stockholm = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
+      var parliament = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
+      var marker;
+      var map;
+  
+      function initialize() {
+          // Create an array of styles.
+          var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+  
+          // Create a new StyledMapType object, passing it the array of styles,
+          // as well as the name to be displayed on the map type control.
+          var styledMap = new google.maps.StyledMapType(styles,
+                  {name: "Styled Map"});
+  
+          var mapOptions = {
+              zoom: 11,
+              center: stockholm
+          };
+  
+          map = new google.maps.Map(document.getElementById('map-canvas'),
+                  mapOptions);
+  
+          var image="<%= image_url "maker.png"%>";
+  
+          marker = new google.maps.Marker({
+              map:map,
+              animation: google.maps.Animation.DROP,
+              position: parliament,
+              icon: image
+          });
+          google.maps.event.addListener(marker, 'click', toggleBounce);
+          //Associate the styled map with the MapTypeId and set it to display.
+          map.mapTypes.set('map_style', styledMap);
+          map.setMapTypeId('map_style');
+      }
+  
+      function toggleBounce() {
+  
+          if (marker.getAnimation() != null) {
+              marker.setAnimation(null);
+          } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+      }
+  
+      google.maps.event.addDomListener(window, 'load', initialize);
+  }
+</script>
+
+<style>
+  #map-canvas { height: 100% }
+  dt{
+    padding-bottom: 5px;
+  }
+  dd{
+    padding-bottom: 15px;
+  }
+</style>
+
+<div class="container" >
+  <% if !@event.photo_events.blank? %>
+  <div class="row" style="margin-top:15px">
+
+    <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" style="margin-bottom:10px; ">
+      <div style="position: absolute;z-index: 1000;margin-top: 75px;font-size: 50px;width: 80%;text-align: center;margin-left:10%">
+        <h1 style="font-weight: 700; color:#fff;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);font-size: 1.3em;">
+          <%= trans.name%>
+        </h1>
+      </div>
+      <div class="carousel-inner">
+        <% @event.photo_events.each_with_index do |p,i| %>
+        <% if i==0 %>
+        <div class="item active">
+          <% else %>
+          <div class="item">
             <% end %>
-            <div class="actions">
-              <%= f.label :photo %>
-              <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]' %>
-              <%= f.hidden_field :event_id,  :value => @event.id %>
-            </div>
-        <% end %>
-
-        <% # jquery upload template # %>
-        <script id="template-upload" type="text/x-tmpl">
-            <div class="upload">
-            {%=o.name%}
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
-                     <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-        <br/>
-        <hr/>
-        <br/>
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x450&sensor=false&zoom=13&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+            <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
+            <div class="carousel-caption"></div>
+          </div>
+          <% end %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic1" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic1" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+        </a>
       </div>
+    
+     
+    </div>
+    <% else %>
+      <div class="page-header">
+        <h1><%= trans.name%></h1>
+      </div>
+    <% end %>
+
+</div>
+
+
+<div class="container" >
+<div class="row" style="margin-top: 15px; margin-bottom:20px" >
+
+    <div class="col-md-6" >
+      <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
+      <dl>
+        <%
+           if @event.rating != 0
+        %>
+            <dt>Classificação:</dt>
+            <dd>
+              <%
+                 val=@event.rating
+                 indice=0;
+                 while val >0
+              %><span class="fa fa-star"></span><%
+               val=val-1
+               indice=indice+1
+               end
+               while indice <5
+            %><span class="fa fa-star-o"></span><%
+               indice=indice+1
+               end
+            %>
+            </dd>
+      <%
+         end
+         @tipos=@event.event_types.all
+         if @tipos.length!=0
+      %>
+        <dt>Tipo: </dt>
+        <dd>
+        <% @tipos.each do |tipo| %>
+          <%= tipo.type.name %><br/>
+        <% end %>
+        </dd>
+        <% end
+        if trans.description != nil
+        %>
+        <dt>Descrição:</dt>
+        <dd style="text-overflow: ellipsis;text-align: justify"><%= trans.description%></dd>
+        <%
+           end
+           if @event.address != nil
+        %>
+            <dt>Morada:</dt>
+            <dd><%= @event.address %></dd>
+        <%
+           end
+           if trans.schedule != nil
+        %>
+            <dt>Horário:</dt>
+            <dd><%= trans.schedule %></dd>
+        <%
+           end
+           if @event.site != nil
+        %>
+            <dt>Site</dt>
+            <dd><%= @event.site %></dd>
+        <%
+           end
+           if @event.email != nil
+        %>
+            <dt>Email</dt>
+            <dd><%= @event.email %></dd>
+        <%
+           end
+           if @event.phone != nil
+        %>
+            <dt>Telemovel</dt>
+            <dd><%= @event.phone %></dd>
+        <%
+           end
+           if trans.transport != nil
+        %>
+            <dt>Transporte</dt>
+            <dd><%= trans.transport %></dd>
+        <%
+           end
+           if @event.startdate != nil
+        %>
+            <dt>Data</dt>
+            <dd>
+              <%= @event.startdate %>
+              <%
+                 if @event.enddate != nil%>
+                  até <%= @event.enddate %>
+              <%  end
+              %>
+            </dd>
+        <%
+           end
+           if trans.price != nil
+        %>
+            <dt>Preço</dt>
+            <dd><%= trans.price %></dd>
+        <%
+           end
+           if @event.organization != nil
+        %>
+            <dt>Organização</dt>
+            <dd><%= @event.organization %></dd>
+        <%
+           end
+           if trans.program != nil
+        %>
+            <dt>Programação</dt>
+            <dd><%= trans.program %></dd>
+        <%
+           end
+           if @event.source != nil
+        %>
+            <dt>Origem</dt>
+            <dd><%= @event.source %></dd>
+        <%
+           end
+        %>
+      </dl>
+      
     </div>
 
-    <br>
-    <table class="table">
-      <tr class="col-md-3">
-        <td style="border-top: none;"><%= link_to 'Voltar', events_path ,:class => "btn btn-default"%></td>
-        <td style="border-top: none;"><%= link_to 'Editar', edit_event_path(@event),:class => "btn btn-primary" %></td>
-      </tr>
-    </table>
+    <div class="col-sm-6">
+      <div class="row"  style="margin-top:15px;">
+         <div class="col-sm-4">
+            <%= form_for @photo_event=PhotoEvent.new, :url => photo_events_path, html: { multipart: true } do |f| %>
+                <% if @photo_event.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@photo_event.errors.count, "error") %> Prohibited this upload from being saved:</h2>
+
+                      <ul>
+                        <% @photo_event.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                <% end %>
+                <div class="actions">
+                  <%= f.file_field :photo, multiple: true, name: 'photo_event[photo]',:class=>"filestyle" %>
+                  <%= f.hidden_field :event_id,  :value => @event.id %>
+                </div>
+                <script>
+                    $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Adicionar uma Foto"});
+                </script>
+            <% end %>
+            <% # jquery upload template # %>
+            <script id="template-upload" type="text/x-tmpl">
+                  <div class="upload">
+                  {%=o.name%}
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                           <span class="sr-only"></span>
+                          </div>
+                      </div>
+                  </div>
+            </script>
+          </div>
+          <div class="col-sm-4 text-center">
+            <%= link_to edit_event_path(@event), {:class => 'btn btn-primary', :style =>"min-width:150px"} do%>
+            Editar
+            <%end%>
+          </div>
+          <div class="col-sm-4 text-right">
+            <%= link_to @event, {:class => 'btn btn-primary', :style =>"min-width:150px", method: :delete, data: { confirm: 'Tem a certeza que quer eliminar este ponto de interesse?'} } do %>
+            Remover
+            <% end %>
+          </div>
+      </div>
+      <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px" onload="mapinit();"></div>
+    </div>
+
+  <%
+     @coments=@event.comment_events
+     unless @coments.blank?
+   %>
+      <div class="col-sm-12">
+        <h3>Comentários</h3>
+        <% @coments.each do |co|%>
+          <div class="media-body bubble-body bubble-arrow-left">
+            <div class="bubble-inner">
+              <% if (!co.mobile_user_id.nil?)  && (!co.mobile_user.user.username.nil?)
+                    nome=co.mobile_user.user.username
+                  else
+                    nome="Anónimo"
+                  end %>
+              <h4 class="media-heading bubble-heading"><%= nome %></h4>
+              <div class="bubble-content">
+                <p><%= co.comment %></p><p></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-</div>
+
+<!--<span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
+</br>
+</br>
+</div> --!>
+
+
+
+<script>
+  mapinit();
+</script>

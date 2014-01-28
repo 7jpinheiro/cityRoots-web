@@ -1,6 +1,8 @@
 class MobileUserCitiesController < ApplicationController
   before_action :set_mobile_user_city, only: [:show, :edit, :update, :destroy]
 
+
+  
   # GET /mobile_user_cities
   # GET /mobile_user_cities.json
   def index
@@ -28,7 +30,7 @@ class MobileUserCitiesController < ApplicationController
 
     respond_to do |format|
       if @mobile_user_city.save
-        format.html { redirect_to @mobile_user_city, notice: 'Mobile user city was successfully created.' }
+        format.html { redirect_to @mobile_user_city, notice: 'Cidade adicionada para utilizador mobile com sucesso.' }
         format.json { render action: 'show', status: :created, location: @mobile_user_city }
       else
         format.html { render action: 'new' }
@@ -42,7 +44,7 @@ class MobileUserCitiesController < ApplicationController
   def update
     respond_to do |format|
       if @mobile_user_city.update(mobile_user_city_params)
-        format.html { redirect_to @mobile_user_city, notice: 'Mobile user city was successfully updated.' }
+        format.html { redirect_to @mobile_user_city, notice: 'Cidade actualizada para utilizador mobile com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -1,6 +1,5 @@
 jQuery ->
   $('#photo_event_photo').attr('name','photo_event[photo]')
-
   $('#new_photo_event').fileupload
     dataType: 'script'
     add: (e, data) ->

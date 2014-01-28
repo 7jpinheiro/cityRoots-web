@@ -3,12 +3,17 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 gem 'crummy'
+
 # Use postgreSQL as the database for Active Record
 gem 'pg'
 gem "paperclip", "~> 3.0"
 gem 'jquery-fileupload-rails'
 
 gem 'rabl'
+gem "nested_form"
+
+# used to get Rails variables in JS
+gem 'gon'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -25,7 +30,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -35,7 +40,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+gem "cocoon"
 # gem to handle login pages
 gem 'devise'
 #gem to handle user permissions
@@ -43,7 +48,13 @@ gem 'cancan'
 
 gem 'annotate', ">=2.6.0"
 
+gem "jquery-ui-rails"
+# pagination
+gem "kaminari"
 
+gem 'json'
+
+gem 'devise-i18n'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -56,3 +67,12 @@ gem 'annotate', ">=2.6.0"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#facebook login
+gem 'omniauth-facebook'
+
+#Locales
+gem 'rails-i18n', '~> 4.0.0'
+
+#gem activemerchant
+gem 'activemerchant'

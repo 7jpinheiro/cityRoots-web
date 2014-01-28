@@ -1,6 +1,7 @@
 class MobileUsersController < ApplicationController
   before_action :set_mobile_user, only: [:show, :edit, :update, :destroy]
 
+ 
   # GET /mobile_users
   # GET /mobile_users.json
   def index
@@ -28,7 +29,7 @@ class MobileUsersController < ApplicationController
 
     respond_to do |format|
       if @mobile_user.save
-        format.html { redirect_to @mobile_user, notice: 'Mobile user was successfully created.' }
+        format.html { redirect_to @mobile_user, notice: 'Utilizador mobile criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @mobile_user }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class MobileUsersController < ApplicationController
   def update
     respond_to do |format|
       if @mobile_user.update(mobile_user_params)
-        format.html { redirect_to @mobile_user, notice: 'Mobile user was successfully updated.' }
+        format.html { redirect_to @mobile_user, notice: 'Utilizador mobile actualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

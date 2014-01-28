@@ -1,5 +1,5 @@
-<% if @photo_event.new_record? %>
-alert('Failed');
+if @photo_event.new_record? %>
+alert('Erro a gravar a foto.');
 <% else %>
 if ($('div.upload') !== undefined) {
     $('div.upload').remove();

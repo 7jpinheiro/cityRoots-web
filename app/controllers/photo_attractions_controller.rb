@@ -1,6 +1,7 @@
 class PhotoAttractionsController < ApplicationController
   before_action :set_photo_attraction, only: [:show, :edit, :update, :destroy]
 
+
   # GET /photo_attractions
   # GET /photo_attractions.json
   def index
@@ -24,16 +25,17 @@ class PhotoAttractionsController < ApplicationController
   # POST /photo_attractions
   # POST /photo_attractions.json
   def create
+    puts "------------------ create" + photo_attraction_params.inspect + "------------------"
     @photo_attraction = PhotoAttraction.new(photo_attraction_params)
-    respond_to do |format|
+    puts "------------------ hhjhjhj" + @photo_attraction.inspect + "------------------"
+
       if @photo_attraction.save
-        format.html { redirect_to @photo_attraction, notice: 'Photo attraction was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo_attraction }
+        puts "------------------ create successfully"
+        flash.now[:alert] = 'Save photo attraction!'
       else
-        format.html { render action: 'new' }
-        format.json { render json: @photo_attraction.errors, status: :unprocessable_entity }
+        puts "------------------ create error"
+        flash.now[:alert] = 'Error while saving photo attraction!'
       end
-    end
   end
 
   # PATCH/PUT /photo_attractions/1
@@ -41,7 +43,7 @@ class PhotoAttractionsController < ApplicationController
   def update
     respond_to do |format|
       if @photo_attraction.update(photo_attraction_params)
-        format.html { redirect_to @photo_attraction, notice: 'Photo attraction was successfully updated.' }
+        format.html { redirect_to @photo_attraction, notice: 'Foto de atração actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -68,6 +70,6 @@ class PhotoAttractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_attraction_params
-      params.require(:photo_attraction).permit(:name, :photo_file_name, :description, :attraction_id, :photo)
+      params.require(:photo_attraction).permit(:description, :attraction_id, :photo)
     end
 end

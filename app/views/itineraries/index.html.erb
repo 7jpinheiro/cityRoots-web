@@ -1,47 +1,100 @@
-<h1>Lista de Rotas</h1>
+<%= javascript_include_tag "autocomplete" %>
+
+<div class="page-header">
+<h1>Lista das suas Rotas</h1>
+</div>
+
 <%= csrf_meta_tag %>
 
+<%= form_tag itineraries_path, :method=>'get' do  |f|%>
+    <table>
+      <tr>
+        <td class="col-sm-2"><%= link_to 'Nova Rota', new_itinerary_path, :class=>"btn btn-primary btn-square" %></td>
+        <td class="col-sm-2"></td>
+        <td class="col-sm-3"><%= text_field_tag :search, params[:search], class: "with_autocomplete form-control", 'data-autocompleteUrl' => autocomplete_itinerary_name_itineraries_path%></td>
+        <td class="col-sm-1"><%= submit_tag "Procurar", :name => nil, :class=>"btn btn-default" %></td>
+      </tr>
+    </table>
+<% end %>
 
-<% @itineraries.each do |itinerary| %>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-xs-3 col-md-3 text-center">
-        <%= image_tag "Index/douro.jpg" , :style =>"max-height:180px; max-width:200px" %>
-      </div>
-      <div class="col-xs-9 col-md-9 section-box">
+<%
+   @itineraries.each do |itinerary|
+%>
+    <br/>
+    <div class="col-md-12">
+      <div class="well well-sm">
         <div class="row">
-          <div class="col-md-8">
-            <h4><strong><%= link_to itinerary.name, itinerary %></strong></h4>
-          </div>
-          <div  class="col-md-4 text-right" style="min-height:30px">
-            <%= link_to edit_itinerary_path(itinerary) do %>
-            <span class="glyphicon glyphicon-edit"> </span>Editar
-            <% end %>
-            <%= link_to itinerary, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-            <span class="glyphicon glyphicon-remove"></span>Remover
+          <div class="col-xs-4 col-md-3 text-center">
+            <%  unless (itinerary.attractions.first.nil?) || (itinerary.attractions.first.photo_attractions.first.nil?) %>
+                <%= image_tag itinerary.attractions.first.photo_attractions.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
+             <% else %>
+            <%= image_tag "no_image.jpg" , :style =>"max-width:100%; max-height:100%" %>
             <% end %>
           </div>
-        </div>
-        <div >
-          <p>
-            <b>Descrição: </b>
-            <%= truncate itinerary.description, length: 300 %>
-            <%= link_to 'Ler mais', itinerary %><br/>
-          </p>
-          <hr/>
-          <div class="row rating-desc">
-            <div class="col-md-12">
-              <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"> </span><span class="glyphicon glyphicon-star-empty"></span>(36)<span class="separator">|</span>
-              <span class="glyphicon glyphicon-comment"></span>(<%= itinerary.comment_itineraries.size %> Comments)
+          <div class="col-xs-8 col-md-9 section-box">
+            <div class="row">
+              <div class="col-md-8">
+                <h4><strong><%= link_to itinerary.name, itinerary %></strong></h4>
+              </div>
+              <div  class="col-md-4 text-right" style="min-height:30px">
+                <%= link_to edit_itinerary_path(itinerary) do %>
+                    <span class="fa fa-edit"> </span>Editar
+                <% end %>
+                <%= link_to itinerary, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                    <span class="fa fa-trash-o"></span>Remover
+                <% end %>
+              </div>
+            </div>
+            <div >
+              <p>
+                <b>Descrição: </b>
+              <div class="hidden-xs">
+                <%= truncate itinerary.description, length: 300 %>
+              </div>
+              <div class="visible-xs">
+                <%= truncate itinerary.description, length: 100 %>
+              </div><br/>
+              </p>
+              <hr/>
+              <div class="row rating-desc">
+                <div class="col-md-12">
+                  <%
+                     @ratings=itinerary.rating_itineraries
+                     ratin=0
+                     if @ratings != nil
+                       index=0
+                       @ratings.each do |rati|
+                         ratin=ratin+rati.rating
+                         index=index+1
+                       end
+                     else
+                       ratin=0
+                     end
+                     val=ratin
+                     indice=0;
+                     while val >0
+                  %><span class="fa fa-star"></span><%
+                   val=val-1
+                   indice=indice+1
+                   end
+                   while indice <5
+                %><span class="fa fa-star-o"></span><%
+                   indice=indice+1
+                   end
+                %>
+                  <span class="separator">|</span>
+                  <%
+                     commes=itinerary.comment_itineraries
+                     size=commes.length
+                  %>
+                  <span class="fa fa-comment"></span>(<%= size %> Comments)
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 <% end %>
+<%= paginate @itineraries %>
 <br/>
-
-<%= link_to 'Nova Rota', new_itinerary_path , :class=>"btn btn-primary" %>

@@ -1,0 +1,144 @@
+<%= stylesheet_link_tag "payments" %>
+
+<%= form_for :payment, url:payment_create_path do |f| %>
+  
+  <div class="page-header">
+    <h1>Subscrição do plano profissional</h1>
+  </div>
+
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="well well-sm">
+      <div class="row">
+
+        <div class="col-sm-10 col-sm-offset-1">
+          <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:25px">O teu pedido</h2>
+          <table class="table ">
+                <thead>
+                  <tr style="background:#DDDDDD">
+                    <th>Descrição</th>
+                    <th class="text-center">Montante</th>
+                    <th class="text-center">Quantidade</th>
+                    <th class="text-center">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background:#fff">
+                    <td>
+                      <strong>Pacote Premium</strong><br/>
+                      Para além de gerir os seus próprios conteúdos relativos a divulgação dos seus serviços, produtos, eventos e promoções, obtenha maior destaque e visibilidade na aplicação.
+                    </td>
+                    <td class="text-center">29,99€</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">29,99€</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr style="background:#DDDDDD">
+                    <td></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><strong>Valor Total:</strong></td>
+                    <td class="text-center">29,99€</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        <div class="col-sm-10 col-sm-offset-1">
+          <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:15px;">Pagamento</h2>
+          <div class="form-group" style="margin-top: 20px; ">
+            <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12" %>
+            <ul class="cards">
+              <div class="col-sm-3 col-xs-12">
+                <div class="radio">
+                  <label>
+                    <%= f.radio_button :card_type, 'visa' %>
+                    <li class="visa"></li>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-3 col-xs-12">
+                <div class="radio">
+                  <label>
+                    <%= f.radio_button :card_type, 'master' %> 
+                    <li class="mastercard"></li>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-3 col-xs-12">
+                <div class="radio">
+                  <label>
+                    <%= f.radio_button :card_type, 'discover' %> 
+                    <li class="discover"></li>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-3 col-xs-12">
+                <div class="radio">
+                  <label>
+                    <%= f.radio_button :card_type, 'american_express'%> 
+                    <li class="america_express"></li>
+                  </label>
+                </div>
+              </div>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-10 col-sm-offset-1">
+          
+          <div class="form-group" style="margin-top: 20px; ">
+            <div class="col-sm-6">
+              <%= f.label :first_name, 'Primeiro Nome',  :class=>"control-label text-center col-sm-12" %>
+              <%= f.text_field :first_name, :class=>"form-control form-control-square" %>
+            </div>
+
+            <div class="col-sm-6">
+              <%= f.label :last_name, "Ultimo Nome",  :class=>"control-label text-center col-sm-12"%>
+              <%= f.text_field :last_name, :class=>"form-control form-control-square" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-10 col-sm-offset-1">
+          <div class="form-group" style="margin-top: 20px">
+              <div class="col-sm-12">        
+                <%= f.label :card_number, "Número do cartão" , :class=>"control-label text-center col-sm-12" %>      
+                <%= f.text_field :card_number, :class=>"form-control form-control-square"  %>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-sm-10 col-sm-offset-1">
+          <div class="form-group" style="margin-top:20px">
+            <div class="col-sm-6">
+              <%= f.label :card_verification, "CCV / CVV",  :class=>"control-label text-center col-sm-12" %>
+              <%= f.text_field :card_verification, :class=>"form-control"  %>
+            </div>
+
+            <div class="col-sm-6">
+              <%= f.label :card_expires_on,"Válido até" , :class=>"control-label text-center col-sm-12" %>
+              <span class="row">
+                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)},{:class=>"form-control", :style=>"width:48%; float:left; margin-left:2%"} %>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      <%= f.text_field :value ,:id=>"value", :value=>29.99 , :hidden=>"hidden" %>
+      <div class="col-sm-10 col-sm-offset-1">
+        <div class="form-group">
+          <div class="col-sm-6">
+            <%= f.submit "Submeter pedido", :class=>"btn btn-primary btn-square" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+  </div>
+</div>
+     
+<% end %>
+
