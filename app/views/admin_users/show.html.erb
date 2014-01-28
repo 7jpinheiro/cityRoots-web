@@ -1,22 +1,18 @@
-<br/>
-<div class="row">
-  <table class="col-sm-6">
-    <tr>
-      <td class="col-sm-1">
-        <%= image_tag "user.png" , :style =>"height:15%;width: 60%" %>
-      </td>
-      <td class="col-sm-2">
-        <h1><%= @admin_user.username%></h1>
-      </td>
-    </tr>
-  </table>
+
+<div class="page-header">
+  <h1 style="vertical-align: bottom;">
+        <%= image_tag "user.png" , :style =>"height: 80px;width: auto;" %>
+      
+        <%= @admin_user.username%>
+      
+</h1>
 </div>
 
 <div class="row">
   <div class="col-md-6">
     <div class="well well-sm">
       <p style="text-align: center;">
-        <strong style="text-align: center;"> Informações</strong>
+        <h4 style="text-align: center;"><strong > Informações</strong></h4>
       <p/>
 
       <dl class="dl-horizontal" style="align-content: center;">
@@ -34,7 +30,7 @@
   </div>
   <div class="col-md-6">
     <div class="well well-sm" style="height: 176px;">
-      <strong>Dados do utilizador</strong>
+        <h4 style="text-align: center;"><strong >Dados do utilizador</strong></h4>
       <%
          if @admin_user.web_user.nil?
       %>
@@ -178,7 +174,6 @@
 <%
 end
 if @admin_user.role? (:restauracao_gold)
-%>
     %>
     <div class="row">
       <div class="col-md-12">
@@ -218,3 +213,12 @@ if @admin_user.role? (:restauracao_gold)
 <%
    end
 %>
+<% if (@admin_user.web_user) && !(@admin_user.web_user.active) && (@admin_user.web_user.web_user_type.name == "Entidade")%>
+  <%= link_to admin_users_activar_path(@admin_user), :class=>"btn btn-warning btn-sm" do %>
+    <i class="fa fa-trash-o"></i> Activar
+  <% end 
+    end
+  %>
+<%= link_to admin_users_index_path, :class=>"btn btn-primary btn-sm" do %>
+    </i> Voltar
+<% end %>
