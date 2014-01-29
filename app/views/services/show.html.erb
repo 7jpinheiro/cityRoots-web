@@ -156,13 +156,13 @@
            if servi.schedule != nil
         %>
             <dt>Horário</dt>
-            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.schedule%></dd>
+            <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.schedule%></dd>
         <%
            end
            if servi.transport != nil
         %>
             <dt>Transporte</dt>
-            <dd style="text-overflow: ellipsis;width: 150px;"><%= servi.transport%></dd>
+            <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.transport%></dd>
         <%
            end
            if @service.site != nil
