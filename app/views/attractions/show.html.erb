@@ -154,49 +154,49 @@
             </dd>
             <%
               end
-              if trans.description != nil
+              if trans.description != nil || trans.description!=""
               %>
             <dt>Descrição</dt>
             <dd style="text-overflow: ellipsis; text-align: justify"><%= trans.description%></dd>
             <%
               end
-              if @attraction.address != nil
+              if @attraction.address != nil || @attraction.address!=""
               %>
             <dt>Morada</dt>
             <dd><%= @attraction.address %></dd>
             <%
               end
-              if trans.schedule != nil
+              if trans.schedule != nil || trans.schedule!=""
               %>
             <dt>Horário</dt>
             <dd><%= trans.schedule %></dd>
             <%
               end
-              if @attraction.site != nil
+              if @attraction.site != nil || @attraction.site!=""
               %>
             <dt>Site</dt>
             <dd><%= @attraction.site %></dd>
             <%
               end
-              if @attraction.email != nil
+              if @attraction.email != nil || @attraction.email!=""
               %>
             <dt>Email</dt>
             <dd><%= @attraction.email %></dd>
             <%
               end
-              if @attraction.phone != nil
+              if @attraction.phone != nil || @attraction.phone!=""
               %>
             <dt>Telefone</dt>
             <dd><%= @attraction.phone %></dd>
             <%
               end
-              if trans.transport != nil
+              if trans.transport != nil || trans.transport!=""
               %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
             <%
               end
-              if @attraction.source != nil
+              if @attraction.source != nil || @attraction.source!=""
               %>
             <dt>Email</dt>
             <dd><%= @attraction.source %></dd>
@@ -210,7 +210,7 @@
             </dd>
             <%
               end
-              if trans.price != nil
+              if trans.price != nil || trans.price!=""
               %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
@@ -257,9 +257,9 @@
         <div class="bubble-inner">
           <%
             if co.mobile_user_id != nil
-              usermovel= co.mobile_user.user
-              if usermovel.username != nil
-                nome=usermovel.username
+              usermovel= co.mobile_user
+              if usermovel.firstname != nil
+                nome=usermovel.firstname+" "+usermovel.surname
               else
                 nome="Anónimo"
               end
