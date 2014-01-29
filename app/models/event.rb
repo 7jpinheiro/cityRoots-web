@@ -44,5 +44,12 @@ class Event < ActiveRecord::Base
 	belongs_to :city
   accepts_nested_attributes_for :event_types , :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :event_translations , :reject_if => :all_blank, :allow_destroy => true
+   validate :validate_end_date_before_start_date
+
+  def validate_end_date_before_start_date
+    if enddate && startdate
+      errors.add(:enddate, "Data de fim tem que ser igual ou maior que a de inicio") if enddate < startdate
+    end
+  end
 
 end
