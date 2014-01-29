@@ -36,7 +36,7 @@
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
                 <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
-                <p class="help-block"></p>
+
               </div>
             </div>
           </div>
@@ -110,6 +110,7 @@
       </span>
         <% end %>
         <p><%= f.link_to_add "Adicionar Lingua", :event_translations %></p>
+        <p class="help-block"></p>
       </div>
       <div class="well well-sm">
         <div class="row">
