@@ -85,9 +85,23 @@
               <div class="visible-xs">
                 <%= truncate trans.description, length: 100 %>
               </div><br/>
+              <%
+                 if trans.schedule.empty? || trans.schedule!=nil
+              %>
                 <b>Horário:</b><%= trans.schedule %><br/>
+              <%
+                 end
+                 if trans.transport.empty? || trans.transport!=nil
+              %>
                 <b>Transporte:</b><%= trans.transport %><br/>
-                <b>Preço:</b><%= trans.price %>
+              <%
+                 end
+                 if trans.price.empty? || trans.price!=nil
+              %>
+                  <b>Preço:</b><%= trans.price %>
+              <%
+                 end
+              %>
               </p>
               <hr/>
               <div class="row rating-desc">

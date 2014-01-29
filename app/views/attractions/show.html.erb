@@ -154,49 +154,49 @@
             </dd>
             <%
               end
-              if trans.description != nil || trans.description!=""
+              if trans.description != nil || trans.description.empty?
               %>
             <dt>Descrição</dt>
             <dd style="text-overflow: ellipsis; text-align: justify"><%= trans.description%></dd>
             <%
               end
-              if @attraction.address != nil || @attraction.address!=""
+              if @attraction.address != nil || @attraction.address.empty?
               %>
             <dt>Morada</dt>
             <dd><%= @attraction.address %></dd>
             <%
               end
-              if trans.schedule != nil || trans.schedule!=""
+              if trans.schedule != nil || trans.schedule.empty?
               %>
             <dt>Horário</dt>
             <dd><%= trans.schedule %></dd>
             <%
               end
-              if @attraction.site != nil || @attraction.site!=""
+              if @attraction.site != nil || @attraction.site.empty?
               %>
             <dt>Site</dt>
             <dd><%= @attraction.site %></dd>
             <%
               end
-              if @attraction.email != nil || @attraction.email!=""
+              if @attraction.email != nil || @attraction.email.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.email %></dd>
             <%
               end
-              if @attraction.phone != nil || @attraction.phone!=""
+              if @attraction.phone != nil || @attraction.phone.empty?
               %>
             <dt>Telefone</dt>
             <dd><%= @attraction.phone %></dd>
             <%
               end
-              if trans.transport != nil || trans.transport!=""
+              if trans.transport != nil || trans.transport.empty?
               %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
             <%
               end
-              if @attraction.source != nil || @attraction.source!=""
+              if @attraction.source != nil || @attraction.source.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.source %></dd>
@@ -210,7 +210,7 @@
             </dd>
             <%
               end
-              if trans.price != nil || trans.price!=""
+              if trans.price != nil || trans.price.empty?
               %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>

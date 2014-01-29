@@ -76,10 +76,28 @@
                 <%= link_to 'Ler mais', service %><br/>
               </p>
               <p>
+                <%
+                   if serv.schedule.empty? || serv.schedule!=nil
+                %>
                 <b>Horário: </b><%= serv.schedule %><br/>
+                <%
+                    end
+                    if service.capacity.empty? || service.capacity!=nil
+                %>
                 <b>Capacidade:</b><%= service.capacity %> <br/>
+                <%
+                   end
+                   if service.email.empty? || service.email!=nil
+                %>
                 <b>Email:</b><%= service.email %> <br/>
+                <%
+                   end
+                   if service.site.empty? || service.site!=nil
+                %>
                 <b>Site:</b><%= service.site %> <br/>
+                <%
+                   end
+                %>
               </p>
               <hr/>
               <div class="row rating-desc">
