@@ -77,25 +77,33 @@
               </p>
               <p>
                 <%
-                   if serv.schedule.empty? || serv.schedule!=nil
+                   if serv.schedule!=nil
+                     if !serv.schedule.empty?
                 %>
                 <b>Horário: </b><%= serv.schedule %><br/>
                 <%
                     end
-                    if service.capacity.empty? || service.capacity!=nil
+                   end
+                    if service.capacity!=nil
+                        if !service.capacity.empty?
                 %>
                 <b>Capacidade:</b><%= service.capacity %> <br/>
                 <%
+                    end
                    end
-                   if service.email.empty? || service.email!=nil
+                   if service.email!=nil
+                    if service.email.empty?
                 %>
                 <b>Email:</b><%= service.email %> <br/>
                 <%
+                     end
                    end
-                   if service.site.empty? || service.site!=nil
+                   if service.site!=nil
+                    if service.site.empty?
                 %>
                 <b>Site:</b><%= service.site %> <br/>
                 <%
+                    end
                    end
                 %>
               </p>

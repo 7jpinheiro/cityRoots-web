@@ -147,49 +147,64 @@
         <% end %>
         </dd>
         <% end
-        if trans.description != nil || trans.description!=""
+        if trans.description != nil
+           if !trans.description.empty?
         %>
         <dt>Descrição:</dt>
         <dd style="text-overflow: ellipsis;text-align: justify"><%= trans.description%></dd>
         <%
            end
-           if @event.address != nil || @event.address!=""
+           end
+           if @event.address != nil
+             if !@event.address.empty?
         %>
             <dt>Morada:</dt>
             <dd><%= @event.address %></dd>
         <%
            end
-           if trans.schedule != nil || trans.schedule!=""
+           end
+           if trans.schedule != nil
+             if !trans.schedule.empty?
         %>
             <dt>Horário:</dt>
             <dd><%= trans.schedule %></dd>
         <%
            end
-           if @event.site != nil || @event.site!=""
+           end
+           if @event.site != nil
+            if !@event.site.empty?
         %>
             <dt>Site</dt>
             <dd><%= @event.site %></dd>
         <%
            end
-           if @event.email != nil || @event.email!=""
+           end
+           if @event.email != nil
+            if !@event.email.empty?
         %>
             <dt>Email</dt>
             <dd><%= @event.email %></dd>
         <%
            end
-           if @event.phone != nil || @event.phone!=""
+           end
+           if @event.phone != nil
+            if !@event.phone.empty?
         %>
             <dt>Telemovel</dt>
             <dd><%= @event.phone %></dd>
         <%
            end
-           if trans.transport != nil || trans.transport!=""
+           end
+           if trans.transport != nil
+            if !trans.transport.empty?
         %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
         <%
            end
-           if @event.startdate != nil || @event.startdate!=""
+           end
+           if @event.startdate != nil
+            if !@event.startdate.empty?
         %>
             <dt>Data</dt>
             <dd>
@@ -202,29 +217,38 @@
             </dd>
         <%
            end
-           if trans.price != nil || trans.price!=""
+           end
+           if trans.price != nil
+            if !trans.price.empty?
         %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
         <%
            end
-           if @event.organization != nil || @event.organization!=""
+           end
+           if @event.organization != nil
+            if !@event.organization.empty?
         %>
             <dt>Organização</dt>
             <dd><%= @event.organization %></dd>
         <%
            end
-           if trans.program != nil || trans.program!=""
+           end
+           if trans.program != nil
+            if !trans.program.empty?
         %>
             <dt>Programação</dt>
             <dd><%= trans.program %></dd>
         <%
            end
-           if @event.source != nil || @event.source!=""
+           end
+           if @event.source != nil
+            if !@event.source.empty?
         %>
             <dt>Origem</dt>
             <dd><%= @event.source %></dd>
         <%
+           end
            end
         %>
       </dl>
