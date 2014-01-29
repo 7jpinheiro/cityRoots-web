@@ -1772,7 +1772,7 @@ class ApisController < ApplicationController
               @tmp_com.push(com)
             end
             poi["comments"]=@tmp_com
-            point["poi"]=poi
+            point["attraction"]=poi
             @attractions.push(point)
           end
         end
@@ -1834,7 +1834,7 @@ class ApisController < ApplicationController
               @tmp_com.push(com)
             end
             poi["comments"]=@tmp_com
-            point["poi"]=poi
+            point["event"]=poi
             @events.push(point)
           end
         end
@@ -1893,7 +1893,7 @@ class ApisController < ApplicationController
               @tmp_com.push(com)
             end
             poi["comments"]=@tmp_com
-            point["poi"]=poi
+            point["service"]=poi
             @services.push(point)
           end
         end
