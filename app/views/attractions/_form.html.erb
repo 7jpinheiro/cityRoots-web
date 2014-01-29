@@ -1,10 +1,9 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
-
 <script type="text/javascript">//<![CDATA[
 $(window).load(function(){
     $(".translations").find("#deletebutton:first").remove();
-    //$(".translations").find("#lingua:first").remove();
-    $(".translations").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label>Português</lable>').show();
+    $(".translations").find("#baixo:first").html("<label for='price' class='control-label col-sm-3' style='margin-bottom: 49px;'>Preço</lable>").show();
+    $(".translations").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
 });//]]>
 </script>
 
@@ -68,7 +67,7 @@ $(window).load(function(){
           <br/>
           <div class="row">
             <div class="form-group" style="margin-left: 20px;">
-              <%= e.label "Preço" ,:for=>"price" , :class=>"control-label col-sm-3" %>
+              <%= e.label "Preço" ,:id=>"baixo",:for=>"price" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
                   <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
                 <p class="help-block"></p>
@@ -76,21 +75,13 @@ $(window).load(function(){
             </div>
           </div>
           <div id="deletebutton"><span style="margin-left: 20px;"></span><%= e.link_to_remove "Remover Língua" %></div>
-          <br/>
-          <br/>
         </div>
         </div>
       </span>
       <% end %>
       <p><%= f.link_to_add "Adicionar Língua", :attraction_translations %></p>
     </div>
-    <script type="text/javascript">//<![CDATA[
-    $(window).onload(function(){
-        $(".translations").find("#deletebutton:first").remove();
-        //$(".translations").find("#lingua:first").remove();
-        $(".translations").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label>Português</lable>').show();
-    });//]]>
-    </script>
+
     <%
        cityid=current_user.web_user.city_id
     %>
