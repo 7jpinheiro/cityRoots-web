@@ -1,0 +1,52 @@
+
+<div class="page-header">
+	<h1>Importe de dados </h1>
+</div>
+<p>
+
+
+
+<p><%= link_to 'Ponto de Interesse', import_download_ponto_path %><p>
+<p><%= link_to 'Eventos', import_download_evento_path %><p>
+<p><%= link_to 'Serviços', import_download_servico_path %><p>
+
+
+
+
+
+
+
+<%= form_tag attractions_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+<div class="col-sm-3" style="margin-bottom:25px">
+  <%= file_field_tag "attractions[file]" %>
+</div>
+<div class="col-sm-6">
+  <%= submit_tag "Submeter ficheiro", :name => nil%>
+</div>
+<% end %>
+
+
+
+<%= form_tag events_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+<div class="col-sm-3" style="margin-bottom:25px">
+  <%= file_field_tag "events[file]" %>
+</div>
+<div class="col-sm-6">
+  <%= submit_tag "Submeter ficheiro", :name => nil%>
+</div>
+<% end %>
+
+
+
+<%= form_tag services_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+<div class="col-sm-3" style="margin-bottom:25px">
+  <%= file_field_tag "services[file]" %>
+</div>
+<div class="col-sm-6">
+  <%= submit_tag "Submeter ficheiro", :name => nil%>
+</div>
+<% end %>
+
+<script>
+  $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Importar dados"});
+</script>
