@@ -1,17 +1,27 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
+<script type="text/css">
+#error_explanation {
+   .alert();
+   .alert-error();
+   .alert-block();
+}
+
+.field_with_errors {
+   .control-group.error();
+}
+</script>
 
 <%= form_for @web_user, :html => {:novalidate => 'novalidate'} do  |f| %>
-  <% if @web_user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@web_user.errors.count, "error") %> prohibited this web_user from being saved:</h2>
-
+<% if @web_user.errors.any? %>
+   <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
       <ul>
-      <% @web_user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+         <% @web_user.errors.full_messages.each do |msg| %>
+         <li><%= msg %></li>
+         <% end %>
       </ul>
-    </div>
-  <% end %>
+   </div>
+<% end %>
     <form role="form" class="form-horizontal">
       <div class="row">
         <%= f.text_field :id ,:id=>"nome" ,:type=>"hidden" , :value=>current_user.id %>

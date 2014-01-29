@@ -6,24 +6,19 @@
    #ling=lang.name;
 %>
 <br/>
-<div class="row">
-  <table class="col-sm-6">
-    <tr>
-      <td class="col-sm-1">
-        <%= image_tag "user.png" , :style =>"height:15%;width: 60%" %>
-      </td>
-      <td class="col-sm-2">
-        <h1><%= user.username%></h1>
-      </td>
-    </tr>
-  </table>
+
+<div class="page-header">
+  <h1 style="vertical-align: bottom;">
+        <%= image_tag "user.png" , :style =>"height: 80px;width: auto;" %>
+        <%= user.username%>    
+  </h1>
 </div>
 
 <div class="row">
   <div class="col-md-6">
     <div class="well well-sm">
       <p style="text-align: center;">
-        <strong style="text-align: center;"> As suas informações</strong>
+        <h4 style="text-align: center;"><strong > As suas informações</strong></h4>
       <p/>
 
       <dl class="dl-horizontal" style="align-content: center;">
@@ -36,15 +31,15 @@
         <dt>País</dt>
         <dd><%= user.country.name%></dd>
       </dl>
-      <%= link_to edit_user_registration_path, :class=>"link" do
-      %><i class="fa fa-edit"></i> Editar informação pessoal<%
+      <%= link_to edit_web_user_path(user.web_user), :class=>"link" do
+      %><i class="fa fa-edit"></i> Editar informações pessoais<%
        end
     %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="well well-sm" style="height: 176px;">
-      <strong>Gestão de conteudos da sua entidade</strong>
+      <h4 style="text-align: center;"><strong >Gestão de conteudos da sua entidade</strong></h4>
       <%
          if current_user.web_user.nil?
       %>
@@ -99,7 +94,7 @@
                       <tr>
                       <tr>
                       <td>
-                        <%= link_to users_index_path do %>Users
+                        <%= link_to admin_users_index_path do %>Users
                             </td>
                             <td><span class="badge badge-danger badge-square"><%= n_users%></span><% end %>
                         </td>
