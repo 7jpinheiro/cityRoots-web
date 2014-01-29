@@ -1,6 +1,6 @@
 class ApisController < ApplicationController
   before_action :set_api, only: [:show, :edit, :update, :destroy]
-  before_filter :restrict_access
+  #before_filter :restrict_access
 
   # GET /apis
   # GET /apis.json
