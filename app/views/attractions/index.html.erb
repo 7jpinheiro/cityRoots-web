@@ -86,20 +86,26 @@
                 <%= truncate trans.description, length: 100 %>
               </div><br/>
               <%
-                 if trans.schedule.empty? || trans.schedule!=nil
+                 if trans.schedule!=nil
+                    if trans.schedule.empty?
               %>
                 <b>Horário:</b><%= trans.schedule %><br/>
               <%
+                   end
                  end
-                 if trans.transport.empty? || trans.transport!=nil
+                 if trans.transport!=nil
+                    if trans.transport.empty?
               %>
                 <b>Transporte:</b><%= trans.transport %><br/>
               <%
+                    end
                  end
-                 if trans.price.empty? || trans.price!=nil
+                 if trans.price!=nil
+                    if trans.price.empty?
               %>
                   <b>Preço:</b><%= trans.price %>
               <%
+                    end
                  end
               %>
               </p>
