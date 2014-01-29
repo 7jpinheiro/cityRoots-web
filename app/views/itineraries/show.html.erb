@@ -123,11 +123,14 @@
                 <dd><%= tipo %></dd>
           <%
              end
+          %>
+          </dl>
+          <%
              @itinerary_att=@itinerary.itinerary_attractions
              if @itinerary_att.length != 0
           %>
-          </dl>
-          <div class="list-group">
+        
+            <div class="list-group">
                 <a href="#" class="list-group-item active text-center">
                   Prontos de Interesse
                 </a>
@@ -192,10 +195,10 @@
                      </div><!-- /.modal-dialog -->
                    </div>
                    <!-- /.modal -->
-               <%
-                  end
-                  end %>
-          </div>
+                <% end %>
+              </div>
+             <% end %>
+          
             <%
              @itinerary_servi=@itinerary.itinerary_services
              if @itinerary_servi.length != 0
@@ -256,11 +259,9 @@
                      </div><!-- /.modal-dialog -->
                    </div>
                    <!-- /.modal -->
-              <%
-             end
-             end
-             %>
-             </div>
+              <% end %>
+              </div>
+             <% end %>
              <%
              @itinerary_even=@itinerary.itinerary_events
              if @itinerary_even.length != 0
@@ -332,13 +333,15 @@
                      </div><!-- /.modal-content -->
                    </div><!-- /.modal-dialog -->
                  </div><!-- /.modal -->
-               <%
-              end
-             end
-          %>
-          </div>               
-        </dl>
-      </div>
+                <% end %>
+              </div>
+             <% end %>
+      
+        </div>
+
+
+
+
       <div class="col-md-6">
         <div class="row"  style="margin-top:15px;">
           <div class="col-sm-6 text-center">
