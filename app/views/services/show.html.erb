@@ -176,6 +176,12 @@
             <dt>Email</dt>
             <dd><%= @service.email %></dd>
         <%
+          end
+          if @attraction.phone != nil
+        %>
+            <dt>Telefone</dt>
+            <dd><%= @attraction.phone %></dd>
+        <%
            end
            if @service.address != nil
         %>

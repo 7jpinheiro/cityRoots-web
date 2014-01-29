@@ -127,9 +127,6 @@ class AttractionsController < ApplicationController
     if (!current_user.nil?) && (current_user.role? (:admin))
       attractions = AttractionTranslation.where("language_id=1 and LOWER(name) LIKE LOWER(?)","#{params[:name]}%")
     else
-
-# SELECT "attraction_translations".* FROM "attraction_translations" INNER JOIN "attractions" ON "attraction_translations"."attraction_id" = "attractions"."id" WHERE (attraction_translations.language_id=1 and attractions.web_user_id=10 and LOWER(attraction_translations.name) LIKE LOWER('%Museu%')) LIMIT 10 OFFSET 0
-      
       attractions = AttractionTranslation.joins('LEFT OUTER JOIN attractions ON "attraction_translations"."attraction_id" = "attractions"."id"').where("attraction_translations.language_id=1 and attractions.web_user_id=? and LOWER(attraction_translations.name) LIKE LOWER(?)", current_user.id,"#{params[:name]}%")
     end
     result = attractions.collect do |t|

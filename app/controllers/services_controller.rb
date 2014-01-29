@@ -166,6 +166,7 @@ class ServicesController < ApplicationController
           :address,
           :latitude,
           :longitude,
+          :phone,
           :reference_point,
           :active,
           :timestamp,

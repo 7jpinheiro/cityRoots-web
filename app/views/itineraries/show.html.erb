@@ -16,6 +16,18 @@
 
 <div class="container" >
   <div class="row" style="margin-top:15px">
+    <%  num=0;
+        @itinerary.itinerary_attractions.each do |photo_att|
+          num = num + photo_att.attraction.photo_attractions.count
+        end
+        @itinerary.itinerary_events.each do |photo_event|
+          num = num + photo_event.event.photo_events.count
+        end
+        @itinerary.itinerary_services.each do |photo_service|
+          num = num + photo_service.service.photo_services.count
+        end
+        if num > 0 
+    %>
     <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" style="margin-bottom:10px; ">
       <div style="position: absolute;z-index: 1000;margin-top: 75px;font-size: 50px;width: 80%;text-align: center;margin-left:10%">
         <h1 style="font-weight: 700; color:#fff;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);font-size: 1.3em;">
@@ -23,10 +35,12 @@
         </h1>
       </div>
       <div class="carousel-inner">
-        <% @itinerary.itinerary_attractions.each do |photo_att|
-          photo_att.attraction.photo_attractions.each_with_index do |p,i|
+        <% @num_images=0;
+        @itinerary.itinerary_attractions.each do |photo_att|
+          photo_att.attraction.photo_attractions.each_with_index do |p|
+            @num_images = @num_images + 1
          %>
-        <% if i==0 %>
+        <% if @num_images==0 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -37,10 +51,11 @@
           <% end 
              end %>
           <% @itinerary.itinerary_events.each do |photo_event|
-            photo_event.event.photo_events.each_with_index do |p,i| 
+            photo_event.event.photo_events.each_with_index do |p| 
+            @num_images = @num_images + 1 
           %>
 
-        <% if i==0 %>
+        <% if @num_images==0 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -51,13 +66,14 @@
           <% end
              end  %>
           <% @itinerary.itinerary_services.each do |photo_service|
-            photo_service.service.photo_services.each_with_index do |p,i| 
+            photo_service.service.photo_services.each_with_index do |p| 
+              @num_images = @num_images + 1
           %>
-        <% if i==0 %>
+        <% if @num_images ==0 %>
         <div class="item active">
           <% else %>
           <div class="item">
-            <% end %>
+          <% end %>
             <%= image_tag p.photo.url(:medium,false) , { style: "text-align:center; vertical-align:middle; height:250px; width: 100%;" } %>
             <div class="carousel-caption"></div>
           </div>
@@ -71,7 +87,14 @@
         <span class="fa fa-chevron-right"></span>
         </a>
       </div>
-    
+      <% else %>
+
+      <div class="page-header">
+        <h1><%=  @itinerary.name%></h1>
+      </div>
+
+      <% end %>
+
      
     </div>
 </div>
@@ -80,7 +103,9 @@
 <div class="col-md-12">
     <div class="row" style="margin-top: 15px; margin-bottom:20px">
       <div class="col-md-6">
+         <% if num > 0 %>
         <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
+        <% end %>        
          <dl>
           <%
              if @itinerary.description != nil
@@ -185,7 +210,7 @@
                      var ser=["<%= ser.name %>",<%= ser2.latitude %>,<%= ser2.longitude %>,<%= p.order %>];
                      locations.push(ser);
                  </script>
-                  <a href="#" class="list-group-item active text-center" data-toggle="modal" data-target="<%= target1 %>"><%= ser.name%></a>
+                  <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>"><%= ser.name%></a>
                 </div>
                    <!-- Modal -->
                    <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -246,7 +271,7 @@
                      var even=["<%= eve.name %>",<%= eve2.latitude %>,<%= eve2.longitude %>,<%= p.order %>];
                      locations.push(even);
                  </script>
-                 <a href="#" class="list-group-item" data-toggle="modal" data-target="<%= target1 %>">  <%= eve.name%> </a>
+                 <a href="#" class="list-group-item  text-center" data-toggle="modal" data-target="<%= target1 %>">  <%= eve.name%> </a>
               </div>               
                  <!-- Modal -->
                  <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -317,12 +342,13 @@
             <% end %>
           </div>
       </div>
-        <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px"></div>
+      <div id="map-canvas" style="width: 100%; height: 400px; margin-top:15px"></div>
       </div>
     </div>
     <br>
   </div>
 </div>
+
 <script type="text/javascript">
     function initialize() {
         var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];

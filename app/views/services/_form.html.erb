@@ -109,6 +109,16 @@
         </div>
         <br/>
         <div class="row">
+        <div class="form-group">
+          <%= f.label "Telefone" ,:for=>"phone" , :class=>"col-sm-4 control-label" ,:style=>"text-align: center;" %>
+          <div class="col-sm-6">
+            <%= f.text_field :phone ,:id=>"phone" , :class=>"form-control  form-control-square", :placeholder=>"123 123 123"%>
+            <p class="help-block"></p>
+          </div>
+        </div>
+      </div>
+        <br/>
+        <div class="row">
           <div class="form-group ">
             <%= f.label "Morada" ,:for=>"address"  , :class=>"col-sm-4 control-label",:style=>"text-align:center;"  %>
             <div class="col-sm-6">
