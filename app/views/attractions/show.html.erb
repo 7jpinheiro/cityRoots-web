@@ -179,7 +179,7 @@
                end
               end
               if @attraction.site != nil
-               if  @attraction.site.empty?
+               if  !@attraction.site.empty?
               %>
             <dt>Site</dt>
             <dd><%= @attraction.site %></dd>
@@ -187,7 +187,7 @@
                end
               end
               if @attraction.email != nil
-               if  @attraction.email.empty?
+               if  !@attraction.email.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.email %></dd>
@@ -195,7 +195,7 @@
                end
               end
               if @attraction.phone != nil
-               if @attraction.phone.empty?
+               if !@attraction.phone.empty?
               %>
             <dt>Telefone</dt>
             <dd><%= @attraction.phone %></dd>
@@ -203,7 +203,7 @@
                end
               end
               if trans.transport != nil
-               if trans.transport.empty?
+               if !trans.transport.empty?
               %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
@@ -211,7 +211,7 @@
                end
               end
               if @attraction.source != nil
-               if @attraction.source.empty?
+               if !@attraction.source.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.source %></dd>
@@ -227,7 +227,7 @@
             <%
               end
               if trans.price != nil
-               if  trans.price.empty?
+               if  !trans.price.empty?
               %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
