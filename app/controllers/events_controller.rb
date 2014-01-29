@@ -17,7 +17,7 @@ class EventsController < ApplicationController
       if (current_user.role? (:admin))
         @events =  Event.joins(:event_translations).where("event_translations.language_id=1 and LOWER(event_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
       else
-        @events =  Event.joins(:event_translations).where("event_translations.language_id=1 and LOWER(event_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
+        @events =  Event.joins(:event_translations).where("event_translations.language_id=1 and  events.web_user_id=? and LOWER(event_translations.name) LIKE LOWER(?)",current_user.id, "%#{params[:search]}%").page(params[:page]).per(10)
       end
     else
       if (!current_user.nil?) && (current_user.role? (:admin))
