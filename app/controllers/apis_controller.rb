@@ -1101,8 +1101,8 @@ class ApisController < ApplicationController
         com=Hash.new
         com["comment"]=c.comment
         com["date"]=c.evaluationdate
-        use=User.where("id=?",c.mobile_user_id).first
-        com["username"]=use.username
+        use=MobileUser.where("id=?",c.mobile_user_id).first
+        com["username"]=use.firstname+" "+use.surname
         @tmp_com.push(com)
       end
       atrac["comments"]=@tmp_com
@@ -1175,8 +1175,8 @@ class ApisController < ApplicationController
         com=Hash.new
         com["comment"]=c.comment
         com["date"]=c.evaluationdate
-        use=User.where("id=?",c.mobile_user_id).first
-        com["username"]=use.username
+        use=MobileUser.where("id=?",c.mobile_user_id).first
+        com["username"]=use.firstname+" "+use.surname
         @tmp_com.push(com)
       end
       event["comments"]=@tmp_com
@@ -1253,8 +1253,8 @@ class ApisController < ApplicationController
         com=Hash.new
         com["comment"]=c.comment
         com["date"]=c.evaluationdate
-        use=User.where("id=?",c.mobile_user_id).first
-        com["username"]=use.username
+        use=MobileUser.where("id=?",c.mobile_user_id).first
+        com["username"]=use.firstname+" "+use.surname
         @tmp_com.push(com)
       end
       serv["comments"]=@tmp_com
@@ -1326,8 +1326,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           atrac["comments"]=@tmp_com
@@ -1395,8 +1395,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           atrac["comments"]=@tmp_com
@@ -1476,8 +1476,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           event["comments"]=@tmp_com
@@ -1548,8 +1548,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           event["comments"]=@tmp_com
@@ -1624,8 +1624,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           serv["comments"]=@tmp_com
@@ -1695,8 +1695,8 @@ class ApisController < ApplicationController
             com=Hash.new
             com["comment"]=c.comment
             com["date"]=c.evaluationdate
-            use=User.where("id=?",c.mobile_user_id).first
-            com["username"]=use.username
+            use=MobileUser.where("id=?",c.mobile_user_id).first
+            com["username"]=use.firstname+" "+use.surname
             @tmp_com.push(com)
           end
           serv["comments"]=@tmp_com
@@ -1718,7 +1718,7 @@ class ApisController < ApplicationController
         tip=ItineraryType.where("id=?",iti.itinerary_type_id).first
         obj["type"]=tip.name
 
-        @pois=Array.new
+        @attractions=Array.new
         #
         #attraction
         #
@@ -1727,6 +1727,7 @@ class ApisController < ApplicationController
           @atts.each do |at|
             point=Hash.new
             point["order"]=at.order
+            poi=Hash.new
             if params[:lang]!=nil
               t_id=Language.where("abv=?",params[:lang]).first
             else
@@ -1734,44 +1735,49 @@ class ApisController < ApplicationController
             end
             tra=AttractionTranslation.where("language_id=? and attraction_id=?",t_id,at.attraction_id).first
             att=Attraction.where("id=?",at.attraction_id).first
-            point["id"]=at.attraction_id
-            point["name"]=tra.name
-            point["description"]=tra.description
-            point["schedule"]=tra.schedule
-            point["transport"]=tra.transport
-            point["site"]=att.site
-            point["email"]=att.email
-            point["address"]=att.address
-            point["phone"]=att.phone
-            point["latitude"]=att.latitude
-            point["longitude"]=att.longitude
-            point["isActive"]=att.active
-            point["timestamp"]=att.timestamp
-            point["hasAccessibily"]=att.accessibility
-            point["rating"]=att.rating
+            poi["id"]=at.attraction_id
+            poi["name"]=tra.name
+            poi["description"]=tra.description
+            poi["schedule"]=tra.schedule
+            poi["transport"]=tra.transport
+            poi["price"]=tra.price
+            poi["site"]=att.site
+            poi["source"]=att.source
+            poi["email"]=att.email
+            poi["address"]=att.address
+            poi["phone"]=att.phone
+            poi["latitude"]=att.latitude
+            poi["longitude"]=att.longitude
+            poi["isActive"]=att.active
+            poi["timestamp"]=att.timestamp
+            poi["hasAccessibily"]=att.accessibility
+            poi["rating"]=att.rating
             @tmp=Array.new
             att.types.each do |t|
               @tmp.push(t.name)
             end
-            point["type"]=@tmp
+            poi["type"]=@tmp
             @tmp_photo=Array.new
             att.photo_attractions.all.each do |p|
               @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
             end
-            point["photos"]=@tmp_photo
+            poi["photos"]=@tmp_photo
             @tmp_com=Array.new
             att.comment_attractions.all.each do |c|
               com=Hash.new
               com["comment"]=c.comment
               com["date"]=c.evaluationdate
-              use=User.where("id=?",c.mobile_user_id).first
-              com["username"]=use.username
+              use=MobileUser.where("id=?",c.mobile_user_id).first
+              com["username"]=use.firstname+" "+use.surname
               @tmp_com.push(com)
             end
-            point["comments"]=@tmp_com
-            @pois.push(point)
+            poi["comments"]=@tmp_com
+            point["attraction"]=poi
+            @attractions.push(point)
           end
         end
+        obj["attractions"]=@attractions
+        @events=Array.new
         #
         #events
         #
@@ -1780,6 +1786,7 @@ class ApisController < ApplicationController
           @even.each do |evt|
             point=Hash.new
             point["order"]=evt.order
+            poi=Hash.new
             if params[:lang]!=nil
               t_id=Language.where("abv=?",params[:lang]).first
             else
@@ -1787,53 +1794,62 @@ class ApisController < ApplicationController
             end
             tra=EventTranslation.where("language_id=?",t_id).where("event_id=?",evt.event_id).first
             evtn=Event.where("id=?",evt.event_id).first
-            point["id"]=evt.event_id
-            point["poi_type"]=1
-            point["name"]=tra.name
-            point["description"]=tra.description
-            point["schedule"]=tra.schedule
-            point["transport"]=tra.transport
-            point["site"]=evtn.site
-            point["email"]=evtn.email
-            point["address"]=evtn.address
-            point["phone"]=evtn.phone
-            point["latitude"]=evtn.latitude
-            point["longitude"]=evtn.longitude
-            point["isActive"]=evtn.active
-            point["timestamp"]=evtn.timestamp
-            point["hasAccessibily"]=evtn.accessibility
-            point["rating"]=evtn.rating
+            poi["id"]=evt.event_id
+            poi["poi_type"]=1
+            poi["name"]=tra.name
+            poi["description"]=tra.description
+            poi["schedule"]=tra.schedule
+            poi["transport"]=tra.transport
+            poi["price"]=tra.price
+            poi["program"]=tra.program
+            poi["site"]=evtn.site
+            poi["source"]=evtn.source
+            poi["organization"]=evtn.organization
+            poi["email"]=evtn.email
+            poi["address"]=evtn.address
+            poi["phone"]=evtn.phone
+            poi["latitude"]=evtn.latitude
+            poi["longitude"]=evtn.longitude
+            poi["isActive"]=evtn.active
+            poi["timestamp"]=evtn.timestamp
+            poi["hasAccessibily"]=evtn.accessibility
+            poi["rating"]=evtn.rating
             @tmp=Array.new
             evtn.types.each do |t|
               @tmp.push(t.name)
             end
-            point["type"]=@tmp
+            poi["type"]=@tmp
             @tmp_photo=Array.new
             evtn.photo_events.all.each do |p|
               @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
             end
-            point["photos"]=@tmp_photo
+            poi["photos"]=@tmp_photo
             @tmp_com=Array.new
             evtn.comment_events.all.each do |c|
               com=Hash.new
               com["comment"]=c.comment
               com["date"]=c.evaluationdate
-              use=User.where("id=?",c.mobile_user_id).first
-              com["username"]=use.username
+              use=MobileUser.where("id=?",c.mobile_user_id).first
+              com["username"]=use.firstname+" "+use.surname
               @tmp_com.push(com)
             end
-            point["comments"]=@tmp_com
-            @pois.push(point)
+            poi["comments"]=@tmp_com
+            point["event"]=poi
+            @events.push(point)
           end
         end
+        obj["events"]=@events
         #
         #services
         #
+        @services=Array.new
+
         @servi=iti.itinerary_services
         if @servi.length > 0
           @servi.each do |ser|
             point=Hash.new
             point["order"]=ser.order
+            poi=Hash.new
             if params[:lang]!=nil
               t_id=Language.where("abv=?",params[:lang]).first
             else
@@ -1841,46 +1857,47 @@ class ApisController < ApplicationController
             end
             tra=ServiceTranslation.where("language_id=?",t_id).where("service_id=?",ser.service_id).first
             serv=Service.where("id=?",ser.service_id).first
-            point["id"]=ser.service_id
-            point["poi_type"]=2
-            point["name"]=tra.name
-            point["description"]=tra.description
-            point["schedule"]=tra.schedule
-            point["transport"]=tra.transport
-            point["site"]=serv.site
-            point["email"]=serv.email
-            point["address"]=serv.address
-            point["phone"]=serv.phone
-            point["latitude"]=serv.latitude
-            point["longitude"]=serv.longitude
-            point["isActive"]=serv.active
-            point["timestamp"]=serv.timestamp
-            point["hasAccessibily"]=serv.accessibility
-            point["rating"]=serv.rating
+            poi["id"]=ser.service_id
+            poi["poi_type"]=2
+            poi["name"]=tra.name
+            poi["description"]=tra.description
+            poi["schedule"]=tra.schedule
+            poi["transport"]=tra.transport
+            poi["site"]=serv.site
+            poi["email"]=serv.email
+            poi["address"]=serv.address
+            poi["phone"]=serv.phone
+            poi["latitude"]=serv.latitude
+            poi["longitude"]=serv.longitude
+            poi["isActive"]=serv.active
+            poi["timestamp"]=serv.timestamp
+            poi["hasAccessibily"]=serv.accessibility
+            poi["rating"]=serv.rating
             @tmp=Array.new
             serv.types.each do |t|
               @tmp.push(t.name)
             end
-            point["type"]=@tmp
+            poi["type"]=@tmp
             @tmp_photo=Array.new
             serv.photo_services.all.each do |p|
               @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
             end
-            point["photos"]=@tmp_photo
+            poi["photos"]=@tmp_photo
             @tmp_com=Array.new
             serv.comment_services.all.each do |c|
               com=Hash.new
               com["comment"]=c.comment
               com["date"]=c.evaluationdate
-              use=User.where("id=?",c.mobile_user_id).first
-              com["username"]=use.username
+              use=MobileUser.where("id=?",c.mobile_user_id).first
+              com["username"]=use.firstname+" "+use.surname
               @tmp_com.push(com)
             end
-            point["comments"]=@tmp_com
-            @pois.push(point)
+            poi["comments"]=@tmp_com
+            point["service"]=poi
+            @services.push(point)
           end
         end
-        obj["pois"]=@pois
+        obj["services"]=@services
         @result.push(obj)
       end
       respond_to do |format|
@@ -2025,16 +2042,16 @@ class ApisController < ApplicationController
       @user=User.new
       @user.email=params[:email]
       @user.username=params[:username]
-      @user.password=params[:password]
-      @user.password_confirmation=params[:password]
+      @user.password=""
+      @user.password_confirmation=""
       @user.language_id = 1
       @user.country_id = 188
       @mobile_user = MobileUser.new
       @mobile_user.firstname=params[:firstname]
       @mobile_user.surname=params[:surname]
-      @mobile_user.gender=params[:gender]
+      @mobile_user.gender=nil
       @mobile_user.active=true
-      @mobile_user.dateofbirth=params[:dateofbirth]
+      @mobile_user.dateofbirth=nil
 
       @user.valid?
       @mobile_user.valid?
@@ -2045,21 +2062,6 @@ class ApisController < ApplicationController
         @mobile_user.save
         hash=Hash.new
         hash["id"]=@user.id
-        respond_to do |format|
-          format.json {  render :json => hash }
-        end
-      else
-        respond_to do |format|
-          format.json {  render :json => nil }
-        end
-      end
-    end
-
-    if params[:login]!= nil
-      user=User.where("username=?",params[:username]).where("password=?",params[:password]).first
-      if user!=nil
-        hash=Hash.new
-        hash["id"]=user.id
         respond_to do |format|
           format.json {  render :json => hash }
         end

@@ -47,12 +47,12 @@
         <div class="col-sm-10 col-sm-offset-1">
           <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:15px;">Pagamento</h2>
           <div class="form-group" style="margin-top: 20px; ">
-            <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12", :required => true %>
+            <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12"%>
             <ul class="cards">
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'visa' %>
+                    <%= f.radio_button :card_type, 'visa', :required => true  %>
                     <li class="visa"></li>
                   </label>
                 </div>
@@ -61,7 +61,7 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'master' %>
+                    <%= f.radio_button :card_type, 'master', :required => true  %>
                     <li class="mastercard"></li>
                   </label>
                 </div>
@@ -70,7 +70,7 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'discover' %>
+                    <%= f.radio_button :card_type, 'discover', :required => true  %>
                     <li class="discover"></li>
                   </label>
                 </div>
@@ -79,12 +79,13 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'american_express'%>
+                    <%= f.radio_button :card_type, 'american_express', :required => true %>
                     <li class="america_express"></li>
                   </label>
                 </div>
               </div>
             </ul>
+            <p class="help-block"></p>
           </div>
         </div>
 
