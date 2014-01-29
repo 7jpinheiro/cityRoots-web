@@ -107,6 +107,7 @@
     <% end %>
 
 </div>
+</div>
 
 
 <div class="container" >
@@ -147,46 +148,60 @@
         </dd>
         <% end
         if trans.description != nil
+           if !trans.description.empty?
         %>
         <dt>Descrição:</dt>
         <dd style="text-overflow: ellipsis;text-align: justify"><%= trans.description%></dd>
         <%
            end
+           end
            if @event.address != nil
+             if !@event.address.empty?
         %>
             <dt>Morada:</dt>
             <dd><%= @event.address %></dd>
         <%
            end
+           end
            if trans.schedule != nil
+             if !trans.schedule.empty?
         %>
             <dt>Horário:</dt>
             <dd><%= trans.schedule %></dd>
         <%
            end
+           end
            if @event.site != nil
+            if !@event.site.empty?
         %>
             <dt>Site</dt>
             <dd><%= @event.site %></dd>
         <%
            end
+           end
            if @event.email != nil
+            if !@event.email.empty?
         %>
             <dt>Email</dt>
             <dd><%= @event.email %></dd>
         <%
            end
+           end
            if @event.phone != nil
+            if !@event.phone.empty?
         %>
             <dt>Telemovel</dt>
             <dd><%= @event.phone %></dd>
         <%
            end
+           end
            if trans.transport != nil
+            if !trans.transport.empty?
         %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
         <%
+           end
            end
            if @event.startdate != nil
         %>
@@ -202,28 +217,36 @@
         <%
            end
            if trans.price != nil
+            if !trans.price.empty?
         %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
         <%
            end
+           end
            if @event.organization != nil
+            if !@event.organization.empty?
         %>
             <dt>Organização</dt>
             <dd><%= @event.organization %></dd>
         <%
            end
+           end
            if trans.program != nil
+            if !trans.program.empty?
         %>
             <dt>Programação</dt>
             <dd><%= trans.program %></dd>
         <%
            end
+           end
            if @event.source != nil
+            if !@event.source.empty?
         %>
             <dt>Origem</dt>
             <dd><%= @event.source %></dd>
         <%
+           end
            end
         %>
       </dl>
@@ -261,7 +284,7 @@
           <div class="media-body bubble-body bubble-arrow-left">
             <div class="bubble-inner">
               <% if (!co.mobile_user_id.nil?)  && (!co.mobile_user.user.username.nil?)
-                    nome=co.mobile_user.user.username
+                    nome=co.mobile_user.firstname+" "+co.mobile_user.surname
                   else
                     nome="Anónimo"
                   end %>
@@ -275,6 +298,7 @@
       </div>
     <% end %>
   </div>
+ </div>
 
 <!--<span style="border-top: none;"><%= link_to 'Voltar', events_path ,:class=>"btn btn-default btn-square"%></span>
 </br>

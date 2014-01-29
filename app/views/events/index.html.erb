@@ -2,7 +2,7 @@
 <%= csrf_meta_tag %>
 
 <div class="page-header">
-    <h1>Lista dos seus Eventos</h1>
+  <h1>Lista dos seus Eventos</h1>
 </div>
 
 
@@ -19,102 +19,119 @@
 <% end %>
 
 <%
-@events.each do |event|
-    trans=event.event_translations.first
+   @events.each do |event|
+     trans=event.event_translations.first
 %>
-<br/>
-<div class="col-md-12">
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-xs-3 col-md-3 text-center">
-        <%	unless event.photo_events.first.nil? %>
-            <%=	image_tag event.photo_events.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
-        <% else %>
-            <%= image_tag "no_image.jpg" , :style =>"max-width:100%; max-height:100%" %>
-        <% end %>
-      </div>
-      <div class="col-xs-9 col-md-9 section-box">
+    <br/>
+    <div class="col-md-12">
+      <div class="well well-sm">
         <div class="row">
-          <div class="col-md-8">
-           <h4>
-             <strong><%= link_to trans.name, event %></strong>
-             <% if event.accessibility != 0 %>
-                 <small><i class="fa fa-wheelchair"></i></small>
-             <% end %>
-           </h4>
-          </div>
-          <div  class="col-md-4 text-right" style="min-height:30px">
-            <%= link_to edit_event_path(event) do %>
-            <span class="fa fa-edit"> </span>Editar
-            <% end %>
-            <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'}  do %>
-             <span class="fa fa-trash-o"></span>Remover
+          <div class="col-xs-3 col-md-3 text-center">
+            <%	unless event.photo_events.first.nil? %>
+                <%=	image_tag event.photo_events.first.photo.url(:small,false), :style =>'max-width:100%; max-height:100%'  %>
+            <% else %>
+                <%= image_tag "no_image.jpg" , :style =>"max-width:100%; max-height:100%" %>
             <% end %>
           </div>
-        </div>
-        <div >
-            <%
-               @tipos=event.event_types.all
-               if @tipos.length!=0
-                 %>
-              <p>
-                <b>Tipo</b>
+          <div class="col-xs-9 col-md-9 section-box">
+            <div class="row">
+              <div class="col-md-8">
+                <h4>
+                  <strong><%= link_to trans.name, event %></strong>
+                  <% if event.accessibility != 0 %>
+                      <small><i class="fa fa-wheelchair"></i></small>
+                  <% end %>
+                </h4>
+              </div>
+              <div  class="col-md-4 text-right" style="min-height:30px">
+                <%= link_to edit_event_path(event) do %>
+                    <span class="fa fa-edit"> </span>Editar
+                <% end %>
+                <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'}  do %>
+                    <span class="fa fa-trash-o"></span>Remover
+                <% end %>
+              </div>
+            </div>
+            <div >
               <%
-                @tipos.each do |tipo|
-               %>
-                <%= tipo.type.name %><span> </span>
+                 @tipos=event.event_types.all
+                 if @tipos.length!=0
+              %>
+                  <p>
+                    <b>Tipo</b>
+                    <%
+                       @tipos.each do |tipo|
+                    %>
+                        <%= tipo.type.name %><span> </span>
+                    <%
+                       end
+                    %>
+                  </p>
               <%
                  end
-                 %>
-              </p>
-                <%
-               end
-            %>
+              %>
 
-          <p>
-            <b>Descrição: </b>
-          <div class="hidden-xs">
-            <%= truncate trans.description, length: 300 %>
-          </div>
-          <div class="visible-xs">
-            <%= truncate trans.description, length: 100 %>
-          </div><br/>
-          </p>
-            <b>Preço:</b><%= trans.price %><br/>
-          </p>
-          <p>
-              <b>Data inicio:</b><%= event.startdate %> <br/>
-              <b>Data fecho:</b><%= event.enddate %> <br/>
-            </p>
-          <hr/>
-          <div class="row rating-desc">
-            <div class="col-md-12">
-              <%
-              val=event.rating
-              indice=0;
-              while val >0
-                %><span class="fa fa-star"></span><%
-                val=val-1
-                indice=indice+1
-              end
-              while indice <5
+              <p>
+                <b>Descrição: </b>
+              <div class="hidden-xs">
+                <%= truncate trans.description, length: 300 %>
+              </div>
+              <div class="visible-xs">
+                <%= truncate trans.description, length: 100 %>
+              </div><br/>
+              <p>
+                <%
+                   if trans.price!=nil
+                     if !trans.price.empty?
+                %>
+                    <b>Preço:</b><%= trans.price %><br/>
+                <%
+                     end
+                   end
+                   if event.startdate!=nil
+                %>
+                        <b>Data inicio:</b><%= event.startdate %> <br/>
+                    <%
+
+                   end
+                   if event.enddate!=nil
+
+                    %>
+                        <b>Data fecho:</b><%= event.enddate %> <br/>
+                    <%
+
+                       end
+                %>
+              </p>
+              <hr/>
+              <div class="row rating-desc">
+                <div class="col-md-12">
+                  <%
+                     val=event.rating
+                     indice=0;
+                     while val >0
+                  %><span class="fa fa-star"></span><%
+                   val=val-1
+                   indice=indice+1
+                   end
+                   while indice <5
                 %><span class="fa fa-star-o"></span><%
-                indice=indice+1
-              end
-              %>
-              <span class="separator">|</span>
-              <%
-              commes=event.comment_events
-              size=commes.length
-              %>
-              <span class="fa fa-comment"></span>(<%= size %> Comments)
+                   indice=indice+1
+                   end
+                %>
+                  <span class="separator">|</span>
+                  <%
+                     commes=event.comment_events
+                     size=commes.length
+                  %>
+                  <span class="fa fa-comment"></span>(<%= size %> Comments)
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 <% end %>
 <%= paginate @events %>
 <br/>

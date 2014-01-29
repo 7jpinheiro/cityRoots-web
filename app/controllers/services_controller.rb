@@ -17,7 +17,7 @@ class ServicesController < ApplicationController
       if (current_user.role? (:admin))
         @services = Service.joins(:service_translations).where("service_translations.language_id=1 and LOWER(service_translations.name) LIKE LOWER(?)", "%#{params[:search]}%").page(params[:page]).per(10)
       else
-        @services = Service.joins(:service_translations).where("service_translations.language_id=1 services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", current_user.id,"%#{params[:search]}%").page(params[:page]).per(10)
+        @services = Service.joins(:service_translations).where("service_translations.language_id=1 and services.web_user_id=? and LOWER(service_translations.name) LIKE LOWER(?)", current_user.id,"%#{params[:search]}%").page(params[:page]).per(10)
       end
     else
       if (current_user.role? (:admin))
