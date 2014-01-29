@@ -50,9 +50,11 @@ class WebUsersController < ApplicationController
   # PATCH/PUT /web_users/1
   # PATCH/PUT /web_users/1.json
   def update
+    puts "jkfvhdfhgjhghjgfghjfgfhjhgjf"
     respond_to do |format|
       if @web_user.update(web_user_params)
-        format.html { redirect_to @web_user, notice: 'Entidade actualizada com sucesso.' }
+        puts "entra aqui"
+        format.html { redirect_to profiles_index_path, notice: 'Perfil actualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

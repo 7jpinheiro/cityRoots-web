@@ -12,7 +12,7 @@ CityRootsWeb::Application.routes.draw do
   resources :countries, :only => [:create,:destroy]
   resource :profiles
   
-  resources :web_users do
+  resources :web_users , :only => [:create,:destroy, :new, :edit] do
     resources :web_user_types, :only => [:create,:destroy]
     resources :web_user_packs
   end
@@ -87,7 +87,10 @@ CityRootsWeb::Application.routes.draw do
   post "payments/payment", to:"payments#create", as:"payment_create"
   get "payments/sucess"
   get "payments/failure"
-
+  get "/imports/index"
+  get "/imports/download_ponto", to:"imports#download_ponto", as:"import_download_ponto"
+  get "/imports/download_servico", to:"imports#download_servico", as:"import_download_servico"
+  get "/imports/download_evento", to:"imports#download_evento", as:"import_download_evento"
   get "attractions/:id/gallery",  to:"attractions#gallery", as:"attractions_gallery"
   get "events/:id/gallery",  to:"events#gallery", as:"events_gallery"
   get "services/:id/gallery",  to:"services#gallery", as:"services_gallery"

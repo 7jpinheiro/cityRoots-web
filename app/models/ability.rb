@@ -18,6 +18,7 @@ class Ability
       puts "------------- entidade -----------------"
       can :manage, Attraction, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
+      can :manage, WebUser, :id => user.id
       can :manage, Service, :web_user_id => user.id
       can :manage, Itinerary, :user_id => user.id
       can :manage, AttractionTranslation, :web_user_id => user.id
@@ -42,6 +43,7 @@ class Ability
       puts "------------- restauracao -----------------"
       can :manage, Payment
       can :create, Payment
+      can :manage, WebUser, :id => user.id
       can :manage, Service, :web_user_id => user.id
       can :create, Service
     end
@@ -50,6 +52,7 @@ class Ability
       puts "------------- restauracao_gold -----------------"
       can :manage, Service, :web_user_id => user.id
       can :manage, Event, :web_user_id => user.id
+      can :manage, WebUser, :id => user.id
     end
 
     if user.role?(:mobile)
