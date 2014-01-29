@@ -1,1 +1,1 @@
-json.extract! @api, :created_at, :updated_at
+json.extract! @api
