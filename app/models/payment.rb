@@ -24,6 +24,16 @@ class Payment
     end
   end
 
+
+  def validate_card
+    unless @credit_card.valid?
+      credit_card.errors.full_messages.each do |message|
+        errors.add_to_base message
+      end
+    end
+  end
+
+
   def price_in_cents
     (@money.to_f*100).round
   end

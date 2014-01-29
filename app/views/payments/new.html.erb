@@ -1,6 +1,8 @@
+<%= javascript_include_tag "jqBootstrapValidation" %>
+
 <%= stylesheet_link_tag "payments" %>
 
-<%= form_for :payment, url:payment_create_path do |f| %>
+<%= form_for :payment, url:payment_create_path, :html => {:novalidate => 'novalidate'} do |f| %>
   
   <div class="page-header">
     <h1>Subscrição do plano profissional</h1>
@@ -45,7 +47,7 @@
         <div class="col-sm-10 col-sm-offset-1">
           <h2 style="border-bottom:1px solid #DDDDDD; margin-bottom:15px;">Pagamento</h2>
           <div class="form-group" style="margin-top: 20px; ">
-            <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12" %>
+            <%= f.label :card_type, "Método de pagamento:", :class=>"control-label col-sm-12", :required => true %>
             <ul class="cards">
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
@@ -59,7 +61,7 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'master' %> 
+                    <%= f.radio_button :card_type, 'master' %>
                     <li class="mastercard"></li>
                   </label>
                 </div>
@@ -68,7 +70,7 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'discover' %> 
+                    <%= f.radio_button :card_type, 'discover' %>
                     <li class="discover"></li>
                   </label>
                 </div>
@@ -77,12 +79,11 @@
               <div class="col-sm-3 col-xs-12">
                 <div class="radio">
                   <label>
-                    <%= f.radio_button :card_type, 'american_express'%> 
+                    <%= f.radio_button :card_type, 'american_express'%>
                     <li class="america_express"></li>
                   </label>
                 </div>
               </div>
-
             </ul>
           </div>
         </div>
@@ -92,12 +93,14 @@
           <div class="form-group" style="margin-top: 20px; ">
             <div class="col-sm-6">
               <%= f.label :first_name, 'Primeiro Nome',  :class=>"control-label text-center col-sm-12" %>
-              <%= f.text_field :first_name, :class=>"form-control form-control-square" %>
+              <%= f.text_field :first_name, :class=>"form-control form-control-square",:required => true %>
+              <p class="help-block"></p>
             </div>
 
             <div class="col-sm-6">
               <%= f.label :last_name, "Ultimo Nome",  :class=>"control-label text-center col-sm-12"%>
-              <%= f.text_field :last_name, :class=>"form-control form-control-square" %>
+              <%= f.text_field :last_name, :class=>"form-control form-control-square",:required => true %>
+              <p class="help-block"></p>
             </div>
           </div>
         </div>
@@ -106,7 +109,8 @@
           <div class="form-group" style="margin-top: 20px">
               <div class="col-sm-12">        
                 <%= f.label :card_number, "Número do cartão" , :class=>"control-label text-center col-sm-12" %>      
-                <%= f.text_field :card_number, :class=>"form-control form-control-square"  %>
+                <%= f.text_field :card_number, :class=>"form-control form-control-square",:required => true  %>
+                <p class="help-block"></p>
               </div>
           </div>
         </div>
@@ -115,14 +119,16 @@
           <div class="form-group" style="margin-top:20px">
             <div class="col-sm-6">
               <%= f.label :card_verification, "CCV / CVV",  :class=>"control-label text-center col-sm-12" %>
-              <%= f.text_field :card_verification, :class=>"form-control"  %>
+              <%= f.text_field :card_verification, :class=>"form-control",:required => true  %>
+              <p class="help-block"></p>
             </div>
 
             <div class="col-sm-6">
               <%= f.label :card_expires_on,"Válido até" , :class=>"control-label text-center col-sm-12" %>
               <span class="row">
-                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)},{:class=>"form-control", :style=>"width:48%; float:left; margin-left:2%"} %>
+                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10)},{:class=>"form-control", :style=>"width:48%; float:left; margin-left:2%",:required => true} %>
               </span>
+              <p class="help-block"></p>
             </div>
           </div>
         </div>
@@ -141,4 +147,8 @@
 </div>
      
 <% end %>
+
+<script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 

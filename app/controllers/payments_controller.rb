@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
 
 
   def create
-    puts params[:payment].inspect
+    #puts params[:payment].inspect
     @payment = Payment.new(request.remote_ip, params[:payment][:value],params[:payment])
      if @payment.purchase
         userpack = WebUserPack.new
@@ -22,8 +22,9 @@ class PaymentsController < ApplicationController
         flash.now.notice = "Comece já a desfrutar das novas funcionalidades."  
         render profiles_index_path
       else
-        flash.now.alert = "Ocorreu um problema a efectuar o pagamento"  
-        render payment_create_path
+        flash.now.alert = "Ocorreu um problema a efectuar o pagamento"
+        @payment = nil
+        render 'payments/new'
       end
   end
 
