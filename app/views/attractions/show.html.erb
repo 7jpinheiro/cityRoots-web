@@ -154,53 +154,69 @@
             </dd>
             <%
               end
-              if trans.description != nil || trans.description.empty?
+              if trans.description != nil
+               if  trans.description.empty?
               %>
             <dt>Descrição</dt>
             <dd style="text-overflow: ellipsis; text-align: justify"><%= trans.description%></dd>
             <%
+               end
               end
-              if @attraction.address != nil || @attraction.address.empty?
+              if @attraction.address != nil
+               if @attraction.address.empty?
               %>
             <dt>Morada</dt>
             <dd><%= @attraction.address %></dd>
             <%
+                end
               end
-              if trans.schedule != nil || trans.schedule.empty?
+              if trans.schedule != nil
+               if trans.schedule.empty?
               %>
             <dt>Horário</dt>
             <dd><%= trans.schedule %></dd>
             <%
+               end
               end
-              if @attraction.site != nil || @attraction.site.empty?
+              if @attraction.site != nil
+               if  @attraction.site.empty?
               %>
             <dt>Site</dt>
             <dd><%= @attraction.site %></dd>
             <%
+               end
               end
-              if @attraction.email != nil || @attraction.email.empty?
+              if @attraction.email != nil
+               if  @attraction.email.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.email %></dd>
             <%
+               end
               end
-              if @attraction.phone != nil || @attraction.phone.empty?
+              if @attraction.phone != nil
+               if @attraction.phone.empty?
               %>
             <dt>Telefone</dt>
             <dd><%= @attraction.phone %></dd>
             <%
+               end
               end
-              if trans.transport != nil || trans.transport.empty?
+              if trans.transport != nil
+               if trans.transport.empty?
               %>
             <dt>Transporte</dt>
             <dd><%= trans.transport %></dd>
             <%
+               end
               end
-              if @attraction.source != nil || @attraction.source.empty?
+              if @attraction.source != nil
+               if @attraction.source.empty?
               %>
             <dt>Email</dt>
             <dd><%= @attraction.source %></dd>
             <%
+               end
               end
               if @attraction.reference_point == true
               %>
@@ -210,11 +226,13 @@
             </dd>
             <%
               end
-              if trans.price != nil || trans.price.empty?
+              if trans.price != nil
+               if  trans.price.empty?
               %>
             <dt>Preço</dt>
             <dd><%= trans.price %></dd>
             <%
+               end
               end
               %>
           </dl>
