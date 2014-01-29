@@ -709,6 +709,23 @@
 				},
         blockSubmit: true
 			},
+      date: {
+        name: "date",
+        init: function ($this, name) {
+          var element = $this.parents("form").first().find("[name=\"" + $this.data("validation" + name + "date") + "\"]").first();
+          var element2 = $this.parents("form").find("input.startdate").first();
+          console.log(element2)
+          element.bind("validation.validation", function () {
+            $this.trigger("change.validation", {submitting: true});
+          });
+          return {"element": element};
+        },
+        validate: function ($this, value, validator) {
+          return (value > validator.element.val() && ! validator.negative)
+            || (value < validator.element.val() && validator.negative);
+        },
+        blockSubmit: true
+      },
 			max: {
 				name: "max",
 				init: function ($this, name) {
@@ -798,6 +815,12 @@
 				match: "password",
 				message: "A password não corresponde à password definida.<!-- data-validator-paswordagain-message to override -->"
 			},
+      date: {
+        name: "Date",
+        type: "date",
+        match: "date",
+        message: "A data de tem de ser superior.<!-- data-validator-paswordagain-message to override -->"
+      },
 			positive: {
 				name: "Positive",
 				type: "shortcut",
