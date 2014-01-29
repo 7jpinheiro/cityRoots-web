@@ -40,7 +40,7 @@
           photo_att.attraction.photo_attractions.each_with_index do |p|
             @num_images = @num_images + 1
          %>
-        <% if @num_images==0 %>
+        <% if @num_images==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -55,7 +55,7 @@
             @num_images = @num_images + 1 
           %>
 
-        <% if @num_images==0 %>
+        <% if @num_images==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -69,7 +69,7 @@
             photo_service.service.photo_services.each_with_index do |p| 
               @num_images = @num_images + 1
           %>
-        <% if @num_images ==0 %>
+        <% if @num_images ==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -105,7 +105,8 @@
       <div class="col-md-6">
          <% if num > 0 %>
         <h3 style="margin-top:0; padding-top:0;border-bottom: 1px solid #ecf0f1;margin-bottom: 25px;">Informações</h3>
-        <% end %>        
+        <% end %>      
+
          <dl>
           <%
              if @itinerary.description != nil
@@ -125,6 +126,7 @@
              @itinerary_att=@itinerary.itinerary_attractions
              if @itinerary_att.length != 0
           %>
+          </dl>
           <div class="list-group">
                 <a href="#" class="list-group-item active text-center">
                   Prontos de Interesse
@@ -136,15 +138,15 @@
                     target1="#att#{att.attraction_id}"
                     target2="att#{att.attraction_id}"
                %>
-                   <script>
-                     var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>];
-                     locations.push(att);
-                   </script>
+               <script>
+                 var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>];
+                 locations.push(att);
+               </script>
           
-                  <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>">
+                <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>">
                    <%= att.name%> 
-                  </a> 
-                 </div>
+                </a> 
+            
                    <!-- Modal -->
                    <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                      <div class="modal-dialog">
@@ -188,10 +190,13 @@
                          </div>
                        </div><!-- /.modal-content -->
                      </div><!-- /.modal-dialog -->
-                   </div><!-- /.modal -->
+                   </div>
+                   <!-- /.modal -->
                <%
                   end
-             end
+                  end %>
+          </div>
+            <%
              @itinerary_servi=@itinerary.itinerary_services
              if @itinerary_servi.length != 0
           %>
@@ -211,7 +216,7 @@
                      locations.push(ser);
                  </script>
                   <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>"><%= ser.name%></a>
-                </div>
+            
                    <!-- Modal -->
                    <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                      <div class="modal-dialog">
@@ -249,10 +254,14 @@
                          </div>
                        </div><!-- /.modal-content -->
                      </div><!-- /.modal-dialog -->
-                   </div><!-- /.modal -->
-                       <%
-                   end
+                   </div>
+                   <!-- /.modal -->
+              <%
              end
+             end
+             %>
+             </div>
+             <%
              @itinerary_even=@itinerary.itinerary_events
              if @itinerary_even.length != 0
                        %>
@@ -272,7 +281,7 @@
                      locations.push(even);
                  </script>
                  <a href="#" class="list-group-item  text-center" data-toggle="modal" data-target="<%= target1 %>">  <%= eve.name%> </a>
-              </div>               
+              
                  <!-- Modal -->
                  <div class="modal fade" id="<%= target2 %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                    <div class="modal-dialog">
@@ -324,9 +333,10 @@
                    </div><!-- /.modal-dialog -->
                  </div><!-- /.modal -->
                <%
-                  end
+              end
              end
           %>
+          </div>               
         </dl>
       </div>
       <div class="col-md-6">
