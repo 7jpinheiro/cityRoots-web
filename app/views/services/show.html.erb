@@ -100,6 +100,7 @@
     <% end %>
 
 </div>
+</div>
 
 
 <div class="container" >
@@ -147,43 +148,43 @@
         <%
 
            end
-           if servi.description != nil
+           if servi.description != nil || servi.description !=""
         %>
             <dt>Descrição</dt>
             <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.description%></dd>
         <%
            end
-           if servi.schedule != nil
+           if servi.schedule != nil || servi.schedule !=""
         %>
             <dt>Horário</dt>
             <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.schedule%></dd>
         <%
            end
-           if servi.transport != nil
+           if servi.transport != nil || servi.transport !=""
         %>
             <dt>Transporte</dt>
             <dd style="text-overflow: ellipsis;text-align: justify"><%= servi.transport%></dd>
         <%
            end
-           if @service.site != nil
+           if @service.site != nil || @service.site!=""
         %>
             <dt>Site</dt>
             <dd><%= @service.site %></dd>
         <%
            end
-           if @service.email != nil
+           if @service.email != nil || @service.email!=""
         %>
             <dt>Email</dt>
             <dd><%= @service.email %></dd>
         <%
           end
-          if @service.phone != nil
+          if @service.phone != nil || @service.phone!=""
         %>
             <dt>Telefone</dt>
             <dd><%= @service.phone %></dd>
         <%
            end
-           if @service.address != nil
+           if @service.address != nil || @service.address!=""
         %>
             <dt>Morada</dt>
             <dd><%= @service.address %></dd>
@@ -197,13 +198,13 @@
             </dd>
         <%
            end
-           if @service.capacity != nil
+           if @service.capacity != nil || @service.capacity!=""
         %>
             <dt>Capacidade</dt>
             <dd><%= @service.capacity %></dd>
         <%
            end
-           if @service.details != nil
+           if @service.details != nil || @service.details!=""
         %>
             <dt>Detalhes</dt>
             <dd><%= @service.details %></dd>
@@ -248,9 +249,8 @@
             <div class="media-body bubble-body bubble-arrow-left">
               <div class="bubble-inner">
                 <%
-                   if co.mobile_user_id != nil
-                     usermovel=co.mobile_user.user
-                     nome=usermovel.username
+                   if co.mobile_user.firstname != nil
+                     nome=co.mobile_user.firstname+""+co.mobile_user.surname
                    else
                      nome="Anonimo"
                    end
