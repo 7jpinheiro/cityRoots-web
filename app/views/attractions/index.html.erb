@@ -87,21 +87,21 @@
               </div><br/>
               <%
                  if trans.schedule!=nil
-                    if trans.schedule.empty?
+                    if !trans.schedule.empty?
               %>
                 <b>Horário:</b><%= trans.schedule %><br/>
               <%
                    end
                  end
                  if trans.transport!=nil
-                    if trans.transport.empty?
+                    if !trans.transport.empty?
               %>
                 <b>Transporte:</b><%= trans.transport %><br/>
               <%
                     end
                  end
                  if trans.price!=nil
-                    if trans.price.empty?
+                    if !trans.price.empty?
               %>
                   <b>Preço:</b><%= trans.price %>
               <%
