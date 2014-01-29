@@ -40,7 +40,7 @@
           photo_att.attraction.photo_attractions.each_with_index do |p|
             @num_images = @num_images + 1
          %>
-        <% if @num_images==0 %>
+        <% if @num_images==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -55,7 +55,7 @@
             @num_images = @num_images + 1 
           %>
 
-        <% if @num_images==0 %>
+        <% if @num_images==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
@@ -69,7 +69,7 @@
             photo_service.service.photo_services.each_with_index do |p| 
               @num_images = @num_images + 1
           %>
-        <% if @num_images ==0 %>
+        <% if @num_images ==1 %>
         <div class="item active">
           <% else %>
           <div class="item">
