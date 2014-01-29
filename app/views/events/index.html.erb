@@ -6,6 +6,7 @@
 </div>
 
 
+
 <%= form_tag events_path, :method=>'get' do  |f|%>
     <table>
       <tr>
@@ -16,16 +17,6 @@
       </tr>
     </table>
 <% end %>
-
-<%= form_tag events_excel_path,  :multipart => true , :method=>'post' do  |f|%>
-<div class="col-sm-3" style="margin-bottom:25px">
-  <%= file_field_tag "events[file]" %>
-</div>
-<div class="col-sm-6">
-  <%= submit_tag "Submeter ficheiro", :name => nil%>
-</div>
-<% end %>
-
 
 <%
 @events.each do |event|
