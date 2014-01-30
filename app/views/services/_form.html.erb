@@ -27,14 +27,15 @@
       %>
       <div class="row">
         <%= f.fields_for :service_translations do |e| %>
+            <div class="services">
         <span class="col-sm-6">
         <div class="well well-sm">
           <div class="row">
             <br/>
             <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
-              <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
+              <div class="col-sm-7" id="lingua">
+                <%= e.collection_select(:language_id, Language.where("id <> ?",1).all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -72,20 +73,27 @@
           <br/>
           <div class="row">
             <div class="form-group " style="margin-left: 20px;">
-              <%= e.label "Transporte" ,:for=>"transport"  , :class=>"control-label col-sm-3"  %>
+              <%= e.label "Transporte" ,:id=>"baixo",:for=>"transport"  , :class=>"control-label col-sm-3"  %>
               <div class="col-sm-7">
                 <%= e.text_field :transport ,:id=>"transport" , :class=>"form-control form-control-square", :placeholder=>"Maneiras de transporte" %>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
-          <br/><span  style="margin-left: 20px; margin-bottom: 20px;"><%= e.link_to_remove "Remover Língua" %></span>
-          <br/>
+          <div id="deletebutton"><span  style="margin-left: 20px; margin-bottom: 20px;"><%= e.link_to_remove "Remover Língua" %></span></div>
         </div>
       </span>
+            </div>
         <% end %>
         <p><%= f.link_to_add "Adicionar Lingua", :service_translations %></p>
       </div>
+      <script type="text/javascript">//<![CDATA[
+      $(window).load(function(){
+          $(".services").find("#deletebutton:first").remove();
+          $(".services").find("#baixo:first").html("<label for='transport' class='control-label col-sm-3' style='margin-bottom: 50px;'>Transporte</lable>").show();
+          $(".services").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="service[service_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
+      });//]]>
+      </script>
       <div class="well well-sm" style="position:relative;">
         <div class="row">
           <br/>
@@ -243,6 +251,14 @@
 
         var marker;
         function initialize() {
+            // Create an array of styles.
+            var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+            // Create a new StyledMapType object, passing it the array of styles,
+            // as well as the name to be displayed on the map type control.
+            var styledMap = new google.maps.StyledMapType(styles,
+                    {name: "Styled Map"});
+
             var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
             var mapOptions = {
                 zoom: 12,
@@ -250,11 +266,19 @@
             }
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+            var image="<%= image_url "markerser.png"%>";
+
             marker = new google.maps.Marker({
                 position: myLatlng,
                 draggable:true,
-                map: map
+                map: map,
+                icon: image
             });
+
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style');
+
             google.maps.event.addListener(marker, 'dragend', function()
             {
                 document.getElementById("longitude").value=marker.getPosition().lng();

@@ -1,5 +1,4 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
-
 <%= nested_form_for(@itinerary, :html=>{:novalidate => 'novalidate'}) do |f| %>
     <div>
     <% if @itinerary.errors.any? %>
@@ -59,20 +58,23 @@
           <br>
 
           <%= f.fields_for :itinerary_attractions do |builder| %>
+             <div class="attractions">
               <div class="well">
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                    <%= builder.select :order, (1..30) , {},  {:class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
                   <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder.collection_select(:attraction_id,AttractionTranslation.all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
+                    <%= builder.collection_select(:attraction_id,AttractionTranslation.select("DISTINCT name,attraction_id").all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder.link_to_remove "Remover Ponto" %>
+                <p class="help-block"></p>
               </div>
+             </div>
           <% end %>
           <p><%= f.link_to_add "Adicionar Ponto", :itinerary_attractions %></p>
           <p class="help-block"></p>
@@ -81,20 +83,22 @@
           <strong>Eventos</strong>
           <br>
           <%= f.fields_for :itinerary_events do |builder1| %>
+              <div class="events">
               <div class="well">
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder1.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                    <%= builder1.select :order, (1..30) , {},  {:class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
                   <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder1.collection_select(:event_id,EventTranslation.all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
+                    <%= builder1.collection_select(:event_id,EventTranslation.select("DISTINCT name,event_id").all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder1.link_to_remove "Remover Ponto" %>
                 <p class="help-block"></p>
+              </div>
               </div>
           <% end %>
           <p><%= f.link_to_add "Adicionar Ponto", :itinerary_events %></p>
@@ -104,24 +108,25 @@
           <strong>Serviços</strong>
           <br>
           <%= f.fields_for :itinerary_services do |builder2| %>
+              <div class="services">
               <div class="well">
-
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder2.select :order, (0..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem",:id=>"order" } %>
+                    <%= builder2.select :order, (1..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
                   <div class="form-group ">
                     <label for="ponto">Ponto</label>
-                    <%= builder2.collection_select(:service_id,ServiceTranslation.all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true}) %>
+                    <%= builder2.collection_select(:service_id,ServiceTranslation.select("DISTINCT name,service_id").all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
                   <%= builder2.link_to_remove "Remover Ponto" %>
                 <p class="help-block"></p>
               </div>
+              </div>
           <% end %>
-          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services %></p>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services%></p>
           <p class="help-block"></p>
         </div>
       </div>

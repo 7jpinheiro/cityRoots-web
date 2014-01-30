@@ -59,18 +59,7 @@
               <div class="row rating-desc">
                 <div class="col-md-12">
                   <%
-                     @ratings=itinerary.rating_itineraries
-                     ratin=0
-                     if @ratings != nil
-                       index=0
-                       @ratings.each do |rati|
-                         ratin=ratin+rati.rating
-                         index=index+1
-                       end
-                     else
-                       ratin=0
-                     end
-                     val=ratin
+                     val=itinerary.rating
                      indice=0;
                      while val >0
                   %><span class="fa fa-star"></span><%

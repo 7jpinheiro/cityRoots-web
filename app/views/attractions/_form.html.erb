@@ -1,17 +1,24 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
-
+<script type="text/javascript">//<![CDATA[
+$(window).load(function(){
+    $(".translations").find("#deletebutton:first").remove();
+    $(".translations").find("#baixo:first").html("<label for='price' class='control-label col-sm-3' style='margin-bottom: 49px;'>Preço</lable>").show();
+    $(".translations").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
+});//]]>
+</script>
 
 <%= nested_form_for @attraction, :html => {:novalidate => 'novalidate'} do |f| %>
     <div class="row">
       <%= f.fields_for :attraction_translations do |e| %>
         <span class="col-sm-6">
+        <div class="translations">
         <div class="well well-sm">
           <div class="row">
             <br/>
             <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
-              <div class="col-sm-7">
-                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",  :required => true,:autofocus => true   }) %>
+              <div class="col-sm-7" id="lingua">
+                <%= e.collection_select(:language_id, Language.where("id <> ?",1).all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",  :required => true,:autofocus => true   }) %>
                 <p class="help-block"></p>
               </div>
             </div>
@@ -60,25 +67,21 @@
           <br/>
           <div class="row">
             <div class="form-group" style="margin-left: 20px;">
-              <%= e.label "Preço" ,:for=>"price" , :class=>"control-label col-sm-3" %>
+              <%= e.label "Preço" ,:id=>"baixo",:for=>"price" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7">
-                <div class="input-group">
                   <%= e.text_field :price ,:id=>"price" , :class=>"form-control form-control-square" , :placeholder=>"Adultos 10.00€, Crianças 5.00€"%>
-                  <span class="input-group-addon">€</span>
-                  
-                </div>
                 <p class="help-block"></p>
               </div>
             </div>
           </div>
-          <br/><span  style="margin-left: 20px; margin-bottom: 20px;"><%= e.link_to_remove "Remover Língua" %></span>
-          <br/>
-          <br/>
+          <div id="deletebutton"><span style="margin-left: 20px;"></span><%= e.link_to_remove "Remover Língua" %></div>
+        </div>
         </div>
       </span>
       <% end %>
       <p><%= f.link_to_add "Adicionar Língua", :attraction_translations %></p>
     </div>
+
     <%
        cityid=current_user.web_user.city_id
     %>
@@ -219,6 +222,14 @@
 
         var marker;
         function initialize() {
+            // Create an array of styles.
+            var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+            // Create a new StyledMapType object, passing it the array of styles,
+            // as well as the name to be displayed on the map type control.
+            var styledMap = new google.maps.StyledMapType(styles,
+                    {name: "Styled Map"});
+
             var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
             var mapOptions = {
                 zoom: 12,
@@ -226,11 +237,17 @@
             }
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+            var image="<%= image_url "markeratt.png"%>";
+
             marker = new google.maps.Marker({
                 position: myLatlng,
                 draggable:true,
-                map: map
+                map: map,
+                icon: image
             });
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style');
             google.maps.event.addListener(marker, 'dragend', function()
             {
                 document.getElementById("longitude").value=marker.getPosition().lng();
@@ -246,8 +263,6 @@
         #map-canvas { height: 100% }
     </style>
 <% end %>
-
-
 <script>
   $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 </script>
