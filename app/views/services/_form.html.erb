@@ -251,6 +251,14 @@
 
         var marker;
         function initialize() {
+            // Create an array of styles.
+            var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+            // Create a new StyledMapType object, passing it the array of styles,
+            // as well as the name to be displayed on the map type control.
+            var styledMap = new google.maps.StyledMapType(styles,
+                    {name: "Styled Map"});
+
             var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
             var mapOptions = {
                 zoom: 12,
@@ -258,11 +266,19 @@
             }
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+            var image="<%= image_url "markerser.png"%>";
+
             marker = new google.maps.Marker({
                 position: myLatlng,
                 draggable:true,
-                map: map
+                map: map,
+                icon: image
             });
+
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style');
+
             google.maps.event.addListener(marker, 'dragend', function()
             {
                 document.getElementById("longitude").value=marker.getPosition().lng();

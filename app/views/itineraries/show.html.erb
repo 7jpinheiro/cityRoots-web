@@ -142,7 +142,7 @@
                     target2="att#{att.attraction_id}"
                %>
                <script>
-                 var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>];
+                 var att=["<%= att.name %>",<%= att2.latitude %>,<%= att2.longitude %>,<%= p.order %>,"att"];
                  locations.push(att);
                </script>
           
@@ -215,7 +215,7 @@
                        target2="att#{ser.service_id}"
                 %>
                  <script>
-                     var ser=["<%= ser.name %>",<%= ser2.latitude %>,<%= ser2.longitude %>,<%= p.order %>];
+                     var ser=["<%= ser.name %>",<%= ser2.latitude %>,<%= ser2.longitude %>,<%= p.order %>,"ser"];
                      locations.push(ser);
                  </script>
                   <a href="#" class="list-group-item text-center" data-toggle="modal" data-target="<%= target1 %>"><%= ser.name%></a>
@@ -278,7 +278,7 @@
                     target2="att#{eve.event_id}"
                %>
                  <script>
-                     var even=["<%= eve.name %>",<%= eve2.latitude %>,<%= eve2.longitude %>,<%= p.order %>];
+                     var even=["<%= eve.name %>",<%= eve2.latitude %>,<%= eve2.longitude %>,<%= p.order %>,"evt"];
                      locations.push(even);
                  </script>
                  <a href="#" class="list-group-item  text-center" data-toggle="modal" data-target="<%= target1 %>">  <%= eve.name%> </a>
@@ -336,12 +336,7 @@
                 <% end %>
               </div>
              <% end %>
-      
         </div>
-
-
-
-
       <div class="col-md-6">
         <div class="row"  style="margin-top:15px;">
           <div class="col-sm-6 text-center">
@@ -361,20 +356,25 @@
     <br>
   </div>
 </div>
+</div>
+</div>
 
 <script type="text/javascript">
     function initialize() {
+        // Create an array of styles.
         var styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+
+        // Create a new StyledMapType object, passing it the array of styles,
+        // as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles,
+                {name: "Styled Map"});
+        var myLatlng = new google.maps.LatLng(41.5518, -8.4229);
         var mapOptions = {
-            zoom: 13,
-            center: new google.maps.LatLng(locations[0][1],locations[0][2])
+            zoom: 12,
+            center: myLatlng
         }
         var map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
-
-
-
-        var image ="<%= image_url "maker.png"%>";
 
         // Shapes define the clickable region of the icon.
         // The type defines an HTML &lt;area&gt; element 'poly' which
@@ -390,14 +390,37 @@
         for (var i = 0; i < locations.length; i++) {
             var beach = locations[i];
             var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                icon: image,
-                title: beach[0],
-                zIndex: beach[3]
-            });
+            if(beach[4]=="att"){
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    icon: "<%= image_url "markeratt.png"%>",
+                    title: beach[0],
+                    zIndex: beach[3]
+                });
+            }
+            if(beach[4]=="evt"){
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    icon: "<%= image_url "markerevt.png"%>",
+                    title: beach[0],
+                    zIndex: beach[3]
+                });
+            }
+            if(beach[4]=="ser"){
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    icon: "<%= image_url "markerser.png"%>",
+                    title: beach[0],
+                    zIndex: beach[3]
+                });
+            }
         }
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);

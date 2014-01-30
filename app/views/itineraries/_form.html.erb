@@ -1,31 +1,4 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
-<script>
-  var index=1;
-  var at=0;
-  var se=0;
-  var ev=0;
-
-  function update_count(tipo){
-      setTimeout(function (){
-          if(tipo==0){
-              $("#sel_attr:last").val(index);
-              index++;
-          }
-          if(tipo==1){
-              $("#sel_evet:last").val(index);
-              index++;
-          }
-          if(tipo==2){
-              $("#sel_serv:last").val(index);
-              index++;
-          }
-      }, 500);
-  }
-
-  function remove(){
-      index--;
-  }
-</script>
 <%= nested_form_for(@itinerary, :html=>{:novalidate => 'novalidate'}) do |f| %>
     <div>
     <% if @itinerary.errors.any? %>
@@ -89,7 +62,7 @@
               <div class="well">
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder.select :order, (1..30) , {},  { :id=>"sel_attr",:name=>"sel_attr",:class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
+                    <%= builder.select :order, (1..30) , {},  {:class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
@@ -98,12 +71,12 @@
                     <%= builder.collection_select(:attraction_id,AttractionTranslation.select("DISTINCT name,attraction_id").all,:attraction_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
-                  <%= builder.link_to_remove "Remover Ponto" ,:onclick=>"remove();" %>
+                  <%= builder.link_to_remove "Remover Ponto" %>
                 <p class="help-block"></p>
               </div>
              </div>
           <% end %>
-          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_attractions , :onclick=>"update_count(0);" %></p>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_attractions %></p>
           <p class="help-block"></p>
         </div>
         <div class="col-md-4">
@@ -114,7 +87,7 @@
               <div class="well">
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder1.select :order, (1..30) , {},  {:id=>"sel_evet",:name=>"sel_evet", :class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
+                    <%= builder1.select :order, (1..30) , {},  {:class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
@@ -123,12 +96,12 @@
                     <%= builder1.collection_select(:event_id,EventTranslation.select("DISTINCT name,event_id").all,:event_id,:name,{prompt: "Selecione um Ponto"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
-                  <%= builder1.link_to_remove "Remover Ponto" ,:onclick=>"remove();"%>
+                  <%= builder1.link_to_remove "Remover Ponto" %>
                 <p class="help-block"></p>
               </div>
               </div>
           <% end %>
-          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_events, :onclick=>"update_count(1);"%></p>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_events %></p>
           <p class="help-block"></p>
         </div>
         <div class="col-md-4">
@@ -139,7 +112,7 @@
               <div class="well">
                   <div class="form-group ">
                     <label for="order">Ordem</label><br/>
-                    <%= builder2.select :order, (1..30) , {},  {:id=>"sel_serv",:name=>"sel_evet", :class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
+                    <%= builder2.select :order, (1..30) , {},  { :class => 'form-control' ,:prompt=> "Selecione a ordem" } %>
                     <p class="help-block"></p>
                   </div>
                   <br/>
@@ -148,12 +121,12 @@
                     <%= builder2.collection_select(:service_id,ServiceTranslation.select("DISTINCT name,service_id").all,:service_id,:name,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true}) %>
                     <p class="help-block"></p>
                   </div>
-                  <%= builder2.link_to_remove "Remover Ponto",:onclick=>"remove();" %>
+                  <%= builder2.link_to_remove "Remover Ponto" %>
                 <p class="help-block"></p>
               </div>
               </div>
           <% end %>
-          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services, :onclick=>"update_count(2);"%></p>
+          <p><%= f.link_to_add "Adicionar Ponto", :itinerary_services%></p>
           <p class="help-block"></p>
         </div>
       </div>
