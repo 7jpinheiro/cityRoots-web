@@ -2063,8 +2063,8 @@ class ApisController < ApplicationController
       @user=User.new
       @user.email=params[:email]
       @user.username=params[:username]
-      @user.password=params[:username]
-      @user.password_confirmation=params[:username]
+      @user.password=params[:email]
+      @user.password_confirmation=params[:email]
       @user.language_id = 1
       @user.country_id = 188
       @mobile_user = MobileUser.new
