@@ -5,13 +5,13 @@ Repositório da plataforma web do grupo Roteiro Turístico da UCE15(2013/2014) d
 
 TODO List:
 
-[ ] - Obrigar a por portugues   
-[ ] - Pagina de import de ficheiro excel com dados  
+[X] - Obrigar a por portugues   
+[ ] - Pagina de import de ficheiro excel com dados(Catarina)  
 [ ] - Validar data de fim > data inicio  
-[ ] - Estrelas nas rotas  
+[X] - Estrelas nas rotas  
 [ ] - Links Sociais   
-[ ] - Mapa edit eventos/rotas icon cityroots   
+[X] - Mapa edit eventos/rotas icon cityroots   
 [ ] - Editar perfil   
-
+[ ] - Editar esta tudo a portugues e é impossivel editar coisas já adicionadas, é precisso corrigir
 
 
