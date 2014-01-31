@@ -1906,13 +1906,19 @@ class ApisController < ApplicationController
     end
     if params[:co]!=nil && params[:attr]
       @com=CommentAttraction.new
+      @rat=RatingAttraction.new
       @com.comment=params[:comentario]
+      @rat.rating=params[:rating]
       @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      @rat.evaluationdate=Time.now.strftime("%Y-%m-%d")
       obj=Attraction.where("id=?",params[:id]).first
       @com.attraction=obj
+      @rat.attraction=obj
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
+      @rat.mobile_user=@use.mobile_user
       @com.save()
+      @rat.save()
 
       respond_to do |format|
         format.json {  render :json => Hash.new("success"=>"true") }
@@ -1920,12 +1926,17 @@ class ApisController < ApplicationController
     end
     if params[:co]!=nil && params[:even]
       @com=CommentEvent.new
+      @rat=RatingEvent.new
       @com.comment=params[:comentario]
+      @rat.rating=params[:rating]
       @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      @rat.evaluationdate=Time.now.strftime("%Y-%m-%d")
       obj=Event.where("id=?",params[:id]).first
       @com.event=obj
+      @rat.event=obj
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
+      @rat.mobile_user=@use.mobile_user
       @com.save()
       respond_to do |format|
         format.json {  render :json => Hash.new("success"=>"true") }
@@ -1933,12 +1944,17 @@ class ApisController < ApplicationController
     end
     if params[:co]!=nil && params[:serv]
       @com=CommentService.new
+      @rat=RatingService.new
       @com.comment=params[:comentario]
+      @rat.rating=params[:rating]
       @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
+      @rat.evaluationdate=Time.now.strftime("%Y-%m-%d")
       obj=Service.where("id=?",params[:id]).first
-      @com.event=obj
+      @com.service=obj
+      @rat.service=obj
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
+      @rat.mobile_user=@use.mobile_user
       @com.save()
       respond_to do |format|
         format.json {  render :json => Hash.new("success"=>"true") }
@@ -1946,13 +1962,18 @@ class ApisController < ApplicationController
     end
     if params[:co]!=nil && params[:itin]
       @com=CommentItinerary.new
+      @rat=RatingItinerary.new
       @com.comment=params[:comentario]
+      @rat.rating=params[:rating]
       @com.evaluationdate=Time.now.strftime("%Y-%m-%d")
       obj=Itinerary.where("id=?",params[:id]).first
-      @com.event=obj
+      @com.itinerary=obj
+      @rat.itinerary=obj
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
+      @rat.mobile_user=@use.mobile_user
       @com.save()
+      @rat.save()
       respond_to do |format|
         format.json {  render :json => Hash.new("success"=>"true") }
       end
@@ -2042,8 +2063,8 @@ class ApisController < ApplicationController
       @user=User.new
       @user.email=params[:email]
       @user.username=params[:username]
-      @user.password=""
-      @user.password_confirmation=""
+      @user.password=params[:email]
+      @user.password_confirmation=params[:email]
       @user.language_id = 1
       @user.country_id = 188
       @mobile_user = MobileUser.new
@@ -2066,8 +2087,10 @@ class ApisController < ApplicationController
           format.json {  render :json => hash }
         end
       else
+        hash=Hash.new
+        hash["erro"]="Erro ao gravar"
         respond_to do |format|
-          format.json {  render :json => nil }
+          format.json {  render :json => hash }
         end
       end
     end
