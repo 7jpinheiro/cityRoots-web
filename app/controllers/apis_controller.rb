@@ -2063,8 +2063,8 @@ class ApisController < ApplicationController
       @user=User.new
       @user.email=params[:email]
       @user.username=params[:username]
-      @user.password=""
-      @user.password_confirmation=""
+      @user.password=params[:username]
+      @user.password_confirmation=params[:username]
       @user.language_id = 1
       @user.country_id = 188
       @mobile_user = MobileUser.new
@@ -2087,8 +2087,10 @@ class ApisController < ApplicationController
           format.json {  render :json => hash }
         end
       else
+        hash=Hash.new
+        hash["erro"]="Erro ao gravar"
         respond_to do |format|
-          format.json {  render :json => nil }
+          format.json {  render :json => hash }
         end
       end
     end
