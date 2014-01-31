@@ -212,7 +212,7 @@
         <%
            end
            if @service.capacity != nil
-            if !@service.capacity.empty?
+            if @service.capacity>0
         %>
             <dt>Capacidade</dt>
             <dd><%= @service.capacity %></dd>
