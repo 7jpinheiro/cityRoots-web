@@ -24,14 +24,14 @@ development:
 #  host: 193.136.19.202
 #  port: 5432
 
-#production:
-#  adapter: postgresql
-#  database: cityroots
-#  encoding: utf8
-#  pool: 5
-#  timeout: 5000
-#  username: pg_user
-#  password: 123456
-#  host: 193.136.19.202
-#  port: 5432
+production:
+  adapter: postgresql
+  database: cityroots
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  username: postgres
+  password: 123456
+  host: localhost
+  port: 5432
 
