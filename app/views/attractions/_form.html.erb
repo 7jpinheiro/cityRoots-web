@@ -1,9 +1,13 @@
 <%= javascript_include_tag "jqBootstrapValidation" %>
 <script type="text/javascript">//<![CDATA[
 $(window).load(function(){
-    $(".translations").find("#deletebutton:first").remove();
+    $(".translations").find("#deletebutton")[0].remove();
     $(".translations").find("#baixo:first").html("<label for='price' class='control-label col-sm-3' style='margin-bottom: 49px;'>Preço</lable>").show();
-    $(".translations").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
+    <% if @attraction.new_record? %>
+      $(".translations").find("#lingua")[0].html('<input class="form-control form-control-square" id="name" name="attraction[attraction_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
+    <% else %>
+      document.getElementById("attraction_attraction_translations_attributes_0_language_id").disabled=true;
+    <% end %>
 });//]]>
 </script>
 
@@ -18,7 +22,7 @@ $(window).load(function(){
             <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7" id="lingua">
-                <%= e.collection_select(:language_id, Language.where("id <> ?",1).all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",  :required => true,:autofocus => true   }) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",  :required => true,:autofocus => true   }) %>
                 <p class="help-block"></p>
               </div>
             </div>

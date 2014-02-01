@@ -36,7 +36,7 @@
             <div class="form-group " style="margin-left: 20px;">
               <%= e.label "Língua" ,:for=>"language_id" , :class=>"control-label col-sm-3" %>
               <div class="col-sm-7" id="lingua">
-                <%= e.collection_select(:language_id, Language.where("id <> ?",1).all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
+                <%= e.collection_select(:language_id, Language.all, :id, :name, {prompt: "Selecione uma Lingua"}, {class: "form-control",:required => true ,:autofocus => true}) %>
 
               </div>
             </div>
@@ -109,13 +109,7 @@
         <% end %>
         <p><%= f.link_to_add "Adicionar Lingua", :event_translations %></p>
         <p class="help-block"></p>
-        <script type="text/javascript">//<![CDATA[
-        $(window).load(function(){
-            $(".events").find("#deletebutton:first").remove();
-            $(".events").find("#baixo:first").html("<label for='price' class='control-label col-sm-3' style='margin-bottom: 40px;'>Preço</lable>").show();
-            $(".events").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="event[event_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
-        });//]]>
-        </script>
+      
       </div>
       <div class="well well-sm">
         <div class="row">
@@ -325,4 +319,15 @@
 
 <script>
     $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
+  <script type="text/javascript">//<![CDATA[
+  $(window).load(function(){
+    $(".events").find("#deletebutton")[0].remove();
+    $(".events").find("#baixo:first").html("<label for='price' class='control-label col-sm-3' style='margin-bottom: 40px;'>Preço</lable>").show();
+  <% if @event.new_record? %>
+    $(".events").find("#lingua:first").html('<input class="form-control form-control-square" id="name" name="event[event_translations_attributes][0][language_id]" value="1" required="required" type="hidden" aria-invalid="false"><label style="margin-bottom: 30px;">Português</lable>').show();
+    <% else %>
+      document.getElementById("event_event_translations_attributes_0_language_id").disabled=true;
+    <% end %>
+});//]]>
 </script>
