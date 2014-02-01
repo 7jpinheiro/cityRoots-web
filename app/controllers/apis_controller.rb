@@ -1954,11 +1954,11 @@ class ApisController < ApplicationController
         @rat.save()
         @com.save()
         respond_to do |format|
-          format.json {  render :json => Hash.new("success"=>"true") }
+          format.json {  render :json => Hash.new("success"=>true) }
         end
       else
         respond_to do |format|
-          format.json {  render :json => Hash.new("success"=>"false") }
+          format.json {  render :json => Hash.new("success"=>false) }
         end
       end
     end
