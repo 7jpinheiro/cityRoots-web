@@ -59,8 +59,12 @@
         <div class="form-group control-group">
           <%= f.label "Tipo" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
-            <p class="help-block"></p>
+            <% if @web_user.new_record? %>
+              <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
+              <p class="help-block"></p>
+             <% else %>
+              <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -69,8 +73,12 @@
         <div class="form-group control-group">
           <%= f.label "Cidade" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
-            <p class="help-block"></p>
+            <% if @web_user.new_record? %>
+              <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
+              <p class="help-block"></p>
+              <% else %>
+                <%= f.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
+              <% end %>
           </div>
         </div>
       </div>

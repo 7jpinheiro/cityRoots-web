@@ -9,9 +9,9 @@ TODO List:
 [ ] - Pagina de import de ficheiro excel com dados(Catarina)  
 [ ] - Validar data de fim > data inicio  
 [X] - Estrelas nas rotas  
-[ ] - Links Sociais   
+[X] - Links Sociais   
 [X] - Mapa edit eventos/rotas icon cityroots   
-[ ] - Editar perfil   
+[X] - Editar perfil   
 [ ] - Editar esta tudo a portugues e é impossivel editar coisas já adicionadas, é precisso corrigir
 
 

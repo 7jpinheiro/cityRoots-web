@@ -6,10 +6,11 @@
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bf-navbar-collapse">
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <%= image_tag "Index/logo_CR.png", :style=>"width: 18px;height: 18px;" %>
-        <%= link_to "CityRoots" , welcome_index_path , :style => "color:inherit;text-decoration:none;cursor:pointer;" %>
-      </span>
+       
+        <%= link_to welcome_index_path , :style => "color:inherit;text-decoration:none;cursor:pointer;" do %>
+         <%= image_tag "logo_CR.png", :style=>"height: 32px;margin-top: 15px;margin-right: 10px;" %>
+        <% end %>
+     
     </div>
     <nav class="collapse navbar-collapse bf-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
