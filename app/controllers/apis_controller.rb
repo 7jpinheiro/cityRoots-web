@@ -1917,11 +1917,20 @@ class ApisController < ApplicationController
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
       @rat.mobile_user=@use.mobile_user
-      @com.save()
-      @rat.save()
 
-      respond_to do |format|
-        format.json {  render :json => Hash.new("success"=>"true") }
+      @rat.valid?
+      @com.valid?
+
+      if @com.errors.blank?
+        @rat.save()
+        @com.save()
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"true") }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"false") }
+        end
       end
     end
     if params[:co]!=nil && params[:even]
@@ -1937,7 +1946,13 @@ class ApisController < ApplicationController
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
       @rat.mobile_user=@use.mobile_user
-      if @com.save()
+
+      @rat.valid?
+      @com.valid?
+
+      if @com.errors.blank?
+        @rat.save()
+        @com.save()
         respond_to do |format|
           format.json {  render :json => Hash.new("success"=>"true") }
         end
@@ -1960,9 +1975,20 @@ class ApisController < ApplicationController
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
       @rat.mobile_user=@use.mobile_user
-      @com.save()
-      respond_to do |format|
-        format.json {  render :json => Hash.new("success"=>"true") }
+
+      @rat.valid?
+      @com.valid?
+
+      if @com.errors.blank?
+        @rat.save()
+        @com.save()
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"true") }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"false") }
+        end
       end
     end
     if params[:co]!=nil && params[:itin]
@@ -1977,10 +2003,20 @@ class ApisController < ApplicationController
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
       @rat.mobile_user=@use.mobile_user
-      @com.save()
-      @rat.save()
-      respond_to do |format|
-        format.json {  render :json => Hash.new("success"=>"true") }
+
+      @rat.valid?
+      @com.valid?
+
+      if @com.errors.blank?
+        @rat.save()
+        @com.save()
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"true") }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"false") }
+        end
       end
     end
     #
