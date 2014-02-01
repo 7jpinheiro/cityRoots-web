@@ -55,18 +55,6 @@ class Ability
       can :manage, WebUser, :id => user.id
     end
 
-    if user.role?(:mobile)
-      can :read, :all
-      can :create, CommentAttraction
-      can :create, CommentEvent
-      can :create, CommentItinerary
-      can :create, CommentService
-      can :create, RatingAttraction
-      can :create, RatingEvent
-      can :create, RatingItinerary
-      can :create, RatingService
-    end
-
     if user.role?(:admin)
       can :manage, :all
       can :create, :all

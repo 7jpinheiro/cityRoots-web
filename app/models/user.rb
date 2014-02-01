@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   def create_list_roles
     @list_roles=Array.new
     if self.web_user && !self.id.nil?
-      puts "+++++++++++++++" +self.web_user.web_user_type.name  + "-----------"
+      puts " INFO : Cria lista de roles." 
       if self.web_user.web_user_type.name == "Entidade"
         if self.web_user.active 
           @list_roles.push "entidade" 
@@ -79,17 +79,13 @@ class User < ActiveRecord::Base
     if self.web_user.nil? && !self.id.nil?
       @list_roles.push "new_user" if self.web_user.blank?
     end
-    
-    if @list_roles.blank?
-      @list_roles.push "mobile"
-    end
 
   end
 
 
   def role?(arg)
-    create_list_roles if @list_roles.blank? ||  @list_roles.include?("mobile")
-    puts "----------" + @list_roles.inspect + "++++++++++++"
+    create_list_roles if @list_roles.blank? 
+    puts "INFO: Roles= " + @list_roles.inspect
     @list_roles.include? arg.to_s
   end
 

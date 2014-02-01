@@ -5,7 +5,7 @@
     text-align: left;
 }
 .intro-header {
-	padding-top: 62px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+	padding-top: 60px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
 }
 
 .intro-message {

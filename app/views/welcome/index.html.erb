@@ -1,18 +1,31 @@
 <%= stylesheet_link_tag "welcome" %>
+<%= stylesheet_link_tag "bootstrap-social" %>
 
   <div class="container">
 
     <div class="row">
       <div class="col-lg-12">
         <div class="intro-message">
-          <%= image_tag "logo_CR-1.png",  style: "max-width: 25%; margin-bottom:7%; margin-top:7%" %>
-          <ul class="list-inline intro-social-buttons">
-            <li><a href="https://www.facebook.com/CityRootsapp" class="btn btn-info btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+          <%= image_tag "logo_CR-1.png",  style: "max-width: 25%; margin-bottom:5%; margin-top:7%" %>
+          <ul class="list-inline intro-social-buttons" style="min-width:140px">
+            <li><a href="https://www.facebook.com/CityRootsapp" class="btn btn-block btn-social btn-facebook"><i class="fa fa-facebook fa-fw" ></i> <span class="network-name">Facebook </span></a>
             </li>
+<<<<<<< HEAD
             <li><a href="https://plus.google.com/u/0/105183430321926174600" class="btn btn-danger btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
             </li>
             <li><a href="https://play.google.com/store/apps/details?id=com.uminho.uce15.cityroots&hl=pt_PT" class="btn btn-success btn-lg"><%= image_tag "play_logo.png", height: "30px", width: "30px" %> <span class="network-name">Google Play</span></a>
+=======
+            <li>
+              <a href="https://plus.google.com/u/0/105183430321926174600" class="btn btn-block btn-social btn-google-plus" style="min-width:140px">
+                <i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+ </span>
+              </a>
+>>>>>>> 4e83ab3b1f4ad777960085961f6c2dc33d45e431
             </li>
+            <li>
+              <a href="https://play.google.com/store/apps/details?id=com.uminho.uce15.cityroots&hl=pt_PT" class="btn" style=" margin-top: -33px;padding: 0px;">
+                <img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+              </a>
+            </a></li>
           </ul>
         </div>
       </div>
