@@ -1937,9 +1937,14 @@ class ApisController < ApplicationController
       @use=User.where("username=?",params[:user]).first
       @com.mobile_user=@use.mobile_user
       @rat.mobile_user=@use.mobile_user
-      @com.save()
-      respond_to do |format|
-        format.json {  render :json => Hash.new("success"=>"true") }
+      if @com.save()
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"true") }
+        end
+      else
+        respond_to do |format|
+          format.json {  render :json => Hash.new("success"=>"false") }
+        end
       end
     end
     if params[:co]!=nil && params[:serv]
