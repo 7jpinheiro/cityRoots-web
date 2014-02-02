@@ -36,6 +36,9 @@
               <li class="<%= is_active?(admin_users_index_path) %>">                 
                 <%= link_to "Utilizadores" , admin_users_index_path  %>
               </li>
+              <li class="<%= is_active?(imports_index_path) %>">                 
+                <%= link_to "Importe de dados" , imports_index_path  %>
+              </li>
         <%
                 end
                 if current_user.role? (:entidade)
@@ -49,6 +52,9 @@
               </li>
               <li class="<%= is_active?(events_path) %>"> 
                 <%= link_to "Eventos" , events_path  %>
+              </li>
+              <li class="<%= is_active?(imports_index_path) %>">                 
+                <%= link_to "Importe de dados" , imports_index_path  %>
               </li>
         <%
                 end

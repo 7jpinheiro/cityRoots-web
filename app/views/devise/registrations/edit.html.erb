@@ -1,121 +1,52 @@
 <div class="page-header">
-    <h1><%= current_user.username %></h1>
+    <h1>Alterar Password</h1>
 </div>
 
 
 <div class="container">
-  <div class="">
+  <div class="row">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),:class=>"form-horizontal") do |f| %>
         <%= devise_error_messages! %>
         <br>
-
-        <% @web_user = @user.web_user %>
-    <%= f.fields_for @web_user do |e| %>        
-<% if @web_user.errors.any? %>
-   <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <ul>
-         <% @web_user.errors.full_messages.each do |msg| %>
-         <li><%= msg %></li>
-         <% end %>
-      </ul>
-   </div>
-<% end %>
-    <form role="form" class="form-horizontal">
-      <div class="row">
-        <%= e.text_field :id ,:id=>"nome" ,:type=>"hidden" , :value=>current_user.id %>
-        <%= e.text_field :active ,:id=>"active" ,:type=>"hidden" , :value=>"0" %>
-        <div class="form-group control-group">
-          <%= e.label "Nome" ,:for=>"nome" , :class=>"col-sm-3 control-label" %>
-          <div class="col-sm-6">
-            <%= e.text_field :name ,:id=>"nome" ,:autofocus => true, :class=>"form-control form-control-square", :placeholder=>"Nome da sua empresa",:required => true %>
-            <p class="help-block"></p>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group control-group">
-          <%= e.label "Nif." ,:for=>"nif" , :class=>"col-sm-3 control-label" %>
-          <div class="col-sm-6">
-            <%= e.text_field :nif ,:id=>"nif" , :autofocus => true, :minlength =>"9",:maxlength =>"9" ,:type => "number",:class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte", :required => true  %>
-            <p class="help-block"></p>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group control-group">
-          <%= e.label "Morada" ,:for=>"address" , :class=>"col-sm-3 control-label" %>
-          <div class="col-sm-6">
-            <%= e.text_field :address ,:id=>"address" ,:autofocus => true, :class=>"form-control form-control-square", :placeholder=>"A sua Morada",:required => true %>
-            <p class="help-block"></p>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group control-group">
-          <%= e.label "Tipo" ,:for=>"address" , :class=>"col-sm-3 control-label" %>
-          <div class="col-sm-6">
-            <% if @web_user.new_record? %>
-              <%= e.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
-              <p class="help-block"></p>
-             <% else %>
-              <%= e.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group control-group">
-          <%= e.label "Cidade" ,:for=>"address" , :class=>"col-sm-3 control-label" %>
-          <div class="col-sm-6">
-            <% if @web_user.new_record? %>
-              <%= e.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
-              <p class="help-block"></p>
-              <% else %>
-                <%= e.collection_select( :city_id, City.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
-              <% end %>
-          </div>
-        </div>
-      </div>
-      <br/>
-    </form>
-<% end %>
         <div class="row">
           <div class="form-group">
             <label for="password_confirmation" class="col-sm-3 control-label">Password actual</label>
             <div class="col-sm-6">
-              <%= f.password_field :current_password, :autocomplete => false , :class=>"form-control form-control-square" %>
+              <%= f.password_field :current_password, :autocomplete => false, :autofocus => true , :class=>"form-control " %>
              <p class="help-block"></p>              
             </div>
           </div>
         </div>
+      </br>
         <div class="row">
           <div class="form-group">
             <label for="password" class="col-sm-3 control-label">Nova Password</label>
             <div class="col-sm-6">
-              <%= f.password_field :password, :autocomplete => "off", :autofocus => true , :class=>"form-control form-control-square" %>
+              <%= f.password_field :password, :autocomplete => "off", :class=>"form-control " %>
              <p class="help-block"></p>              
             </div>
           </div>
         </div>
+        </br>
         <div class="row">
           <div class="form-group">
             <label for="password_confirmation" class="col-sm-3 control-label">Confirmação Password</label>
             <div class="col-sm-6">
-              <%= f.password_field :password_confirmation, :autofocus => true , :class=>"form-control form-control-square" %>
+              <%= f.password_field :password_confirmation, :class=>"form-control" %>
              <p class="help-block"></p>
 
             </div>
           </div>
         </div>
+       
   </div>
-  <%= f.submit "Guardar" , :class=>"btn btn-primary btn-block btn-square" , :style=>"width:100px;" %>
 </div>
+</br>
+</br>
+</br>
+
+  <div class="col-sm-2"><%= f.submit "Guardar" , :class=>"btn btn-primary btn-block" , :style=>"width:100px;" %></div>
+  <div class="col-sm-2"><%= link_to "Voltar", profiles_index_path , :class=>"btn btn-default btn-block " , :style=>"width:100px;" %></div>
+
   <% end %>
 </div>
-
-</br>

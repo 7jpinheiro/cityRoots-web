@@ -1,52 +1,151 @@
+<%= stylesheet_link_tag "welcome2" %>
 
-<div class="page-header">
-	<h1>Importe de dados </h1>
-</div>
-<p>
+<div class="content-section-b" style="border:0">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-5 col-sm-6">
+          <div class="clearfix"></div>
+          <h2 class="section-heading">Importe os seus dados</h2>
+          <hr class="section-heading-spacer" style="width: 320px;">
+          <p></p>
+
+          <p class="lead" style="padding-top:50px">
+          Através de um ficheiro Excel pode importar facilmente dados dos Pontos de Interesse, Eventos e Serviços.</br>
+					O processo é muito simples de executar, pois foi pensado na sua comodidade e privacidade.</br>
+					Para o ajudar disponibilizamos ficheiros template onde pode colocar lá os seus dados e após isso submetê-los.</br>
+          </p> 
+        </div>
+        <div class="col-lg-5 col-lg-offset-2 col-sm-6" style="margin-top:50px">
+          <%= image_tag "import_excel.png",   class: "img-responsive"%>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="clearfix"></div>
+          <h3 class="section-heading"><strong>Importar Pontos de Interesse</strong></h3>
+
+          <p class="lead">
+          Faça download de um dos nossos aquivos de templates em formato Excel (.xlsx) para pontos de interesse! </br>
+          <%= link_to 'Download do template de Pontos de Interesse.', import_download_ponto_path %></p>
+          Importe já os dados dos pontos de interesse.
+
+	      <%= form_tag attractions_excel_path(),  :multipart => true , :method=>'post' do  |f|%>
+        <div class="col-sm-6">
+		      <div class="input-group">
+							<span class="input-group-btn">
+								<span class="btn btn-default btn-file">
+	  							Browse…<%= file_field_tag "attractions[file]" %>
+								</span>
+							</span>
+							<input type="text" class="form-control" readonly="">
+					</div>
+				</div>
+        </p> 
+        <div class="col-sm-6">
+					<%= submit_tag "Submeter ficheiro", :name => nil, class: "btn btn-primary"%>
+				</div>			
+				<% end %>
+        </div>
+      </div>
+    </div>
+</br>
+</br>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="clearfix"></div>
+          <h3 class="section-heading"><strong>Importar Eventos</strong></h3>
+
+          <p class="lead">
+          Faça download de um dos nossos aquivos de templates em formato Excel (.xlsx) para pontos de interesse!</br>
+          <%= link_to 'Download do template de Eventos.', import_download_evento_path %></p>
+          Importe já os dados dos seus Eventos.
+
+          <%= form_tag events_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+					<div class="col-sm-6">
+			      <div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-default btn-file">
+		  							Browse…<%= file_field_tag "events[file]" %>
+									</span>
+								</span>
+								<input type="text" class="form-control" readonly="">
+						</div>
+					</div>
+        	</p> 
+	        <div class="col-sm-6">
+						<%= submit_tag "Submeter ficheiro", :name => nil, class: "btn btn-primary"%>
+					</div>			
+					<% end %>
+        </div>
+      </div>
+    </div>
+</br>
+</br>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="clearfix"></div>
+          <h3 class="section-heading"><strong>Importar Serviços</strong></h3>
+
+          <p class="lead">
+          Faça download de um dos nossos aquivos de templates em formato Excel (.xlsx) para pontos de interesse!</br>
+          <%= link_to 'Download do template de Serviços.', import_download_servico_path %></p>
+          Importe já os dados dos seus Serviços.
+
+
+					<%= form_tag services_excel_path,  :multipart => true , :method=>'post' do  |f|%>
+					<div class="col-sm-6">
+			      <div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-default btn-file">
+		  							Browse…<%= file_field_tag "services[file]" , :class =>"form-control"%>
+									</span>
+								</span>
+								<input type="text" class="form-control" readonly="">
+						</div>
+					</div>
+        	</p> 
+	        <div class="col-sm-6">
+						<%= submit_tag "Submeter ficheiro", :name => nil, class: "btn btn-primary"%>
+					</div>			
+					<% end %>
+        </div>
+      </div>
+    </div>
+</br>
+</br>   
 
 
 
-<p><%= link_to 'Ponto de Interesse', import_download_ponto_path %><p>
-<p><%= link_to 'Eventos', import_download_evento_path %><p>
-<p><%= link_to 'Serviços', import_download_servico_path %><p>
 
-
-
-
-
-
-
-<%= form_tag attractions_excel_path,  :multipart => true , :method=>'post' do  |f|%>
-<div class="col-sm-3" style="margin-bottom:25px">
-  <%= file_field_tag "attractions[file]" %>
-</div>
-<div class="col-sm-6">
-  <%= submit_tag "Submeter ficheiro", :name => nil%>
-</div>
-<% end %>
-
-
-
-<%= form_tag events_excel_path,  :multipart => true , :method=>'post' do  |f|%>
-<div class="col-sm-3" style="margin-bottom:25px">
-  <%= file_field_tag "events[file]" %>
-</div>
-<div class="col-sm-6">
-  <%= submit_tag "Submeter ficheiro", :name => nil%>
-</div>
-<% end %>
-
-
-
-<%= form_tag services_excel_path,  :multipart => true , :method=>'post' do  |f|%>
-<div class="col-sm-3" style="margin-bottom:25px">
-  <%= file_field_tag "services[file]" %>
-</div>
-<div class="col-sm-6">
-  <%= submit_tag "Submeter ficheiro", :name => nil%>
-</div>
-<% end %>
 
 <script>
-  $(":file").filestyle({input: false,classButton: "btn btn-primary",buttonText: "Importar dados"});
-</script>
+		$(document)
+			.on('change', '.btn-file :file', function() {
+				var input = $(this),
+				numFiles = input.get(0).files ? input.get(0).files.length : 1,
+				label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+				input.trigger('fileselect', [numFiles, label]);
+		});
+		
+		$(document).ready( function() {
+			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+				
+				var input = $(this).parents('.input-group').find(':text'),
+					log = numFiles > 1 ? numFiles + ' files selected' : label;
+				
+				if( input.length ) {
+					input.val(log);
+				} else {
+					if( log ) alert(log);
+				}
+				
+			});
+		});		
+	</script>

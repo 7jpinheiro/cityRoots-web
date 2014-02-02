@@ -175,7 +175,7 @@
             if !@event.site.empty?
         %>
             <dt>Site</dt>
-            <dd><%= @event.site %></dd>
+            <dd><%= link_to  @event.site,  @event.site, style: "word-wrap: break-word;"%></dd>
         <%
            end
            end
