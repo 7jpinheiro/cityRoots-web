@@ -175,7 +175,7 @@
             if !@service.site.empty?
         %>
             <dt>Site</dt>
-            <dd><%= @service.site %></dd>
+            <dd><%= link_to  @service.site,  @service.site, style: "word-wrap: break-word;"%></dd>
         <%
             end
            end

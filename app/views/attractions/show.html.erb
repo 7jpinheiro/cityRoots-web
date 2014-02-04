@@ -182,7 +182,7 @@
                if  !@attraction.site.empty?
               %>
             <dt>Site</dt>
-            <dd><%= @attraction.site %></dd>
+            <dd><%= link_to  @attraction.site,  @attraction.site, style: "word-wrap: break-word;"%></dd>
             <%
                end
               end
@@ -293,16 +293,15 @@
           </div>
         </div>
       </div>
-      <%
-        end
-        %>
+      <% end %>
     </div>
-    <%
-      end
-      %>
-  </div>
-</div>
+    <% end %>
 
+  </div>
+  <span style="border-top: none;"><%= link_to 'Voltar', attractions_path ,:class=>"btn btn-default btn-square"%></span>
+</br>
+</br>
+</div>
 </div>
 </div>
 <script>

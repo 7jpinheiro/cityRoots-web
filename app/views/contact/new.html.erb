@@ -58,7 +58,7 @@
     #map-canvas { height: 100% }
 </style>
 
-<div id="map-canvas" style="width: 100%; height: 400px" onload="mapinit();"></div>    
+<div id="map-canvas" style="width: 100%; height: 400px; margin-bottom:20px" onload="mapinit();"></div>    
 <div class="col-sm-6 ">
 <%= form_for @message, :url => contact_create_path, :html => {:class => "form"} do |form| %>
   <legend>Contacte-nos</legend>

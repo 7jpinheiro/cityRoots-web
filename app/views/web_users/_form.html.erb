@@ -39,7 +39,7 @@
         <div class="form-group control-group">
           <%= f.label "Nif." ,:for=>"nif" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.text_field :nif ,:id=>"nif" , :autofocus => true, :minlength =>"9",:maxlength =>"9" ,:type => "number",:class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte", :required => true  %>
+            <%= f.text_field :nif ,:id=>"nif" , :minlength =>"9",:maxlength =>"9" ,:type => "number",:class=>"form-control form-control-square", :placeholder=>"Numero de contribuinte", :required => true  %>
             <p class="help-block"></p>
           </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="form-group control-group">
           <%= f.label "Morada" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
-            <%= f.text_field :address ,:id=>"address" ,:autofocus => true, :class=>"form-control form-control-square", :placeholder=>"A sua Morada",:required => true %>
+            <%= f.text_field :address ,:id=>"address" , :class=>"form-control form-control-square", :placeholder=>"A sua Morada",:required => true %>
             <p class="help-block"></p>
           </div>
         </div>

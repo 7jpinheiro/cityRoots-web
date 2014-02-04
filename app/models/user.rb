@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
+  accepts_nested_attributes_for :web_user , :reject_if => :all_blank, :allow_destroy => true
+
 
   after_initialize :init_variables
 
