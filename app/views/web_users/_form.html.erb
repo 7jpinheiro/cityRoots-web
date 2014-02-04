@@ -60,10 +60,10 @@
           <%= f.label "Tipo" ,:for=>"address" , :class=>"col-sm-1 control-label" %>
           <div class="col-sm-6">
             <% if @web_user.new_record? %>
-              <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
+              <%= f.collection_select( :web_user_type_id, WebUserType.where("id <> ?",3).all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:required => true} ) %>
               <p class="help-block"></p>
              <% else %>
-              <%= f.collection_select( :web_user_type_id, WebUserType.all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
+              <%= f.collection_select( :web_user_type_id, WebUserType.where("id <> ?",3).all, :id, :name ,{prompt: "Selecione um Tipo"}, {class: "form-control",:disabled => true} ) %>
             <% end %>
           </div>
         </div>
