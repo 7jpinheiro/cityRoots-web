@@ -38,7 +38,7 @@
               <div class="col-md-8">
                 <h4>
                   <strong><%= link_to trans.name, event %></strong>
-                  <% if event.accessibility != true %>
+                  <% if event.accessibility == true %>
                       <small><i class="fa fa-wheelchair"></i></small>
                   <% end %>
                 </h4>
