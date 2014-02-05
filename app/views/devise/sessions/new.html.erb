@@ -1,43 +1,84 @@
-<div class="page-header">
-    <h1>Bem vindo ao CityRoots</h1>
-</div>
+<style>
+body{
+  background: #f8f8f8
+}
+ .login-or {
+    position: relative;
+    font-size: 18px;
+    color: #aaa;
+    margin-top: 10px;
+            margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    margin-left: -25px;
+    background-color: #fff;
+    width: 50px;
+    text-align: center;
+  }
+  .hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+</style>
+<%= stylesheet_link_tag "bootstrap-social" %>
 
+</br>
+    </br>
+<div class="col-sm-6 col-sm-offset-3 " style="background:#fff">
+  <div class="row">
 
-<div class="container">
-  <div class="jumbotron">
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:class=>"form-horizontal") do |f| %>
+    <div class="main col-sm-10 col-sm-offset-1">
+      
+      <div class="text-center">
+        <h1>Bem-vindo ao CityRoots</h1>
+      </div>
+    </br>
+    </br>
+      <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-sm-offset-2 col-xs-offset-2 col-md-offset-2">
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-social btn-facebook" do %>
+                  <i class="fa fa-facebook"></i> Login com <%= provider.to_s.titleize %>
+                <% end %>
+              <% end %>
+        </div>
+      </div>
+    </br>
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">ou</span>
+      </div>
+
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:class=>"form") do |f| %>
         <%= devise_error_messages! %>
         <br>
-        <div class="row">
           <div class="form-group">
-            <label for="username" class="col-sm-4 control-label">Email</label>
-            <div class="col-sm-8">
+            <label for="username" class="control-label">Email</label>
               <%= f.email_field :email, :autofocus => true , :class=>"form-control form-control-square" %>
-            </div>
           </div>
-        </div>
-        <div class="row">
+    
           <div class="form-group">
-            <label for="password" class="col-sm-4 control-label">Password</label>
-            <div class="col-sm-8">
+                <%= link_to "Esqueceu a sua password?", new_password_path(resource_name), class:"pull-right" %>
+            <label for="password" class="control-label">Password</label>
               <%= f.password_field :password, :autofocus => true , :class=>"form-control form-control-square" %>
-            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <div class="col-sm-8">
-              <% if devise_mapping.rememberable? -%>
-                  <div><%= f.check_box :remember_me %> <%= f.label :remember_me, 'Lembrar-me' %></div>
-              <% end -%>
-            </div>
+          <div class="checkbox pull-right">
+              <%= f.check_box :remember_me %> <%= f.label :remember_me, 'Lembrar-me' %>
           </div>
-        </div>
-
-        <div><%= f.submit "Login" , :class=>"btn btn-primary btn-block btn-square" , :style=>"width:100px;" %></div>
+        <div><%= f.submit "Iniciar Sessão" , :class=>"btn btn-primary"  %></div>
     <% end %>
 
-    <%= render "devise/shared/links" %>
-
+    </br>
+      <%= link_to "Registe-se", new_registration_path(resource_name) %><br />
+</br>
   </div>
+</div>
 </div>
