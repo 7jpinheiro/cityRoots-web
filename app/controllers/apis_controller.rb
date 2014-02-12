@@ -57,7 +57,7 @@ class ApisController < ApplicationController
         atrac["type"]=@tmp
         @tmp_photo=Array.new
         att.photo_attractions.all.each do |p|
-          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
         end
         atrac["photos"]=@tmp_photo
         atrac["rating"]=att.rating
@@ -131,7 +131,7 @@ class ApisController < ApplicationController
         event["type"]=@tmp
         @tmp_photo=Array.new
         eve.photo_events.all.each do |p|
-          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
         end
         event["photos"]=@tmp_photo
         event["rating"]=eve.rating
@@ -209,7 +209,7 @@ class ApisController < ApplicationController
         serv["type"]=@tmp
         @tmp_photo=Array.new
         ser.photo_services.all.each do |p|
-          @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+          @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
         end
         serv["photos"]=@tmp_photo
         serv["rating"]=ser.rating
@@ -282,7 +282,7 @@ class ApisController < ApplicationController
           atrac["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
@@ -351,7 +351,7 @@ class ApisController < ApplicationController
           atrac["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
@@ -432,7 +432,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           event["rating"]=eve.rating
@@ -504,7 +504,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           eve.photo_events.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           event["photos"]=@tmp_photo
           event["rating"]=eve.rating
@@ -580,7 +580,7 @@ class ApisController < ApplicationController
           serv["type"]=@tmp
           @tmp_photo=Array.new
           ser.photo_services.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
@@ -651,7 +651,7 @@ class ApisController < ApplicationController
           serv["type"]=@tmp
           @tmp_photo=Array.new
           ser.photo_services.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
@@ -722,7 +722,7 @@ class ApisController < ApplicationController
             point["type"]=@tmp
             @tmp_photo=Array.new
             att.photo_attractions.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             point["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -776,7 +776,7 @@ class ApisController < ApplicationController
             point["type"]=@tmp
             @tmp_photo=Array.new
             evtn.photo_events.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             point["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -830,7 +830,7 @@ class ApisController < ApplicationController
             point["type"]=@tmp
             @tmp_photo=Array.new
             serv.photo_services.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             point["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -965,7 +965,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           anun.photo_events.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           event["photos"]=@tmp_photo
           event["rating"]=anun.rating
@@ -1091,7 +1091,7 @@ class ApisController < ApplicationController
       atrac["type"]=@tmp
       @tmp_photo=Array.new
       att.photo_attractions.all.each do |p|
-        @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
       end
       atrac["photos"]=@tmp_photo
       atrac["rating"]=att.rating
@@ -1165,7 +1165,7 @@ class ApisController < ApplicationController
       event["type"]=@tmp
       @tmp_photo=Array.new
       eve.photo_events.all.each do |p|
-        @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
       end
       event["photos"]=@tmp_photo
       event["rating"]=eve.rating
@@ -1243,7 +1243,7 @@ class ApisController < ApplicationController
       serv["type"]=@tmp
       @tmp_photo=Array.new
       ser.photo_services.all.each do |p|
-        @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+        @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
       end
       serv["photos"]=@tmp_photo
       serv["rating"]=ser.rating
@@ -1316,7 +1316,7 @@ class ApisController < ApplicationController
           atrac["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
@@ -1385,7 +1385,7 @@ class ApisController < ApplicationController
           atrac["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           atrac["rating"]=att.rating
@@ -1466,7 +1466,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           att.photo_attractions.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           atrac["photos"]=@tmp_photo
           event["rating"]=eve.rating
@@ -1538,7 +1538,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           eve.photo_events.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           event["photos"]=@tmp_photo
           event["rating"]=eve.rating
@@ -1614,7 +1614,7 @@ class ApisController < ApplicationController
           serv["type"]=@tmp
           @tmp_photo=Array.new
           ser.photo_services.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
@@ -1685,7 +1685,7 @@ class ApisController < ApplicationController
           serv["type"]=@tmp
           @tmp_photo=Array.new
           ser.photo_services.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           serv["photos"]=@tmp_photo
           serv["rating"]=ser.rating
@@ -1759,7 +1759,7 @@ class ApisController < ApplicationController
             poi["type"]=@tmp
             @tmp_photo=Array.new
             att.photo_attractions.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             poi["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -1821,7 +1821,7 @@ class ApisController < ApplicationController
             poi["type"]=@tmp
             @tmp_photo=Array.new
             evtn.photo_events.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             poi["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -1880,7 +1880,7 @@ class ApisController < ApplicationController
             poi["type"]=@tmp
             @tmp_photo=Array.new
             serv.photo_services.all.each do |p|
-              @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+              @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
             end
             poi["photos"]=@tmp_photo
             @tmp_com=Array.new
@@ -2078,7 +2078,7 @@ class ApisController < ApplicationController
           event["type"]=@tmp
           @tmp_photo=Array.new
           anun.photo_events.all.each do |p|
-            @tmp_photo.push("http://193.136.19.202:8080"+p.photo.url(:small,false))
+            @tmp_photo.push("http://193.136.19.202:80"+p.photo.url(:small,false))
           end
           event["photos"]=@tmp_photo
           event["rating"]=anun.rating
